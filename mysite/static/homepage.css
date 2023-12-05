@@ -1,0 +1,78 @@
+/* homepage.css */
+/* Custom CSS for styling */
+/* Reset default margin/padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Basic styling for the navbar */
+  .navbar {
+    display: flex;
+    align-items: center;
+    background-color: #73A7C6;
+    padding: 10px;
+  }
+  
+  .navbar-brand {
+    margin-right: auto;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+  }
+  
+  .navbar-menu {
+    display: flex;
+  }
+  
+  .navbar-item {
+    padding: 8px 12px;
+    color: white;
+    text-decoration: none;
+  }
+  
+  .navbar-search {
+    margin-left: 20px;
+    display: flex;
+  }
+  
+  .navbar-search-input {
+    padding: 6px;
+    margin-right: 6px;
+  }
+  
+  .navbar-search-button {
+    padding: 6px 10px;
+    background-color: white;
+    border: none;
+    color: #73A7C6;
+    cursor: pointer;
+  }
+  
+  .navbar-inquiry {
+    margin-left: 20px;
+    color: white;
+    text-decoration: none;
+  }
+  
+.navbar {
+    background-color: #73A7C6; /* Changing the background color */
+  }
+  
+  .navbar-brand {
+    font-weight: bold; /* Making the text bold */
+    font-size: 1.2rem; /* Increasing the font size */
+    margin-right: 10px; /* Adjust the margin value as needed */
+  }
+  
+  /* Adjusting the width of the search input */
+  .form-control {
+    width: 300px; /* Change the width as per your requirement */
+  }
+  
+  .navbar-inquiry {
+    color: #ffffff; /* Text color for the inquiry link */
+    margin-left: 10px; /* Adjust margin if needed */
+  }
+  
