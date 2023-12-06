@@ -12,3 +12,18 @@ def about(request):
 
 def services(request):
     return HttpResponse('This is my service')
+
+def home(request):
+    return HttpResponse("This is Home Page")
+
+def availabletest(request):
+    return HttpResponse("This is Available Test Page")
+
+def report(request):
+    return HttpResponse("This is Report Page")
+
+def package(request):
+    return HttpResponse("This is Package Page")
+
+def feedback(request):
+    return HttpResponse("This is Feedback Page")
