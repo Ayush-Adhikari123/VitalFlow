@@ -27,3 +27,9 @@ def package(request):
 
 def feedback(request):
     return HttpResponse("This is Feedback Page")
+
+def about(request):
+    return HttpResponse("This is About Page")
+
+def contact(request):
+    return HttpResponse("This is Contact Page")
