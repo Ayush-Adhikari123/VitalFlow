@@ -8,6 +8,52 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="static/homepage.css"/> 
     <style>
+
+      .class1 {
+        box-shadow: 6px 6px 10px #555;
+        border: 3px solid transparent;     
+	      padding:15px 5px 2px 5px;
+        border-radius: 25px;
+        justify-content: center;
+        
+      }
+      
+      .class2 {
+        box-shadow: 6px 6px 10px #555;
+        border: 3px solid transparent;     
+	      padding:10px 5px 2px 5px;
+        border-radius: 25px;
+        justify-content: center;
+        
+      }
+      .class3 {
+        box-shadow: 6px 6px 10px #555;
+        border: 3px solid transparent;     
+	      padding:8px 5px 2px 5px;
+        border-radius: 25px;
+        justify-content: center;
+        
+      }
+      .class4{
+        box-shadow: 6px 6px 10px #555;
+        border: 3px solid transparent;     
+	      padding:8px 5px 2px 5px;
+        border-radius: 25px;
+        justify-content: center;
+      }
+
+        .class5{
+          box-shadow: 6px 6px 10px #555;
+          border: 3px solid transparent;     
+          padding:8px 5px 2px 5px;
+          border-radius: 25px;
+          justify-content: center;
+        
+      }
+      .class2:hover,.class3:hover,.class4:hover,.class5:hover,.class1:hover {
+        transform: scale(1.3);
+        z-index:2;             
+         }
       
       /* Custom CSS for spacing */
       .navbar {
@@ -65,13 +111,13 @@
         </div>
       </nav>
     </h1>
-    <div class="d-flex justify-content-evenly " style="margin-top:500px" >
+    <div class="d-flex justify-content-evenly " style="margin-top:485px" >
 
-      <div><a href="/home"><img src="{% static 'images/1.png' %}" width="150" height="100"></a></div>
-      <div><a href="/availabletest"><img src="{% static 'images/2.png' %}" width="150" height="100"></a></div>
-      <div><a href="/report"><img src="{% static 'images/3.png' %}" width="150" height="120"></a></div>
-      <div><a href="/package"><img src="{% static 'images/4.png' %}" width="150" height="100"></a></div>
-      <div><a href="/feedback"><img src="{% static 'images/5.png' %}" width="150" height="110"></a></div>
+      <div class="class1"><a href="/home"><img src="{% static 'images/1.png' %}" width="140" height="100"></a></div>
+      <div class="class5"><a href="/availabletest"><img src="{% static 'images/9.png' %}" width="130" height="120"></a></div>
+      <div class="class4"><a href="/report"><img src="{% static 'images/3.png' %}" width="140" height="120"></a></div>
+      <div class="class2"><a href="/package"><img src="{% static 'images/6.png' %}" width="140" height="120"></a></div>
+      <div class="class3"><a href="/feedback"><img src="{% static 'images/8.jpg' %}" width="140" height="120"></a></div>
       </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
