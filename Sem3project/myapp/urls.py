@@ -11,5 +11,6 @@ urlpatterns = [
    path("package",views.package, name='package'),
    path("report",views.report, name='report'),
    path("feedback",views.feedback, name='feedback'),
-   path("contact",views.contact, name='contact')
+   path("contact",views.contact, name='contact'),
+   path("adminpage",views.adminpage, name='adminpage')
 ]

@@ -57,8 +57,8 @@
         padding:8px 5px 2px 5px;
         border-radius: 25px;
         justify-content: center;
-      
-    }
+      }
+
     .class2:hover,.class3:hover,.class4:hover,.class5:hover,.class1:hover {
       transform: scale(1.3);
       z-index:2;             
