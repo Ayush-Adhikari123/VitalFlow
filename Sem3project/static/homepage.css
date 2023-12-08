@@ -27,6 +27,7 @@
         border-radius: 25px;
         justify-content: center;
         
+        /* this is class css */
       }
       .class2 {
         box-shadow: 6px 6px 10px #555;
