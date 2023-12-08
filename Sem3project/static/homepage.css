@@ -1,0 +1,87 @@
+      /* Custom CSS for spacing */
+      .navbar {
+        background-color: #00A2E8 !important; /* Changing the background color */
+      }
+      .navbar .dropdown-menu {
+        background-color: #00A2E8 !important;
+      }
+      .navbar-inquiry {
+        font-size: 1.1rem; /* Increasing the font size */
+        margin-left: 30px;
+      }
+      .btn-Login {
+        justify-content: center;
+        background-color: #1e62d8 !important;
+        border: none;
+        border-radius: 8px; /* Adjust the border-radius to your preference */
+        cursor: pointer;
+        padding: 8px 16px; /* Adjust the padding to reduce the size */
+        font-size: 14px; /* Adjust the font size **/
+        margin-left: 300px;
+        font-weight: bold; /* Adjust the margin */
+      }
+      .navbar-brand {
+        color: #8A3030;
+        font-weight: bold;
+        font-size: 2rem; /* Increasing the font size */
+        margin-left: 30px;
+        margin-right: 100px; /* Adjust the margin value as needed */
+      }
+      /* Adjusting the width of the search input */
+      .form-control {
+        width: 350px; /* Change the width as per your requirement */
+      }
+      /* #carouselExampleCaptions .carousel-caption {
+        text-align: left;
+      } */
+      /* .dropdown-menu {
+        background-color: #00A2E8 !important;
+      } */
+      
+      .class1 {
+        box-shadow: 6px 6px 10px #555;
+        border: 3px solid transparent;     
+	      padding:12px 5px 2px 5px;
+        border-radius: 25px;
+        justify-content: center;
+        
+      }
+      
+      .class2 {
+        box-shadow: 6px 6px 10px #555;
+        border: 3px solid transparent;     
+	      padding:10px 5px 2px 5px;
+        border-radius: 25px;
+        justify-content: center;
+        
+      }
+      .class3 {
+        box-shadow: 6px 6px 10px #555;
+        border: 3px solid transparent;     
+	      padding:8px 5px 2px 5px;
+        border-radius: 25px;
+        justify-content: center;
+        
+      }
+      .class4{
+        box-shadow: 6px 6px 10px #555;
+        border: 3px solid transparent;     
+	      padding:8px 5px 2px 5px;
+        border-radius: 25px;
+        justify-content: center;
+      }
+
+        .class5{
+          box-shadow: 6px 6px 10px #555;
+          border: 3px solid transparent;     
+          padding:8px 5px 2px 5px;
+          border-radius: 25px;
+          justify-content: center;
+      }
+      .class2:hover,.class3:hover,.class4:hover,.class5:hover,.class1:hover {
+        transform: scale(1.3);
+        z-index:2;             
+         }
+         .carousel-caption {
+          position: static;
+           }
