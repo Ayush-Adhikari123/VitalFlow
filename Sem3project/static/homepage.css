@@ -9,6 +9,18 @@
         font-size: 1.1rem; /* Increasing the font size */
         margin-left: 30px;
       }
+      .btn-Login {
+        justify-content: center;
+        background-color: #1e62d8 !important;
+        border: none;
+        border-radius: 8px; /* Adjust the border-radius to your preference */
+        cursor: pointer;
+        padding: 8px 16px; /* Adjust the padding to reduce the size */
+        font-size: 14px; /* Adjust the font size */
+        margin-left: 300px;
+        font-weight: bold; /* Adjust the margin */
+      }
+      
       .navbar-brand {
         color: #8A3030;
         font-weight: bold;
