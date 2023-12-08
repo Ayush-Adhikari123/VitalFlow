@@ -35,4 +35,5 @@ def contact(request):
     return HttpResponse("This is Contact Page")
 
 def adminpage(request):
-     return render(request,'adminpage.html')
+    return render(request,'adminpage.html')
+    
