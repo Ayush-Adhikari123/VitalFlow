@@ -11,6 +11,7 @@ def about(request):
     return HttpResponse('This is my about')
 
 def services(request):
+<<<<<<< HEAD
     return HttpResponse('This is my service')
 
 def home(request):
@@ -37,3 +38,6 @@ def contact(request):
 def adminpage(request):
     return render(request,'adminpage.html')
     
+=======
+    return HttpResponse('This is my service')
+>>>>>>> origin/ayushbhetwal
