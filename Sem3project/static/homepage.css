@@ -4,6 +4,7 @@
       }
       .navbar .dropdown-menu {
         background-color: #00A2E8 !important;
+
       }
       .navbar-inquiry {
         font-size: 1.1rem; /* Increasing the font size */
@@ -20,6 +21,7 @@
         margin-left: 300px;
         font-weight: bold; /* Adjust the margin */
       }
+
       .navbar-brand {
         color: #8A3030;
         font-weight: bold;
@@ -31,6 +33,7 @@
       .form-control {
         width: 350px; /* Change the width as per your requirement */
       }
+
       /* #carouselExampleCaptions .carousel-caption {
         text-align: left;
       } */
@@ -89,6 +92,7 @@
       }
      .carousel-caption {
           position: static;
+
       }
 /* ----------------PRADIP KO PART======= */
 body {
@@ -188,3 +192,4 @@ input {
   font-weight: bold;
 
 }
+
