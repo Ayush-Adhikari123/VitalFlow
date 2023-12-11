@@ -39,3 +39,4 @@ def adminpage(request):
 
 def createreport(request):
     return render(request,'createReport.html')  
+
