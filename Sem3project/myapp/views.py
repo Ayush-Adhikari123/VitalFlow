@@ -36,4 +36,7 @@ def contact(request):
 
 def adminpage(request):
     return render(request,'adminpage.html')
-    
+
+def createreport(request):
+    return render(request,'createReport.html')  
+
