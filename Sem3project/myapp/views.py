@@ -5,13 +5,12 @@ def index(request):
     context ={
         'variable':"this is sent"
     }
-    return render(request,'navbar.html',context)
+    return render(request,'homepage.html',context)
 
 def about(request):
     return HttpResponse('This is my about')
 
 def services(request):
-<<<<<<< HEAD
     return HttpResponse('This is my service')
 
 def home(request):
@@ -37,7 +36,7 @@ def contact(request):
 
 def adminpage(request):
     return render(request,'adminpage.html')
-    
-=======
-    return HttpResponse('This is my service')
->>>>>>> origin/ayushbhetwal
+
+def createreport(request):
+    return render(request,'createReport.html')  
+
