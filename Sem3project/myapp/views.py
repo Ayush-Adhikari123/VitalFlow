@@ -40,3 +40,5 @@ def adminpage(request):
 def adminlogin(request):
     return render(request,'adminlogin.html')
     
+def viewreport(request):
+    return render(request,'viewreport.html')
