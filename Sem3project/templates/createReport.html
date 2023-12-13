@@ -34,7 +34,7 @@
 
      <div class="rounded-box2">
        <div class="container-form">
-      <div class="content2">
+        <div class="content2">
           <form class="form">
             <div class="label" style="font-weight: bold;">PATIENT NAME:</div>
             <input type="text" class="input" name="name" placeholder="Enter patient name">
@@ -49,9 +49,9 @@
             <label>
               <input type="radio" name="gender" value="female"> FEMALE
             </label>
-            <!-- <label>
+            <label>
               <input type="radio" name="gender" value="other"> OTHER
-            </label> -->
+            </label>
             <!-- <div class="label" style="font-weight: bold;">PE NO:</div>
             <input type="text" class="input" name="pe" placeholder="Enter PE number"> -->
             <div class="label" style="font-weight: bold;">ADDRESS:</div>
@@ -68,35 +68,40 @@
             <div></div>
           </form>
         </div>
-        <table>
+        <table id="testTable">
           <thead>
             <tr>
-              <th>Header 1</th>
-              <th>Header 2</th>
-              <th>Header 3</th>
+              <th>INVESTIGATION</th>
+              <th>RESULT</th>
+              <th>REFERANCE VALUE</th>
+              <th>UNIT</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>
-            
-                <select>
-                  <option value="Option 1">OE</option>
-                  <option value="Option 2">FUCK</option>
-                  <option value="Option 3">YOU</option>
-                </select>
-              </td>
-              <td>Data 2</td>
-              <td>Data 3</td>
-            </tr>
-    
+          <tbody>    
           </tbody>
-        </table>
-     
+        </table>    
       </div>
       <button type="reset" class="button-clear">CLEAR</button>
+      <button onclick="addRow()" type="add" class="button-add">ADD NEW ROW</button>
       <button type="submit" class="button-create">CREATE</button>
     </div>
+    <script>
+      function addRow() {
+          var table = document.getElementById("testTable").getElementsByTagName('tbody')[0];
+          var newRow = table.insertRow(table.rows.length);
+  
+          var cell1 = newRow.insertCell(0);
+          var cell2 = newRow.insertCell(1);
+          var cell3 = newRow.insertCell(2);
+          var cell4 = newRow.insertCell(3);
+  
+          cell1.innerHTML = '<select><option value="Complete Blood Count (CBC)">Complete Blood Count (CBC)</option><option value="Red Blood Cell Count (RBC)">Red Blood Cell Count (RBC)</option><option value="Hemoglobin (Hb)">Hemoglobin (Hb)</option><option value="Hematocrit (Hct)">Hematocrit (Hct)</option><option value="White Blood Cell Count (WBC)">White Blood Cell Count (WBC)</option><option value="Platelet Count">Platelet Count</option><option value="Blood Glucose">Blood Glucose</option><option value="Fasting Blood Glucose">Fasting Blood Glucose</option><option value="Lipid Panel">Lipid Panel</option><option value="Total Cholesterol">Total Cholesterol</option><option value="LDL Cholesterol">LDL Cholesterol</option><option value="HDL Cholesterol">HDL Cholesterol</option><option value="Triglycerides">Triglycerides</option><option value="Liver Function Tests">Liver Function Tests</option><option value="ALT (Alanine Aminotransferase)">ALT (Alanine Aminotransferase)</option><option value="AST (Aspartate Aminotransferase)">AST (Aspartate Aminotransferase)</option><option value="ALP (Alkaline Phosphatase)">ALP (Alkaline Phosphatase)</option><option value="Total Bilirubin">Total Bilirubin</option><option value="Kidney Function Tests">Kidney Function Tests</option><option value="BUN (Blood Urea Nitrogen)">BUN (Blood Urea Nitrogen)</option><option value="Serum Creatinine">Serum Creatinine</option><option value="Electrolytes">Electrolytes</option><option value="Sodium">Sodium</option><option value="Potassium">Potassium</option><option value="Chloride">Chloride</option><option value="Thyroid Function Tests">Thyroid Function Tests</option><option value="TSH (Thyroid Stimulating Hormone)">TSH (Thyroid Stimulating Hormone)</option><option value="FT4 (Free Thyroxine)">FT4 (Free Thyroxine)</option><option value="Iron Studies">Iron Studies</option><option value="Serum Iron">Serum Iron</option><option value="TIBC (Total Iron Binding Capacity)">TIBC (Total Iron Binding Capacity)</option><option value="Ferritin">Ferritin</option><option value="C-Reactive Protein (CRP)">C-Reactive Protein (CRP)</option><option value="Uric Acid">Uric Acid</option><option value="Male Uric Acid">Male Uric Acid</option><option value="Female Uric Acid">Female Uric Acid</option></select>';
+          cell2.innerHTML = '<input type="text" class="result-input" name="result" placeholder="ENTER RESULT">';
+          cell3.innerHTML = '<select><option value="Option 1">4.5 - 5.5 million</option><option value="Option 2">12.0 - 15.5 g/dL</option><option value="Option 3">38.3% - 48.6%</option> <option value="Option ">4,000 - 11,000 </option> <option value="Option ">150,000 - 450,000 </option> <option value="Option ">70 - 99 </option> <option value="Option ">Less than 200</option> <option value="Option "> Less than 100</option> <option value="Option ">Less than 150</option> <option value="Option ">40 - 60</option> <option value="Option ">7 - 56</option> <option value="Option ">5 - 40</option> <option value="Option ">44 - 147</option> <option value="Option ">0.3 - 1.2 </option> <option value="Option ">7 - 20 </option> <option value="Option ">0.6 - 1.3 </option> <option value="Option ">135 - 145</option> <option value="Option ">3.5 - 5.0</option> <option value="Option ">98 - 108</option> <option value="Option ">0.4 - 4.0</option> <option value="Option ">0.8 - 1.8</option> <option value="Option ">65 - 176</option> <option value="Option ">250 - 450</option> <option value="Option ">12 - 300</option> <option value="Option "> Less than 0.8 </option> <option value="Option ">3.4 - 7.0</option> <option value="Option ">2.4 - 6.0</option> </select>';
+          cell4.innerHTML = '<select><option value="Option 1">cells/mcL</option><option value="Option 2">g/dL</option><option value="Option 3">cells/mcL</option><option value="Option 3">mg/dL</option><option value="Option 3">U/L</option><option value="Option 3"> mmol/L </option><option value="Option 3">mIU/L </option><option value="Option ">ng/dL </option><option value="Option "> µg/dL</option><option value="Option ">ng/mL </option><option value="Option "> mg/dL </option></select>';
+      }
+  </script>
+  
 
   </body>
 </html>
