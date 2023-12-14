@@ -13,6 +13,8 @@ urlpatterns = [
    path("feedback",views.feedback, name='feedback'),
    path("contact",views.contact, name='contact'),
    path("adminpage",views.adminpage, name='adminpage'),
-   path("createreport",views.createreport,name='createreport')
+   path("createreport",views.createreport,name='createreport'),
+   path("createtechnicianlogin",views.createtechnicianlogin,name='createtechnicianlogin'),
+   path("createadminpage",views.createadminpage,name="createadminpage")
 
  ]

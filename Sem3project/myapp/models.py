@@ -8,7 +8,7 @@ class Report(models.Model):
     gender=models.CharField( max_length=50)
     address =models.CharField( max_length=50)
     lab_no =models.IntegerField( )
-    contact =models.IntegerField( )   
+    contact =models.IntegerField( )
     date =models.CharField( max_length=50)
     consultant =models.CharField( max_length=50)
     investigation =models.CharField( max_length=50)
@@ -16,4 +16,11 @@ class Report(models.Model):
     reference_value =models.CharField( max_length=50)
     unit =models.CharField( max_length=50)
     
-    
+
+class technicianlogin(models.Model):
+    technician_id=models.CharField(max_length=32)
+    Password=models.CharField(max_length=16)
+
+class adminpage(models.Model):
+    admin_id=models.CharField(max_length=32)
+    Password=models.CharField(max_length=16)

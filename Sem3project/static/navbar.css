@@ -32,3 +32,26 @@
       .form-control {
         width: 350px; /* Change the width as per your requirement */
       }
+
+
+      /* css for drop down login */
+
+      .navbar-nav li.nav-item.dropdown:hover ul.dropdown-menu {
+        display: block;
+        margin-top: 0;
+    }
+    
+    .dropdown-menu {
+        background-color: #1e62d8; /* Background color for the dropdown menu */
+        border: 1px solid #1e62d8; /* Border color for the dropdown menu */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Box shadow for the dropdown menu */
+    }
+    
+    .dropdown-menu a {
+        color: #fff; /* Text color for dropdown items */
+    }
+    
+    .dropdown-menu a:hover {
+        background-color: #1951b9; /* Background color on hover for dropdown items */
+
+    }

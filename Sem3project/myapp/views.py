@@ -1,5 +1,6 @@
 from django.shortcuts import render,HttpResponse
 from .models import Report  # Import the Report model
+from .models import technicianlogin
 # Create your views here.
 
 
@@ -79,5 +80,36 @@ def createreport(request):
         return HttpResponse("Report created successfully")  # You can redirect or render a different page here
     else:
         return render(request, 'createReport.html')  # Render the createReport.html template for GET requests
-  
+
+
+def createtechnicianlogin(request):
+    if request.method == 'POST':
+        # Extract form data from the POST request
+        technician_id = request.POST.get('technician_id')
+        Password = request.POST.get('Password')
+
+        new_technicianlogin= technicianlogin(
+            technician_id=technician_id,
+            Password=Password
+        )
+        new_technicianlogin.save()
+        return HttpResponse("Succesfully Logined")
+    else:
+        return render(request,'techlogin.html')
+    
+
+def createadminpage(request):
+    if request.method == 'POST':
+        # Extract form data from the POST request
+        admin_id = request.POST.get('admin_id')
+        Password = request.POST.get('Password')
+
+        new_adminpage= adminpage(
+            admin_id=admin_id,
+            Password=Password
+        )
+        new_adminpage.save()
+        return HttpResponse("Succesfully Logined")
+    else:
+        return render(request,'adminpage.html')
 
