@@ -52,7 +52,7 @@
 
 }
 .btn-primary.with-icon1:hover{
-  background-color: #ffffff;
+ background-color: #ffffff;
  border: 3px solid transparent; 
  border-radius: 25px;
  box-shadow: 6px 6px 10px #555;
@@ -65,8 +65,8 @@
 	padding:15px 2px 8px 5px;
   border: 3px solid transparent; 
   justify-content: center;
- border-radius: 25px;
- box-shadow: 6px 6px 10px #555;
+  border-radius: 25px;
+  box-shadow: 6px 6px 10px #555;
 }
 .btn-primary.with-icon-3 {
   margin-top: 105px;

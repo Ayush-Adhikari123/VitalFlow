@@ -1,0 +1,189 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>VitalFlow</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/createReport.css"/> 
+  </head>
+  <body>
+    <div class="header">
+        <div class="logo">
+            <img src="/static/Images/Logo.png" alt="Header Image" style="height: 100px;">
+        </div>
+        <div class="company-name">
+            <h1>VITAL FLOW<br>BIO-LAB</h1>
+        </div>
+    </div>
+    <div class ="container ">
+    <div class="rounded-box">
+      <div class="content">
+      <div class="top-buttons">
+        <button class="btn btn-primary with-icon"></button>
+      </div>
+      <div class="top-buttons">
+        <button class="btn btn-primary with-icon-2"></button>
+      </div>
+      <div class="top-buttons">
+        <button class="btn btn-primary with-icon-3"></button>
+      </div>
+      </div>
+    </div>
+    
+
+     <div class="rounded-box2">
+       <div class="container-form">
+        <div class="content2">
+          <form class="form">
+            <div class="label" style="font-weight: bold;">PATIENT NAME:</div>
+            <input type="text" class="input" name="name" placeholder="Enter patient name">
+            <!-- <div class="label" style="font-weight: bold;">DISPATCH DATE:</div>
+            <input type="date" class="input" name="date" placeholder="Enter dispatch date"> -->
+            <div class="label" style="font-weight: bold;">AGE:</div>
+            <input type="text" class="input" name="age" placeholder="Enter age">
+            <div class="label" style="font-weight: bold;">GENDER:</div>
+            <label>
+              <input type="radio" name="gender" value="male"> MALE
+            </label>
+            <label>
+              <input type="radio" name="gender" value="female"> FEMALE
+            </label>
+            <label>
+              <input type="radio" name="gender" value="other"> OTHER
+            </label>
+            <!-- <div class="label" style="font-weight: bold;">PE NO:</div>
+            <input type="text" class="input" name="pe" placeholder="Enter PE number"> -->
+            <div class="label" style="font-weight: bold;">ADDRESS:</div>
+            <input type="text" class="input" name="address" placeholder="Enter address">
+            <div class="label" style="font-weight: bold;">LAB NO:</div>
+            <input type="text" class="input" name="lab" placeholder="Enter lab number">
+            <div class="label" style="font-weight: bold;">CONTACTS:</div>
+            <input type="text" class="input" name="contacts" placeholder="Enter contacts">
+            <div class="label" style="font-weight: bold;">DATE:</div>
+            <input type="date" class="input" name="date" placeholder="Enter date">
+            <div class="label" style="font-weight: bold;">CONSULTANT:</div>
+            <input type="text" class="input" name="consultant" placeholder="Enter consultant">
+              <div class="dropdown-container">
+                <label for="testDropdown">Select Test:</label>
+                <select id="testDropdown">
+                  <option value="">Select Test</option>
+                  <option value="Complete Blood Count (CBC)">Complete Blood Count (CBC)</option>
+                  <option value="Blood Glucose">Blood Glucose</option>
+                  <option value="Lipid Panel">Lipid Panel</option>
+                  <option value="Liver Function Tests">Liver Function Tests</option>
+                  <option value="Kidney Function Tests">Kidney Function Tests</option>
+                  <option value="Electrolytes">Electrolytes</option>
+                  <option value="Thyroid Function Tests">Thyroid Function Tests</option>
+                  <option value="C-Reactive Protein (CRP)">C-Reactive Protein (CRP)</option>
+                  <option value="Uric Acid">Uric Acid</option>
+                  <option value="Iron Studies">Iron Studies</option>
+
+                </select>
+              </div>
+            
+          </form>
+        </div>
+        <table id="testTable">
+          <thead>
+            <tr>
+              <th>INVESTIGATION</th>
+              <th>RESULT</th>
+              <th>REFERANCE VALUE</th>
+              <th>UNIT</th>
+            </tr>
+          </thead>
+          <tbody>    
+          </tbody>
+        </table>    
+      </div>
+      <button type="reset" class="button-clear">CLEAR</button>
+      <button type="submit" class="button-create">CREATE</button>
+    </div>
+
+    <script>
+      var options = {
+        "Complete Blood Count (CBC)": [
+          { text: 'Red Blood Cell Count (RBC)', reference: '4.5 - 5.5 million', unit: 'cells/mcL' },
+          { text: 'Hemoglobin (Hb)', reference: '12.0 - 15.5', unit: 'g/dL' },
+          { text: 'Hematocrit (Hct)', reference: '38.3% - 48.6%', unit: '' },
+          { text: 'White Blood Cell Count (WBC)', reference: '4,000 - 11,000', unit: 'cells/mcL' },
+          { text: 'Platelet Count', reference: '150,000 - 450,000', unit: 'cells/mcL' }
+        ],
+        "Blood Glucose": [
+          { text: 'Fasting Blood Glucose', reference: '70 - 99', unit: 'mg/dL' }
+        ],
+        "Lipid Panel": [
+          { text: 'Total Cholesterol', reference: 'Less than 200', unit: 'mg/dL' },
+          { text: 'LDL Cholesterol', reference: 'Less than 100', unit: 'mg/dL' },
+          { text: 'HDL Cholesterol', reference: '40 - 60', unit: 'mg/dL' },
+          { text: 'Triglycerides', reference: 'Less than 150', unit: 'mg/dL' }
+        ],
+        "Liver Function Tests": [
+          { text: 'ALT (Alanine Aminotransferase)', reference: '7 - 56', unit: 'U/L' },
+          { text: 'AST (Aspartate Aminotransferase)', reference: '5 - 40', unit: 'U/L' },
+          { text: 'ALP (Alkaline Phosphatase)', reference: '44 - 147', unit: 'U/L' },
+          { text: 'Total Bilirubin', reference: '0.3 - 1.2', unit: 'mg/dL' }
+        ],
+        "Kidney Function Tests": [
+          { text: 'BUN (Blood Urea Nitrogen)', reference: '7 - 20', unit: 'mg/dL' },
+          { text: 'Serum Creatinine', reference: '0.6 - 1.3', unit: 'mg/dL' }
+        ],
+        "Electrolytes": [
+          { text: 'Sodium', reference: '135 - 145', unit: 'mmol/L' },
+          { text: 'Potassium', reference: '3.5 - 5.0', unit: 'mmol/L' },
+          { text: 'Chloride', reference: '98 - 108', unit: 'mmol/L' }
+        ],
+        "Thyroid Function Tests": [
+          { text: 'TSH (Thyroid Stimulating Hormone)', reference: '0.4 - 4.0', unit: 'mIU/L' },
+          { text: 'FT4 (Free Thyroxine)', reference: '0.8 - 1.8', unit: 'ng/dL' }
+        ],
+        "Iron Studies": [
+          { text: 'Serum Iron', reference: '65 - 176', unit: 'µg/dL' },
+          { text: 'TIBC (Total Iron Binding Capacity)', reference: '250 - 450', unit: 'µg/dL' },
+          { text: 'Ferritin', reference: '12 - 300', unit: 'ng/mL' }
+        ],
+        "C-Reactive Protein (CRP)": [
+          { text: '', reference: 'Less than 0.8', unit: 'mg/dL' }
+        ],
+        "Uric Acid": [
+          { text: 'Male', reference: '3.4 - 7.0', unit: 'mg/dL' },
+          { text: 'Female', reference: '2.4 - 6.0', unit: 'mg/dL' }
+        ]
+        // Add more options as needed
+      };
+    
+      document.addEventListener('DOMContentLoaded', function() {
+        var dropdown = document.getElementById("testDropdown");
+        dropdown.addEventListener('change', addRow);
+      });
+    
+      function addRow() {
+        var table = document.getElementById("testTable").getElementsByTagName('tbody')[0];
+        var newRow = table.insertRow(table.rows.length);
+    
+        var cell1 = newRow.insertCell(0);
+        var cell2 = newRow.insertCell(1);
+        var cell3 = newRow.insertCell(2);
+        var cell4 = newRow.insertCell(3);
+    
+        var dropdown = document.getElementById("testDropdown");
+        var selectedTest = dropdown.value;
+    
+        if (selectedTest in options) {
+          var subtests = options[selectedTest];
+    
+          cell1.innerHTML = selectedTest + '<br>' +
+            subtests.map(subtest => `<span>${subtest.text}</span>`).join('<br>');
+            cell2.innerHTML = subtests.map((subtest, index) => `<input type="text" class="textbox-input" name="${subtest.text}" style="height: 20px; margin-top: ${index === 0 ? '30px' : '0'};" placeholder="ENTER RESULT">`).join('<br>');
+
+          // cell2.innerHTML = subtests.map(subtest => `<input type="text" class="textbox-input" name="${subtest.text}" placeholder="ENTER RESULT">`).join('<br>');
+          cell3.innerHTML = '<br>' + subtests.map(subtest => `<span>${subtest.reference}</span>`).join('<br>');
+
+          cell4.innerHTML ='<br>' + subtests.map(subtest => `<span>${subtest.unit}</span>`).join('<br>');
+        }
+      }
+    </script>    
+  </body>
+</html>

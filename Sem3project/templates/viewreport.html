@@ -29,13 +29,13 @@
   <div class="container">
     <div class="navbar">
       <div class="top-buttons">
-        <button class="btn btn-primary with-icon1"><a href="/home"><img src="{% static 'images/add-user.png' %}" width="160" height="140"></a></button>
+        <button class="btn btn-primary with-icon1"><a href="/createreport"><img src="{% static 'images/add-user.png' %}" width="160" height="140"></a></button>
       </div>
       <div class="top-buttons">
-        <button class="btn btn-primary with-icon-2"><a href="/home"><img src="{% static 'images/analysiss.png' %}" width="160" height="140"></a></button>
+        <button class="btn btn-primary with-icon-2"><a href="/viewreport"><img src="{% static 'images/analysiss.png' %}" width="160" height="140"></a></button>
       </div>
       <div class="top-buttons">
-        <button class="btn btn-primary with-icon-3"><a href="/home"><img src="{% static 'images/logout.png' %}" width="160" height="140"></a></button>
+        <button class="btn btn-primary with-icon-3" id="foo" onclick="myFunction()" data-toggle="modal" data-target="#exampleModalLong"><a><img src="{% static 'images/logout.png' %}" width="160" height="140"></a></button>
       </div>
     </div>
     <div class="section">
@@ -56,6 +56,7 @@
             <th scope="col">Date</th>
             <th scope="col">Patient Id</th>
             <th scope="col">Full Name</th>
+            <th scope="col">Test</th>
             <th scope="col"></th>
           </tr>
         </thead>
@@ -65,13 +66,14 @@
             <td>2023-02-30</td>
             <td>220302</td>
             <td>Srijan Shrestha</td>
+            <td>Sugar</td>
             <td><div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login" data-toggle="modal" data-target="#loginModal">
                 View
               </button>
               <button type="button" class=" btn btn-success btn-Login" data-toggle="modal" data-target="#loginModal">
                 Edit
               </button>
-              <button type="button" class="btn btn-danger btn-Login" data-toggle="modal" data-target="#loginModal">
+              <button type="button" class="btn btn-danger btn-Login" data-toggle="modal" data-target="#exampleModalLong1">
                 Delete
               </button></div>
             </td>
@@ -82,13 +84,14 @@
             <td>2023-02-22</td>
             <td>220302</td>
             <td>Srijan Shrestha</td>
+            <td>Urine</td>
             <td><div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login" data-toggle="modal" data-target="#loginModal">
               View
             </button>
             <button type="button" class=" btn btn-success btn-Login" data-toggle="modal" data-target="#loginModal">
               Edit
             </button>
-            <button type="button" class="btn btn-danger btn-Login" data-toggle="modal" data-target="#loginModal">
+            <button type="button" class="btn btn-danger btn-Login" data-toggle="modal" data-target="#exampleModalLong1">
               Delete
             </button></div>
           </td>
@@ -98,13 +101,14 @@
             <td>2023-02-10</td>
             <td>220302</td>
             <td>Srijan Shrestha</td>
+            <td>Cholesterol</td>
             <td><div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login" data-toggle="modal" data-target="#loginModal">
               View
             </button>
             <button type="button" class=" btn btn-success btn-Login" data-toggle="modal" data-target="#loginModal">
               Edit
             </button>
-            <button type="button" class="btn btn-danger btn-Login" data-toggle="modal" data-target="#loginModal">
+            <button type="button" class="btn btn-danger btn-Login" data-toggle="modal" data-target="#exampleModalLong1">
               Delete
             </button></div>
           </td>
@@ -146,7 +150,74 @@
       </div>
     </div>
   </div>
+  <!-- Button trigger modal -->
+{% comment %} <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+  Launch demo modal
+</button> {% endcomment %}
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Logout</h5>
+        <button type="button" class="close" style='border: none; background:none' data-dismiss="modal" onclick="myFunction1()" aria-label="Close">
+          {% comment %} <style>.close {
+            border: 1px solid #000; /* You can adjust the color and width of the border */
+          }
+        </style> {% endcomment %}
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to logout?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger"   onclick="myFunction1()" data-dismiss="modal">Close</button>
+        <a href="/"><button type="button" class="btn btn-primary">Logout</button></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModalLong1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Delete</h5>
+        <button type="button" class="close" style='border: none; background:none' data-dismiss="modal" onclick="myFunction1()" aria-label="Close">
+          {% comment %} <style>.close {
+            border: 1px solid #000; /* You can adjust the color and width of the border */
+          }
+        </style> {% endcomment %}
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to Delete it?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger"   onclick="myFunction1()" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 </body>
 
 </html>
+<script>
+
+
+  function myFunction() {
+    document.getElementById('foo').style.cssText = 'margin-top:105px; margin-left: -177px;background-color: #ffffff; padding:12px 5px 2px 5px; border: 3px solid transparent; justify-content: center; border-radius: 25px; box-shadow: 6px 6px 10px #555;'
+}
+
+function myFunction1() {
+  document.getElementById('foo').style.cssText = 'margin-top:105px; margin-left: -177px; '
+}
+</script>
+
+
