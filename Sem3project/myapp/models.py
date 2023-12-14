@@ -11,9 +11,12 @@ class Report(models.Model):
     contact =models.IntegerField( )   
     date =models.CharField( max_length=50)
     consultant =models.CharField( max_length=50)
+    
+class Report_Detail(models.Model):
     investigation =models.CharField( max_length=50)
     results =models.CharField( max_length=50)
     reference_value =models.CharField( max_length=50)
     unit =models.CharField( max_length=50)
+    report = models.ForeignKey(Report, on_delete=models.CASCADE)
     
     

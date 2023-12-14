@@ -1,7 +1,6 @@
 from django.shortcuts import render,HttpResponse
 from .models import Report  # Import the Report model
-# Create your views here.
-
+from .forms import Report_DetailForm  # Import the Report_DetailForm
 
 def index(request):
     context ={
@@ -51,11 +50,11 @@ def createreport(request):
         lab_no = request.POST.get('lab_no')
         contact = request.POST.get('contact')
         date = request.POST.get('date')
-        consultant = request.POST.get('consultant')
-        investigation = request.POST.get('investigation')
-        results = request.POST.get('results')
-        reference_value = request.POST.get('reference_value')
-        unit = request.POST.get('unit')
+        # consultant = request.POST.get('consultant')
+        # investigation = request.POST.get('investigation')
+        # results = request.POST.get('results')
+        # reference_value = request.POST.get('reference_value')
+        # unit = request.POST.get('unit')
         
         
         # Create a new Report instance and save it to the database
@@ -67,12 +66,12 @@ def createreport(request):
             address =address,
             lab_no =lab_no,
             contact =contact,
-            date =date,
-           consultant =consultant,
-           investigation =investigation,
-            results =results,
-            reference_value =reference_value,
-            unit =unit
+            date =date
+        #    consultant =consultant,
+        #    investigation =investigation,
+        #     results =results,
+        #     reference_value =reference_value,
+        #     unit =unit
             # Set other fields similarly
         )
         new_report.save()  # Save the report to the database
@@ -81,3 +80,17 @@ def createreport(request):
         return render(request, 'createReport.html')  # Render the createReport.html template for GET requests
   
 
+
+
+
+# Your other views here...
+
+def create_report_detail(request):
+    if request.method == 'POST':
+        form = Report_DetailForm(request.POST)
+        if form.is_valid():
+            form.save()  # Save the form data to the database
+            return HttpResponse("Report detail created successfully")  # Success message or redirect
+    else:
+        form = Report_DetailForm()
+    return render(request, 'createReport.html', {'form': form})
