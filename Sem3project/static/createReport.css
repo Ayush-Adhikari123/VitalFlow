@@ -62,6 +62,12 @@
      display:flex;
    }
    
+   form {
+    display: block;
+    height: 500px;
+    margin-top: 0em;
+}
+
 
 .btn-primary.with-icon {
  background-image: url('/static/images/add-user.png');
@@ -97,6 +103,10 @@ table {
  width: 100%;
  border-collapse: collapse;
  margin-top: 10px;
+
+ overflow-y: auto;
+            display: block;
+            max-height: 500px;
 }
 
 th, td {
@@ -133,19 +143,17 @@ th, td {
  border-radius: 20px; 
  padding: 8px 16px;
  font-size: 20px; 
- margin-left: 120px;
+ margin-left: 480px;
  font-weight: bold; 
  margin-top: 30px;
 }
 
-.button-add{
-  justify-content: center;
-  background-color: #00ffa1 !important;
-  border: none;
-  border-radius: 20px; 
-  padding: 8px 16px;
-  font-size: 20px; 
-  margin-left: 175px;
-  font-weight: bold; 
-  margin-top: 30px;
- }
+
+
+ .dropdown-container {
+  margin-bottom: 20px;
+}
+
+#testDropdown {
+  padding: 5px; 
+}

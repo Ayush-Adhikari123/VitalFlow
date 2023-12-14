@@ -31,6 +31,7 @@
       </div>
       </div>
     </div>
+    
 
      <div class="rounded-box2">
        <div class="container-form">
@@ -38,8 +39,8 @@
           <form class="form">
             <div class="label" style="font-weight: bold;">PATIENT NAME:</div>
             <input type="text" class="input" name="name" placeholder="Enter patient name">
-            <div class="label" style="font-weight: bold;">DISPATCH DATE:</div>
-            <input type="date" class="input" name="date" placeholder="Enter dispatch date">
+            <!-- <div class="label" style="font-weight: bold;">DISPATCH DATE:</div>
+            <input type="date" class="input" name="date" placeholder="Enter dispatch date"> -->
             <div class="label" style="font-weight: bold;">AGE:</div>
             <input type="text" class="input" name="age" placeholder="Enter age">
             <div class="label" style="font-weight: bold;">GENDER:</div>
@@ -62,10 +63,26 @@
             <input type="text" class="input" name="contacts" placeholder="Enter contacts">
             <div class="label" style="font-weight: bold;">DATE:</div>
             <input type="date" class="input" name="date" placeholder="Enter date">
-            <div class="label" style="font-weight: bold;">CONTACT:</div>
+            <div class="label" style="font-weight: bold;">CONSULTANT:</div>
             <input type="text" class="input" name="consultant" placeholder="Enter consultant">
-            <div></div>
-            <div></div>
+              <div class="dropdown-container">
+                <label for="testDropdown">Select Test:</label>
+                <select id="testDropdown">
+                  <option value="">Select Test</option>
+                  <option value="Complete Blood Count (CBC)">Complete Blood Count (CBC)</option>
+                  <option value="Blood Glucose">Blood Glucose</option>
+                  <option value="Lipid Panel">Lipid Panel</option>
+                  <option value="Liver Function Tests">Liver Function Tests</option>
+                  <option value="Kidney Function Tests">Kidney Function Tests</option>
+                  <option value="Electrolytes">Electrolytes</option>
+                  <option value="Thyroid Function Tests">Thyroid Function Tests</option>
+                  <option value="C-Reactive Protein (CRP)">C-Reactive Protein (CRP)</option>
+                  <option value="Uric Acid">Uric Acid</option>
+                  <option value="Iron Studies">Iron Studies</option>
+
+                </select>
+              </div>
+            
           </form>
         </div>
         <table id="testTable">
@@ -82,180 +99,91 @@
         </table>    
       </div>
       <button type="reset" class="button-clear">CLEAR</button>
-      <button onclick="addRow()" type="add" class="button-add">ADD NEW ROW</button>
       <button type="submit" class="button-create">CREATE</button>
     </div>
-    <!-- <script>
-      function addRow() {
-          var table = document.getElementById("testTable").getElementsByTagName('tbody')[0];
-          var newRow = table.insertRow(table.rows.length);
-  
-          var cell1 = newRow.insertCell(0);
-          var cell2 = newRow.insertCell(1);
-          var cell3 = newRow.insertCell(2);
-          var cell4 = newRow.insertCell(3);
-  
-          cell1.innerHTML = '<select><option value="Complete Blood Count (CBC)">Complete Blood Count (CBC)</option><option value="Red Blood Cell Count (RBC)">Red Blood Cell Count (RBC)</option><option value="Hemoglobin (Hb)">Hemoglobin (Hb)</option><option value="Hematocrit (Hct)">Hematocrit (Hct)</option><option value="White Blood Cell Count (WBC)">White Blood Cell Count (WBC)</option><option value="Platelet Count">Platelet Count</option><option value="Blood Glucose">Blood Glucose</option><option value="Fasting Blood Glucose">Fasting Blood Glucose</option><option value="Lipid Panel">Lipid Panel</option><option value="Total Cholesterol">Total Cholesterol</option><option value="LDL Cholesterol">LDL Cholesterol</option><option value="HDL Cholesterol">HDL Cholesterol</option><option value="Triglycerides">Triglycerides</option><option value="Liver Function Tests">Liver Function Tests</option><option value="ALT (Alanine Aminotransferase)">ALT (Alanine Aminotransferase)</option><option value="AST (Aspartate Aminotransferase)">AST (Aspartate Aminotransferase)</option><option value="ALP (Alkaline Phosphatase)">ALP (Alkaline Phosphatase)</option><option value="Total Bilirubin">Total Bilirubin</option><option value="Kidney Function Tests">Kidney Function Tests</option><option value="BUN (Blood Urea Nitrogen)">BUN (Blood Urea Nitrogen)</option><option value="Serum Creatinine">Serum Creatinine</option><option value="Electrolytes">Electrolytes</option><option value="Sodium">Sodium</option><option value="Potassium">Potassium</option><option value="Chloride">Chloride</option><option value="Thyroid Function Tests">Thyroid Function Tests</option><option value="TSH (Thyroid Stimulating Hormone)">TSH (Thyroid Stimulating Hormone)</option><option value="FT4 (Free Thyroxine)">FT4 (Free Thyroxine)</option><option value="Iron Studies">Iron Studies</option><option value="Serum Iron">Serum Iron</option><option value="TIBC (Total Iron Binding Capacity)">TIBC (Total Iron Binding Capacity)</option><option value="Ferritin">Ferritin</option><option value="C-Reactive Protein (CRP)">C-Reactive Protein (CRP)</option><option value="Uric Acid">Uric Acid</option><option value="Male Uric Acid">Male Uric Acid</option><option value="Female Uric Acid">Female Uric Acid</option></select>';
-          cell2.innerHTML = '<input type="text" class="result-input" name="result" placeholder="ENTER RESULT">';
-          cell3.innerHTML = '<select><option value="Option 1">4.5 - 5.5 million</option><option value="Option 2">12.0 - 15.5 g/dL</option><option value="Option 3">38.3% - 48.6%</option> <option value="Option ">4,000 - 11,000 </option> <option value="Option ">150,000 - 450,000 </option> <option value="Option ">70 - 99 </option> <option value="Option ">Less than 200</option> <option value="Option "> Less than 100</option> <option value="Option ">Less than 150</option> <option value="Option ">40 - 60</option> <option value="Option ">7 - 56</option> <option value="Option ">5 - 40</option> <option value="Option ">44 - 147</option> <option value="Option ">0.3 - 1.2 </option> <option value="Option ">7 - 20 </option> <option value="Option ">0.6 - 1.3 </option> <option value="Option ">135 - 145</option> <option value="Option ">3.5 - 5.0</option> <option value="Option ">98 - 108</option> <option value="Option ">0.4 - 4.0</option> <option value="Option ">0.8 - 1.8</option> <option value="Option ">65 - 176</option> <option value="Option ">250 - 450</option> <option value="Option ">12 - 300</option> <option value="Option "> Less than 0.8 </option> <option value="Option ">3.4 - 7.0</option> <option value="Option ">2.4 - 6.0</option> </select>';
-          cell4.innerHTML = '<select><option value="Option 1">cells/mcL</option><option value="Option 2">g/dL</option><option value="Option 3">cells/mcL</option><option value="Option 3">mg/dL</option><option value="Option 3">U/L</option><option value="Option 3"> mmol/L </option><option value="Option 3">mIU/L </option><option value="Option ">ng/dL </option><option value="Option "> µg/dL</option><option value="Option ">ng/mL </option><option value="Option "> mg/dL </option></select>';
-      }
-  </script> -->
 
-  <script>
-    function addRow() {
+    <script>
+      var options = {
+        "Complete Blood Count (CBC)": [
+          { text: 'Red Blood Cell Count (RBC)', reference: '4.5 - 5.5 million', unit: 'cells/mcL' },
+          { text: 'Hemoglobin (Hb)', reference: '12.0 - 15.5', unit: 'g/dL' },
+          { text: 'Hematocrit (Hct)', reference: '38.3% - 48.6%', unit: '' },
+          { text: 'White Blood Cell Count (WBC)', reference: '4,000 - 11,000', unit: 'cells/mcL' },
+          { text: 'Platelet Count', reference: '150,000 - 450,000', unit: 'cells/mcL' }
+        ],
+        "Blood Glucose": [
+          { text: 'Fasting Blood Glucose', reference: '70 - 99', unit: 'mg/dL' }
+        ],
+        "Lipid Panel": [
+          { text: 'Total Cholesterol', reference: 'Less than 200', unit: 'mg/dL' },
+          { text: 'LDL Cholesterol', reference: 'Less than 100', unit: 'mg/dL' },
+          { text: 'HDL Cholesterol', reference: '40 - 60', unit: 'mg/dL' },
+          { text: 'Triglycerides', reference: 'Less than 150', unit: 'mg/dL' }
+        ],
+        "Liver Function Tests": [
+          { text: 'ALT (Alanine Aminotransferase)', reference: '7 - 56', unit: 'U/L' },
+          { text: 'AST (Aspartate Aminotransferase)', reference: '5 - 40', unit: 'U/L' },
+          { text: 'ALP (Alkaline Phosphatase)', reference: '44 - 147', unit: 'U/L' },
+          { text: 'Total Bilirubin', reference: '0.3 - 1.2', unit: 'mg/dL' }
+        ],
+        "Kidney Function Tests": [
+          { text: 'BUN (Blood Urea Nitrogen)', reference: '7 - 20', unit: 'mg/dL' },
+          { text: 'Serum Creatinine', reference: '0.6 - 1.3', unit: 'mg/dL' }
+        ],
+        "Electrolytes": [
+          { text: 'Sodium', reference: '135 - 145', unit: 'mmol/L' },
+          { text: 'Potassium', reference: '3.5 - 5.0', unit: 'mmol/L' },
+          { text: 'Chloride', reference: '98 - 108', unit: 'mmol/L' }
+        ],
+        "Thyroid Function Tests": [
+          { text: 'TSH (Thyroid Stimulating Hormone)', reference: '0.4 - 4.0', unit: 'mIU/L' },
+          { text: 'FT4 (Free Thyroxine)', reference: '0.8 - 1.8', unit: 'ng/dL' }
+        ],
+        "Iron Studies": [
+          { text: 'Serum Iron', reference: '65 - 176', unit: 'µg/dL' },
+          { text: 'TIBC (Total Iron Binding Capacity)', reference: '250 - 450', unit: 'µg/dL' },
+          { text: 'Ferritin', reference: '12 - 300', unit: 'ng/mL' }
+        ],
+        "C-Reactive Protein (CRP)": [
+          { text: '', reference: 'Less than 0.8', unit: 'mg/dL' }
+        ],
+        "Uric Acid": [
+          { text: 'Male', reference: '3.4 - 7.0', unit: 'mg/dL' },
+          { text: 'Female', reference: '2.4 - 6.0', unit: 'mg/dL' }
+        ]
+        // Add more options as needed
+      };
+    
+      document.addEventListener('DOMContentLoaded', function() {
+        var dropdown = document.getElementById("testDropdown");
+        dropdown.addEventListener('change', addRow);
+      });
+    
+      function addRow() {
         var table = document.getElementById("testTable").getElementsByTagName('tbody')[0];
         var newRow = table.insertRow(table.rows.length);
-
+    
         var cell1 = newRow.insertCell(0);
         var cell2 = newRow.insertCell(1);
         var cell3 = newRow.insertCell(2);
         var cell4 = newRow.insertCell(3);
+    
+        var dropdown = document.getElementById("testDropdown");
+        var selectedTest = dropdown.value;
+    
+        if (selectedTest in options) {
+          var subtests = options[selectedTest];
+    
+          cell1.innerHTML = selectedTest + '<br>' +
+            subtests.map(subtest => `<span>${subtest.text}</span>`).join('<br>');
+            cell2.innerHTML = subtests.map((subtest, index) => `<input type="text" class="textbox-input" name="${subtest.text}" style="height: 20px; margin-top: ${index === 0 ? '30px' : '0'};" placeholder="ENTER RESULT">`).join('<br>');
 
-        var investigationOptions = [
-            'Complete Blood Count (CBC)',
-            'Red Blood Cell Count (RBC)',
-            'Hemoglobin (Hb)',
-            'Hematocrit (Hct)',
-            'White Blood Cell Count (WBC)',
-            'Platelet Count',
-            'Blood Glucose',
-            'Fasting Blood Glucose',
-            'Lipid Panel',
-            'Total Cholesterol',
-            'LDL Cholesterol',
-            'HDL Cholesterol',
-            'Triglycerides',
-            'Liver Function Tests',
-            'ALT (Alanine Aminotransferase)',
-            'AST (Aspartate Aminotransferase)',
-            'ALP (Alkaline Phosphatase)',
-            'Total Bilirubin',
-            'Kidney Function Tests',
-            'BUN (Blood Urea Nitrogen)',
-            'Serum Creatinine',
-            'Electrolytes',
-            'Sodium',
-            'Potassium',
-            'Chloride',
-            'Thyroid Function Tests',
-            'TSH (Thyroid Stimulating Hormone)',
-            'FT4 (Free Thyroxine)',
-            'Iron Studies',
-            'Serum Iron',
-            'TIBC (Total Iron Binding Capacity)',
-            'Ferritin',
-            'C-Reactive Protein (CRP)',
-            'Uric Acid',
-            'Male Uric Acid',
-            'Female Uric Acid'
-            // Add more options as needed
-        ];
+          // cell2.innerHTML = subtests.map(subtest => `<input type="text" class="textbox-input" name="${subtest.text}" placeholder="ENTER RESULT">`).join('<br>');
+          cell3.innerHTML = '<br>' + subtests.map(subtest => `<span>${subtest.reference}</span>`).join('<br>');
 
-        cell1.innerHTML = '<select class="dynamic-dropdown" onchange="updateColumns(this)">' +
-            investigationOptions.map(option => `<option value="${option}">${option}</option>`).join('') +
-            '</select>';
-
-        cell2.innerHTML = '<input type="text" class="result-input" style="width:120px; name="result" placeholder="ENTER RESULT">';
-        cell3.innerHTML = '<input type="text" class="reference-input" style="width:150px;name="reference" readonly>';
-        cell4.innerHTML = '<input type="text" class="unit-input" style="width:120px; name="unit" readonly>';
-    }
-
-    function updateColumns(selectElement) {
-        var row = selectElement.parentNode.parentNode;
-        var referenceInput = row.cells[2].getElementsByTagName('input')[0];
-        var unitInput = row.cells[3].getElementsByTagName('input')[0];
-
-        var selectedInvestigation = selectElement.value;
-
-        // Reference ranges and units
-        var referenceValues = {
-            'Complete Blood Count (CBC)': '',
-            'Red Blood Cell Count (RBC)': '4.5 - 5.5 million',
-            'Hemoglobin (Hb)': '12.0 - 15.5 g/dL',
-            'Hematocrit (Hct)': '38.3% - 48.6%',
-            'White Blood Cell Count (WBC)': '4,000 - 11,000 cells/mcL',
-            'Platelet Count': '150,000 - 450,000 cells/mcL',
-            'Blood Glucose': '',
-            'Fasting Blood Glucose': '70 - 99 mg/dL',
-            'Lipid Panel': '',
-            'Total Cholesterol': 'Less than 200 mg/dL',
-            'LDL Cholesterol': 'Less than 100 mg/dL',
-            'HDL Cholesterol': '40 - 60 mg/dL',
-            'Triglycerides': 'Less than 150 mg/dL',
-            'Liver Function Tests': '',
-            'ALT (Alanine Aminotransferase)': '7 - 56 U/L',
-            'AST (Aspartate Aminotransferase)': '5 - 40 U/L',
-            'ALP (Alkaline Phosphatase)': '44 - 147 U/L',
-            'Total Bilirubin': '0.3 - 1.2 mg/dL',
-            'Kidney Function Tests': '',
-            'BUN (Blood Urea Nitrogen)': '7 - 20 mg/dL',
-            'Serum Creatinine': '0.6 - 1.3 mg/dL',
-            'Electrolytes': '',
-            'Sodium': '135 - 145 mmol/L',
-            'Potassium': '3.5 - 5.0 mmol/L',
-            'Chloride': '98 - 108 mmol/L',
-            'Thyroid Function Tests': '',
-            'TSH (Thyroid Stimulating Hormone)': '0.4 - 4.0 mIU/L',
-            'FT4 (Free Thyroxine)': '0.8 - 1.8 ng/dL',
-            'Iron Studies': '',
-            'Serum Iron': '65 - 176 µg/dL',
-            'TIBC (Total Iron Binding Capacity)': '250 - 450 µg/dL',
-            'Ferritin': '12 - 300 ng/mL',
-            'C-Reactive Protein (CRP)': 'Less than 0.8 mg/dL',
-            'Uric Acid': '',
-            'Male Uric Acid': '3.4 - 7.0 mg/dL',
-            'Female Uric Acid': '2.4 - 6.0 mg/dL'
-            // Add more options as needed
-        };
-
-        var unitValues = {
-            'Complete Blood Count (CBC)': '',
-            'Red Blood Cell Count (RBC)': 'cells/mcL',
-            'Hemoglobin (Hb)': 'g/dL',
-            'Hematocrit (Hct)': '',
-            'White Blood Cell Count (WBC)': 'cells/mcL',
-            'Platelet Count': 'cells/mcL',
-            'Blood Glucose': '',
-            'Fasting Blood Glucose': 'mg/dL',
-            'Lipid Panel': '',
-            'Total Cholesterol': 'mg/dL',
-            'LDL Cholesterol': 'mg/dL',
-            'HDL Cholesterol': 'mg/dL',
-            'Triglycerides': 'mg/dL',
-            'Liver Function Tests': '',
-            'ALT (Alanine Aminotransferase)': 'U/L',
-            'AST (Aspartate Aminotransferase)': 'U/L',
-            'ALP (Alkaline Phosphatase)': 'U/L',
-            'Total Bilirubin': 'mg/dL',
-            'Kidney Function Tests': '',
-            'BUN (Blood Urea Nitrogen)': 'mg/dL',
-            'Serum Creatinine': 'mg/dL',
-            'Electrolytes': '',
-            'Sodium': 'mmol/L',
-            'Potassium': 'mmol/L',
-            'Chloride': 'mmol/L',
-            'Thyroid Function Tests': '',
-            'TSH (Thyroid Stimulating Hormone)': 'mIU/L',
-            'FT4 (Free Thyroxine)': 'ng/dL',
-            'Iron Studies': '',
-            'Serum Iron': 'µg/dL',
-            'TIBC (Total Iron Binding Capacity)': 'µg/dL',
-            'Ferritin': 'ng/mL',
-            'C-Reactive Protein (CRP)': 'mg/dL',
-            'Uric Acid': '',
-            'Male Uric Acid': 'mg/dL',
-            'Female Uric Acid': 'mg/dL'
-            // Add more options as needed
-        };
-
-        referenceInput.value = referenceValues[selectedInvestigation] || '';
-        unitInput.value = unitValues[selectedInvestigation] || '';
-    }
-</script>
-
-  
-  
-
+          cell4.innerHTML ='<br>' + subtests.map(subtest => `<span>${subtest.unit}</span>`).join('<br>');
+        }
+      }
+    </script>    
   </body>
 </html>
