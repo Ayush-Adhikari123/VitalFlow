@@ -42,3 +42,6 @@ def createreport(request):
 
 def viewreport(request):
     return render(request,'viewreport.html')
+
+def techlogin(request):
+    return render(request,'techlogin.html')
