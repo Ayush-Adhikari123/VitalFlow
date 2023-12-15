@@ -13,6 +13,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Report_Detail',
             fields=[
+                
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('investigation', models.CharField(max_length=50)),
                 ('results', models.CharField(max_length=50)),

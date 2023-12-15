@@ -55,9 +55,11 @@
     </div>
 
      <div class="rounded-box2">
+      <form class="form" action="{% url 'createreport' %}" method="post">
+        {% csrf_token %}
        <div class="container-form">
         <div class="content2">
-          <form class="form">
+          
             <div class="label" style="font-weight: bold;">PATIENT NAME:</div>
             <input type="text" class="input" name="name" placeholder="Enter patient name">
             <!-- <div class="label" style="font-weight: bold;">DISPATCH DATE:</div>
@@ -79,9 +81,9 @@
             <div class="label" style="font-weight: bold;">ADDRESS:</div>
             <input type="text" class="input" name="address" placeholder="Enter address">
             <div class="label" style="font-weight: bold;">LAB NO:</div>
-            <input type="text" class="input" name="lab" placeholder="Enter lab number">
+            <input type="text" class="input" name="lab_no" placeholder="Enter lab number">
             <div class="label" style="font-weight: bold;">CONTACTS:</div>
-            <input type="text" class="input" name="contacts" placeholder="Enter contacts">
+            <input type="text" class="input" name="contact" placeholder="Enter contacts">
             <div class="label" style="font-weight: bold;">DATE:</div>
             <input type="date" class="input" name="date" placeholder="Enter date">
             <div class="label" style="font-weight: bold;">CONSULTANT:</div>
@@ -104,7 +106,7 @@
                 </select>
               </div>
             
-          </form>
+          
         </div>
         <table id="testTable">
           <thead>
@@ -121,9 +123,11 @@
       </div>
       <button type="reset" class="button-clear">CLEAR</button>
       <button type="submit" class="button-create">CREATE</button>
+    </form>
     </div>
 
     <script>
+      
       var options = {
         "Complete Blood Count (CBC)": [
           { text: 'Red Blood Cell Count (RBC)', reference: '4.5 - 5.5 million', unit: 'cells/mcL' },

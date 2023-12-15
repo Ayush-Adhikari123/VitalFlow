@@ -3,13 +3,12 @@ from django.db import models
 # Create your models here.
 class Report(models.Model):
     patient_Name =models.CharField( max_length=50)
-    dispatch_date =models.CharField( max_length=50)
     age=models.IntegerField()
     gender=models.CharField( max_length=50)
     address =models.CharField( max_length=50)
     lab_no =models.IntegerField( )
     contact =models.IntegerField( )   
-    date =models.CharField( max_length=50)
+    date =models.DateField( max_length=50)
     consultant =models.CharField( max_length=50)
     
 class Report_Detail(models.Model):
