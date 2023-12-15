@@ -55,11 +55,11 @@
     </div>
 
      <div class="rounded-box2">
-      <form class="form" action="{% url 'createreport' %}" method="post">
-        {% csrf_token %}
+     
        <div class="container-form">
         <div class="content2">
-          
+          <form class="form" id="reportForm" action="{% url 'createreport' %}" method="post">
+            {% csrf_token %}
             <div class="label" style="font-weight: bold;">PATIENT NAME:</div>
             <input type="text" class="input" name="name" placeholder="Enter patient name">
             <!-- <div class="label" style="font-weight: bold;">DISPATCH DATE:</div>
@@ -89,7 +89,7 @@
             <div class="label" style="font-weight: bold;">CONSULTANT:</div>
             <input type="text" class="input" name="consultant" placeholder="Enter consultant">
               <div class="dropdown-container">
-                <label for="testDropdown">Select Test:</label>
+                <label for="testDropdown" name ="test_list">Select Test:</label>
                 <select id="testDropdown">
                   <option value="">Select Test</option>
                   <option value="Complete Blood Count (CBC)">Complete Blood Count (CBC)</option>
@@ -105,8 +105,7 @@
 
                 </select>
               </div>
-            
-          
+           
         </div>
         <table id="testTable">
           <thead>
@@ -121,9 +120,10 @@
           </tbody>
         </table>    
       </div>
-      <button type="reset" class="button-clear">CLEAR</button>
-      <button type="submit" class="button-create">CREATE</button>
     </form>
+      <button type="reset" class="button-clear">CLEAR</button>
+      <button type="submit" class="button-create"  id="submitForm">CREATE</button>
+    
     </div>
 
     <script>
@@ -203,6 +203,7 @@
             subtests.map(subtest => `<span>${subtest.text}</span>`).join('<br>');
             cell2.innerHTML = subtests.map((subtest, index) => `<input type="text" class="textbox-input" name="${subtest.text}" style="height: 20px; margin-top: ${index === 0 ? '30px' : '0'};" placeholder="ENTER RESULT">`).join('<br>');
 
+
           // cell2.innerHTML = subtests.map(subtest => `<input type="text" class="textbox-input" name="${subtest.text}" placeholder="ENTER RESULT">`).join('<br>');
           cell3.innerHTML = '<br>' + subtests.map(subtest => `<span>${subtest.reference}</span>`).join('<br>');
 
@@ -217,6 +218,18 @@
 function myFunction1() {
   document.getElementById('foo').style.cssText = ' '
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+  var submitButton = document.getElementById('submitForm');
+
+  submitButton.addEventListener('click', function() {
+      // Perform any necessary validation checks here before form submission
+
+      // Submit the form
+      var form = document.getElementById('reportForm');
+      form.submit();
+  });
+});
     </script>    
   </body>
 </html>

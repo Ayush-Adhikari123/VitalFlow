@@ -1,3 +1,4 @@
+# models.py
 from django.db import models
 
 # Create your models here.
@@ -12,6 +13,7 @@ class Report(models.Model):
     consultant =models.CharField( max_length=50)
     
 class Report_Detail(models.Model):
+    test_list =models.CharField( max_length=50)
     investigation =models.CharField( max_length=50)
     results =models.CharField( max_length=50)
     reference_value =models.CharField( max_length=50)
