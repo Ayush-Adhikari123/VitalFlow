@@ -2,6 +2,9 @@
 <!doctype html>
 <html lang="en">
   <head>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>VitalFlow</title>
@@ -21,17 +24,35 @@
     <div class="rounded-box">
       <div class="content">
       <div class="top-buttons">
-        <button class="btn btn-primary with-icon"></button>
+        <button class="btn btn-primary with-icon-1"></button>
       </div>
       <div class="top-buttons">
-        <button class="btn btn-primary with-icon-2"></button>
+        <a href="/viewreport"><button class="btn btn-primary with-icon-4"></button></a>
       </div>
       <div class="top-buttons">
-        <button class="btn btn-primary with-icon-3"></button>
+       <button class="btn btn-primary with-icon-3" id="foo" onclick="myFunction()" data-toggle="modal" data-target="#exampleModalLong2"></button>
       </div>
       </div>
     </div>
-    
+    <div class="modal fade" id="exampleModalLong2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Logout</h5>
+            <button type="button" class="close" style='border: none; background:none' data-dismiss="modal" onclick="myFunction1()" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to logout?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger"   onclick="myFunction1()" data-dismiss="modal">Close</button>
+            <a href="/"><button type="button" class="btn btn-primary">Logout</button></a>
+          </div>
+        </div>
+      </div>
+    </div>
 
      <div class="rounded-box2">
        <div class="container-form">
@@ -184,6 +205,14 @@
           cell4.innerHTML ='<br>' + subtests.map(subtest => `<span>${subtest.unit}</span>`).join('<br>');
         }
       }
+
+      function myFunction() {
+    document.getElementById('foo').style.cssText = ''
+}
+
+function myFunction1() {
+  document.getElementById('foo').style.cssText = ' '
+}
     </script>    
   </body>
 </html>

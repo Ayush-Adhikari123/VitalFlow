@@ -1,223 +1,317 @@
 {% load static %}
 <!doctype html>
 <html lang="en">
-
-<head>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <head>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>VitalFlow</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-  <link rel="stylesheet" href="/static/viewreport.css" />
-</head>
-
-<body>
-
-  <div class="header">
-    <div class="logo">
-      <img src="/static/Images/Logo.png" alt="Header Image" style="height: 100px;">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>VitalFlow</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/viewreport.css"/> 
+  </head>
+  <body>
+    <div class="header">
+        <div class="logo">
+            <img src="/static/Images/Logo.png" alt="Header Image" style="height: 100px;">
+        </div>
+        <div class="company-name">
+            <h1>VITAL FLOW<br>BIO-LAB</h1>
+        </div>
     </div>
-    <div class="company-name">
-      <h1>VITAL FLOW<br>BIO-LAB</h1>
-    </div>
-  </div>
-  <div class="container">
-    <div class="navbar">
+    <div class ="container ">
+    <div class="rounded-box">
+      <div class="content">
       <div class="top-buttons">
-        <button class="btn btn-primary with-icon1"><a href="/createreport"><img src="{% static 'images/add-user.png' %}" width="160" height="140"></a></button>
+        <a href="/createreport"> <button class="btn btn-primary with-icon-1"></button></a>
       </div>
       <div class="top-buttons">
-        <button class="btn btn-primary with-icon-2"><a href="/viewreport"><img src="{% static 'images/analysiss.png' %}" width="160" height="140"></a></button>
+        <a href="/viewreport"><button class="btn btn-primary with-icon-4"></button></a>
       </div>
       <div class="top-buttons">
-        <button class="btn btn-primary with-icon-3" id="foo" onclick="myFunction()" data-toggle="modal" data-target="#exampleModalLong"><a><img src="{% static 'images/logout.png' %}" width="160" height="140"></a></button>
+       <button class="btn btn-primary with-icon-3" id="foo" onclick="myFunction()" data-toggle="modal" data-target="#exampleModalLong2"></button>
+      </div>
       </div>
     </div>
-    <div class="section">
-      
-      <form class="d-flex " role="search" style="margin-bottom: 100px" >
-        
-          <input class="form-control me-2 " style="width: 300px" type="search" placeholder="Patient Id" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        
-      
-
-        
-      </form>
-      <table class="table table-striped mt-5">
-        <thead>
-          <tr>
-            <th scope="col">S.N</th>
-            <th scope="col">Date</th>
-            <th scope="col">Patient Id</th>
-            <th scope="col">Full Name</th>
-            <th scope="col">Test</th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>2023-02-30</td>
-            <td>220302</td>
-            <td>Srijan Shrestha</td>
-            <td>Sugar</td>
-            <td><div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login" data-toggle="modal" data-target="#loginModal">
-                View
-              </button>
-              <button type="button" class=" btn btn-success btn-Login" data-toggle="modal" data-target="#loginModal">
-                Edit
-              </button>
-              <button type="button" class="btn btn-danger btn-Login" data-toggle="modal" data-target="#exampleModalLong1">
-                Delete
-              </button></div>
-            </td>
-            
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>2023-02-22</td>
-            <td>220302</td>
-            <td>Srijan Shrestha</td>
-            <td>Urine</td>
-            <td><div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login" data-toggle="modal" data-target="#loginModal">
-              View
+    <div class="modal fade" id="exampleModalLong2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Logout</h5>
+            <button type="button" class="close" style='border: none; background:none' data-dismiss="modal" onclick="myFunction1()" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
             </button>
-            <button type="button" class=" btn btn-success btn-Login" data-toggle="modal" data-target="#loginModal">
-              Edit
-            </button>
-            <button type="button" class="btn btn-danger btn-Login" data-toggle="modal" data-target="#exampleModalLong1">
-              Delete
-            </button></div>
-          </td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>2023-02-10</td>
-            <td>220302</td>
-            <td>Srijan Shrestha</td>
-            <td>Cholesterol</td>
-            <td><div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login" data-toggle="modal" data-target="#loginModal">
-              View
-            </button>
-            <button type="button" class=" btn btn-success btn-Login" data-toggle="modal" data-target="#loginModal">
-              Edit
-            </button>
-            <button type="button" class="btn btn-danger btn-Login" data-toggle="modal" data-target="#exampleModalLong1">
-              Delete
-            </button></div>
-          </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="modal fade" id="loginModal" tabindex="0" role="dialog" aria-labelledby="loginModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="login-container">
-            <form class="form">
-              <div class="label">Patient Name:</div>
-              <div class="label">Dispatch Date:</div>
-              <input type="text" class="input" name="name" placeholder="Enter patient name">
-              <input type="date" class="input" name="date" placeholder="Enter dispatch date">
-              <div class="label">Age/sex:</div>
-              <div class="label">PE No:</div>
-              <input type="text" class="input" name="age" placeholder="Enter age and sex">
-              <input type="text" class="input" name="pe" placeholder="Enter PE number">
-              <div class="label">Address:</div>
-              <div class="label">Lab No:</div>
-              <input type="text" class="input" name="address" placeholder="Enter address">
-              <input type="text" class="input" name="lab" placeholder="Enter lab number">
-              <div class="label">Contacts:</div>
-              <div class="label">Date:</div>
-              <input type="text" class="input" name="contacts" placeholder="Enter contacts">
-              <input type="date" class="input" name="date" placeholder="Enter date">
-              <div class="label">Consultant:</div>
-              <div></div>
-              <input type="text" class="input" name="consultant" placeholder="Enter consultant">
-              <div></div>
-
-
-            </form>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to logout?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger"   onclick="myFunction1()" data-dismiss="modal">Close</button>
+            <a href="/"><button type="button" class="btn btn-primary">Logout</button></a>
           </div>
         </div>
-
       </div>
     </div>
-  </div>
-  <!-- Button trigger modal -->
-{% comment %} <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
-  Launch demo modal
-</button> {% endcomment %}
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Logout</h5>
-        <button type="button" class="close" style='border: none; background:none' data-dismiss="modal" onclick="myFunction1()" aria-label="Close">
-          {% comment %} <style>.close {
-            border: 1px solid #000; /* You can adjust the color and width of the border */
-          }
-        </style> {% endcomment %}
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Are you sure you want to logout?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger"   onclick="myFunction1()" data-dismiss="modal">Close</button>
-        <a href="/"><button type="button" class="btn btn-primary">Logout</button></a>
+    <div class="modal fade" id="exampleModalLong1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Delete</h5>
+            <button type="button" class="close" style='border: none; background:none' data-dismiss="modal" onclick="myFunction1()" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to Delete it?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger"   onclick="myFunction1()" data-dismiss="modal">No</button>
+            <button type="button" class="btn btn-primary">Yes</button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
-<div class="modal fade" id="exampleModalLong1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Delete</h5>
-        <button type="button" class="close" style='border: none; background:none' data-dismiss="modal" onclick="myFunction1()" aria-label="Close">
-          {% comment %} <style>.close {
-            border: 1px solid #000; /* You can adjust the color and width of the border */
-          }
-        </style> {% endcomment %}
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Are you sure you want to Delete it?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger"   onclick="myFunction1()" data-dismiss="modal">No</button>
-        <button type="button" class="btn btn-primary">Yes</button>
+    <div class="modal fade" id="loginModal" tabindex="0" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+      <div class="modal-dialog1" role="document">
+        
+        <div class="views"  >
+          <img src="/static/images/viewreport.png" height="740" alt="Your Image">
+           <div class="text-field">
+            <label for="userInput">Enter Text:</label>
+            <input type="text" id="userInput">
+            
+          </div>
+        </div>
+       
       </div>
     </div>
+
+     <div class="rounded-box2 ">
+      <form class="d-flex mb-5" role="search"  >
+        <input class="form-control me-2 " style="width: 300px" type="search" placeholder="Patient Id" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>      
+    </form>
+    <div class="table-scroll">
+    <table class="table table-striped ">
+      <thead>
+        <tr>
+          <th scope="col">S.N</th>
+          <th scope="col">Date</th>
+          <th scope="col">Patient Id</th>
+          <th scope="col">Full Name</th>
+          <th scope="col">Test</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>2023-02-30</td>
+          <td>220302</td>
+          <td>Srijan Shrestha</td>
+          <td>Sugar</td>
+          
+          <td><div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login" data-toggle="modal" data-target="#loginModal">
+              View
+            </button>
+            <button type="button" class=" btn btn-success btn-Login ms-2 me-2" data-toggle="modal" data-target="#loginModal">
+              Edit
+            </button>
+            <button type="button" class="btn btn-danger btn-Login" data-toggle="modal" data-target="#exampleModalLong1">
+              Delete
+            </button></div>
+          </td>
+          
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>2023-02-22</td>
+          <td>220302</td>
+          <td>Srijan Shrestha</td>
+          <td>Uric acid</td>
+        
+          <td><div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login" data-toggle="modal" data-target="#loginModal">
+            View
+          </button>
+          <button type="button" class=" btn btn-success btn-Login ms-2 me-2" data-toggle="modal" data-target="#loginModal">
+            Edit
+          </button>
+          <button type="button" class="btn btn-danger btn-Login" data-toggle="modal" data-target="#exampleModalLong1">
+            Delete
+          </button></div>
+        </td>
+        </tr>
+
+        <tr>
+          <th scope="row">2</th>
+          <td>2023-02-22</td>
+          <td>220302</td>
+          <td>Srijan Shrestha</td>
+          <td>Uric acid</td>
+        
+          <td><div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login" data-toggle="modal" data-target="#loginModal">
+            View
+          </button>
+          <button type="button" class=" btn btn-success btn-Login ms-2 me-2" data-toggle="modal" data-target="#loginModal">
+            Edit
+          </button>
+          <button type="button" class="btn btn-danger btn-Login" data-toggle="modal" data-target="#exampleModalLong1">
+            Delete
+          </button></div>
+        </td>
+        </tr>
+
+        <tr>
+          <th scope="row">2</th>
+          <td>2023-02-22</td>
+          <td>220302</td>
+          <td>Srijan Shrestha</td>
+          <td>Uric acid</td>
+        
+          <td><div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login" data-toggle="modal" data-target="#loginModal">
+            View
+          </button>
+          <button type="button" class=" btn btn-success btn-Login ms-2 me-2" data-toggle="modal" data-target="#loginModal">
+            Edit
+          </button>
+          <button type="button" class="btn btn-danger btn-Login" data-toggle="modal" data-target="#exampleModalLong1">
+            Delete
+          </button></div>
+        </td>
+        </tr>
+
+        <tr>
+          <th scope="row">2</th>
+          <td>2023-02-22</td>
+          <td>220302</td>
+          <td>Srijan Shrestha</td>
+          <td>Uric acid</td>
+        
+          <td><div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login" data-toggle="modal" data-target="#loginModal">
+            View
+          </button>
+          <button type="button" class=" btn btn-success btn-Login ms-2 me-2" data-toggle="modal" data-target="#loginModal">
+            Edit
+          </button>
+          <button type="button" class="btn btn-danger btn-Login" data-toggle="modal" data-target="#exampleModalLong1">
+            Delete
+          </button></div>
+        </td>
+        </tr>
+
+        <tr>
+          <th scope="row">2</th>
+          <td>2023-02-22</td>
+          <td>220302</td>
+          <td>Srijan Shrestha</td>
+          <td>Uric acid</td>
+        
+          <td><div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login" data-toggle="modal" data-target="#loginModal">
+            View
+          </button>
+          <button type="button" class=" btn btn-success btn-Login ms-2 me-2" data-toggle="modal" data-target="#loginModal">
+            Edit
+          </button>
+          <button type="button" class="btn btn-danger btn-Login" data-toggle="modal" data-target="#exampleModalLong1">
+            Delete
+          </button></div>
+        </td>
+        </tr>
+
+        <tr>
+          <th scope="row">2</th>
+          <td>2023-02-22</td>
+          <td>220302</td>
+          <td>Srijan Shrestha</td>
+          <td>Uric acid</td>
+        
+          <td><div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login" data-toggle="modal" data-target="#loginModal">
+            View
+          </button>
+          <button type="button" class=" btn btn-success btn-Login ms-2 me-2" data-toggle="modal" data-target="#loginModal">
+            Edit
+          </button>
+          <button type="button" class="btn btn-danger btn-Login" data-toggle="modal" data-target="#exampleModalLong1">
+            Delete
+          </button></div>
+        </td>
+        </tr>
+
+        <tr>
+          <th scope="row">2</th>
+          <td>2023-02-22</td>
+          <td>220302</td>
+          <td>Srijan Shrestha</td>
+          <td>Uric acid</td>
+        
+          <td><div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login" data-toggle="modal" data-target="#loginModal">
+            View
+          </button>
+          <button type="button" class=" btn btn-success btn-Login ms-2 me-2" data-toggle="modal" data-target="#loginModal">
+            Edit
+          </button>
+          <button type="button" class="btn btn-danger btn-Login" data-toggle="modal" data-target="#exampleModalLong1">
+            Delete
+          </button></div>
+        </td>
+        </tr>
+
+        <tr>
+          <th scope="row">2</th>
+          <td>2023-02-22</td>
+          <td>220302</td>
+          <td>Srijan Shrestha</td>
+          <td>Uric acid</td>
+        
+          <td><div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login" data-toggle="modal" data-target="#loginModal">
+            View
+          </button>
+          <button type="button" class=" btn btn-success btn-Login ms-2 me-2" data-toggle="modal" data-target="#loginModal">
+            Edit
+          </button>
+          <button type="button" class="btn btn-danger btn-Login" data-toggle="modal" data-target="#exampleModalLong1">
+            Delete
+          </button></div>
+        </td>
+        </tr>
+
+        <tr>
+          <th scope="row">2</th>
+          <td>2023-02-22</td>
+          <td>220302</td>
+          <td>Srijan Shrestha</td>
+          <td>Uric acid</td>
+        
+          <td><div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login" data-toggle="modal" data-target="#loginModal">
+            View
+          </button>
+          <button type="button" class=" btn btn-success btn-Login ms-2 me-2" data-toggle="modal" data-target="#loginModal">
+            Edit
+          </button>
+          <button type="button" class="btn btn-danger btn-Login" data-toggle="modal" data-target="#exampleModalLong1">
+            Delete
+          </button></div>
+        </td>
+        </tr>
+
+        
+       
+      </tbody>
+    </table>
   </div>
-</div>
+    </div>
 
-
-</body>
-
-</html>
-<script>
-
-
-  function myFunction() {
-    document.getElementById('foo').style.cssText = 'margin-top:105px; margin-left: -177px;background-color: #ffffff; padding:12px 5px 2px 5px; border: 3px solid transparent; justify-content: center; border-radius: 25px; box-shadow: 6px 6px 10px #555;'
+    <script>
+      function myFunction() {
+    document.getElementById('foo').style.cssText = ''
 }
 
 function myFunction1() {
-  document.getElementById('foo').style.cssText = 'margin-top:105px; margin-left: -177px; '
+  document.getElementById('foo').style.cssText = ' '
 }
-</script>
-
-
+    </script>    
+  </body>
+</html>
