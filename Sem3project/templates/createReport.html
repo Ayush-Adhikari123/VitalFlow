@@ -90,8 +90,7 @@
             <div class="label" style="font-weight: bold;">CONSULTANT:</div>
             <input type="text" class="input" name="consultant" placeholder="Enter consultant">
             
-            {% comment %} <form class="form" id="reportForm" action="{% url 'createreport' %}" method="post">
-              {% csrf_token %} {% endcomment %}
+            
               <div class="dropdown-container">
                 <label for="testDropdown" name ="test_list">Select Test:</label>
                 <select id="testDropdown"  name="test_list">
@@ -206,7 +205,7 @@
               var cellResult = row.insertCell();
               var inputResult = document.createElement("input");
               inputResult.setAttribute("type", "text");
-              inputResult.setAttribute("name", `${subtest.text}_result`);
+              inputResult.setAttribute("name", `_result`);
               inputResult.setAttribute("id", `${subtest.text}_result`);
               inputResult.value = "RESULT";  
 
@@ -218,9 +217,7 @@
               var cellUnit = row.insertCell();
               cellUnit.textContent = subtest.unit;
             });
-          }
-        
-      
+          }      
 }
 function clearForm() {
   document.getElementById("reportForm").reset();
