@@ -42,7 +42,11 @@ def contact(request):
 
 def adminpage(request):
     return render(request,'adminpage.html')
+<<<<<<< HEAD
       
+=======
+       
+>>>>>>> origin/ayushbhetwal
 def createreport(request):
     
     options = {
@@ -129,7 +133,12 @@ def createreport(request):
                 for subtest in subtests:
                     text = subtest['text']
                     # result = request.POST.get(f'{text}_result')
+<<<<<<< HEAD
                     result ="ok"
+=======
+                    result = request.POST.get(f'_result')
+                    # result ="ok"
+>>>>>>> origin/ayushbhetwal
                     reference = subtest['reference']
                     unit = subtest['unit']
 
@@ -151,6 +160,7 @@ def createreport(request):
       form = Report_DetailForm()
     return render(request, 'createReport.html')
 
+<<<<<<< HEAD
 
 
 def viewreport(request):
@@ -162,3 +172,5 @@ def packages(request):
 
 def techlogin(techlogin):
     return render(request,"techlogin.html")
+=======
+>>>>>>> origin/ayushbhetwal

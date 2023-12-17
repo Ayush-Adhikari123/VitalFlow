@@ -90,8 +90,12 @@
             <div class="label" style="font-weight: bold;">CONSULTANT:</div>
             <input type="text" class="input" name="consultant" placeholder="Enter consultant">
             
+<<<<<<< HEAD
             {% comment %} <form class="form" id="reportForm" action="{% url 'createreport' %}" method="post">
               {% csrf_token %} {% endcomment %}
+=======
+            
+>>>>>>> origin/ayushbhetwal
               <div class="dropdown-container">
                 <label for="testDropdown" name ="test_list">Select Test:</label>
                 <select id="testDropdown"  name="test_list">
@@ -137,7 +141,11 @@
         "Complete Blood Count (CBC)": [
           { "text": 'Red Blood Cell Count (RBC)', "reference": '4.5 - 5.5 million', "unit": 'cells/mcL' },
           { "text": 'Hemoglobin (Hb)', "reference": '12.0 - 15.5', "unit": 'g/dL' },
+<<<<<<< HEAD
           { "text": 'Hematocrit (Hct)', "reference": '38.3% - 48.6%', "unit": '%' },
+=======
+          { "text": 'Hematocrit (Hct)', "reference": '38.3% - 48.6%', "unit": '' },
+>>>>>>> origin/ayushbhetwal
           { "text": 'White Blood Cell Count (WBC)', "reference": '4,000 - 11,000', "unit": 'cells/mcL' },
           { "text": 'Platelet Count', "reference": '150,000 - 450,000', "unit": 'cells/mcL' }
         ],
@@ -206,7 +214,11 @@
               var cellResult = row.insertCell();
               var inputResult = document.createElement("input");
               inputResult.setAttribute("type", "text");
+<<<<<<< HEAD
               inputResult.setAttribute("name", `${subtest.text}_result`);
+=======
+              inputResult.setAttribute("name", `_result`);
+>>>>>>> origin/ayushbhetwal
               inputResult.setAttribute("id", `${subtest.text}_result`);
               inputResult.value = "RESULT";  
 
@@ -218,9 +230,13 @@
               var cellUnit = row.insertCell();
               cellUnit.textContent = subtest.unit;
             });
+<<<<<<< HEAD
           }
         
       
+=======
+          }      
+>>>>>>> origin/ayushbhetwal
 }
 function clearForm() {
   document.getElementById("reportForm").reset();
