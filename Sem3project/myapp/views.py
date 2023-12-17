@@ -153,6 +153,12 @@ def createreport(request):
 
 
 
+def viewreport(request):
+    return render(request,'viewreport.html')
+
 
 def packages(request):
     return render(request,'packages.html')
+
+def techlogin(techlogin):
+    return render(request,"techlogin.html")
