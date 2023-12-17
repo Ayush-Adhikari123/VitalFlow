@@ -14,7 +14,8 @@ urlpatterns = [
    path("feedback",views.feedback, name='feedback'),
    path("contact",views.contact, name='contact'),
    path("adminpage",views.adminpage, name='adminpage'),
-   path("createreport",views.createreport,name='createreport')
-  #  path("create_report_detail",views.create_report_detail,name='create_report_detail')
-
+   path("createreport",views.createreport,name='createreport'),
+    path("techlogin",views.techlogin, name='techlogin'),
+    path("packages",views.packages, name='packages'),
+ path("viewreport",views.viewreport,name='viewreport'),
  ]
