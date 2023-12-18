@@ -23,7 +23,7 @@ def home(request):
     return HttpResponse("This is Home Page")
 
 def availabletest(request):
-    return HttpResponse("This is Available Test Page")
+   return render(request,'AvailableTest.html')
 
 def report(request):
     return HttpResponse("This is Report Page")
