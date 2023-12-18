@@ -25,11 +25,11 @@
      }
         
        .rounded-box {
-         background-color: #ffffff; /* Set your desired box color */
-         border-radius: 20px; /* Set your desired border radius */
-         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add a box shadow for depth */
-         padding: 20px; /* Set your desired padding */
-         width: 210px; /* Set your desired width */
+         background-color: #ffffff; 
+         border-radius: 20px; 
+         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+         padding: 20px; 
+         width: 210px; 
          height: 610px;
          border: outset;
          BACKGROUND-COLOR: aliceblue;
@@ -41,11 +41,11 @@
        }
        
        .rounded-box2 {
-         background-color: #ffffff; /* Set your desired box color */
-         border-radius: 20px; /* Set your desired border radius */
-         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add a box shadow for depth */
-         padding: 10px; /* Set your desired padding */
-         width: 1800px; /* Set your desired width */
+         background-color: #ffffff; 
+         border-radius: 20px; 
+         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+         padding: 10px; 
+         width: 1800px; 
          border: solid;
          height: 610px;
          BACKGROUND-COLOR: MISTYROSE;
