@@ -45,3 +45,6 @@ def viewreport(request):
 
 def createreport(request):
     return render(request,'createReport.html')
+
+def test(request):
+    return render(request,'test.html')

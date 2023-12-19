@@ -15,5 +15,6 @@ urlpatterns = [
    path("adminpage",views.adminpage, name='adminpage'),
    path("adminlogin",views.adminlogin, name='adminlogin'),
    path("viewreport",views.viewreport,name='viewreport'),
-   path("createreport",views.createreport,name='createreport')
+   path("createreport",views.createreport,name='createreport'),
+   path("test",views.test,name='test')
 ]
