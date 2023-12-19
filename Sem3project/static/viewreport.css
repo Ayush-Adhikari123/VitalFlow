@@ -119,16 +119,57 @@
   }
 
   .modal-dialog1 {
+    /* background-image: url('/static/images/viewreport.png'); */
     max-width: var(--bs-modal-width);
-    margin-right: 913px;
-    margin-left: 913;
+    background-color: #ffffff;
+    margin-left: 475px;
+    background-size: cover;
+    height: 624px;
   }
   .views{
-    margin-left: 400px;
-    margin-right: 400px;
+    background-color: #6290E8;
+    /* margin-top: 67px;
+    height: 21px;
+    width: 67px; */
   }
 
-  .text-field{
+  /* .text-field{
     margin-top: 400px;
 
+  } */
+  .address-txt{
+    margin-top: -8px;
+  }
+  .view-2{
+    background-color: #70B6C6;
+  }
+  .view-4{
+    background-image: url('/static/images/fina2.png');
+    width: 250px;
+    height: 250px;
+    background-size: cover;
+   margin: auto;
+
+  }
+  
+  .container1{
+    margin-top: 50px;
+  }
+ 
+  .container3{
+    background-color: #2A54C2;
+  }
+  .line{
+    border-width: 2px;
+    border-color: black;
+    margin: 0;
+    padding: 0;
+  }
+  .pdf {
+    background-color: #DB6464 !important;
+    border: none;
+    border-radius: 8px; /* Adjust the border-radius to your preference */
+    cursor: pointer;
+    font-size: 14px; /* Adjust the font size **/
+    font-weight: bold; /* Adjust the margin */
   }
