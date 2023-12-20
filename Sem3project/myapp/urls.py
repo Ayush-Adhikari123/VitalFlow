@@ -15,13 +15,9 @@ urlpatterns = [
    path("contact",views.contact, name='contact'),
    path("adminpage",views.adminpage, name='adminpage'),
    path("createreport",views.createreport,name='createreport'),
-<<<<<<< HEAD
     path("techlogin",views.techlogin, name='techlogin'),
     path("packages",views.packages, name='packages'),
  path("viewreport",views.viewreport,name='viewreport'),
-=======
-  #  path("createreport",views.create_report_detail,name='create_report_detail'),
-   # path("create_report_detail",views.createreport,name='create_report_detail')
-
->>>>>>> origin/ayushbhetwal
+ path("updatereport/<str:contact>/",views.updatereport,name='updatereport'),
+ 
  ]

@@ -59,7 +59,7 @@
      
        <div class="container-form">
         <div class="content2">
-           <form class="form" id="reportForm" action="{% url 'createreport' %}" method="post">
+           <form class="form" id="reportForm" action="{% url 'updatereport'  contact=report.contact%}" method="post">
             {% csrf_token %}
             <div class="label" style="font-weight: bold;">PATIENT NAME:</div>
             <input type="text" class="input" name="name" placeholder="Enter patient name">
@@ -91,7 +91,7 @@
             <input type="text" class="input" name="consultant" placeholder="Enter consultant">
             
             
-              <div class="dropdown-container">
+              {% comment %} <div class="dropdown-container">
                 <label for="testDropdown" name ="test_list">Select Test:</label>
                 <select id="testDropdown"  name="test_list">
                   <option value="">Select Test</option>
@@ -107,8 +107,7 @@
                   <option value="Iron Studies">Iron Studies</option>
 
                 </select>
-              </div>
-           
+              </div>            {% endcomment %}
         </div>
         <table id="testTable">
           <thead>
@@ -125,14 +124,14 @@
       </div>
     
       <button type="reset" class="button-clear">CLEAR</button>
-      <button type="submit" class="button-create"  id="submitForm">CREATE</button>
+      <button type="submit" class="button-create"  id="submitForm">Update</button>
     
     </div>
   </form>
 
     <script>
       
-      var options = {
+      {% comment %} var options = {
         "Complete Blood Count (CBC)": [
           { "text": 'Red Blood Cell Count (RBC)', "reference": '4.5 - 5.5 million', "unit": 'cells/mcL' },
           { "text": 'Hemoglobin (Hb)', "reference": '12.0 - 15.5', "unit": 'g/dL' },
@@ -220,7 +219,7 @@
           }
         
       
-}
+} {% endcomment %}
 function clearForm() {
   document.getElementById("reportForm").reset();
 }

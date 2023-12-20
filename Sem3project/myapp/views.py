@@ -6,6 +6,7 @@ from myapp.models import Report,Report_Detail
 from .forms import Report_DetailForm  # Import the Report_DetailForm
 import json
 from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
 
 def index(request):
     context ={
@@ -54,7 +55,7 @@ def createreport(request):
           { "text": 'Platelet Count', "reference": '150,000 - 450,000', "unit": 'cells/mcL' }
         ],
         "Blood Glucose": [
-          { "text": 'Fasting Blood Glucose', "reference": '70 - 99', "unit": 'mg/dL' }
+          { "text": 'Fasting Blood Glucose',"result": " ", "reference": '70 - 99', "unit": 'mg/dL' }
         ],
         "Lipid Panel": [
           { "text": 'Total Cholesterol', "reference": 'Less than 200', "unit": 'mg/dL' },
@@ -127,18 +128,23 @@ def createreport(request):
             if test_dropdown in options:
                 subtests = options[test_dropdown]
                 for subtest in subtests:
+                    
                     text = subtest['text']
-                    # result = request.POST.get(f'{text}_result')
-                    result ="ok"
-                    reference = subtest['reference']
-                    unit = subtest['unit']
+                    result = None
 
+                    # Retrieve results for each subtest based on the input names
+                    for key, value in request.POST.items():
+                        if key.startswith(f'result_{test_dropdown}_{text.replace(" ", "_")}'):
+                            result = value
+                            break  # Exit the loop once the result is found
+
+                    # Create a Report_Detail object for each subtest and save it to the database
                     new_report_detail = Report_Detail(
                         test_list=test_dropdown,
                         investigation=text,
                         results=result,
-                        reference_value=reference,
-                        unit=unit
+                        reference_value=subtest['reference'],
+                        unit=subtest['unit']
                     )
                     new_report_detail.save()
 
@@ -162,3 +168,32 @@ def packages(request):
 
 def techlogin(techlogin):
     return render(request,"techlogin.html")
+
+def updatereport(request,contact):
+    if request.method == 'POST':
+        # Retrieve the existing record from the database
+        existing_report = get_object_or_404(Report, contact=contact)
+        
+        # Update the fields with the new values from the form
+        existing_report.patient_Name = request.POST.get('name')
+        existing_report.age = request.POST.get('age')
+        existing_report.gender = request.POST.get('gender')
+        existing_report.address = request.POST.get('address')
+        existing_report.contact = request.POST.get('contact')
+        existing_report.date = request.POST.get('date')
+        existing_report.consultant = request.POST.get('consultant')
+
+        # Perform basic validation on the updated age
+        new_age = request.POST.get('age')
+        if new_age.strip() == '' or not new_age.isnumeric():
+            return render(request, 'updateReport.html', {'report': existing_report})
+
+        # Save the updated record
+        existing_report.save()
+        
+        return HttpResponse("Report updated successfully")
+    else:
+        # Retrieve the existing record to display in the form for editing
+        existing_report = get_object_or_404(Report, contact=contact)
+        return render(request, 'updateReport.html', {'report': existing_report})
+
