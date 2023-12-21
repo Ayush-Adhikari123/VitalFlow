@@ -1,3 +1,4 @@
+# urls.py
 from django.contrib import admin
 from django.urls import path
 from myapp import views
@@ -13,8 +14,9 @@ urlpatterns = [
    path("feedback",views.feedback, name='feedback'),
    path("contact",views.contact, name='contact'),
    path("adminpage",views.adminpage, name='adminpage'),
-   path("adminlogin",views.adminlogin, name='adminlogin'),
-   path("viewreport",views.viewreport,name='viewreport'),
    path("createreport",views.createreport,name='createreport'),
-   path("test",views.test,name='test')
-]
+    path("techlogin",views.techlogin, name='techlogin'),
+    path("packages",views.packages, name='packages'),
+ path("viewreport",views.viewreport,name='viewreport'),
+ path("test",views.test,name='test')
+ ]

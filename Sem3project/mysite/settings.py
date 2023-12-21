@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
+    'myapp.apps.MyappConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -127,3 +129,22 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
+
+# ============================================================================================
+JAZZMIN_SETTINGS = {
+    # title of the window (Will default to current_admin_site.site_title if absent or None)
+    "site_title": "VITALFLOW BIO LAB",
+     "site_brand": "ADMIN",
+    "site_logo": "images/Logo.png",
+    "welcome_sign": "Welcome to the VITALFLOW ADMIN LOGIN",
+    "copyright": "VITALFLOW BIO LAB",
+        "show_ui_builder": True,
+
+
+     # List of model admins to search from the search bar, search bar omitted if excluded
+    # If you want to use a single search field you dont need to use a list, you can use a simple string 
+    "search_model": ["auth.User", "auth.Group"],
+
+
+
+}
