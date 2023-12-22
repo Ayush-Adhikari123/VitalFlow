@@ -40,8 +40,8 @@ def about(request):
 def contact(request):
     return HttpResponse("This is Contact Page")
 
-def adminpage(request):
-    return render(request,'adminpage.html')
+def adminprofile(request):
+    return render(request,'adminprofile.html')
       
 def createreport(request):
     
