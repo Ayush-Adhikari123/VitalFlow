@@ -191,9 +191,26 @@ def updatereport(request,contact):
         # Save the updated record
         existing_report.save()
         
-        return HttpResponse("Report updated successfully")
+        
+        # Retrieve Report_Detail records related to the Report
+        report_details = Report_Detail.objects.filter(report=existing_report)
+
+        # Update Report_Detail records
+        for report_detail in report_details:
+            investigation_name = report_detail.investigation  # Retrieve the investigation name
+
+            # Get the updated result from the form using the input name
+            result = request.POST.get(f'result_{existing_report.contact}_{investigation_name.replace(" ", "_")}')
+
+            # Update the result in the Report_Detail model
+            report_detail.results = result
+
+            # Save the updated Report_Detail record
+            report_detail.save()
+
+        return HttpResponse("Report and Report_Detail updated successfully")
     else:
-        # Retrieve the existing record to display in the form for editing
+        # Retrieve the existing Report record for rendering in the form
         existing_report = get_object_or_404(Report, contact=contact)
         return render(request, 'updateReport.html', {'report': existing_report})
-
+        
