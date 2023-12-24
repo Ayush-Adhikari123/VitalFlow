@@ -18,6 +18,8 @@ class Report_Detail(models.Model):
     results =models.CharField( max_length=50)
     reference_value =models.CharField( max_length=50)
     unit =models.CharField( max_length=50)
+    report = models.ForeignKey(Report, blank=True, null=True, on_delete=models.CASCADE)
     
-    
-    
+class technicianlogin(models.Model):
+    technician_id=models.CharField(max_length=32)
+    Password=models.CharField(max_length=16)    

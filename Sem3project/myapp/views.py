@@ -5,7 +5,8 @@ from django.shortcuts import render,HttpResponse
 from myapp.models import Report,Report_Detail
 from .forms import Report_DetailForm  # Import the Report_DetailForm
 import json
-from django.http import JsonResponse
+from django.http import HttpResponseRedirect, JsonResponse
+from django.shortcuts import get_object_or_404
 
 def index(request):
     context ={
@@ -160,5 +161,132 @@ def viewreport(request):
 def packages(request):
     return render(request,'packages.html')
 
-def techlogin(techlogin):
-    return render(request,"techlogin.html")
+def adminlogin(request):
+    return render(request,"adminlogin.html")
+
+
+# =====================================================================================
+
+from django.contrib.auth.forms import AuthenticationForm,PasswordChangeForm,SetPasswordForm,UserChangeForm
+from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
+from django.contrib  import  messages
+from .forms import EditadminprofileForm, EditsuperadminprofileForm
+# login function for admin
+def admin_login(request):
+  if not request.user.is_authenticated:
+    if request.method =="POST":
+        fm = AuthenticationForm(request=request,data=request.POST)
+        if fm.is_valid():
+          uname = fm.cleaned_data['username']
+          upass = fm.cleaned_data['password']
+          user = authenticate(username=uname,password=upass)
+          if user is not None:
+              login(request,user)
+              messages.success(request,'LOGED IN SUCCESSFULLY🤯🤯🤯')
+              return HttpResponseRedirect('/adminprofile/')
+    else:
+      fm=AuthenticationForm()
+    return render(request,'adminlogin.html',{'form':fm})
+  else:
+      return HttpResponseRedirect('/adminprofile/')
+  
+
+def admin_profile(request):
+    if  request.user.is_authenticated:
+      if request.method == "POST":
+         fm= EditadminprofileForm(request.POST, instance= request.user)
+         if fm.is_valid():
+          messages.info(request,'Profile Updated Successfully!')
+          fm.save()
+      else:
+        # if request.user.is_superuser == True:
+        #   fm =EditsuperadminprofileForm(instance = request.user)
+        # else:
+          fm =EditadminprofileForm(instance=request.user)
+      return render(request,'adminprofile.html',{'name': request.user,'form':fm})
+    else:
+        return HttpResponseRedirect('adminlogin')
+
+
+
+def admin_logout(request):
+    logout(request)
+    return HttpResponseRedirect("/adminlogin/")
+
+def admin_password(request):
+  if request.user.is_authenticated:  
+    if request.method == "POST":
+      fm = PasswordChangeForm(user=request.user,data = request.POST)
+      if fm.is_valid():
+          fm.save()
+          # update_session_auth_hash(request,fm.user) =============> if uncommented, the admin will not be forcefully loged out .he will be movw to admin profile.
+          messages.info(request,"PASSWORD HAS BEEN UPDATED!")
+          return HttpResponseRedirect('/adminprofile/')
+    else :
+      fm = PasswordChangeForm(user=request.user)
+    return render(request,'adminpassword.html',{'form': fm})
+  else:
+     return HttpResponseRedirect('/adminlogin/')
+  
+
+  # =========================================================================================
+def updatereport(request,contact):
+    if request.method == 'POST':
+        # Retrieve the existing record from the database
+        existing_report = get_object_or_404(Report, contact=contact)
+        
+        # Update the fields with the new values from the form
+        existing_report.patient_Name = request.POST.get('name')
+        existing_report.age = request.POST.get('age')
+        existing_report.gender = request.POST.get('gender')
+        existing_report.address = request.POST.get('address')
+        existing_report.contact = request.POST.get('contact')
+        existing_report.date = request.POST.get('date')
+        existing_report.consultant = request.POST.get('consultant')
+
+        # Perform basic validation on the updated age
+        new_age = request.POST.get('age')
+        if new_age.strip() == '' or not new_age.isnumeric():
+            return render(request, 'updateReport.html', {'report': existing_report})
+
+        # Save the updated record
+        existing_report.save()
+        
+        
+        # Retrieve Report_Detail records related to the Report
+        report_details = Report_Detail.objects.filter(report=existing_report)
+
+        # Update Report_Detail records
+        for report_detail in report_details:
+            investigation_name = report_detail.investigation  # Retrieve the investigation name
+
+            # Get the updated result from the form using the input name
+            result = request.POST.get(f'result_{existing_report.contact}_{investigation_name.replace(" ", "_")}')
+
+            # Update the result in the Report_Detail model
+            report_detail.results = result
+
+            # Save the updated Report_Detail record
+            report_detail.save()
+
+        return HttpResponse("Report and Report_Detail updated successfully")
+    else:
+        # Retrieve the existing Report record for rendering in the form
+        existing_report = get_object_or_404(Report, contact=contact)
+        return render(request, 'updateReport.html', {'report': existing_report})
+    
+
+def createtechnicianlogin(request):
+    if request.method == 'POST':
+        # Extract form data from the POST request
+        technician_id = request.POST.get('technician_id')
+        Password = request.POST.get('Password')
+
+        new_technicianlogin= technicianlogin(
+            technician_id=technician_id,
+            Password=Password
+        )
+        new_technicianlogin.save()
+        return HttpResponse("Succesfully Logined")
+    else:
+        return render(request,'techlogin.html')
