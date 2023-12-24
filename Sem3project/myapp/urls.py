@@ -25,4 +25,6 @@ path('adminlogout/',views.admin_logout,name ='adminlogout'),
 path('adminprofile/',views.admin_profile,name='adminprofile'),
 path('changepassword/',views.admin_password,name='changepassword'),
 
+
+path("updatereport/<str:contact>/",views.updatereport,name='updatereport'),
  ]
