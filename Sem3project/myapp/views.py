@@ -5,7 +5,7 @@ from django.shortcuts import render,HttpResponse
 from myapp.models import Report,Report_Detail
 from .forms import Report_DetailForm  # Import the Report_DetailForm
 import json
-from django.http import JsonResponse
+from django.http import HttpResponseRedirect, JsonResponse
 
 def index(request):
     context ={
@@ -160,5 +160,69 @@ def viewreport(request):
 def packages(request):
     return render(request,'packages.html')
 
-def techlogin(techlogin):
-    return render(request,"techlogin.html")
+def adminlogin(request):
+    return render(request,"adminlogin.html")
+
+
+# =====================================================================================
+
+from django.contrib.auth.forms import AuthenticationForm,PasswordChangeForm,SetPasswordForm,UserChangeForm
+from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
+from django.contrib  import  messages
+from .forms import EditadminprofileForm, EditsuperadminprofileForm
+# login function for admin
+def admin_login(request):
+  if not request.user.is_authenticated:
+    if request.method =="POST":
+        fm = AuthenticationForm(request=request,data=request.POST)
+        if fm.is_valid():
+          uname = fm.cleaned_data['username']
+          upass = fm.cleaned_data['password']
+          user = authenticate(username=uname,password=upass)
+          if user is not None:
+              login(request,user)
+              messages.success(request,'LOGED IN SUCCESSFULLY🤯🤯🤯')
+              return HttpResponseRedirect('/adminprofile/')
+    else:
+      fm=AuthenticationForm()
+    return render(request,'adminlogin.html',{'form':fm})
+  else:
+      return HttpResponseRedirect('/adminprofile/')
+  
+
+def admin_profile(request):
+    if  request.user.is_authenticated:
+      if request.method == "POST":
+         fm= EditadminprofileForm(request.POST, instance= request.user)
+         if fm.is_valid():
+          messages.info(request,'Profile Updated Successfully!')
+          fm.save()
+      else:
+        # if request.user.is_superuser == True:
+        #   fm =EditsuperadminprofileForm(instance = request.user)
+        # else:
+          fm =EditadminprofileForm(instance=request.user)
+      return render(request,'adminprofile.html',{'name': request.user,'form':fm})
+    else:
+        return HttpResponseRedirect('adminlogin')
+
+
+
+def admin_logout(request):
+    logout(request)
+    return HttpResponseRedirect("/adminlogin/")
+
+def admin_password(request):
+  if request.user.is_authenticated:  
+    if request.method == "POST":
+      fm = PasswordChangeForm(user=request.user,data = request.POST)
+      if fm.is_valid():
+          fm.save()
+          # update_session_auth_hash(request,fm.user) =============> if uncommented, the admin will not be forcefully loged out .he will be movw to admin profile.
+          messages.info(request,"PASSWORD HAS BEEN UPDATED!")
+          return HttpResponseRedirect('/adminprofile/')
+    else :
+      fm = PasswordChangeForm(user=request.user)
+    return render(request,'adminpassword.html',{'form': fm})
+  else:
+     return HttpResponseRedirect('/adminlogin/')
