@@ -274,3 +274,19 @@ def updatereport(request,contact):
         # Retrieve the existing Report record for rendering in the form
         existing_report = get_object_or_404(Report, contact=contact)
         return render(request, 'updateReport.html', {'report': existing_report})
+    
+
+def createtechnicianlogin(request):
+    if request.method == 'POST':
+        # Extract form data from the POST request
+        technician_id = request.POST.get('technician_id')
+        Password = request.POST.get('Password')
+
+        new_technicianlogin= technicianlogin(
+            technician_id=technician_id,
+            Password=Password
+        )
+        new_technicianlogin.save()
+        return HttpResponse("Succesfully Logined")
+    else:
+        return render(request,'techlogin.html')
