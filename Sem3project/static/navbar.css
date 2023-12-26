@@ -1,3 +1,39 @@
+<<<<<<< HEAD
+/* Custom CSS for spacing */
+.navbar {
+  background-color: #73a7c6 !important; /* Changing the background color */
+}
+.navbar .dropdown-menu {
+  background-color: #73a7c6 !important;
+}
+.navbar-inquiry {
+  font-size: 1.1rem; /* Increasing the font size */
+  margin-left: 30px;
+}
+.btn-Login {
+  justify-content: center;
+  background-color: #1e62d8 !important;
+  border: none;
+  border-radius: 8px; /* Adjust the border-radius to your preference */
+  cursor: pointer;
+  padding: 8px 16px; /* Adjust the padding to reduce the size */
+  font-size: 14px; /* Adjust the font size */
+  margin-left: 300px;
+  font-weight: bold; /* Adjust the margin */
+}
+
+.navbar-brand {
+  color: #8a3030;
+  font-weight: bold;
+  font-size: 2rem; /* Increasing the font size */
+  margin-left: 30px;
+  margin-right: 100px; /* Adjust the margin value as needed */
+}
+/* Adjusting the width of the search input */
+.form-control {
+  width: 350px; /* Change the width as per your requirement */
+}
+=======
       /* Custom CSS for spacing */
       .navbar {
         background-color: #73A7C6 !important; /* Changing the background color */
@@ -32,3 +68,27 @@
       .form-control {
         width: 350px; /* Change the width as per your requirement */
       }
+
+
+      /* css for drop down login */
+
+      .navbar-nav li.nav-item.dropdown:hover ul.dropdown-menu {
+        display: block;
+        margin-top: 0;
+    }
+    
+    .dropdown-menu {
+        background-color: #1e62d8; /* Background color for the dropdown menu */
+        border: 1px solid #1e62d8; /* Border color for the dropdown menu */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Box shadow for the dropdown menu */
+    }
+    
+    .dropdown-menu a {
+        color: #fff; /* Text color for dropdown items */
+    }
+    
+    .dropdown-menu a:hover {
+        background-color: #1951b9; /* Background color on hover for dropdown items */
+
+    }
+>>>>>>> origin/pradip
