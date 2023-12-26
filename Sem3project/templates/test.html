@@ -122,14 +122,14 @@
             }
           
           
-            .table-scroll thead th{
+            {% comment %} .table-scroll thead th{
               position: sticky;
               top: 0px;
             }
             .table-scroll{
               overflow-y: scroll;
               height: 470px;
-            }
+            } {% endcomment %}
           
             .modal-dialog1 {
               /* background-image: url('/static/images/viewreport.png'); */
@@ -157,20 +157,29 @@
               background-color: #70B6C6;
             }
             .view-4{
-              background-image: url('/static/images/fina2.png');
+              
               width: 250px;
               height: 250px;
-              background-size: cover;
-             margin: auto;
+              
+             {% comment %} margin: auto; {% endcomment %}
+             {% comment %} margin-left:151px; {% endcomment %}
+             
           
             }
             
             .container1{
-              margin-top: 50px;
+              background-image: url('/static/images/fina2.png');
+              
+              background-position: center;
+              height: 405px;
+              background-size: cover;
+              background-size: contain;
+              background-repeat: no-repeat;
             }
            
             .container3{
               background-color: #2A54C2;
+              
             }
             .line{
               border-width: 2px;
@@ -192,13 +201,29 @@
           .elem{
     
           }
+          .table>:not(caption)>*>*{
+            background-color:rgba(0,0,0,0.1); !important;
+          }
+          .no-border {
+            border: none;
+            outline: none;
+        }
+        .no-click {
+          
+          user-select: none;
+      }
+      .table-scroll {
+        overflow-y: scroll;
+        height: 370px;
+    }
+    
     </style>
     <!-- Adding the html2pdf.js library -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
-<body>
+<body >
     <!-- Creating an HTML element to be converted to a PDF -->
     <div class="elem">
         <div class="views d-flex justify-content-center"  >
@@ -216,93 +241,85 @@
             <div class="d-flex  justify-content-between">
             <div class="ms-4">
             <label for="userInput"style="font-size: 12px; font-weight: bold;">Report Id:</label>
-            <input type="text" value="220302" id="userInput1"  style="width: 84px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; background-color: #70b6c6; ">
+            <input type="text" value="{{ report_data.id }}" id="userInput1" readonly class="no-border" style="width: 150px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; background-color: #70b6c6; ">
             </div>
             {% comment %} <label for="userInput">Patient Name:</label>
             <input type="text" id="userInput1"  style="width: 84px; height: 15px; border: none; font-size: 10px; margin-buttom:20px;"> {% endcomment %}
             
             <div class="me-4">
             <label for="userInput" style="font-size: 12px; font-weight: bold;">Date:</label>
-            <input type="text" value="2023-08-21" id="userInput1"  style="width: 84px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; background-color: #70b6c6;">
+            <input type="text" value="{{ report_data.date }}" id="userInput1" readonly class="no-border" style="width: 150px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; background-color: #70b6c6;">
             </div>
           </div>
-          <div class="row m-0 p-0 ">
+          <div class="d-flex  justify-content-around ">
             <div class="col-5 ms-5">
-            <label for="userInput" style="font-size: 12px; font-weight: bold;">Patient Name:</label>
-            <input type="text" value="Srijan Shrestha" id="userInput1"  style="width: 84px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; background-color: #70b6c6;">
+            <label for="userInput" style="font-size: 12px; font-weight: bold; ">Patient Name:</label>
+            <input type="text" value="{{ report_data.patient_Name }}" id="userInput1" readonly class="no-border" style="width: 150px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; background-color: #70b6c6;">
             </div>
             {% comment %} background-color: #70b6c6; {% endcomment %}
             {% comment %} <label for="userInput">Patient Name:</label>
             <input type="text" id="userInput1"  style="width: 84px; height: 15px; border: none; font-size: 10px; margin-buttom:20px;"> {% endcomment %}
             <div class="col-5">
             <label for="userInput" style="font-size: 12px; font-weight: bold;">Contact   :</label>
-            <input type="text" value="9862107925" id="userInput1"  style="width: 84px; height: 15px; border: none; font-size: 12px; margin-buttom:20px;  margin-left:15px; background-color: #70b6c6;">
+            <input type="text" value="{{ report_data.contact }}" id="userInput1" readonly class="no-border" style="width: 150px; height: 15px; border: none; font-size: 12px; margin-buttom:20px;  margin-left:15px; background-color: #70b6c6;">
             </div>
           </div>
-          <div class="row m-0 p-0 ">
+          <div class="d-flex  justify-content-around ">
             <div class="col-5 ms-5 ">
-            <label for="userInput px-0" style="font-size: 12px; font-weight: bold;">Age :</label>
-            <input type="text" value="20" id="userInput1"  style="width: 84px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; margin-left:51px; background-color: #70b6c6; ">
+            <label for="userInput px-0" style="font-size: 12px; font-weight: bold; ">Age :</label>
+            <input type="text" value="{{ report_data.age }}" id="userInput1" readonly class="no-border" style="width: 150px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; margin-left:51px; background-color: #70b6c6; ">
             </div>
             {% comment %} <label for="userInput">Patient Name:</label>
             <input type="text" id="userInput1"  style="width: 84px; height: 15px; border: none; font-size: 10px; margin-buttom:20px;"> {% endcomment %}
             <div class="col-5">
             <label for="userInput" style="font-size: 12px; font-weight: bold;">Gender    :</label>
-            <input type="text" value="Male" id="userInput1"  style="width: 84px; height: 15px; border: none; font-size: 12px; margin-buttom:20px;  margin-left:18px; background-color: #70b6c6;">
+            <input type="text" value="{{ report_data.gender }}" id="userInput1" readonly class="no-border" style="width: 150px; height: 15px; border: none; font-size: 12px; margin-buttom:20px;  margin-left:18px; background-color: #70b6c6;">
             </div>
           </div>
-          <div class="row m-0 p-0">
+          <div class="d-flex  justify-content-around">
             <div class="col-5 ms-5">
-            <label for="userInput" style="font-size: 12px; font-weight: bold;">Address     :</label>
-            <input type="text" value="Sunakothi" id="userInput1"  style="width: 84px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; margin-left:28px; background-color: #70b6c6;">
+            <label for="userInput" style="font-size: 12px; font-weight: bold; ">Address     :</label>
+            <input type="text" value="{{ report_data.address }}" id="userInput1" readonly class="no-border" style="width: 150px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; margin-left:28px; background-color: #70b6c6;">
             </div>
             {% comment %} <label for="userInput">Patient Name:</label>
             <input type="text" id="userInput1"  style="width: 84px; height: 15px; border: none; font-size: 10px; margin-buttom:20px;"> {% endcomment %}
             <div class="col-5">
             <label for="userInput" style="font-size: 12px; font-weight: bold;">Consultant:</label>
-            <input type="text" value="Dr.Kadel.P" id="userInput1"  style="width: 84px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; background-color: #70b6c6;">
+            <input type="text" value="{{ report_data.consultant }}" id="userInput1" readonly class="no-border" style="width: 150px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; background-color: #70b6c6;">
             </div>
             
           </div>
           </div>
           <div class="container1">
-            
-            <div class="view-4  ">
-              <div style=" margin-right: 200px;"><table class="table table-striped" style="width:1000px; ">
-                <thead>
-                  <tr>
-                    <th scope="col">S.N</th>
-                    <th scope="col">INVESTIGATION</th>
-                    <th scope="col">RESULT</th>
-                    <th scope="col">UNIT</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                  </tr>
-                </tbody>
-              </table></div>
-              
-            </div>
-  
-          </div>
-          <div class="container2 mt-5 pt-5">
+            {% comment %} <div class="view-4"> {% endcomment %}
+                <div class="table-scroll">
+                    <table class="table mt-5 mx-auto" style="width:90% ;">
+                        <thead>
+                            <tr >
+                                <th scope="col">S.N</th>
+                                <th scope="col">INVESTIGATION</th>
+                                <th scope="col">RESULT</th>
+                                <th scope="col">REFERENCE VALUE</th>
+                                <th scope="col">UNIT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for detail in report_detail_data %}
+                                <tr class="no-click">
+                                    <th scope="row">{{ forloop.counter }}</th>
+                                    <td >{{ detail.investigation }}</td>
+                                    <td>{{ detail.results }}</td>
+                                    <td>{{ detail.reference_value }}</td>
+                                    <td>{{ detail.unit }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% comment %} </div> {% endcomment %}
+        </div>
+        
+          <div class="container2 ">
   
             <div class="view-5 d-flex mt-1 justify-content-around">
               <div>
