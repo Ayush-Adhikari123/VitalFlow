@@ -1,11 +1,15 @@
 
 
 # views.py
-from django.shortcuts import render,HttpResponse
+from django.http import HttpResponseBadRequest
+
+from django.shortcuts import render,HttpResponse,redirect
 from myapp.models import Report,Report_Detail
-from .forms import Report_DetailForm  # Import the Report_DetailForm
+from .models import Report, Report_Detail
+from .forms import Report_DetailForm ,PatientForm # Import the Report_DetailForm
 import json
 from django.http import JsonResponse
+
 
 def index(request):
     context ={
@@ -134,6 +138,7 @@ def createreport(request):
                     unit = subtest['unit']
 
                     new_report_detail = Report_Detail(
+                        report=new_report,
                         test_list=test_dropdown,
                         investigation=text,
                         results=result,
@@ -161,7 +166,136 @@ def packages(request):
     return render(request,'packages.html')
 
 def techlogin(techlogin):
-    return render(request,"techlogin.html")
+    return render(request ,"techlogin.html")
 
+
+
+
+    if request.method == 'POST':
+        # Use request.POST to get data from a POST request
+        patient_Name = request.POST.get('patient_Name', '')
+        contact = request.POST.get('contact', '')
+
+        print(f"Patient Name: {patient_Name}, Contact: {contact}")
+
+        # Assuming you want to fetch data where patient_name is "test" and contact is "5151645"
+        report_data = Report.objects.filter(patient_Name=patient_Name, contact=contact).first()
+        report_detail_data = Report_Detail.objects.all()
+
+        if report_data is not None:
+            # Process the data
+            print("Data found")
+        else:
+            # Handle the case when no data is found
+            print("No data found")
+
+        context = {
+            'report_data': report_data,
+            'report_detail_data': report_detail_data,
+        }
+
+        return render(request, 'test.html', context)
+
+    return HttpResponse('Invalid request')
 def test(request):
-    return render(request,'test.html')
+    if request.method == 'POST':
+        patient_Name = request.POST.get('patient_Name', '')
+        contact = request.POST.get('contact', '')
+
+        print(f"Patient Name: {patient_Name}, Contact: {contact}")
+
+        if contact:
+            report_data = Report.objects.filter(patient_Name=patient_Name, contact=contact).first()
+            report_detail_data = Report_Detail.objects.filter(report_id=report_data.id)
+            print(report_data)
+
+            if report_data is not None:
+                print("Data found")
+            else:
+                print("No data found")
+
+            context = {
+                'report_data': report_data,
+                'report_detail_data': report_detail_data,
+            }
+            print(f"Method: {request.method}")
+            print(f"Contact: {contact}")
+
+            return render(request, 'test.html', context)
+
+        return HttpResponse('Invalid request or empty contact field')
+    
+# def test(request):
+#     if request.method == 'POST':
+#         # Use request.POST to get data from a POST request
+#         patient_Name = request.POST.get('patient_Name', '')
+#         contact = request.POST.get('contact', '')
+
+#         print(f"Method: {request.method}")
+#         print(f"Patient Name: {patient_Name}, Contact: {contact}")
+
+#         # Check if contact is not an empty string before using it in the filter
+#         if contact:
+#             # Assuming you want to fetch data where patient_name is "test" and contact is a non-empty string
+#             report_data = Report.objects.filter(patient_Name=patient_Name, contact=contact).first()
+#             report_detail_data = Report_Detail.objects.all()
+#             print(report_data)
+
+#             if report_data is not None:
+#                 # Process the data
+#                 print("Data found")
+#             else:
+#                 # Handle the case when no data is found
+#                 print("No data found")
+
+#             context = {
+#                 'report_data': report_data,
+#                 'report_detail_data': report_detail_data,
+#             }
+
+#             return render(request, 'test.html', context)
+
+#     elif request.method == 'GET':
+#         # Use request.GET to get data from a GET request
+#         patient_Name = request.GET.get('patient_Name', '')
+#         contact = request.GET.get('contact', '')
+
+#         print(f"Method: {request.method}")
+#         print(f"Patient Name: {patient_Name}, Contact: {contact}")
+
+#         # You can add logic here to handle the GET request data
+
+#         return HttpResponse('GET request received')
+#         # return render(request, 'test.html', context)
+
+#     # Return a default response if neither POST nor GET conditions are met
+#
+#      return HttpResponse('Invalid request or empty contact field')
+
+
+
+# def userlogin(request):
+#     if request.method == 'POST':
+#         patient_Name = request.POST.get('patient_Name', '')
+#         contact = request.POST.get('contact', '')
+#         form = PatientForm(request.POST)
+#         print(f"Method: {request.method}")
+#         print(f"Patient Name: {patient_Name}, Contact: {contact}")
+#         if form.is_valid():
+#             patient_name = form.cleaned_data['patient_Name']
+#             contact = form.cleaned_data['contact']
+
+#             # Check if the patient exists in the database
+#             if Report.objects.filter(patient_Name="Srijan", contact="9862107925").exists():
+#                 # Redirect to the test page
+#                 return redirect('test')  # Replace 'test_page_url_name' with the actual URL name of your test page
+#             else:
+#                 # Patient not found, handle accordingly (e.g., show an error message)
+#                 pass
+#     else:
+#         form = PatientForm()
+
+#     return render(request, 'test.html', {'form': form})
+
+def userlogin(request):
+    return render(request,'userlogin.html')

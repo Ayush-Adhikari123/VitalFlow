@@ -2,6 +2,7 @@
 from django.contrib import admin
 from django.urls import path
 from myapp import views
+from .views import userlogin
 
 urlpatterns = [
    path("",views.index,name='myapp'),
@@ -18,5 +19,7 @@ urlpatterns = [
     path("techlogin",views.techlogin, name='techlogin'),
     path("packages",views.packages, name='packages'),
  path("viewreport",views.viewreport,name='viewreport'),
- path("test",views.test,name='test')
+ 
+ path("userlogin",views.userlogin,name='userlogin'),
+path('test',views.test, name='test')
  ]
