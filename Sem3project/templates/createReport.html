@@ -1,3 +1,4 @@
+
 {% load static %}
 <!doctype html>
 <html lang="en">
@@ -58,7 +59,7 @@
      
        <div class="container-form">
         <div class="content2">
-          <form class="form" id="reportForm" action="{% url 'createreport' %}" method="post">
+           <form class="form" id="reportForm" action="{% url 'createreport' %}" method="post">
             {% csrf_token %}
             <div class="label" style="font-weight: bold;">PATIENT NAME:</div>
             <input type="text" class="input" name="name" placeholder="Enter patient name">
@@ -88,9 +89,11 @@
             <input type="date" class="input" name="date" placeholder="Enter date">
             <div class="label" style="font-weight: bold;">CONSULTANT:</div>
             <input type="text" class="input" name="consultant" placeholder="Enter consultant">
+            
+            
               <div class="dropdown-container">
                 <label for="testDropdown" name ="test_list">Select Test:</label>
-                <select id="testDropdown">
+                <select id="testDropdown"  name="test_list">
                   <option value="">Select Test</option>
                   <option value="Complete Blood Count (CBC)">Complete Blood Count (CBC)</option>
                   <option value="Blood Glucose">Blood Glucose</option>
@@ -116,120 +119,202 @@
               <th>UNIT</th>
             </tr>
           </thead>
-          <tbody>    
+          <tbody id="testTableBody">    
           </tbody>
         </table>    
       </div>
-    </form>
+    
       <button type="reset" class="button-clear">CLEAR</button>
       <button type="submit" class="button-create"  id="submitForm">CREATE</button>
     
     </div>
+  </form>
 
     <script>
       
       var options = {
         "Complete Blood Count (CBC)": [
-          { text: 'Red Blood Cell Count (RBC)', reference: '4.5 - 5.5 million', unit: 'cells/mcL' },
-          { text: 'Hemoglobin (Hb)', reference: '12.0 - 15.5', unit: 'g/dL' },
-          { text: 'Hematocrit (Hct)', reference: '38.3% - 48.6%', unit: '' },
-          { text: 'White Blood Cell Count (WBC)', reference: '4,000 - 11,000', unit: 'cells/mcL' },
-          { text: 'Platelet Count', reference: '150,000 - 450,000', unit: 'cells/mcL' }
+          { "text": 'Red Blood Cell Count (RBC)', "reference": '4.5 - 5.5 million', "unit": 'cells/mcL' },
+          { "text": 'Hemoglobin (Hb)', "reference": '12.0 - 15.5', "unit": 'g/dL' },
+          { "text": 'Hematocrit (Hct)', "reference": '38.3% - 48.6%', "unit": '%' },
+          { "text": 'White Blood Cell Count (WBC)', "reference": '4,000 - 11,000', "unit": 'cells/mcL' },
+          { "text": 'Platelet Count', "reference": '150,000 - 450,000', "unit": 'cells/mcL' }
         ],
         "Blood Glucose": [
-          { text: 'Fasting Blood Glucose', reference: '70 - 99', unit: 'mg/dL' }
+          { "text": 'Fasting Blood Glucose', "reference": '70 - 99', "unit": 'mg/dL' }
         ],
         "Lipid Panel": [
-          { text: 'Total Cholesterol', reference: 'Less than 200', unit: 'mg/dL' },
-          { text: 'LDL Cholesterol', reference: 'Less than 100', unit: 'mg/dL' },
-          { text: 'HDL Cholesterol', reference: '40 - 60', unit: 'mg/dL' },
-          { text: 'Triglycerides', reference: 'Less than 150', unit: 'mg/dL' }
+          { "text": 'Total Cholesterol', "reference": 'Less than 200', "unit": 'mg/dL' },
+          { "text": 'LDL Cholesterol', "reference": 'Less than 100', "unit": 'mg/dL' },
+          { "text": 'HDL Cholesterol', "reference": '40 - 60', "unit": 'mg/dL' },
+          { "text": 'Triglycerides', "reference": 'Less than 150', "unit": 'mg/dL' }
         ],
         "Liver Function Tests": [
-          { text: 'ALT (Alanine Aminotransferase)', reference: '7 - 56', unit: 'U/L' },
-          { text: 'AST (Aspartate Aminotransferase)', reference: '5 - 40', unit: 'U/L' },
-          { text: 'ALP (Alkaline Phosphatase)', reference: '44 - 147', unit: 'U/L' },
-          { text: 'Total Bilirubin', reference: '0.3 - 1.2', unit: 'mg/dL' }
+          { "text": 'ALT (Alanine Aminotransferase)', "reference": '7 - 56', "unit": 'U/L' },
+          { "text": 'AST (Aspartate Aminotransferase)', "reference": '5 - 40', "unit": 'U/L' },
+          { "text": 'ALP (Alkaline Phosphatase)', "reference": '44 - 147', "unit": 'U/L' },
+          { "text": 'Total Bilirubin', "reference": '0.3 - 1.2', "unit": 'mg/dL' }
         ],
         "Kidney Function Tests": [
-          { text: 'BUN (Blood Urea Nitrogen)', reference: '7 - 20', unit: 'mg/dL' },
-          { text: 'Serum Creatinine', reference: '0.6 - 1.3', unit: 'mg/dL' }
+          { "text": 'BUN (Blood Urea Nitrogen)', "reference": '7 - 20', "unit": 'mg/dL' },
+          { "text": 'Serum Creatinine', "reference": '0.6 - 1.3', "unit": 'mg/dL' }
         ],
         "Electrolytes": [
-          { text: 'Sodium', reference: '135 - 145', unit: 'mmol/L' },
-          { text: 'Potassium', reference: '3.5 - 5.0', unit: 'mmol/L' },
-          { text: 'Chloride', reference: '98 - 108', unit: 'mmol/L' }
+          { "text": 'Sodium', "reference": '135 - 145', "unit": 'mmol/L' },
+          { "text": 'Potassium', "reference": '3.5 - 5.0', "unit": 'mmol/L' },
+          { "text": 'Chloride', "reference": '98 - 108', "unit": 'mmol/L' }
         ],
         "Thyroid Function Tests": [
-          { text: 'TSH (Thyroid Stimulating Hormone)', reference: '0.4 - 4.0', unit: 'mIU/L' },
-          { text: 'FT4 (Free Thyroxine)', reference: '0.8 - 1.8', unit: 'ng/dL' }
+          { "text": 'TSH (Thyroid Stimulating Hormone)', "reference": '0.4 - 4.0', "unit": 'mIU/L' },
+          { "text": 'FT4 (Free Thyroxine)', "reference": '0.8 - 1.8', "unit": 'ng/dL' }
         ],
         "Iron Studies": [
-          { text: 'Serum Iron', reference: '65 - 176', unit: 'µg/dL' },
-          { text: 'TIBC (Total Iron Binding Capacity)', reference: '250 - 450', unit: 'µg/dL' },
-          { text: 'Ferritin', reference: '12 - 300', unit: 'ng/mL' }
+          { "text": 'Serum Iron', "reference": '65 - 176', "unit": 'µg/dL' },
+          { "text": 'TIBC (Total Iron Binding Capacity)', "reference": '250 - 450', "unit": 'µg/dL' },
+          { "text": 'Ferritin', "reference": '12 - 300', "unit": 'ng/mL' }
         ],
         "C-Reactive Protein (CRP)": [
-          { text: '', reference: 'Less than 0.8', unit: 'mg/dL' }
+          { "text": '', "reference": 'Less than 0.8', "unit": 'mg/dL' }
         ],
         "Uric Acid": [
-          { text: 'Male', reference: '3.4 - 7.0', unit: 'mg/dL' },
-          { text: 'Female', reference: '2.4 - 6.0', unit: 'mg/dL' }
-        ]
-        // Add more options as needed
-      };
-    
-      document.addEventListener('DOMContentLoaded', function() {
-        var dropdown = document.getElementById("testDropdown");
-        dropdown.addEventListener('change', addRow);
-      });
-    
-      function addRow() {
-        var table = document.getElementById("testTable").getElementsByTagName('tbody')[0];
-        var newRow = table.insertRow(table.rows.length);
-    
-        var cell1 = newRow.insertCell(0);
-        var cell2 = newRow.insertCell(1);
-        var cell3 = newRow.insertCell(2);
-        var cell4 = newRow.insertCell(3);
-    
-        var dropdown = document.getElementById("testDropdown");
-        var selectedTest = dropdown.value;
-    
-        if (selectedTest in options) {
-          var subtests = options[selectedTest];
-    
-          cell1.innerHTML = selectedTest + '<br>' +
-            subtests.map(subtest => `<span>${subtest.text}</span>`).join('<br>');
-            cell2.innerHTML = subtests.map((subtest, index) => `<input type="text" class="textbox-input" name="${subtest.text}" style="height: 20px; margin-top: ${index === 0 ? '30px' : '0'};" placeholder="ENTER RESULT">`).join('<br>');
-
-
-          // cell2.innerHTML = subtests.map(subtest => `<input type="text" class="textbox-input" name="${subtest.text}" placeholder="ENTER RESULT">`).join('<br>');
-          cell3.innerHTML = '<br>' + subtests.map(subtest => `<span>${subtest.reference}</span>`).join('<br>');
-
-          cell4.innerHTML ='<br>' + subtests.map(subtest => `<span>${subtest.unit}</span>`).join('<br>');
-        }
-      }
-
-      function myFunction() {
-    document.getElementById('foo').style.cssText = ''
+          { "text": 'Male', "reference": '3.4 - 7.0', "unit": 'mg/dL' },
+          { "text": 'Female', "reference": '2.4 - 6.0', "unit": 'mg/dL' } 
+        ]};
+        
+{% comment %} 
+        var options = {
+          "Complete Blood Count (CBC)": [
+            { "text": 'Red Blood Cell Count (RBC)', "result": '', "reference": '4.5 - 5.5 million', "unit": 'cells/mcL' },
+            { "text": 'Hemoglobin (Hb)', "result": '', "reference": '12.0 - 15.5', "unit": 'g/dL' },
+            { "text": 'Hematocrit (Hct)', "result": '', "reference": '38.3% - 48.6%', "unit": '%' },
+            { "text": 'White Blood Cell Count (WBC)', "result": '', "reference": '4,000 - 11,000', "unit": 'cells/mcL' },
+            { "text": 'Platelet Count', "result": '', "reference": '150,000 - 450,000', "unit": 'cells/mcL' }
+          ],
+          "Blood Glucose": [
+            { "text": 'Fasting Blood Glucose', "result": '', "reference": '70 - 99', "unit": 'mg/dL' }
+          ],
+          "Lipid Panel": [
+            { "text": 'Total Cholesterol', "result": '', "reference": 'Less than 200', "unit": 'mg/dL' },
+            { "text": 'LDL Cholesterol', "result": '', "reference": 'Less than 100', "unit": 'mg/dL' },
+            { "text": 'HDL Cholesterol', "result": '', "reference": '40 - 60', "unit": 'mg/dL' },
+            { "text": 'Triglycerides', "result": '', "reference": 'Less than 150', "unit": 'mg/dL' }
+          ],
+          "Liver Function Tests": [
+            { "text": 'ALT (Alanine Aminotransferase)', "result": '', "reference": '7 - 56', "unit": 'U/L' },
+            { "text": 'AST (Aspartate Aminotransferase)', "result": '', "reference": '5 - 40', "unit": 'U/L' },
+            { "text": 'ALP (Alkaline Phosphatase)', "result": '', "reference": '44 - 147', "unit": 'U/L' },
+            { "text": 'Total Bilirubin', "result": '', "reference": '0.3 - 1.2', "unit": 'mg/dL' }
+          ],
+          "Kidney Function Tests": [
+            { "text": 'BUN (Blood Urea Nitrogen)', "result": '', "reference": '7 - 20', "unit": 'mg/dL' },
+            { "text": 'Serum Creatinine', "result": '', "reference": '0.6 - 1.3', "unit": 'mg/dL' }
+          ],
+          "Electrolytes": [
+            { "text": 'Sodium', "result": '', "reference": '135 - 145', "unit": 'mmol/L' },
+            { "text": 'Potassium', "result": '', "reference": '3.5 - 5.0', "unit": 'mmol/L' },
+            { "text": 'Chloride', "result": '', "reference": '98 - 108', "unit": 'mmol/L' }
+          ],
+          "Thyroid Function Tests": [
+            { "text": 'TSH (Thyroid Stimulating Hormone)', "result": '', "reference": '0.4 - 4.0', "unit": 'mIU/L' },
+            { "text": 'FT4 (Free Thyroxine)', "result": '', "reference": '0.8 - 1.8', "unit": 'ng/dL' }
+          ],
+          "Iron Studies": [
+            { "text": 'Serum Iron', "result": '', "reference": '65 - 176', "unit": 'µg/dL' },
+            { "text": 'TIBC (Total Iron Binding Capacity)', "result": '', "reference": '250 - 450', "unit": 'µg/dL' },
+            { "text": 'Ferritin', "result": '', "reference": '12 - 300', "unit": 'ng/mL' }
+          ],
+          "C-Reactive Protein (CRP)": [
+            { "text": '', "result": '', "reference": 'Less than 0.8', "unit": 'mg/dL' }
+          ],
+          "Uric Acid": [
+            { "text": 'Male', "result": '', "reference": '3.4 - 7.0', "unit": 'mg/dL' },
+            { "text": 'Female', "result": '', "reference": '2.4 - 6.0', "unit": 'mg/dL' }
+          ]
+        }; {% endcomment %}
+        
+        document.addEventListener('DOMContentLoaded', function () {
+          var dropdown = document.getElementById("testDropdown");
+          dropdown.addEventListener('change', addRow);
+        });
+      
+        function addRow() {
+          var selectedTest = document.getElementById("testDropdown").value;
+          var testTableBody = document.getElementById("testTableBody");
+      
+         
+      
+          if (selectedTest in options) {
+            var subtests = options[selectedTest];
+      
+            subtests.forEach(function (subtest) {
+              var row = testTableBody.insertRow(); // Create a new row
+      
+              // Insert cells into the row
+              var cellInvestigation = row.insertCell();
+              cellInvestigation.textContent = subtest.text;
+      
+              var cellResult = row.insertCell();
+              var inputResult = document.createElement("input");
+              inputResult.setAttribute("type", "text");
+              inputResult.setAttribute("name", `result_${selectedTest}_${subtest.text.replace(/\s+/g, '_')}`);
+              inputResult.setAttribute("placeholder", "Enter Result");
+              cellResult.appendChild(inputResult);
+             
+             //cellResult.innerHTML = subtests.map((subtest, index) => `<input type="text" class="textbox-input" name="${subtest.text}" style="height: 20px; margin-top: ${index === 0 ? '30px' : '0'};" placeholder="ENTER RESULT">`).join('<br>');
+              
+             var cellReference = row.insertCell();
+              cellReference.textContent = subtest.reference;
+      
+              var cellUnit = row.insertCell();
+              cellUnit.textContent = subtest.unit;
+            });
+          }    
 }
+document.getElementById('reportForm').addEventListener('submit', function (event) {
+  event.preventDefault();
 
-function myFunction1() {
-  document.getElementById('foo').style.cssText = ' '
-}
+  var formData = new FormData(this);
+  var jsonData = {};
 
-document.addEventListener('DOMContentLoaded', function() {
-  var submitButton = document.getElementById('submitForm');
+  for (var [key, value] of formData.entries()) {
+    jsonData[key] = value;
+  }
 
-  submitButton.addEventListener('click', function() {
-      // Perform any necessary validation checks here before form submission
+  var table = document.getElementById('testTableBody');
+  var resultData = {};
 
-      // Submit the form
-      var form = document.getElementById('reportForm');
-      form.submit();
+  table.querySelectorAll('input[type="text"]').forEach(function(field) {
+    var fieldName = field.getAttribute('name');
+    var fieldValue = field.value;
+    resultData[fieldName] = fieldValue;
+  });
+
+  jsonData['resultData'] = resultData;
+
+  fetch('{% url "createreport" %}', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRFToken': '{{ csrf_token }}'
+    },
+    body: JSON.stringify(jsonData)
+  })
+  .then(response => {
+    if (response.ok) {
+      console.log('Data sent successfully');
+      // Perform any actions upon successful data submission
+    } else {
+      console.error('Server Error:', response.statusText);
+      // Handle errors during data submission
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
   });
 });
+function clearForm() {
+  document.getElementById("reportForm").reset();
+}
     </script>    
   </body>
 </html>

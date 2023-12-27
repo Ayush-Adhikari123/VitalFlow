@@ -15,9 +15,23 @@ class Report(models.Model):
 class Report_Detail(models.Model):
     test_list =models.CharField( max_length=50)
     investigation =models.CharField( max_length=50)
-    results =models.CharField( max_length=50)
+    results =models.CharField(max_length=100, null=True, blank=True)
     reference_value =models.CharField( max_length=50)
     unit =models.CharField( max_length=50)
-    report = models.ForeignKey(Report, on_delete=models.CASCADE)
+    report = models.ForeignKey(Report, blank=True, null=True, on_delete=models.CASCADE)
+
+class TechAdd(models.Model):
+    first_name =models.CharField( max_length=50)
+    middle_name=models.CharField( max_length=50,null=True)
+    last_name=models.CharField( max_length=50)    
+    email =models.EmailField(null=True)
+    contact =models.IntegerField( )
+    password=models.CharField(max_length=50)
+    com_password=models.CharField(max_length=50)        
+    gender =models.DateField( max_length=50)
+    
+    
+
+    
     
     
