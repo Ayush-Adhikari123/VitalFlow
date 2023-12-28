@@ -31,7 +31,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+<<<<<<< HEAD
     'jazzmin',
+=======
+>>>>>>> origin/ayushbhetwal
     'myapp.apps.MyappConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -128,6 +131,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #Adding manually
 STATICFILES_DIRS = [
     BASE_DIR / "static"
+<<<<<<< HEAD
 ]
 
 # ============================================================================================
@@ -148,3 +152,6 @@ JAZZMIN_SETTINGS = {
 
 
 }
+=======
+]
+>>>>>>> origin/ayushbhetwal

@@ -107,8 +107,8 @@ def createreport(request):
         consultant = request.POST.get('consultant')
 
         # Perform basic validation
-        if age.strip() == '' or not age.isnumeric():
-            return render(request, 'createReport.html', {'options': options})
+        # if age.strip() == '' or not age.isnumeric():
+        #     return render(request, 'createReport.html', {'options': options})
 
         new_report = Report(
             patient_Name=patient_name,
@@ -128,18 +128,20 @@ def createreport(request):
             if test_dropdown in options:
                 subtests = options[test_dropdown]
                 for subtest in subtests:
+                    
                     text = subtest['text']
-                    # result = request.POST.get(f'{text}_result')
-                    result ="ok"
-                    reference = subtest['reference']
-                    unit = subtest['unit']
+                    result_data = json.loads(request.POST.get('resultData'))
+                    # result = request.POST.get(f"result_{test_dropdown}_{text.replace(' ', '_')}")
+                            
 
+                    # Create a Report_Detail object for each subtest and save it to the database
                     new_report_detail = Report_Detail(
+                        report=new_report,
                         test_list=test_dropdown,
                         investigation=text,
-                        results=result,
-                        reference_value=reference,
-                        unit=unit
+                        results=result_data,
+                        reference_value=subtest['reference'],
+                        unit=subtest['unit']
                     )
                     new_report_detail.save()
 
@@ -274,18 +276,19 @@ def updatereport(request,contact):
         # Retrieve the existing Report record for rendering in the form
         existing_report = get_object_or_404(Report, contact=contact)
         return render(request, 'updateReport.html', {'report': existing_report})
-      
-      
-def techadd(request):
+        
+        
+        
+def TechAdd(request):
   if request.method == 'POST':
-        first_name = request.POST.get('first_name')
-        middle_name = request.POST.get('middle_name')
-        last_name = request.POST.get('last_name')
-        email = request.POST.get('email')
-        contact = request.POST.get('contact')
-        password = request.POST.get('password')
-        com_password = request.POST.get('com_password')
-        gender = request.POST.get('gender')
+        first_name = request.POST.get('name')
+        middle_name = request.POST.get('age')
+        last_name = request.POST.get('gender')
+        email = request.POST.get('address')
+        contact = request.POST.get('lab_no')
+        password = request.POST.get('contact')
+        com_password = request.POST.get('date')
+        gender = request.POST.get('consultant')
 
         new_techadd = TechAdd(
             first_name=first_name,
