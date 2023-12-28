@@ -1,0 +1,567 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VitalFlow</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/viewreport.css" />
+</head>
+
+<body>
+  <div class="header">
+    <div class="logo">
+      <img src="/static/Images/Logo.png" alt="Header Image" style="height: 100px;">
+    </div>
+    <div class="company-name">
+      <h1>VITAL FLOW<br>BIO-LAB</h1>
+    </div>
+  </div>
+  <div class="container ">
+    <div class="rounded-box">
+      <div class="content">
+        <div class="top-buttons">
+          <a href="/createreport"> <button class="btn btn-primary with-icon-1"></button></a>
+        </div>
+        <div class="top-buttons">
+          <a href="/viewreport"><button class="btn btn-primary with-icon-4"></button></a>
+        </div>
+        <div class="top-buttons">
+          <button class="btn btn-primary with-icon-3" id="foo" onclick="myFunction()" data-toggle="modal"
+            data-target="#exampleModalLong2"></button>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="exampleModalLong2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Logout</h5>
+            <button type="button" class="close" style='border: none; background:none' data-dismiss="modal"
+              onclick="myFunction1()" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to logout?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" onclick="myFunction1()" data-dismiss="modal">Close</button>
+            <a href="/"><button type="button" class="btn btn-primary">Logout</button></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="exampleModalLong1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Delete</h5>
+            <button type="button" class="close" style='border: none; background:none' data-dismiss="modal"
+              onclick="myFunction1()" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to Delete it?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" onclick="myFunction1()" data-dismiss="modal">No</button>
+            <button type="button" class="btn btn-primary">Yes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="loginModal" tabindex="0" role="dialog" aria-labelledby="loginModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog1 mt-5" role="document">
+
+        <div class="views d-flex justify-content-center">
+          <div class="me-2 mt-1">
+            <img src="/static/images/Logo.png" height="50" alt="Your Image">
+          </div>
+          <div>
+            <div>VITALFLOW BIO-LAB</div>
+            <div class="address-txt">Dillibazar, Kathmandu</div>
+            <div class="address-txt">9841234567,01-444123</div>
+          </div>
+        </div>
+        <div class="view-2">
+          <div class="d-flex  justify-content-between">
+            <div class="ms-4">
+              <label for="userInput" style="font-size: 12px; font-weight: bold;">Report Id:</label>
+              <input type="text" id="userInput1"
+                style="width: 84px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; background-color: #70b6c6; ">
+            </div>
+            {% comment %} <label for="userInput">Patient Name:</label>
+            <input type="text" id="userInput1"
+              style="width: 84px; height: 15px; border: none; font-size: 10px; margin-buttom:20px;"> {% endcomment %}
+            <div class="me-4">
+              <label for="userInput" style="font-size: 12px; font-weight: bold;">Date:</label>
+              <input type="text" id="userInput1"
+                style="width: 84px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; background-color: #70b6c6;">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-5 ms-5">
+              <label for="userInput" style="font-size: 12px; font-weight: bold;">Patient Name:</label>
+              <input type="text" id="userInput1"
+                style="width: 84px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; background-color: #70b6c6;">
+            </div>
+            {% comment %} background-color: #70b6c6; {% endcomment %}
+            {% comment %} <label for="userInput">Patient Name:</label>
+            <input type="text" id="userInput1"
+              style="width: 84px; height: 15px; border: none; font-size: 10px; margin-buttom:20px;"> {% endcomment %}
+            <div class="col-5">
+              <label for="userInput" style="font-size: 12px; font-weight: bold;">Contact :</label>
+              <input type="text" id="userInput1"
+                style="width: 84px; height: 15px; border: none; font-size: 12px; margin-buttom:20px;  margin-left:15px; background-color: #70b6c6;">
+            </div>
+          </div>
+          <div class="row ">
+            <div class="col-5 ms-5 ">
+              <label for="userInput px-0" style="font-size: 12px; font-weight: bold;">Age :</label>
+              <input type="text" id="userInput1"
+                style="width: 84px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; margin-left:51px; background-color: #70b6c6; ">
+            </div>
+            {% comment %} <label for="userInput">Patient Name:</label>
+            <input type="text" id="userInput1"
+              style="width: 84px; height: 15px; border: none; font-size: 10px; margin-buttom:20px;"> {% endcomment %}
+            <div class="col-5">
+              <label for="userInput" style="font-size: 12px; font-weight: bold;">Gender :</label>
+              <input type="text" id="userInput1"
+                style="width: 84px; height: 15px; border: none; font-size: 12px; margin-buttom:20px;  margin-left:18px; background-color: #70b6c6;">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-5 ms-5">
+              <label for="userInput" style="font-size: 12px; font-weight: bold;">Address :</label>
+              <input type="text" id="userInput1"
+                style="width: 84px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; margin-left:28px; background-color: #70b6c6;">
+            </div>
+            {% comment %} <label for="userInput">Patient Name:</label>
+            <input type="text" id="userInput1"
+              style="width: 84px; height: 15px; border: none; font-size: 10px; margin-buttom:20px;"> {% endcomment %}
+            <div class="col-5">
+              <label for="userInput" style="font-size: 12px; font-weight: bold;">Consultant:</label>
+              <input type="text" id="userInput1"
+                style="width: 84px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; background-color: #70b6c6;">
+            </div>
+          </div>
+        </div>
+        <div class="container1">
+
+          <div class="view-4  ">
+
+          </div>
+
+        </div>
+        <div class="container2">
+
+          <div class="view-5 d-flex mt-1 justify-content-around">
+            <div>
+              <div><img src="/static/images/Signature1.png" height="50" width="100" alt="Your Image"> </div>
+              <hr class="line">
+              <label for="userInput" style="font-size: 12px; font-weight: bold;">LAB TECHNICIAN</label>
+            </div>
+
+            <div>
+              <div><img src="/static/images/Signature2.png" class="mx-auto d-block" height="50" width="100"
+                  alt="Your Image"> </div>
+              <hr class="line">
+              <label for="userInput" style="font-size: 12px; font-weight: bold;">MEDICAL TECHNOLOGIES</label>
+            </div>
+
+            <div>
+              <div><img src="/static/images/Signature4.png" class="mx-auto d-block" height="50" width="100"
+                  alt="Your Image"> </div>
+              <hr class="line">
+              <label for="userInput" style="font-size: 12px; font-weight: bold;">PATHOLOGIST</label>
+            </div>
+
+
+          </div>
+
+        </div>
+
+        <div class="container3">
+          <div class="view-6 d-flex mt-3 justify-content-around">
+            <div>
+              <label for="userInput" style="font-size: 12px; font-weight: bold; color: #FFFFFF;">Terms &
+                Condition</label>
+            </div>
+            <div>
+              <label for="userInput" style="font-size: 12px; font-weight: bold; color: #FFFFFF;">Privacy
+                Policies</label>
+            </div>
+            <div>
+              <label for="userInput"
+                style="font-size: 12px; font-weight: bold; color: #FFFFFF;">vitalflow@gmaIl.com</label>
+            </div>
+            <div>
+              <label for="userInput" style="font-size: 12px; font-weight: bold; color: #FFFFFF;">2023 All Right
+                Reserved</label>
+            </div>
+          </div>
+
+        </div>
+        <div class="container4">
+          <div class="view-7 d-flex mt-2 justify-content-end">
+            <div class="save1 me-3">
+              <label for="userInput" style="font-size: 15px; font-weight: bold;">SAVE AS :-</label>
+            </div>
+            <div class="save2 me-3 ">
+              <button type="button" class="pdf">
+                PDF
+              </button>
+            </div>
+            <div class="save3 me-3">
+              <button type="button" class="pdf">
+                IMAGE
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+
+        {% comment %} <img src="/static/images/viewreport.png" height="740" alt="Your Image"> {% endcomment %}
+        {% comment %} <div class="text-field1 custom-text-field"> {% endcomment %}
+          {% comment %} <label for="userInput">Enter Text:</label> {% endcomment %}
+          {% comment %} <input type="text" id="userInput1"
+            style="width: 84px; height: 15px; border: none; font-size: 10px; margin-left:67px; margin-buttom:20px;">
+
+
+        </div>
+        <div class="text-field2 custom-text-field2">
+          <input type="text" id="userInput2"
+            style="width: 84px; height: 15px; border: none; font-size: 10px; margin-left:172px;">
+        </div> {% endcomment %}
+
+        {% comment %} <div class="text-field3 custom-text-field3">
+          <input type="text" id="userInput3"
+            style="width: 84px; height: 15px; border: none; font-size: 10px; margin-left:172px; margin-top:-20px; "> {%
+          endcomment %}
+          {% comment %} background-color: #70b6c6; {% endcomment %}
+          {% comment %}
+        </div>
+        <div class="text-field4 custom-text-field4">
+          <input type="text" id="userInput4"
+            style="width: 84px; height: 15px; border: none; font-size: 10px; margin-left:172px;">
+        </div>
+        <div class="text-field5 custom-text-field5">
+          <input type="text" id="userInput5"
+            style="width: 84px; height: 15px; border: none; font-size: 10px; margin-left:170px;">
+        </div> {% endcomment %}
+        {% comment %} <div class="text-field6 custom-text-field6">
+          <input type="text" id="userInput6"
+            style="width: 84px; height: 15px; border: none; font-size: 10px; margin-left:170px;">
+        </div>
+        <div class="text-field7 custom-text-field7">
+          <input type="text" id="userInput7"
+            style="width: 84px; height: 15px; border: none; font-size: 10px; margin-left:170px;">
+        </div>
+        <div class="text-field8 custom-text-field8">
+          <input type="text" id="userInput8"
+            style="width: 84px; height: 15px; border: none; font-size: 10px; margin-left:170px;">
+        </div> {% endcomment %}
+
+
+
+      </div>
+    </div>
+
+    <div class="rounded-box2 ">
+      <form class="d-flex mb-5" role="search">
+        <input class="form-control me-2 " style="width: 300px" type="search" placeholder="Patient Id"
+          aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+      <div class="table-scroll">
+        <table class="table table-striped ">
+          <thead>
+            <tr>
+              <th scope="col">S.N</th>
+              <th scope="col">Date</th>
+              <th scope="col">Patient Id</th>
+              <th scope="col">Full Name</th>
+              <th scope="col">Test</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>2023-02-30</td>
+              <td>220302</td>
+              <td>Srijan Shrestha</td>
+              <td>Sugar</td>
+
+              <td>
+                <div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login"
+                    data-toggle="modal" data-target="#loginModal">
+                    View
+                  </button>
+                  <button type="button" class=" btn btn-success btn-Login ms-2 me-2" data-toggle="modal"
+                    data-target="#loginModal">
+                    Edit
+                  </button>
+                  <button type="button" class="btn btn-danger btn-Login" data-toggle="modal"
+                    data-target="#exampleModalLong1">
+                    Delete
+                  </button>
+                </div>
+              </td>
+
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>2023-02-22</td>
+              <td>220302</td>
+              <td>Srijan Shrestha</td>
+              <td>Uric acid</td>
+
+              <td>
+                <div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login"
+                    data-toggle="modal" data-target="#loginModal">
+                    View
+                  </button>
+                  <button type="button" class=" btn btn-success btn-Login ms-2 me-2" data-toggle="modal"
+                    data-target="#loginModal">
+                    Edit
+                  </button>
+                  <button type="button" class="btn btn-danger btn-Login" data-toggle="modal"
+                    data-target="#exampleModalLong1">
+                    Delete
+                  </button>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <th scope="row">3</th>
+              <td>2023-02-22</td>
+              <td>220302</td>
+              <td>Srijan Shrestha</td>
+              <td>Uric acid</td>
+
+              <td>
+                <div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login"
+                    data-toggle="modal" data-target="#loginModal">
+                    View
+                  </button>
+                  <button type="button" class=" btn btn-success btn-Login ms-2 me-2" data-toggle="modal"
+                    data-target="#loginModal">
+                    Edit
+                  </button>
+                  <button type="button" class="btn btn-danger btn-Login" data-toggle="modal"
+                    data-target="#exampleModalLong1">
+                    Delete
+                  </button>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <th scope="row">4</th>
+              <td>2023-02-22</td>
+              <td>220302</td>
+              <td>Srijan Shrestha</td>
+              <td>Uric acid</td>
+
+              <td>
+                <div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login"
+                    data-toggle="modal" data-target="#loginModal">
+                    View
+                  </button>
+                  <button type="button" class=" btn btn-success btn-Login ms-2 me-2" data-toggle="modal"
+                    data-target="#loginModal">
+                    Edit
+                  </button>
+                  <button type="button" class="btn btn-danger btn-Login" data-toggle="modal"
+                    data-target="#exampleModalLong1">
+                    Delete
+                  </button>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <th scope="row">5</th>
+              <td>2023-02-22</td>
+              <td>220302</td>
+              <td>Srijan Shrestha</td>
+              <td>Uric acid</td>
+
+              <td>
+                <div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login"
+                    data-toggle="modal" data-target="#loginModal">
+                    View
+                  </button>
+                  <button type="button" class=" btn btn-success btn-Login ms-2 me-2" data-toggle="modal"
+                    data-target="#loginModal">
+                    Edit
+                  </button>
+                  <button type="button" class="btn btn-danger btn-Login" data-toggle="modal"
+                    data-target="#exampleModalLong1">
+                    Delete
+                  </button>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <th scope="row">6</th>
+              <td>2023-02-22</td>
+              <td>220302</td>
+              <td>Srijan Shrestha</td>
+              <td>Uric acid</td>
+
+              <td>
+                <div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login"
+                    data-toggle="modal" data-target="#loginModal">
+                    View
+                  </button>
+                  <button type="button" class=" btn btn-success btn-Login ms-2 me-2" data-toggle="modal"
+                    data-target="#loginModal">
+                    Edit
+                  </button>
+                  <button type="button" class="btn btn-danger btn-Login" data-toggle="modal"
+                    data-target="#exampleModalLong1">
+                    Delete
+                  </button>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <th scope="row">7</th>
+              <td>2023-02-22</td>
+              <td>220302</td>
+              <td>Srijan Shrestha</td>
+              <td>Uric acid</td>
+
+              <td>
+                <div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login"
+                    data-toggle="modal" data-target="#loginModal">
+                    View
+                  </button>
+                  <button type="button" class=" btn btn-success btn-Login ms-2 me-2" data-toggle="modal"
+                    data-target="#loginModal">
+                    Edit
+                  </button>
+                  <button type="button" class="btn btn-danger btn-Login" data-toggle="modal"
+                    data-target="#exampleModalLong1">
+                    Delete
+                  </button>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <th scope="row">8</th>
+              <td>2023-02-22</td>
+              <td>220302</td>
+              <td>Srijan Shrestha</td>
+              <td>Uric acid</td>
+
+              <td>
+                <div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login"
+                    data-toggle="modal" data-target="#loginModal">
+                    View
+                  </button>
+                  <button type="button" class=" btn btn-success btn-Login ms-2 me-2" data-toggle="modal"
+                    data-target="#loginModal">
+                    Edit
+                  </button>
+                  <button type="button" class="btn btn-danger btn-Login" data-toggle="modal"
+                    data-target="#exampleModalLong1">
+                    Delete
+                  </button>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <th scope="row">9</th>
+              <td>2023-02-22</td>
+              <td>220302</td>
+              <td>Srijan Shrestha</td>
+              <td>Uric acid</td>
+
+              <td>
+                <div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login"
+                    data-toggle="modal" data-target="#loginModal">
+                    View
+                  </button>
+                  <button type="button" class=" btn btn-success btn-Login ms-2 me-2" data-toggle="modal"
+                    data-target="#loginModal">
+                    Edit
+                  </button>
+                  <button type="button" class="btn btn-danger btn-Login" data-toggle="modal"
+                    data-target="#exampleModalLong1">
+                    Delete
+                  </button>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <th scope="row">10</th>
+              <td>2023-02-22</td>
+              <td>220302</td>
+              <td>Srijan Shrestha</td>
+              <td>Uric acid</td>
+
+              <td>
+                <div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login"
+                    data-toggle="modal" data-target="#loginModal">
+                    View
+                  </button>
+                  <button type="button" class=" btn btn-success btn-Login ms-2 me-2" data-toggle="modal"
+                    data-target="#loginModal">
+                    Edit
+                  </button>
+                  <button type="button" class="btn btn-danger btn-Login" data-toggle="modal"
+                    data-target="#exampleModalLong1">
+                    Delete
+                  </button>
+                </div>
+              </td>
+            </tr>
+
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      function myFunction() {
+        document.getElementById('foo').style.cssText = ''
+      }
+
+      function myFunction1() {
+        document.getElementById('foo').style.cssText = ' '
+      }
+
+
+
+    </script>
+</body>
+
+</html>

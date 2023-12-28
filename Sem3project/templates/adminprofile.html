@@ -1,0 +1,50 @@
+{% extends "admincore.html" %}
+{% block body %}
+
+<link rel="stylesheet" href="/static/adminprofile.css">
+
+<div id="messages-container" class="notification">
+  {% if messages %}
+  {% for message in messages %}
+  <small {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+    {{ message }}
+  </small>
+  {% endfor %}
+  {% endif %}
+</div>
+
+
+{% comment %} ======================================================= {% endcomment %}
+<div class="form-container">
+  <form action="" method="post" novalidate>
+    {%csrf_token%}
+    {% if form.non_field_errors %}
+    {% for error in form.non_field_errors %}
+    {{error}}
+    {% endfor %}
+    {%endif%}
+    {% for fm in form %}
+    {{fm.label_tag}}
+    {{fm}}
+    {{fm.errors|striptags}} <br>
+    {% endfor %}
+    <input type="submit" value="UPDATE">
+  </form>
+  <a href="{% url 'changepassword' %}" class="button">CHANGE PASSWORD</a>
+  <a href="{% url 'adminlogout' %}">LOGOUT</a>
+</div>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var messagesContainer = document.getElementById('messages-container');
+    setTimeout(function () {
+      messagesContainer.classList.add('hide-notification');
+    }, 5000);
+  });
+</script>
+
+{% endblock body %}
+<styles>
+
+</styles>

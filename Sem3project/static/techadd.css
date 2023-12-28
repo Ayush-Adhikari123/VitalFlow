@@ -1,0 +1,66 @@
+/* register.css */
+
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f2f2f2;
+}
+
+.register-container {
+    width: 500px; /* Increased width for a two-column form */
+    margin: 30px auto;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    display: flex; /* Added to create a flex container */
+    flex-wrap: wrap; /* Added to allow the form groups to wrap to the next line */
+}
+
+h2 {
+    text-align: center;
+    font-size: 1.2em;
+    width: 100%; /* Added to make the heading span the full width of the container */
+}
+
+.form-group {
+    margin-bottom: 10px;
+    width: 50%; /* Added to make each form group take up half the width of the container */
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input,
+select {
+    width: 90%; /* Reduced width to prevent overflow */
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+}
+
+button {
+    width: 45%; /* Reduced width to fit two buttons on one line */
+    padding: 8px;
+    color: #fff;
+    background-color: #4caf50;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+.back-button {
+    background-color: #f44336;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+button:active {
+    background-color: #3e8e41;
+}

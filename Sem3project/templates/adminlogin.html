@@ -1,0 +1,112 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="/static/adminlogin.css" />
+  </head>
+  <body>
+    <form action="" method="post" novalidate>
+      {%csrf_token%}
+       {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+         {{error}} 
+         {% endfor %}
+          {%endif%}
+           {% for fm in form %} 
+           {{fm.label_tag}} 
+           {{fm}} 
+           {{fm.errors|striptags}} <b>
+      {% endfor %}
+      <input type="submit" value="lOG INN" />
+    </form>
+  </body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <link rel="stylesheet" href="/static/adminlogin.css" />
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    form {
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      border-radius: 8px;
+      width: 300px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      color: #555;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    input[type="submit"] {
+      background-color: #4caf50;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+    .error {
+      color: #d9534f;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <form action="" method="post" novalidate>
+    {% csrf_token %}
+    <h2>Login</h2>
+    {% if form.non_field_errors %}
+    {% for error in form.non_field_errors %}
+    <div class="error">{{ error }}</div>
+    {% endfor %}
+    {% endif %}
+    {% for fm in form %}
+    <label for="{{ fm.id_for_label }}">{{ fm.label_tag }}</label>
+    {{ fm }}
+    <div class="error">{{ fm.errors|striptags }}</div>
+    {% endfor %}
+    <input type="submit" value="Log In" />
+  </form>
+</body>
+
+</html>

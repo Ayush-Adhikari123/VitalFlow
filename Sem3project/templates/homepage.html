@@ -1,0 +1,191 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Use only Bootstrap 5 links -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VitalFlow</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/static/homepage.css" />
+</head>
+
+<body>
+  <h1>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+          {% comment %} <li class="nav-item dropdown"> {% endcomment %}
+
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="static/images/dropdown.png" alt="Image Description">
+            </a>
+            <ul class="dropdown-menu">
+
+              <li><a class="dropdown-item" href="/home">Home</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="/about">About</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="/contact">Contact</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="/feedback">Feedback</a></li>
+
+            </ul>
+            {% comment %}
+          </li> {% endcomment %}
+          <a class="navbar-brand" href="#">
+            <img src="/static/images/vitalflow.png" class="d-block w-100" style="height: 40px;" alt="..."></a>
+
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+          <a class="navbar-inquiry" href="#">Inquiry: 98412542,04-98741589,01-85126</a>
+
+          <button type="button" class="btn-Login"><a href="/adminlogin"> Login</a>
+
+          </button>
+
+
+        </div>
+      </div>
+    </nav>
+  </h1>
+
+  <div id="carouselExampleRide" class="carousel slide" data-bs-ride="true">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="/static/images/1st.png" class="d-block w-100" style="height: 450px;" alt="...">
+      </div>
+
+      <div class="carousel-item">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="carousel-caption text-left">
+              <h6 class="font-weight-bold" style="color: blue; font-size: 1.5em;">"Cutting-Edge Research"</h6>
+              <p style="color: black; font-size: 1.5em;">Explore our biolab's latest<br>breakthroughs in cutting-edge
+                research,<br>pushing the boundaries of biological<br>science and innovation.</p>
+            </div>
+          </div>
+          <div class="col-md-9">
+            <img src="/static/images/2nd.jpg" class="d-block w-100" style="height: 450px;" alt="...">
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="carousel-caption text-left">
+              <br>
+              <h7 class="font-weight-bold" style="color: blue; font-size: 1.5em;">"Cutting-Edge Diagnostics"</h5>
+                <p style="color:black; font-size: 1em;">Experience the latest in diagnostic technology, providing
+                  <br>accurate and timely results<br> for informed healthcare decisions.
+                </p>
+            </div>
+          </div>
+          <div class="col-md-9">
+            <img src="/static/images/3rd.jpg" class="d-block w-100" style="height: 450px;" alt="...">
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="carousel-caption text-left">
+              <h7 class="font-weight-bold" style="color: blue; font-size: 1.5em;">"Expert Medical Consultations"</h5>
+                <p style="color:black; font-size: 1em;">Connect with our team of experienced healthcare professionals
+                  for personalized consultations, <br>guiding you on your journey<br> to optimal health.</p>
+
+            </div>
+          </div>
+          <div class="col-md-9">
+            <img src="/static/images/4th.jpg" class="d-block w-100" style="height: 450px; " alt="...">
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  <div class="modal fade" id="loginModal" tabindex="0" role="dialog" aria-labelledby="loginModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="login-container">
+        <div class="header">
+          <div class="logo">
+            <img src="/static/Images/Logo.png" alt="Header Image">
+          </div>
+          <div class="company-name">
+            <h1>VITAL FLOW<br>BIO-LAB</h1>
+          </div>
+        </div>
+        <div class="login-container2">
+          <div class="modal-header">
+            <h5 class="modal-title" id="loginModalLabel" style="font-weight: bold ;font-size:40px;">ADMIN LOGIN</h5>
+          </div>
+
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="username" style="font-weight: bold ;font-size:30px;">ADMIN ID:</label>
+                <input type="text" id="username" name="username" required>
+              </div>
+              <div class="form-group">
+                <label for="password" style="font-weight: bold; font-size:30px ;">PASSWORD:</label>
+                <input type="password" id="password" name="password" required>
+              </div>
+
+              <button type="button" onclick="submitForm()" class="login-button">Login</button>
+              <button type="button" onclick="Home()" class="back-button">Back</button>
+
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-evenly " style="margin-top:30px">
+    <div class="class1"><a href="/home"><img src="{% static 'images/10.jpg' %}" width="140" height="110"></a></div>
+    <div class="class5"><a href="/availabletest"><img src="{% static 'images/9.png' %}" width="130" height="120"></a>
+    </div>
+    <div class="class4"><a href="/report"><img src="{% static 'images/3.png' %}" width="140" height="120"></a></div>
+    <div class="class2"><a href="/packages"><img src="{% static 'images/6.png' %}" width="140" height="120"></a></div>
+    <div class="class3"><a href="/feedback"><img src="{% static 'images/8.jpg' %}" width="140" height="120"></a></div>
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,0 +1,94 @@
+.container {
+  display: flex;
+}
+.header {
+  background-color: #6290e8;
+  color: white;
+  padding: 10px;
+  display: flex;
+  height: 120px;
+  justify-content: flex-start;
+  margin-bottom: 5px;
+}
+.navbar {
+  margin-top: 5px;
+  background-color: #fff;
+  padding: 300px 100px;
+  border-radius: 15px;
+  max-width: 100px;
+  border: 1px solid #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 5px;
+  justify-content: flex-start;
+}
+
+.rounded-box {
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 210px;
+  height: 610px;
+  border: outset;
+  background-color: aliceblue;
+  margin-right: 9px;
+}
+
+.content {
+  text-align: center;
+}
+
+.rounded-box2 {
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  width: 1800px;
+  border: solid;
+  height: 610px;
+  background-color: MISTYROSE;
+}
+/* .btn-primary.with-icon-profile {
+  background-image: url("/static/images/profile.png");
+  background-color: rgba(0, 0, 0, 0);
+  background-size: cover;
+  margin-top: 0px;
+  padding: 80px;
+  margin-left: 0px;
+  border: none;
+} */
+
+.btn-primary.with-icon-profile {
+  background-image: url("/static/images/profile.png");
+  background-color: rgba(0, 0, 0, 0);
+  background-size: cover;
+  margin-top: 35px;
+  padding: 80px;
+  margin-left: 0px;
+  border: 0px solid transparent;
+  justify-content: center;
+  border-radius: 25px;
+  box-shadow: 6px 6px 10px #555;
+}
+.btn-primary.with-icon-logout {
+  background-image: url("/static/images/logout.png");
+  background-color: rgba(0, 0, 0, 0);
+  background-size: cover;
+  margin-top: 40px;
+  padding: 80px;
+  border: none;
+}
+.btn-primary.with-icon-logout:hover {
+  background-color: #ffffff;
+  border-radius: 25px;
+  box-shadow: 6px 6px 10px #555;
+}
+/*   
+  .btn-primary.with-icon-1:hover {
+    background-color: #ffffff;
+    border-radius: 25px;
+    box-shadow: 6px 6px 10px #555;
+  }
+   */
