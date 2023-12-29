@@ -28,4 +28,5 @@ path('changepassword/',views.admin_password,name='changepassword'),
 
 path("updatereport/<str:contact>/",views.updatereport,name='updatereport'),
 path("techadd",views.techadd,name='techadd'),
+path("techpannel",views.techpannel,name='techpannel'),
  ]
