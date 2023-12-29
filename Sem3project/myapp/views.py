@@ -279,16 +279,54 @@ def updatereport(request,contact):
         
         
         
-def TechAdd(request):
+def techadd(request):
   if request.method == 'POST':
-        first_name = request.POST.get('name')
-        middle_name = request.POST.get('age')
-        last_name = request.POST.get('gender')
-        email = request.POST.get('address')
-        contact = request.POST.get('lab_no')
-        password = request.POST.get('contact')
-        com_password = request.POST.get('date')
-        gender = request.POST.get('consultant')
+        first_name = request.POST.get('first_name')
+        middle_name = request.POST.get('middle_name')
+        last_name = request.POST.get('last_name')
+        email = request.POST.get('email')
+        contact = request.POST.get('contact')
+        password = request.POST.get('password')
+        com_password = request.POST.get('com_password')
+        gender = request.POST.get('gender')
+        
+        if first_name.strip() == '' :
+            error_message = "Please enter a valid first name."
+            options = {}  # Define your 'options' here if needed
+            return render(request, 'techadd.html', {'options': options, 'error_message': error_message})
+          
+        if last_name.strip() == '' :
+            error_message = "Please enter a valid last name."
+            options = {}  # Define your 'options' here if needed
+            return render(request, 'techadd.html', {'options': options, 'error_message': error_message})
+          
+        if email.strip() == '' :
+            error_message = "Please enter a valid email."
+            options = {}  # Define your 'options' here if needed
+            return render(request, 'techadd.html', {'options': options, 'error_message': error_message})
+        if contact.strip() == '' :
+            error_message = "Please enter a valid contact."
+            options = {}  # Define your 'options' here if needed
+            return render(request, 'techadd.html', {'options': options, 'error_message': error_message})
+
+        if password.strip() == '' :
+            error_message = "Please enter a valid password."
+            options = {}  # Define your 'options' here if needed
+            return render(request, 'techadd.html', {'options': options, 'error_message': error_message})
+
+        if com_password.strip() == '' :
+            error_message = "Please enter a valid confirm password."
+            options = {}  # Define your 'options' here if needed
+            return render(request, 'techadd.html', {'options': options, 'error_message': error_message})
+
+        # if password.strip() != com_password.strip():
+        #     error_message = "Password doesn't match."
+        #     return render(request, 'techadd.html',{'error_message': error_message})
+
+        if gender.strip() == '' :
+            error_message = "Please enter a valid gender."
+            options = {}  # Define your 'options' here if needed
+            return render(request, 'techadd.html', {'options': options, 'error_message': error_message})
 
         new_techadd = TechAdd(
             first_name=first_name,
