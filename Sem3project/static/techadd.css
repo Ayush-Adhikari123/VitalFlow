@@ -1,5 +1,3 @@
-/* register.css */
-
 body {
     margin: 0;
     font-family: 'Arial', sans-serif;
@@ -7,25 +5,25 @@ body {
 }
 
 .register-container {
-    width: 500px; /* Increased width for a two-column form */
+    width: 500px;
     margin: 30px auto;
     background-color: #fff;
     padding: 15px;
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    display: flex; /* Added to create a flex container */
-    flex-wrap: wrap; /* Added to allow the form groups to wrap to the next line */
+    display: flex;
+    flex-wrap: wrap;
 }
 
 h2 {
     text-align: center;
     font-size: 1.2em;
-    width: 100%; /* Added to make the heading span the full width of the container */
+    width: 100%;
 }
 
 .form-group {
     margin-bottom: 10px;
-    width: 50%; /* Added to make each form group take up half the width of the container */
+    width: 50%;
 }
 
 label {
@@ -36,14 +34,14 @@ label {
 
 input,
 select {
-    width: 90%; /* Reduced width to prevent overflow */
+    width: 90%;
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 2px;
 }
 
 button {
-    width: 45%; /* Reduced width to fit two buttons on one line */
+    width: 45%;
     padding: 8px;
     color: #fff;
     background-color: #4caf50;
@@ -63,4 +61,16 @@ button:hover {
 
 button:active {
     background-color: #3e8e41;
+}
+
+/* Additional styles for flex container */
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flex-container label {
+    margin-right: 10px;
 }

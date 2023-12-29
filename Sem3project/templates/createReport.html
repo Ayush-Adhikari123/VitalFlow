@@ -1,26 +1,16 @@
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/pradip
 {% load static %}
 <!doctype html>
 <html lang="en">
   <head>
-<<<<<<< HEAD
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-=======
->>>>>>> origin/pradip
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>VitalFlow</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="/static/createReport.css"/> 
-<<<<<<< HEAD
-=======
-    {% csrf_token %}
->>>>>>> origin/pradip
   </head>
   <body>
     <div class="header">
@@ -35,7 +25,6 @@
     <div class="rounded-box">
       <div class="content">
       <div class="top-buttons">
-<<<<<<< HEAD
         <button class="btn btn-primary with-icon-1"></button>
       </div>
       <div class="top-buttons">
@@ -76,27 +65,6 @@
             <input type="text" class="input" name="name" placeholder="Enter patient name">
             <!-- <div class="label" style="font-weight: bold;">DISPATCH DATE:</div>
             <input type="date" class="input" name="date" placeholder="Enter dispatch date"> -->
-=======
-        <button class="btn btn-primary with-icon"></button>
-      </div>
-      <div class="top-buttons">
-        <button class="btn btn-primary with-icon-2"></button>
-      </div>
-      <div class="top-buttons">
-        <button class="btn btn-primary with-icon-3"></button>
-      </div>
-      </div>
-    </div>
-
-     <div class="rounded-box2">
-       <div class="container-form">
-        <div class="content2">
-          <form class="form" method="post" action="{% url 'createreport' %}">
-            <div class="label" style="font-weight: bold;">PATIENT NAME:</div>
-            <input type="text" class="input" name="patient_Name" placeholder="Enter patient name">
-            <div class="label" style="font-weight: bold;">DISPATCH DATE:</div>
-            <input type="date" class="input" name="date" placeholder="Enter dispatch date">
->>>>>>> origin/pradip
             <div class="label" style="font-weight: bold;">AGE:</div>
             <input type="text" class="input" name="age" placeholder="Enter age">
             <div class="label" style="font-weight: bold;">GENDER:</div>
@@ -119,12 +87,10 @@
             <input type="text" class="input" name="contact" placeholder="Enter contacts">
             <div class="label" style="font-weight: bold;">DATE:</div>
             <input type="date" class="input" name="date" placeholder="Enter date">
-<<<<<<< HEAD
             <div class="label" style="font-weight: bold;">CONSULTANT:</div>
             <input type="text" class="input" name="consultant" placeholder="Enter consultant">
             
-            {% comment %} <form class="form" id="reportForm" action="{% url 'createreport' %}" method="post">
-              {% csrf_token %} {% endcomment %}
+            
               <div class="dropdown-container">
                 <label for="testDropdown" name ="test_list">Select Test:</label>
                 <select id="testDropdown"  name="test_list">
@@ -143,14 +109,6 @@
                 </select>
               </div>
            
-=======
-            <div class="label" style="font-weight: bold;">CONTACT:</div>
-            <input type="text" class="input" name="consultant" placeholder="Enter consultant">
-            <div></div>
-            <div></div>
-            
-          </form>
->>>>>>> origin/pradip
         </div>
         <table id="testTable">
           <thead>
@@ -161,7 +119,6 @@
               <th>UNIT</th>
             </tr>
           </thead>
-<<<<<<< HEAD
           <tbody id="testTableBody">    
           </tbody>
         </table>    
@@ -248,13 +205,13 @@
               var cellResult = row.insertCell();
               var inputResult = document.createElement("input");
               inputResult.setAttribute("type", "text");
-              inputResult.setAttribute("name", `${subtest.text}_result`);
-              inputResult.setAttribute("id", `${subtest.text}_result`);
-              inputResult.value = "RESULT";  
-
+              inputResult.setAttribute("name", `result_${selectedTest}_${subtest.text.replace(/\s+/g, '_')}`);
+              inputResult.setAttribute("placeholder", "Enter Result");
               cellResult.appendChild(inputResult);
-      
-              var cellReference = row.insertCell();
+             
+             //cellResult.innerHTML = subtests.map((subtest, index) => `<input type="text" class="textbox-input" name="${subtest.text}" style="height: 20px; margin-top: ${index === 0 ? '30px' : '0'};" placeholder="ENTER RESULT">`).join('<br>');
+              
+             var cellReference = row.insertCell();
               cellReference.textContent = subtest.reference;
       
               var cellUnit = row.insertCell();
@@ -268,40 +225,5 @@ function clearForm() {
   document.getElementById("reportForm").reset();
 }
     </script>    
-=======
-          <tbody>    
-          </tbody>
-        </table>    
-      </div>
-      <button type="reset" class="button-clear">CLEAR</button>
-      <button onclick="addRow()" type="add" class="button-add">ADD NEW ROW</button>
-      {% comment %} <button type="submit" class="button-create">CREATE</button> {% endcomment %}
-      <input type="submit" class="button-create" value="CREATE">
-    </div>
-    <script>
-      function addRow() {
-          var table = document.getElementById("testTable").getElementsByTagName('tbody')[0];
-          var newRow = table.insertRow(table.rows.length);
-  
-          var cell1 = newRow.insertCell(0);
-          var cell2 = newRow.insertCell(1);
-          var cell3 = newRow.insertCell(2);
-          var cell4 = newRow.insertCell(3);
-  
-      
-           var select1 = document.createElement("select");
-      select1.innerHTML = '<select ><option value="Complete Blood Count (CBC)">Complete Blood Count (CBC)</option><option value="Red Blood Cell Count (RBC)">Red Blood Cell Count (RBC)</option><option value="Hemoglobin (Hb)">Hemoglobin (Hb)</option><option value="Hematocrit (Hct)">Hematocrit (Hct)</option><option value="White Blood Cell Count (WBC)">White Blood Cell Count (WBC)</option><option value="Platelet Count">Platelet Count</option><option value="Blood Glucose">Blood Glucose</option><option value="Fasting Blood Glucose">Fasting Blood Glucose</option><option value="Lipid Panel">Lipid Panel</option><option value="Total Cholesterol">Total Cholesterol</option><option value="LDL Cholesterol">LDL Cholesterol</option><option value="HDL Cholesterol">HDL Cholesterol</option><option value="Triglycerides">Triglycerides</option><option value="Liver Function Tests">Liver Function Tests</option><option value="ALT (Alanine Aminotransferase)">ALT (Alanine Aminotransferase)</option><option value="AST (Aspartate Aminotransferase)">AST (Aspartate Aminotransferase)</option><option value="ALP (Alkaline Phosphatase)">ALP (Alkaline Phosphatase)</option><option value="Total Bilirubin">Total Bilirubin</option><option value="Kidney Function Tests">Kidney Function Tests</option><option value="BUN (Blood Urea Nitrogen)">BUN (Blood Urea Nitrogen)</option><option value="Serum Creatinine">Serum Creatinine</option><option value="Electrolytes">Electrolytes</option><option value="Sodium">Sodium</option><option value="Potassium">Potassium</option><option value="Chloride">Chloride</option><option value="Thyroid Function Tests">Thyroid Function Tests</option><option value="TSH (Thyroid Stimulating Hormone)">TSH (Thyroid Stimulating Hormone)</option><option value="FT4 (Free Thyroxine)">FT4 (Free Thyroxine)</option><option value="Iron Studies">Iron Studies</option><option value="Serum Iron">Serum Iron</option><option value="TIBC (Total Iron Binding Capacity)">TIBC (Total Iron Binding Capacity)</option><option value="Ferritin">Ferritin</option><option value="C-Reactive Protein (CRP)">C-Reactive Protein (CRP)</option><option value="Uric Acid">Uric Acid</option><option value="Male Uric Acid">Male Uric Acid</option><option value="Female Uric Acid">Female Uric Acid</option></select>';
-      select1.setAttribute("name", "investigation"); // Add name attribute
-      cell1.appendChild(select1);   
-      
-      cell2.innerHTML = '<input type="text" class="result-input" name="result" placeholder="ENTER RESULT">';
-          cell3.innerHTML = '<select><option value="Option 1">4.5 - 5.5 million</option><option value="Option 2">12.0 - 15.5 g/dL</option><option value="Option 3">38.3% - 48.6%</option> <option value="Option ">4,000 - 11,000 </option> <option value="Option ">150,000 - 450,000 </option> <option value="Option ">70 - 99 </option> <option value="Option ">Less than 200</option> <option value="Option "> Less than 100</option> <option value="Option ">Less than 150</option> <option value="Option ">40 - 60</option> <option value="Option ">7 - 56</option> <option value="Option ">5 - 40</option> <option value="Option ">44 - 147</option> <option value="Option ">0.3 - 1.2 </option> <option value="Option ">7 - 20 </option> <option value="Option ">0.6 - 1.3 </option> <option value="Option ">135 - 145</option> <option value="Option ">3.5 - 5.0</option> <option value="Option ">98 - 108</option> <option value="Option ">0.4 - 4.0</option> <option value="Option ">0.8 - 1.8</option> <option value="Option ">65 - 176</option> <option value="Option ">250 - 450</option> <option value="Option ">12 - 300</option> <option value="Option "> Less than 0.8 </option> <option value="Option ">3.4 - 7.0</option> <option value="Option ">2.4 - 6.0</option> </select>';
-          cell4.innerHTML = '<select><option value="Option 1">cells/mcL</option><option value="Option 2">g/dL</option><option value="Option 3">cells/mcL</option><option value="Option 3">mg/dL</option><option value="Option 3">U/L</option><option value="Option 3"> mmol/L </option><option value="Option 3">mIU/L </option><option value="Option ">ng/dL </option><option value="Option "> µg/dL</option><option value="Option ">ng/mL </option><option value="Option "> mg/dL </option></select>';
-      
-        }
-  </script>
-  
-
->>>>>>> origin/pradip
   </body>
 </html>
