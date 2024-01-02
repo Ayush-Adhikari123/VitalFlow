@@ -1,5 +1,6 @@
 # models.py
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Report(models.Model):
@@ -33,4 +34,13 @@ class TechAdd(models.Model):
     password=models.CharField(max_length=50)
     com_password=models.CharField(max_length=50)        
     gender =models.CharField( max_length=50)
-    
+
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User , on_delete=models.CASCADE)
+    forget_password_token = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.user.username    
