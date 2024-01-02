@@ -90,7 +90,8 @@
             <div class="label" style="font-weight: bold;">CONSULTANT:</div>
             <input type="text" class="input" name="consultant" placeholder="Enter consultant">
             
-            
+            {% comment %} <form class="form" id="reportForm" action="{% url 'createreport' %}" method="post">
+              {% csrf_token %} {% endcomment %}
               <div class="dropdown-container">
                 <label for="testDropdown" name ="test_list">Select Test:</label>
                 <select id="testDropdown"  name="test_list">
@@ -217,50 +218,10 @@
               var cellUnit = row.insertCell();
               cellUnit.textContent = subtest.unit;
             });
-          }    
+          }
+        
+      
 }
-document.getElementById('reportForm').addEventListener('submit', function (event) {
-  event.preventDefault();
-
-  var formData = new FormData(this);
-  var jsonData = {};
-
-  for (var [key, value] of formData.entries()) {
-    jsonData[key] = value;
-  }
-
-  var table = document.getElementById('testTableBody');
-  var resultData = {};
-
-  table.querySelectorAll('input[type="text"]').forEach(function(field) {
-    var fieldName = field.getAttribute('name');
-    var fieldValue = field.value;
-    resultData[fieldName] = fieldValue;
-  });
-
-  jsonData['resultData'] = resultData;
-
-  fetch('{% url "createreport" %}', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-CSRFToken': '{{ csrf_token }}'
-    },
-    body: JSON.stringify(jsonData)
-  })
-  .then(response => {
-    if (response.ok) {
-      console.log('Data sent successfully');
-      // Perform any actions upon successful data submission
-    } else {
-      console.error('Server Error:', response.statusText);
-      // Handle errors during data submission
-    }
-  })
-  .catch(error => {
-    console.error('Error:', error);
-  });
-});
 function clearForm() {
   document.getElementById("reportForm").reset();
 }

@@ -2,7 +2,7 @@
 
 # views.py
 from django.shortcuts import render,HttpResponse
-from myapp.models import Report,Report_Detail,TechAdd
+from myapp.models import Report,Report_Detail
 from .forms import Report_DetailForm  # Import the Report_DetailForm
 import json
 from django.http import HttpResponseRedirect, JsonResponse
@@ -107,8 +107,8 @@ def createreport(request):
         consultant = request.POST.get('consultant')
 
         # Perform basic validation
-        # if age.strip() == '' or not age.isnumeric():
-        #     return render(request, 'createReport.html', {'options': options})
+        if age.strip() == '' or not age.isnumeric():
+            return render(request, 'createReport.html', {'options': options})
 
         new_report = Report(
             patient_Name=patient_name,
@@ -128,20 +128,18 @@ def createreport(request):
             if test_dropdown in options:
                 subtests = options[test_dropdown]
                 for subtest in subtests:
-                    
                     text = subtest['text']
-                    result_data = json.loads(request.POST.get('resultData'))
-                    # result = request.POST.get(f"result_{test_dropdown}_{text.replace(' ', '_')}")
-                            
+                    # result = request.POST.get(f'{text}_result')
+                    result ="ok"
+                    reference = subtest['reference']
+                    unit = subtest['unit']
 
-                    # Create a Report_Detail object for each subtest and save it to the database
                     new_report_detail = Report_Detail(
-                        report=new_report,
                         test_list=test_dropdown,
                         investigation=text,
-                        results=result_data,
-                        reference_value=subtest['reference'],
-                        unit=subtest['unit']
+                        results=result,
+                        reference_value=reference,
+                        unit=unit
                     )
                     new_report_detail.save()
 
@@ -276,82 +274,22 @@ def updatereport(request,contact):
         # Retrieve the existing Report record for rendering in the form
         existing_report = get_object_or_404(Report, contact=contact)
         return render(request, 'updateReport.html', {'report': existing_report})
-        
-        
-        
-def techadd(request):
-  if request.method == 'POST':
-        first_name = request.POST.get('first_name')
-        middle_name = request.POST.get('middle_name')
-        last_name = request.POST.get('last_name')
-        email = request.POST.get('email')
-        contact = request.POST.get('contact')
-        password = request.POST.get('password')
-        com_password = request.POST.get('com_password')
-        gender = request.POST.get('gender')
-        
-        if first_name.strip() == '' :
-            error_message = "Please enter a valid first name."
-            options = {}  # Define your 'options' here if needed
-            return render(request, 'techadd.html', {'options': options, 'error_message': error_message})
-          
-        if last_name.strip() == '' :
-            error_message = "Please enter a valid last name."
-            options = {}  # Define your 'options' here if needed
-            return render(request, 'techadd.html', {'options': options, 'error_message': error_message})
-          
-        if email.strip() == '' :
-            error_message = "Please enter a valid email."
-            options = {}  # Define your 'options' here if needed
-            return render(request, 'techadd.html', {'options': options, 'error_message': error_message})
-        if contact.strip() == '' :
-            error_message = "Please enter a valid contact."
-            options = {}  # Define your 'options' here if needed
-            return render(request, 'techadd.html', {'options': options, 'error_message': error_message})
+    
 
-        if password.strip() == '' :
-            error_message = "Please enter a valid password."
-            options = {}  # Define your 'options' here if needed
-            return render(request, 'techadd.html', {'options': options, 'error_message': error_message})
+def createtechnicianlogin(request):
+    if request.method == 'POST':
+        # Extract form data from the POST request
+        technician_id = request.POST.get('technician_id')
+        Password = request.POST.get('Password')
 
-        if com_password.strip() == '' :
-            error_message = "Please enter a valid confirm password."
-            options = {}  # Define your 'options' here if needed
-            return render(request, 'techadd.html', {'options': options, 'error_message': error_message})
-
-        # if password.strip() != com_password.strip():
-        #     error_message = "Password doesn't match."
-        #     return render(request, 'techadd.html',{'error_message': error_message})
-
-        if gender.strip() == '' :
-            error_message = "Please enter a valid gender."
-            options = {}  # Define your 'options' here if needed
-            return render(request, 'techadd.html', {'options': options, 'error_message': error_message})
-
-        new_techadd = TechAdd(
-            first_name=first_name,
-            middle_name=middle_name,
-            last_name=last_name,
-            email=email,
-            contact=contact,
-            password=password,
-            com_password=com_password,
-            gender=gender
+        new_technicianlogin= technicianlogin(
+            technician_id=technician_id,
+            Password=Password
         )
-        new_techadd.save()
-        return HttpResponse("New technician added successfully")
-  else:
+        new_technicianlogin.save()
+        return HttpResponse("Succesfully Logined")
+    else:
+        return render(request,'techlogin.html')
       
-    return render(request, 'techadd.html')
-
-
-def techpannel(request):
-  
-  if request.method == 'GET':
-        techadd_data = TechAdd.objects.all()  # Fetch all data from TechAdd model
-        context = {
-            'techadd_data': techadd_data,
-        }
-        return render(request, 'techpannel.html', context)
-  else:
-        return HttpResponse('Invalid request or empty contact field')
+def password_reset(request):
+    return render(request,"password_reset.html")

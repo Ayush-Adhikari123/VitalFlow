@@ -20,15 +20,6 @@ class Report_Detail(models.Model):
     unit =models.CharField( max_length=50)
     report = models.ForeignKey(Report, blank=True, null=True, on_delete=models.CASCADE)
     
-class TechAdd(models.Model):
-    first_name =models.CharField( max_length=50)
-    middle_name=models.CharField( max_length=50,null=True)
-    last_name=models.CharField( max_length=50)    
-    email =models.EmailField(null=True)
-    contact =models.IntegerField( )
-    password=models.CharField(max_length=50)
-    com_password=models.CharField(max_length=50)        
-    gender =models.CharField( max_length=50)
-    
-    
-    
+class technicianlogin(models.Model):
+    technician_id=models.CharField(max_length=32)
+    Password=models.CharField(max_length=16)    
