@@ -334,9 +334,9 @@ def techadd(request):
             options = {}  # Define your 'options' here if needed
             return render(request, 'techadd.html', {'options': options, 'error_message': error_message})
 
-        # if password.strip() != com_password.strip():
-        #     error_message = "Password doesn't match."
-        #     return render(request, 'techadd.html',{'error_message': error_message})
+        if password != com_password:
+            messages.success(request,"Password didn't match")
+            return render(request, 'techadd.html')
 
         if gender.strip() == '' :
             error_message = "Please enter a valid gender."
