@@ -1,7 +1,7 @@
 
 
 # views.py
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import render,HttpResponse,redirect
 from myapp.models import Report,Report_Detail,TechAdd,technicianlogin
 from .forms import Report_DetailForm  # Import the Report_DetailForm
 import json
@@ -13,6 +13,7 @@ from django.contrib import messages
 from .models import *
 from django.contrib.auth import authenticate,login,logout
 from .helpers import send_forget_password_mail
+import uuid
 
 def index(request):
     context ={
