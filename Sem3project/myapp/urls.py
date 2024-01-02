@@ -27,4 +27,6 @@ path('changepassword/',views.admin_password,name='changepassword'),
 
 
 path("updatereport/<str:contact>/",views.updatereport,name='updatereport'),
+path("gethomeservice",views.book_service,name='updatereport'),
+
  ]

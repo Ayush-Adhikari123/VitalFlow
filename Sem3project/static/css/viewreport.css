@@ -1,0 +1,201 @@
+.container {
+  display: flex;
+}
+
+.header {
+  background-color: #6290E8;
+  color: white;
+  padding: 10px;
+  display: flex;
+  height: 120px;
+  justify-content: flex-start;
+  margin-bottom: 5px;
+}
+
+.navbar {
+  margin-top: 5px;
+  background-color: #fff;
+  padding: 300px 100px;
+  border-radius: 15px;
+  max-width: 100px;
+  border: 1px solid #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 5px;
+  justify-content: flex-start;
+}
+
+.rounded-box {
+  background-color: #ffffff;
+  /* Set your desired box color */
+  border-radius: 20px;
+  /* Set your desired border radius */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  /* Optional: Add a box shadow for depth */
+  padding: 20px;
+  /* Set your desired padding */
+  width: 210px;
+  /* Set your desired width */
+  height: 610px;
+  border: outset;
+  BACKGROUND-COLOR: aliceblue;
+  margin-right: 9px;
+}
+
+.content {
+  text-align: center;
+}
+
+.rounded-box2 {
+  background-color: #ffffff;
+  /* Set your desired box color */
+  border-radius: 20px;
+  /* Set your desired border radius */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  /* Optional: Add a box shadow for depth */
+  padding: 10px;
+  /* Set your desired padding */
+  width: 1800px;
+  /* Set your desired width */
+  border: solid;
+  height: 610px;
+  BACKGROUND-COLOR: MISTYROSE;
+}
+
+.rounded-box3 {
+  background-color: #ffffff;
+  /* Set your desired box color */
+  border-radius: 20px;
+  /* Set your desired border radius */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  /* Optional: Add a box shadow for depth */
+  padding: 10px;
+  /* Set your desired padding */
+  width: 1800px;
+  /* Set your desired width */
+  border: solid;
+  height: 610px;
+  margin-right: 0px;
+  BACKGROUND-COLOR: MISTYROSE;
+}
+
+.btn-primary.with-icon-1 {
+  background-image: url('/static/images/add-user.png');
+  background-color: rgba(0, 0, 0, 0);
+  background-size: cover;
+  margin-top: 0px;
+  padding: 80px;
+  margin-left: 0px;
+  border: none;
+}
+
+.btn-primary.with-icon-4 {
+  background-image: url('/static/images/analysiss.png');
+  background-color: rgba(0, 0, 0, 0);
+  background-size: cover;
+  margin-top: 40px;
+  padding: 80px;
+  margin-left: 0px;
+  border: 0px solid transparent;
+  justify-content: center;
+  border-radius: 25px;
+  box-shadow: 6px 6px 10px #555;
+}
+
+.btn-primary.with-icon-3 {
+  background-image: url('/static/images/logout.png');
+  background-color: rgba(0, 0, 0, 0);
+  background-size: cover;
+  margin-top: 40px;
+  padding: 80px;
+  border: none;
+}
+
+.btn-primary.with-icon-1:hover {
+  background-color: #ffffff;
+  border-radius: 25px;
+  box-shadow: 6px 6px 10px #555;
+}
+
+.btn-primary.with-icon-3:hover {
+  background-color: #ffffff;
+  border-radius: 25px;
+  box-shadow: 6px 6px 10px #555;
+}
+
+.table-scroll thead th {
+  position: sticky;
+  top: 0px;
+}
+
+.table-scroll {
+  overflow-y: scroll;
+  height: 470px;
+}
+
+.modal-dialog1 {
+  /* background-image: url('/static/images/viewreport.png'); */
+  max-width: var(--bs-modal-width);
+  background-color: #ffffff;
+  margin-left: 475px;
+  background-size: cover;
+  height: 624px;
+}
+
+.views {
+  background-color: #6290E8;
+  /* margin-top: 67px;
+  height: 21px;
+  width: 67px; */
+}
+
+
+/* .text-field{
+  margin-top: 400px;
+
+} */
+
+.address-txt {
+  margin-top: -8px;
+}
+
+.view-2 {
+  background-color: #70B6C6;
+}
+
+.view-4 {
+  background-image: url('/static/images/fina2.png');
+  width: 250px;
+  height: 250px;
+  background-size: cover;
+  margin: auto;
+  margin-left: 0px;
+}
+
+.container1 {
+  margin-top: 50px;
+}
+
+.container3 {
+  background-color: #2A54C2;
+}
+
+.line {
+  border-width: 2px;
+  border-color: black;
+  margin: 0;
+  padding: 0;
+}
+
+.pdf {
+  background-color: #DB6464 !important;
+  border: none;
+  border-radius: 8px;
+  /* Adjust the border-radius to your preference */
+  cursor: pointer;
+  font-size: 14px;
+  /* Adjust the font size **/
+  font-weight: bold;
+  /* Adjust the margin */
+}
