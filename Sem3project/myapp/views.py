@@ -2,7 +2,7 @@
 
 # views.py
 from django.shortcuts import render,HttpResponse
-from myapp.models import Report,Report_Detail,TechAdd
+from myapp.models import Report,Report_Detail,TechAdd,technicianlogin
 from .forms import Report_DetailForm  # Import the Report_DetailForm
 import json
 from django.http import HttpResponseRedirect, JsonResponse
@@ -291,8 +291,7 @@ def createtechnicianlogin(request):
     else:
         return render(request,'techlogin.html')
       
-def password_reset(request):
-    return render(request,"password_reset.html")
+
   
 def techadd(request):
   if request.method == 'POST':
@@ -369,3 +368,9 @@ def techpannel(request):
         return render(request, 'techpannel.html', context)
   else:
         return HttpResponse('Invalid request or empty contact field')
+    
+def password_reset(request):
+    return render(request,"password_reset.html")
+
+def newpassword(request):
+    return render(request,"newpassword.html")
