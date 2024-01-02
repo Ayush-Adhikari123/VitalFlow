@@ -376,29 +376,6 @@ def techpannel(request):
   else:
         return HttpResponse('Invalid request or empty contact field')
     
-def password_reset(request):
-        try:
-            if request.method == 'POST':
-                username = request.POST.get('username')
-                
-                if not User.objects.filter(username=username).first():
-                    messages.success(request, 'Not user found with this username.')
-                    return redirect('/newpassword/')
-                
-                user_obj = User.objects.get(username = username)
-                token = str(uuid.uuid4())
-                profile_obj= Profile.objects.get(user = user_obj)
-                profile_obj.forget_password_token = token
-                profile_obj.save()
-                send_forget_password_mail(user_obj.email , token)
-                messages.success(request, 'An email is sent.')
-                return redirect('/newpassword/')
-                
-    
-    
-        except Exception as e:
-            print(e)
-        return render(request,"password_reset.html")
 
 def newpassword(request, token):
     context = {}
@@ -415,23 +392,43 @@ def newpassword(request, token):
             
             if user_id is  None:
                 messages.success(request, 'No user id found.')
-                return redirect(f'/change-password/{token}/')
+                return redirect(f'/newpassword/{token}/')
                 
             
             if  new_password != confirm_password:
                 messages.success(request, 'both should  be equal.')
-                return redirect(f'/change-password/{token}/')
+                return redirect(f'/newpassword/{token}/')
                          
             
             user_obj = User.objects.get(id = user_id)
             user_obj.set_password(new_password)
             user_obj.save()
             return redirect('/adminlogin/')
-            
-            
-            
-        
         
     except Exception as e:
         print(e)
-    return render(request,"newpassword.html")
+    return render(request,"newpassword.html", context)
+    
+def password_reset(request):
+        try:
+            if request.method == 'POST':
+                username = request.POST.get('username')
+                
+                if not User.objects.filter(username=username).first():
+                    messages.success(request, 'Not user found with this username.')
+                    return redirect('/password_reset')
+                
+                user_obj = User.objects.get(username = username)
+                token = str(uuid.uuid4())
+                profile_obj= Profile.objects.get(user = user_obj)
+                profile_obj.forget_password_token = token
+                profile_obj.save()
+                send_forget_password_mail(user_obj.email , token)
+                messages.success(request, 'An email is sent.')
+                return redirect('/password_reset')
+                
+    
+    
+        except Exception as e:
+            print(e)
+        return render(request,"password_reset.html")

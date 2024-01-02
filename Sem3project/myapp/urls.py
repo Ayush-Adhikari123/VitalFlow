@@ -30,6 +30,6 @@ path("updatereport/<str:contact>/",views.updatereport,name='updatereport'),
 path("techadd",views.techadd,name='techadd'),
 path("techpannel",views.techpannel,name='techpannel'),
 path("password_reset",views.password_reset,name='password_reset'),
-path("newpassword",views.newpassword,name='newpassword'),
+path("newpassword/<token>/",views.newpassword,name='newpassword'),
 
  ]
