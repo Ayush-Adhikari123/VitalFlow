@@ -376,7 +376,28 @@ def techpannel(request):
         return HttpResponse('Invalid request or empty contact field')
     
 def password_reset(request):
-    return render(request,"password_reset.html")
+        try:
+            if request.method == 'POST':
+                username = request.POST.get('username')
+                
+                if not User.objects.filter(username=username).first():
+                    messages.success(request, 'Not user found with this username.')
+                    return redirect('/newpassword/')
+                
+                user_obj = User.objects.get(username = username)
+                token = str(uuid.uuid4())
+                profile_obj= Profile.objects.get(user = user_obj)
+                profile_obj.forget_password_token = token
+                profile_obj.save()
+                send_forget_password_mail(user_obj.email , token)
+                messages.success(request, 'An email is sent.')
+                return redirect('/newpassword/')
+                
+    
+    
+        except Exception as e:
+            print(e)
+        return render(request,"password_reset.html")
 
 def newpassword(request):
     return render(request,"newpassword.html")
