@@ -7,6 +7,12 @@ from .forms import Report_DetailForm  # Import the Report_DetailForm
 import json
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.contrib import messages
+from .models import *
+from django.contrib.auth import authenticate,login,logout
+from .helpers import send_forget_password_mail
 
 def index(request):
     context ={
