@@ -5,7 +5,7 @@ import json
 
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import HttpResponse, get_object_or_404, render
-from myapp.models import Report, Report_Detail
+from myapp.models import Report, Report_Detail, homeservice, technicianlogin
 
 from .forms import Report_DetailForm  # Import the Report_DetailForm
 
@@ -302,3 +302,33 @@ def createtechnicianlogin(request):
 
 def book_service(request):
     return render(request,'homeService.html')
+
+
+
+def book_home_service(request):
+    if request.method == 'POST':
+        # Get form data from POST request
+        name = request.POST.get('name')
+        phone_number = request.POST.get('phone_number')
+        email = request.POST.get('email')
+        latitude = request.POST.get('latitude')
+        longitude = request.POST.get('longitude')
+        location = request.POST.get('direction')
+        description = request.POST.get('description')
+
+        # Create a homeservice object and save it to the database
+        service = homeservice(
+            Name=name,
+            Phonenumber=phone_number,
+            Email=email,
+            latitude=latitude,
+            longitude=longitude,
+            location=location,
+            discription=description
+        )
+        service.save()
+
+        # Redirect to a success page or any other desired page after saving
+        return HttpResponseRedirect('gethomeservice')  # Redirect to a success page
+
+    return render(request, 'homeService.html') 
