@@ -28,30 +28,42 @@
                 <thead>
                     <tr>
                         <th scope="col">S.N</th>
-                        <th scope="col">First Name</th>
-                        <th scope="col">Middle Name</th>
-                        <th scope="col">Last Name</th>
-                        <th scope="col">Contact</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Phone Number</th>
                         <th scope="col">Email</th>
-                        <th scope="col">Actions</th>
+                        <th scope="col">Location</th>
+                        {% comment %} <th scope="col">Map</th> {% endcomment %}
+                        {% comment %} <th scope="col">Actions</th> {% endcomment %}
                     </tr>
                 </thead>
                 <tbody>
-                                 {% for detail in techadd_data %}
+                                 {% for homeservice in homeservice_data %}
                                 <tr class="no-click">
                                     <th scope="row">{{ forloop.counter }}</th>
-                                    <td>{{ detail.first_name }}</td>
-                                    <td>{{ detail.middle_name }}</td>
-                                    <td>{{ detail.last_name }}</td>
-                                    <td>{{ detail.contact }}</td>
-                                    <td>{{ detail.email }}</td>
+                                    <td>{{ homeservice.Name }}</td>
+                                    <td>{{ homeservice.Phonenumber }}</td>
+                                    <td>{{ homeservice.Email }}</td>
+                                    <td>{{ homeservice.location }}</td>
+                                    {% comment %} <td>
+                                        <div id="map_{{ homeservice.id }}" class="map-container" style="height: 200px;"></div>
+                                        <script>
+                                            var map_{{ homeservice.id }} = L.map('map_{{ homeservice.id }}').setView([{{ homeservice.latitude }}, {{ homeservice.longitude }}], 13);
+            
+                                            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                                            }).addTo(map_{{ homeservice.id }});
+            
+                                            L.marker([{{ homeservice.latitude }}, {{ homeservice.longitude }}]).addTo(map_{{ homeservice.id }})
+                                                .bindPopup('<b>Service Location</b><br>{{ homeservice.location }}').openPopup();
+                                        </script>
+                                    </td> {% endcomment %}
+                                    {% comment %} <td>{{ detail.email }}</td> {% endcomment %}
                                     
-                                    <td>
-                                    <div class="d-flex justify-content-end">
+                        
+                                    {% comment %} <div class="d-flex justify-content-end">
                                         <button type="button" class="btn btn-danger btn-Login" data-toggle="modal"
                                             data-target="#exampleModalLong1">Delete</button>
-                                    </div>
-                                    <td>
+                                    </div> {% endcomment %}
                                 </tr>
                             {% endfor %}
                 </tbody>

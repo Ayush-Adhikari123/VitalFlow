@@ -380,6 +380,8 @@ def techpannel(request):
   else:
         return HttpResponse('Invalid request or empty contact field')
     
+def book_service(request):
+    return render(request,'homeService.html')
 
 def book_home_service(request):
     if request.method == 'POST':
@@ -408,3 +410,14 @@ def book_home_service(request):
         return HttpResponseRedirect('gethomeservice')  # Redirect to a success page
 
     return render(request, 'homeService.html') 
+
+def homeservicepannel(request):
+  
+  if request.method == 'GET':
+        homeservice_data = homeservice.objects.all()  # Fetch all data from TechAdd model
+        context = {
+            'homeservice_data': homeservice_data,
+        }
+        return render(request, 'homeservicepannel.html', context)
+  else:
+        return HttpResponse('Invalid request or empty contact field')
