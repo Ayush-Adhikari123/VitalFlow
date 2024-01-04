@@ -33,3 +33,16 @@ class TechAdd(models.Model):
     password=models.CharField(max_length=50)
     com_password=models.CharField(max_length=50)        
     gender =models.CharField( max_length=50)
+    
+class homeservice(models.Model):
+    Name = models.CharField(max_length=32)
+    Phonenumber = models.ImageField(max_length=10)
+    Email = models.EmailField()
+
+    latitude = models.CharField( max_length=128)
+    longitude = models.CharField( max_length=128)
+
+    location = models.CharField(max_length=250)
+    discription = models.CharField(max_length=600)
+
+    done = models.BooleanField(default=False)

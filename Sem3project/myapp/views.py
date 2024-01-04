@@ -379,3 +379,5 @@ def techpannel(request):
         return render(request, 'techpannel.html', context)
   else:
         return HttpResponse('Invalid request or empty contact field')
+    
+
