@@ -24,9 +24,19 @@ urlpatterns = [
    path('changepassword/',views.admin_password,name='changepassword'),
    path('techprofile',views.techprofile,name='techprofile'),
    path("updatereport/<str:contact>/",views.updatereport,name='updatereport'),
+   path("techadd",views.techadd,name='techadd'),
+   path("techpannel",views.techpannel,name='techpannel'),
 # -------------------------------------------------------------------------------
    path('password_reset/',auth_views.PasswordResetView.as_view(template_name='passwordreset.html'),name='password_reset'),
    path('password_reset/done/',auth_views.PasswordResetDoneView.as_view(template_name='resetdone.html'),name='password_reset_done'),
    path('password-reset-confirm/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(template_name='password_reset_confirm.html'),name='password_reset_confirm'),
    path('reset/done/',auth_views.PasswordResetCompleteView.as_view(template_name='resetcomplete.html'),name='password_reset_complete'),
+   
+# -------------------------------------------------------------------------------
+   path('passwordreset/',auth_views.PasswordResetView.as_view(template_name='password_reset.html'),name='passwordreset'),
+   path('password-reset-confirm/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(template_name='newpassword.html'),name='password_reset_confirm'),
+   
+   path("gethomeservice",views.book_service,name='updatereport'),
+   path('book', views.book_home_service, name='book_service'),
+   path("homeservicepannel",views.homeservicepannel,name='homeservicepannel'),
  ]
