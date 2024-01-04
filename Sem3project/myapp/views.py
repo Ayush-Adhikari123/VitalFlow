@@ -369,3 +369,13 @@ def techadd(request):
     return render(request, 'techadd.html')
   
 
+def techpannel(request):
+  
+  if request.method == 'GET':
+        techadd_data = TechAdd.objects.all()  # Fetch all data from TechAdd model
+        context = {
+            'techadd_data': techadd_data,
+        }
+        return render(request, 'techpannel.html', context)
+  else:
+        return HttpResponse('Invalid request or empty contact field')
