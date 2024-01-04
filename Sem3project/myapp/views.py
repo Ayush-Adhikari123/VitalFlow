@@ -2,7 +2,7 @@
 
 # views.py
 from django.shortcuts import render,HttpResponse
-from myapp.models import Report,Report_Detail
+from myapp.models import Report,Report_Detail,technicianlogin
 from .forms import Report_DetailForm  # Import the Report_DetailForm
 import json
 from django.http import HttpResponseRedirect, JsonResponse
@@ -276,7 +276,7 @@ def updatereport(request,contact):
         return render(request, 'updateReport.html', {'report': existing_report})
     
 
-def createtechnicianlogin(request):
+def techlogin(request):
     if request.method == 'POST':
         # Extract form data from the POST request
         technician_id = request.POST.get('technician_id')
@@ -290,3 +290,14 @@ def createtechnicianlogin(request):
         return HttpResponse("Succesfully Logined")
     else:
         return render(request,'techlogin.html')
+    
+# ================================================================= tech profile
+def techprofile(request):
+      if request.method == "POST":
+         fm= EditadminprofileForm(request.POST, instance= request.user)
+         if fm.is_valid():
+          messages.info(request,'Profile Updated Successfully!')
+          fm.save()
+      else:
+          fm =EditadminprofileForm(instance=request.user)
+      return render(request,'techprofile.html',{'name': request.user,'form':fm})
