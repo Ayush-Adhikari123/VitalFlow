@@ -6,10 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login</title>
   <link rel="stylesheet" href="/static/adminlogin.css" />
+ 
+
   <style>
     /* Style for the loading screen */
   </style>
 </head>
+
 
 <body>
   <!-- Loading screen with GIF -->
@@ -29,6 +32,9 @@
     <label for="{{ fm.id_for_label }}">{{ fm.label_tag }}</label>
     {{ fm }}
     <div class="error">{{ fm.errors|striptags }}</div>
+    {% if fm.name == 'password' %}
+      <a href="/passwordreset">Forgot Password?</a>
+    {% endif %}
     {% endfor %}
     <input type="submit" value="Log In" />
   </form>
