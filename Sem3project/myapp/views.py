@@ -171,6 +171,7 @@ def techpannel(request):
 
 def techadd(request):
     return render(request,'techadd.html')
+    
 
 def techlogin(request):
     return render(request,"techlogin.html")
