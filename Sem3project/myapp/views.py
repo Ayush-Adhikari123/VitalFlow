@@ -2,7 +2,7 @@
 
 # views.py
 from django.shortcuts import render,HttpResponse
-from myapp.models import Report,Report_Detail,technicianlogin,TechAdd
+from myapp.models import Report,Report_Detail,technicianlogin,TechAdd,homeservice
 from .forms import Report_DetailForm  # Import the Report_DetailForm
 import json
 from django.http import HttpResponseRedirect, JsonResponse
