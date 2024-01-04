@@ -1,19 +1,12 @@
 
 
 # views.py
-from django.shortcuts import render,HttpResponse,redirect
-from myapp.models import Report,Report_Detail,TechAdd,technicianlogin,Profile
+from django.shortcuts import render,HttpResponse
+from myapp.models import Report,Report_Detail,technicianlogin
 from .forms import Report_DetailForm  # Import the Report_DetailForm
 import json
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
-from django.contrib import messages
-from .models import *
-from django.contrib.auth import authenticate,login,logout
-from .helpers import send_forget_password_mail
-import uuid
 
 def index(request):
     context ={
@@ -283,7 +276,7 @@ def updatereport(request,contact):
         return render(request, 'updateReport.html', {'report': existing_report})
     
 
-def createtechnicianlogin(request):
+def techlogin(request):
     if request.method == 'POST':
         # Extract form data from the POST request
         technician_id = request.POST.get('technician_id')
@@ -297,138 +290,14 @@ def createtechnicianlogin(request):
         return HttpResponse("Succesfully Logined")
     else:
         return render(request,'techlogin.html')
-      
-
-  
-def techadd(request):
-  if request.method == 'POST':
-        first_name = request.POST.get('first_name')
-        middle_name = request.POST.get('middle_name')
-        last_name = request.POST.get('last_name')
-        email = request.POST.get('email')
-        contact = request.POST.get('contact')
-        password = request.POST.get('password')
-        com_password = request.POST.get('com_password')
-        gender = request.POST.get('gender')
-        
-        if first_name.strip() == '' :
-            error_message = "Please enter a valid first name."
-            options = {}  # Define your 'options' here if needed
-            return render(request, 'techadd.html', {'options': options, 'error_message': error_message})
-          
-        if last_name.strip() == '' :
-            error_message = "Please enter a valid last name."
-            options = {}  # Define your 'options' here if needed
-            return render(request, 'techadd.html', {'options': options, 'error_message': error_message})
-          
-        if email.strip() == '' :
-            error_message = "Please enter a valid email."
-            options = {}  # Define your 'options' here if needed
-            return render(request, 'techadd.html', {'options': options, 'error_message': error_message})
-        if contact.strip() == '' :
-            error_message = "Please enter a valid contact."
-            options = {}  # Define your 'options' here if needed
-            return render(request, 'techadd.html', {'options': options, 'error_message': error_message})
-
-        if password.strip() == '' :
-            error_message = "Please enter a valid password."
-            options = {}  # Define your 'options' here if needed
-            return render(request, 'techadd.html', {'options': options, 'error_message': error_message})
-
-        if com_password.strip() == '' :
-            error_message = "Please enter a valid confirm password."
-            options = {}  # Define your 'options' here if needed
-            return render(request, 'techadd.html', {'options': options, 'error_message': error_message})
-
-        if password != com_password:
-            messages.success(request,"Password didn't match")
-            return render(request, 'techadd.html')
-
-        if gender.strip() == '' :
-            error_message = "Please enter a valid gender."
-            options = {}  # Define your 'options' here if needed
-            return render(request, 'techadd.html', {'options': options, 'error_message': error_message})
-
-        new_techadd = TechAdd(
-            first_name=first_name,
-            middle_name=middle_name,
-            last_name=last_name,
-            email=email,
-            contact=contact,
-            password=password,
-            com_password=com_password,
-            gender=gender
-        )
-        new_techadd.save()
-        return HttpResponse("New technician added successfully")
-  else:
-      
-    return render(request, 'techadd.html')
-
-def techpannel(request):
-  
-  if request.method == 'GET':
-        techadd_data = TechAdd.objects.all()  # Fetch all data from TechAdd model
-        context = {
-            'techadd_data': techadd_data,
-        }
-        return render(request, 'techpannel.html', context)
-  else:
-        return HttpResponse('Invalid request or empty contact field')
     
-
-def newpassword(request, token):
-    context = {}
-    
-    
-    try:
-        profile_obj = Profile.objects.filter(forget_password_token = token).first()
-        context = {'user_id' : profile_obj.user.id}
-        
-        if request.method == 'POST':
-            new_password = request.POST.get('new_password')
-            confirm_password = request.POST.get('reconfirm_password')
-            user_id = request.POST.get('user_id')
-            
-            if user_id is  None:
-                messages.success(request, 'No user id found.')
-                return redirect(f'/newpassword/{token}/')
-                
-            
-            if  new_password != confirm_password:
-                messages.success(request, 'both should  be equal.')
-                return redirect(f'/newpassword/{token}/')
-                         
-            
-            user_obj = User.objects.get(id = user_id)
-            user_obj.set_password(new_password)
-            user_obj.save()
-            return redirect('/adminlogin/')
-        
-    except Exception as e:
-        print(e)
-    return render(request,"newpassword.html", context)
-    
-def password_reset(request):
-        # try:
-            if request.method == 'POST':
-                username = request.POST.get('username')
-                
-                if not User.objects.filter(username=username).first():
-                    messages.success(request, 'Not user found with this username.')
-                    return redirect('/password_reset')
-                
-                user_obj = User.objects.get(username = username)
-                token = str(uuid.uuid4())
-                profile_obj= Profile.objects.get(user = user_obj)
-                profile_obj.forget_password_token = token
-                profile_obj.save()
-                send_forget_password_mail(user_obj.email , token)
-                messages.success(request, 'An email is sent.')
-                return redirect('/password_reset')
-                
-    
-    
-        # except Exception as e:
-        #     print(e)
-            return render(request,"password_reset.html")
+# ================================================================= tech profile
+def techprofile(request):
+      if request.method == "POST":
+         fm= EditadminprofileForm(request.POST, instance= request.user)
+         if fm.is_valid():
+          messages.info(request,'Profile Updated Successfully!')
+          fm.save()
+      else:
+          fm =EditadminprofileForm(instance=request.user)
+      return render(request,'techprofile.html',{'name': request.user,'form':fm})
