@@ -2,7 +2,7 @@
 
 # views.py
 from django.shortcuts import render,HttpResponse,redirect
-from myapp.models import Report,Report_Detail,TechAdd,technicianlogin
+from myapp.models import Report,Report_Detail,TechAdd,technicianlogin,Profile
 from .forms import Report_DetailForm  # Import the Report_DetailForm
 import json
 from django.http import HttpResponseRedirect, JsonResponse
@@ -410,7 +410,7 @@ def newpassword(request, token):
     return render(request,"newpassword.html", context)
     
 def password_reset(request):
-        try:
+        # try:
             if request.method == 'POST':
                 username = request.POST.get('username')
                 
@@ -429,6 +429,6 @@ def password_reset(request):
                 
     
     
-        except Exception as e:
-            print(e)
-        return render(request,"password_reset.html")
+        # except Exception as e:
+        #     print(e)
+            return render(request,"password_reset.html")

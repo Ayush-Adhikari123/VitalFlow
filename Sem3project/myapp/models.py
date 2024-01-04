@@ -36,7 +36,6 @@ class TechAdd(models.Model):
     gender =models.CharField( max_length=50)
 
 
-
 class Profile(models.Model):
     user = models.OneToOneField(User , on_delete=models.CASCADE)
     forget_password_token = models.CharField(max_length=100)
