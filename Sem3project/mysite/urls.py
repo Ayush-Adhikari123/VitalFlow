@@ -17,19 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
-
-from django.http import JsonResponse
-
-# Add a URL pattern for the view that handles form submission
-
-
-
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('myapp.urls')),
-   
-    
-    
+    path('', include('myapp.urls'))
 ]
-

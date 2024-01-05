@@ -1,15 +1,12 @@
 
 
 # views.py
-from django.http import HttpResponseBadRequest
-
-from django.shortcuts import render,HttpResponse,redirect
-from myapp.models import Report,Report_Detail
-from .models import Report, Report_Detail
-from .forms import Report_DetailForm ,PatientForm # Import the Report_DetailForm
+from django.shortcuts import render,HttpResponse
+from myapp.models import Report,Report_Detail,technicianlogin,TechAdd,homeservice
+from .forms import Report_DetailForm  # Import the Report_DetailForm
 import json
-from django.http import JsonResponse
-
+from django.http import HttpResponseRedirect, JsonResponse
+from django.shortcuts import get_object_or_404
 
 def index(request):
     context ={
@@ -44,8 +41,8 @@ def about(request):
 def contact(request):
     return HttpResponse("This is Contact Page")
 
-def adminpage(request):
-    return render(request,'adminpage.html')
+def adminprofile(request):
+    return render(request,'adminprofile.html')
       
 def createreport(request):
     
@@ -165,38 +162,268 @@ def viewreport(request):
 def packages(request):
     return render(request,'packages.html')
 
-def techlogin(techlogin):
-    return render(request ,"techlogin.html")
+def adminlogin(request):
+    return render(request,"adminlogin.html")
+
+
+# =====================================================================================
+
+from django.contrib.auth.forms import AuthenticationForm,PasswordChangeForm,SetPasswordForm,UserChangeForm
+from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
+from django.contrib  import  messages
+from .forms import EditadminprofileForm, EditsuperadminprofileForm
+# login function for admin
+def admin_login(request):
+  if not request.user.is_authenticated:
+    if request.method =="POST":
+        fm = AuthenticationForm(request=request,data=request.POST)
+        if fm.is_valid():
+          uname = fm.cleaned_data['username']
+          upass = fm.cleaned_data['password']
+          user = authenticate(username=uname,password=upass)
+          if user is not None:
+              login(request,user)
+              messages.success(request,'LOGED IN SUCCESSFULLY🤯🤯🤯')
+              return HttpResponseRedirect('/adminprofile/')
+    else:
+      fm=AuthenticationForm()
+    return render(request,'adminlogin.html',{'form':fm})
+  else:
+      return HttpResponseRedirect('/adminprofile/')
+  
+
+def admin_profile(request):
+    if  request.user.is_authenticated:
+      if request.method == "POST":
+         fm= EditadminprofileForm(request.POST, instance= request.user)
+         if fm.is_valid():
+          messages.info(request,'Profile Updated Successfully!')
+          fm.save()
+      else:
+        # if request.user.is_superuser == True:
+        #   fm =EditsuperadminprofileForm(instance = request.user)
+        # else:
+          fm =EditadminprofileForm(instance=request.user)
+      return render(request,'adminprofile.html',{'name': request.user,'form':fm})
+    else:
+        return HttpResponseRedirect('adminlogin')
 
 
 
+def admin_logout(request):
+    logout(request)
+    return HttpResponseRedirect("/adminlogin/")
 
+def admin_password(request):
+  if request.user.is_authenticated:  
+    if request.method == "POST":
+      fm = PasswordChangeForm(user=request.user,data = request.POST)
+      if fm.is_valid():
+          fm.save()
+          # update_session_auth_hash(request,fm.user) =============> if uncommented, the admin will not be forcefully loged out .he will be movw to admin profile.
+          messages.info(request,"PASSWORD HAS BEEN UPDATED!")
+          return HttpResponseRedirect('/adminprofile/')
+    else :
+      fm = PasswordChangeForm(user=request.user)
+    return render(request,'adminpassword.html',{'form': fm})
+  else:
+     return HttpResponseRedirect('/adminlogin/')
+  
+
+  # =========================================================================================
+def updatereport(request,contact):
     if request.method == 'POST':
-        # Use request.POST to get data from a POST request
-        patient_Name = request.POST.get('patient_Name', '')
-        contact = request.POST.get('contact', '')
+        # Retrieve the existing record from the database
+        existing_report = get_object_or_404(Report, contact=contact)
+        
+        # Update the fields with the new values from the form
+        existing_report.patient_Name = request.POST.get('name')
+        existing_report.age = request.POST.get('age')
+        existing_report.gender = request.POST.get('gender')
+        existing_report.address = request.POST.get('address')
+        existing_report.contact = request.POST.get('contact')
+        existing_report.date = request.POST.get('date')
+        existing_report.consultant = request.POST.get('consultant')
 
-        print(f"Patient Name: {patient_Name}, Contact: {contact}")
+        # Perform basic validation on the updated age
+        new_age = request.POST.get('age')
+        if new_age.strip() == '' or not new_age.isnumeric():
+            return render(request, 'updateReport.html', {'report': existing_report})
 
-        # Assuming you want to fetch data where patient_name is "test" and contact is "5151645"
-        report_data = Report.objects.filter(patient_Name=patient_Name, contact=contact).first()
-        report_detail_data = Report_Detail.objects.all()
+        # Save the updated record
+        existing_report.save()
+        
+        
+        # Retrieve Report_Detail records related to the Report
+        report_details = Report_Detail.objects.filter(report=existing_report)
 
-        if report_data is not None:
-            # Process the data
-            print("Data found")
-        else:
-            # Handle the case when no data is found
-            print("No data found")
+        # Update Report_Detail records
+        for report_detail in report_details:
+            investigation_name = report_detail.investigation  # Retrieve the investigation name
 
+            # Get the updated result from the form using the input name
+            result = request.POST.get(f'result_{existing_report.contact}_{investigation_name.replace(" ", "_")}')
+
+            # Update the result in the Report_Detail model
+            report_detail.results = result
+
+            # Save the updated Report_Detail record
+            report_detail.save()
+
+        return HttpResponse("Report and Report_Detail updated successfully")
+    else:
+        # Retrieve the existing Report record for rendering in the form
+        existing_report = get_object_or_404(Report, contact=contact)
+        return render(request, 'updateReport.html', {'report': existing_report})
+    
+
+def techlogin(request):
+    if request.method == 'POST':
+        # Extract form data from the POST request
+        technician_id = request.POST.get('technician_id')
+        Password = request.POST.get('Password')
+
+        new_technicianlogin= technicianlogin(
+            technician_id=technician_id,
+            Password=Password
+        )
+        new_technicianlogin.save()
+        return HttpResponse("Succesfully Logined")
+    else:
+        return render(request,'techlogin.html')
+    
+# ================================================================= tech profile
+def techprofile(request):
+      if request.method == "POST":
+         fm= EditadminprofileForm(request.POST, instance= request.user)
+         if fm.is_valid():
+          messages.info(request,'Profile Updated Successfully!')
+          fm.save()
+      else:
+          fm =EditadminprofileForm(instance=request.user)
+      return render(request,'techprofile.html',{'name': request.user,'form':fm})
+    
+  
+def techadd(request):
+  if request.method == 'POST':
+        first_name = request.POST.get('first_name')
+        middle_name = request.POST.get('middle_name')
+        last_name = request.POST.get('last_name')
+        email = request.POST.get('email')
+        contact = request.POST.get('contact')
+        password = request.POST.get('password')
+        com_password = request.POST.get('com_password')
+        gender = request.POST.get('gender')
+        
+        if first_name.strip() == '' :
+            error_message = "Please enter a valid first name."
+            options = {}  # Define your 'options' here if needed
+            return render(request, 'techadd.html', {'options': options, 'error_message': error_message})
+          
+        if last_name.strip() == '' :
+            error_message = "Please enter a valid last name."
+            options = {}  # Define your 'options' here if needed
+            return render(request, 'techadd.html', {'options': options, 'error_message': error_message})
+          
+        if email.strip() == '' :
+            error_message = "Please enter a valid email."
+            options = {}  # Define your 'options' here if needed
+            return render(request, 'techadd.html', {'options': options, 'error_message': error_message})
+        if contact.strip() == '' :
+            error_message = "Please enter a valid contact."
+            options = {}  # Define your 'options' here if needed
+            return render(request, 'techadd.html', {'options': options, 'error_message': error_message})
+
+        if password.strip() == '' :
+            error_message = "Please enter a valid password."
+            options = {}  # Define your 'options' here if needed
+            return render(request, 'techadd.html', {'options': options, 'error_message': error_message})
+
+        if com_password.strip() == '' :
+            error_message = "Please enter a valid confirm password."
+            options = {}  # Define your 'options' here if needed
+            return render(request, 'techadd.html', {'options': options, 'error_message': error_message})
+
+        if password != com_password:
+            messages.success(request,"Password didn't match")
+            return render(request, 'techadd.html')
+
+        if gender.strip() == '' :
+            error_message = "Please enter a valid gender."
+            options = {}  # Define your 'options' here if needed
+            return render(request, 'techadd.html', {'options': options, 'error_message': error_message})
+
+        new_techadd = TechAdd(
+            first_name=first_name,
+            middle_name=middle_name,
+            last_name=last_name,
+            email=email,
+            contact=contact,
+            password=password,
+            com_password=com_password,
+            gender=gender
+        )
+        new_techadd.save()
+        return HttpResponse("New technician added successfully")
+  else:
+      
+    return render(request, 'techadd.html')
+  
+
+def techpannel(request):
+  
+  if request.method == 'GET':
+        techadd_data = TechAdd.objects.all()  # Fetch all data from TechAdd model
         context = {
-            'report_data': report_data,
-            'report_detail_data': report_detail_data,
+            'techadd_data': techadd_data,
         }
+        return render(request, 'techpannel.html', context)
+  else:
+        return HttpResponse('Invalid request or empty contact field')
+    
+def book_service(request):
+    return render(request,'homeService.html')
 
-        return render(request, 'test.html', context)
+def book_home_service(request):
+    if request.method == 'POST':
+        # Get form data from POST request
+        name = request.POST.get('name')
+        phone_number = request.POST.get('phone_number')
+        email = request.POST.get('email')
+        latitude = request.POST.get('latitude')
+        longitude = request.POST.get('longitude')
+        location = request.POST.get('direction')
+        description = request.POST.get('description')
 
-    return HttpResponse('Invalid request')
+        # Create a homeservice object and save it to the database
+        service = homeservice(
+            Name=name,
+            Phonenumber=phone_number,
+            Email=email,
+            latitude=latitude,
+            longitude=longitude,
+            location=location,
+            discription=description
+        )
+        service.save()
+
+        # Redirect to a success page or any other desired page after saving
+        return HttpResponseRedirect('gethomeservice')  # Redirect to a success page
+
+    return render(request, 'homeService.html') 
+
+def homeservicepannel(request):
+  
+  if request.method == 'GET':
+        homeservice_data = homeservice.objects.all()  # Fetch all data from TechAdd model
+        context = {
+            'homeservice_data': homeservice_data,
+        }
+        return render(request, 'homeservicepannel.html', context)
+  else:
+        return HttpResponse('Invalid request or empty contact field')
+  
+#   ================================================srijan
 def test(request):
     if request.method == 'POST':
         patient_Name = request.POST.get('patient_Name', '')
@@ -224,78 +451,9 @@ def test(request):
             return render(request, 'test.html', context)
 
         return HttpResponse('Invalid request or empty contact field')
-    
-# def test(request):
-#     if request.method == 'POST':
-#         # Use request.POST to get data from a POST request
-#         patient_Name = request.POST.get('patient_Name', '')
-#         contact = request.POST.get('contact', '')
-
-#         print(f"Method: {request.method}")
-#         print(f"Patient Name: {patient_Name}, Contact: {contact}")
-
-#         # Check if contact is not an empty string before using it in the filter
-#         if contact:
-#             # Assuming you want to fetch data where patient_name is "test" and contact is a non-empty string
-#             report_data = Report.objects.filter(patient_Name=patient_Name, contact=contact).first()
-#             report_detail_data = Report_Detail.objects.all()
-#             print(report_data)
-
-#             if report_data is not None:
-#                 # Process the data
-#                 print("Data found")
-#             else:
-#                 # Handle the case when no data is found
-#                 print("No data found")
-
-#             context = {
-#                 'report_data': report_data,
-#                 'report_detail_data': report_detail_data,
-#             }
-
-#             return render(request, 'test.html', context)
-
-#     elif request.method == 'GET':
-#         # Use request.GET to get data from a GET request
-#         patient_Name = request.GET.get('patient_Name', '')
-#         contact = request.GET.get('contact', '')
-
-#         print(f"Method: {request.method}")
-#         print(f"Patient Name: {patient_Name}, Contact: {contact}")
-
-#         # You can add logic here to handle the GET request data
-
-#         return HttpResponse('GET request received')
-#         # return render(request, 'test.html', context)
-
-#     # Return a default response if neither POST nor GET conditions are met
-#
-#      return HttpResponse('Invalid request or empty contact field')
-
-
-
-# def userlogin(request):
-#     if request.method == 'POST':
-#         patient_Name = request.POST.get('patient_Name', '')
-#         contact = request.POST.get('contact', '')
-#         form = PatientForm(request.POST)
-#         print(f"Method: {request.method}")
-#         print(f"Patient Name: {patient_Name}, Contact: {contact}")
-#         if form.is_valid():
-#             patient_name = form.cleaned_data['patient_Name']
-#             contact = form.cleaned_data['contact']
-
-#             # Check if the patient exists in the database
-#             if Report.objects.filter(patient_Name="Srijan", contact="9862107925").exists():
-#                 # Redirect to the test page
-#                 return redirect('test')  # Replace 'test_page_url_name' with the actual URL name of your test page
-#             else:
-#                 # Patient not found, handle accordingly (e.g., show an error message)
-#                 pass
-#     else:
-#         form = PatientForm()
-
-#     return render(request, 'test.html', {'form': form})
 
 def userlogin(request):
     return render(request,'userlogin.html')
+
+def diagnostic(request):
+    return render(request,'diagnostic.html')
