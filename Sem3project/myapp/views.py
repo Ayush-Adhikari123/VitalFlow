@@ -380,8 +380,7 @@ def techpannel(request):
   else:
         return HttpResponse('Invalid request or empty contact field')
     
-def book_service(request):
-    return render(request,'homeService.html')
+
 
 def book_home_service(request):
     if request.method == 'POST':
@@ -407,7 +406,7 @@ def book_home_service(request):
         service.save()
 
         # Redirect to a success page or any other desired page after saving
-        return HttpResponseRedirect('gethomeservice')  # Redirect to a success page
+        return render(request, 'homeService.html')   # Redirect to a success page
 
     return render(request, 'homeService.html') 
 
