@@ -39,4 +39,8 @@ urlpatterns = [
 
    path('book', views.book_home_service, name='book_service'),
    path("homeservicepannel",views.homeservicepannel,name='homeservicepannel'),
+   path("userlogin",views.userlogin,name='userlogin'),
+   path('test',views.test, name='test'),
+   path('diagnostic',views.diagnostic, name='diagnostic')
+ 
  ]
