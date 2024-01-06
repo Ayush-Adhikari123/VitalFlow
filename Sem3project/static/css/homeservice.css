@@ -1,7 +1,7 @@
 .container {
   max-width: 525px; /* Set maximum width */
   width: 90%; /* Adjust width as needed */
-  background: #00a2e8;
+  background: #6290E8;
   position: absolute;
   top: 16%;
   left: 50%;
@@ -15,7 +15,7 @@
   content: "";
   position: absolute;
   bottom: -30px;
-  background: rgb(43, 42, 42);
+  background: rgb(0, 0, 0);
   width: 100%; /* Adjust width */
   height: 4px;
   left: 0;
