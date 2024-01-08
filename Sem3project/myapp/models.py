@@ -1,6 +1,7 @@
 # models.py
 from django.db import models
 
+
 # Create your models here.
 class Report(models.Model):
     patient_Name =models.CharField( max_length=50)
@@ -23,6 +24,7 @@ class Report_Detail(models.Model):
 class technicianlogin(models.Model):
     technician_id=models.CharField(max_length=32)
     Password=models.CharField(max_length=16)    
+
     
 class TechAdd(models.Model):
     first_name =models.CharField( max_length=50)
@@ -34,6 +36,7 @@ class TechAdd(models.Model):
     com_password=models.CharField(max_length=50)        
     gender =models.CharField( max_length=50)
     
+
 class homeservice(models.Model):
     Name = models.CharField(max_length=32)
     Phonenumber = models.ImageField(max_length=10)
@@ -45,4 +48,7 @@ class homeservice(models.Model):
     location = models.CharField(max_length=250)
     discription = models.CharField(max_length=600)
 
+
     done = models.BooleanField(default=False)
+
+
