@@ -1,0 +1,100 @@
+.navbar {
+  background-color: #00a2e8 !important; /* Changing the background color */
+}
+
+.nav-list {
+  background-color: #3599c5 !important;
+}
+
+.navbar-inquiry {
+  font-size: 1.1rem; /* Increasing the font size */
+  margin-left: 30px;
+}
+
+.btn-Login {
+  justify-content: center;
+  background-color: #1e62d8 !important;
+  border: none;
+  border-radius: 8px; /* Adjust the border-radius to your preference */
+  cursor: pointer;
+  padding: 8px 16px; /* Adjust the padding to reduce the size */
+  font-size: 14px; /* Adjust the font size **/
+  margin-left: 300px;
+  font-weight: bold; /* Adjust the margin */
+}
+
+.navbar-brand {
+  color: #8a3030;
+  font-weight: bold;
+  font-size: 2rem; /* Increasing the font size */
+  margin-left: 30px;
+  margin-right: 100px; /* Adjust the margin value as needed */
+}
+
+/* ============================================= */
+.menu-icon {
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 24px;
+}
+
+.bar {
+  width: 30px;
+  height: 3px;
+  background-color: white;
+  transition: 0.4s;
+}
+
+#menu-toggle {
+  display: none;
+}
+
+#menu-toggle:checked + .menu-icon .bar:nth-child(1) {
+  transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+#menu-toggle:checked + .menu-icon .bar:nth-child(2) {
+  opacity: 0;
+}
+
+#menu-toggle:checked + .menu-icon .bar:nth-child(3) {
+  transform: rotate(45deg) translate(-5px, -6px);
+}
+#menu-toggle:checked + .menu-icon + .nav-list {
+  display: block;
+}
+
+.nav-list {
+  list-style: none;
+  margin: 20px;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: -35px;
+  border-radius: 8px;
+  z-index: 1;
+}
+
+.nav-list li {
+  float: none;
+}
+
+.nav-list li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  border-radius: 8px;
+}
+/* ==================================================== */
+.head-container {
+  margin-left: 50px;
+}

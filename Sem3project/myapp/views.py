@@ -1,12 +1,18 @@
 
 
-# views.py
+
 from django.shortcuts import render,HttpResponse
 from myapp.models import Report,Report_Detail,technicianlogin,TechAdd,homeservice
 from .forms import Report_DetailForm  # Import the Report_DetailForm
+
 import json
+
 from django.http import HttpResponseRedirect, JsonResponse
-from django.shortcuts import get_object_or_404
+from django.shortcuts import HttpResponse, get_object_or_404, render
+from myapp.models import Report, Report_Detail, homeservice, technicianlogin
+
+from .forms import Report_DetailForm  # Import the Report_DetailForm
+
 
 def index(request):
     context ={
@@ -168,10 +174,15 @@ def adminlogin(request):
 
 # =====================================================================================
 
-from django.contrib.auth.forms import AuthenticationForm,PasswordChangeForm,SetPasswordForm,UserChangeForm
-from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
-from django.contrib  import  messages
+from django.contrib import messages
+from django.contrib.auth import (authenticate, login, logout,
+                                 update_session_auth_hash)
+from django.contrib.auth.forms import (AuthenticationForm, PasswordChangeForm,
+                                       SetPasswordForm, UserChangeForm)
+
 from .forms import EditadminprofileForm, EditsuperadminprofileForm
+
+
 # login function for admin
 def admin_login(request):
   if not request.user.is_authenticated:
@@ -292,6 +303,11 @@ def techlogin(request):
     else:
         return render(request,'techlogin.html')
     
+
+
+def book_service(request):
+    return render(request,'homeService.html')
+
 # ================================================================= tech profile
 def techprofile(request):
       if request.method == "POST":
@@ -383,6 +399,7 @@ def techpannel(request):
     
 
 
+
 def book_home_service(request):
     if request.method == 'POST':
         # Get form data from POST request
@@ -407,9 +424,14 @@ def book_home_service(request):
         service.save()
 
         # Redirect to a success page or any other desired page after saving
-        return render(request, 'homeService.html')   # Redirect to a success page
+
+        return HttpResponseRedirect('gethomeservice')  # Redirect to a success page
 
     return render(request, 'homeService.html') 
+
+       
+
+    
 
 def homeservicepannel(request):
   
@@ -456,3 +478,4 @@ def userlogin(request):
 
 def diagnostic(request):
     return render(request,'diagnostic.html')
+
