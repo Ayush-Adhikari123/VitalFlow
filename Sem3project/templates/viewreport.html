@@ -23,6 +23,7 @@
       <h1>VITAL FLOW<br>BIO-LAB</h1>
     </div>
   </div>
+
   <div class="container ">
     <div class="rounded-box">
       <div class="content">
@@ -33,11 +34,15 @@
           <a href="/viewreport"><button class="btn btn-primary with-icon-4"></button></a>
         </div>
         <div class="top-buttons">
+          <a href="/techprofile"><button class="btn btn-primary with-icon-2"></button></a>
+        </div>
+        <div class="top-buttons">
           <button class="btn btn-primary with-icon-3" id="foo" onclick="myFunction()" data-toggle="modal"
             data-target="#exampleModalLong2"></button>
         </div>
       </div>
     </div>
+
     <div class="modal fade" id="exampleModalLong2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
       aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -103,9 +108,6 @@
               <input type="text" id="userInput1"
                 style="width: 84px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; background-color: #70b6c6; ">
             </div>
-            {% comment %} <label for="userInput">Patient Name:</label>
-            <input type="text" id="userInput1"
-              style="width: 84px; height: 15px; border: none; font-size: 10px; margin-buttom:20px;"> {% endcomment %}
             <div class="me-4">
               <label for="userInput" style="font-size: 12px; font-weight: bold;">Date:</label>
               <input type="text" id="userInput1"
@@ -118,10 +120,7 @@
               <input type="text" id="userInput1"
                 style="width: 84px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; background-color: #70b6c6;">
             </div>
-            {% comment %} background-color: #70b6c6; {% endcomment %}
-            {% comment %} <label for="userInput">Patient Name:</label>
-            <input type="text" id="userInput1"
-              style="width: 84px; height: 15px; border: none; font-size: 10px; margin-buttom:20px;"> {% endcomment %}
+
             <div class="col-5">
               <label for="userInput" style="font-size: 12px; font-weight: bold;">Contact :</label>
               <input type="text" id="userInput1"
@@ -134,9 +133,7 @@
               <input type="text" id="userInput1"
                 style="width: 84px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; margin-left:51px; background-color: #70b6c6; ">
             </div>
-            {% comment %} <label for="userInput">Patient Name:</label>
-            <input type="text" id="userInput1"
-              style="width: 84px; height: 15px; border: none; font-size: 10px; margin-buttom:20px;"> {% endcomment %}
+
             <div class="col-5">
               <label for="userInput" style="font-size: 12px; font-weight: bold;">Gender :</label>
               <input type="text" id="userInput1"
@@ -149,9 +146,7 @@
               <input type="text" id="userInput1"
                 style="width: 84px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; margin-left:28px; background-color: #70b6c6;">
             </div>
-            {% comment %} <label for="userInput">Patient Name:</label>
-            <input type="text" id="userInput1"
-              style="width: 84px; height: 15px; border: none; font-size: 10px; margin-buttom:20px;"> {% endcomment %}
+
             <div class="col-5">
               <label for="userInput" style="font-size: 12px; font-weight: bold;">Consultant:</label>
               <input type="text" id="userInput1"
@@ -558,9 +553,6 @@
       function myFunction1() {
         document.getElementById('foo').style.cssText = ' '
       }
-
-
-
     </script>
 </body>
 

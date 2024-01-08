@@ -9,7 +9,10 @@ class Report_DetailForm(forms.ModelForm):
 
         # fields=['test_list']# Include all fields or specify the fields you need
 
+class PatientForm(forms.Form):
 
+    patient_Name = forms.CharField(max_length=255)
+    contact = forms.CharField(max_length=15)
 # =============================================suvam ko part
 
 from django.contrib.auth.forms import UserChangeForm
@@ -19,7 +22,7 @@ class EditadminprofileForm(UserChangeForm):
     password=None
     class Meta:
         model =User
-        fields = ['username','first_name','last_name','email','date_joined','last_login','is_active']
+        fields = ['username','first_name','last_name','email','date_joined','last_login']
         labels={'email': 'Email' }
 
 

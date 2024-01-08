@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+
+  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+  
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+    /* Style for the main container */
+    .header{
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: var(--white);
+      box-shadow: 0 0 10px skyblue;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 8%;
+  
+  }
+  
+  .header .logo{
+      font-size: 1.9rem;
+      font-weight: bolder;
+      color: var(--black);
+  }
+  
+  .header .logo i{
+      color: red;
+      padding-right: .5rem;
+  }
+  
+  .header .navbar a{
+      font-size: 1.3rem;
+      color: var(--black);
+      margin: 0 1rem;
+  }
+  
+  .header .navbar a:hover{
+      color: var(--primary);
+  }
+  
+  .header .btn{
+      margin-top: 0;
+  }
+  
+  #menu-btn{
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--black);
+      margin-left: 1.7rem;
+      display: none;
+  }
+  
+  #menu-btn:hover{
+      color: var(--primary);
+  }
+
+  .btn{
+
+    margin-top: 1rem;
+    display: inline-block;
+    padding: 0.5rem 2.5rem;
+    border-radius: 0.7rem;
+    background: var(--primary);
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: var(--white);
+}
+.btn1{
+
+  margin-top: 1rem;
+  display: inline-block;
+  padding: 0.5rem 2.5rem;
+  border-radius: 0.7rem;
+  background: #09e5ab;
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: var(--white);
+}
+
+.btn:hover,.btn1:hover{
+    background: var(--secondary);
+}
+*{
+  font-family: 'Poppins', sans-serif;
+  margin: 0; padding: 0;
+  box-sizing: border-box;
+  outline: none; border: none;
+  text-decoration: none;
+  text-transform: capitalize;
+  transition: .2s linear;
+}
+
+
+    {% comment %} --------------------- {% endcomment %}
+    .main-container {
+        position: relative;
+      display: flex;
+      border: 2px solid rgba(204, 204, 204, 0.3);
+      padding: 10px; /* Padding around the main container */
+      width: 1100px; /* Set the width of the main container */
+      margin-top: 108px; /* Set the top margin to create a gap from the top */
+      margin-left: 20px;
+    }
+
+    /* Style for the image and description container */
+    .image-container {
+      display: flex; /* Use flexbox for layout */
+      align-items: center; /* Center items vertically */
+      flex-grow: 1; /* Allow the image container to grow and take remaining space */
+    }
+
+    /* Style for the image */
+    .image-container img {
+      max-width: 400px; /* Set the maximum width of the image */
+     
+      height: auto; /* Maintain the aspect ratio of the image */
+      margin-right: 100px; /* Add some spacing between the image and description */
+      
+      margin-left: 40px;
+    }
+
+    /* Style for the description */
+    .description {
+        
+        margin-bottom: 250px;
+        font-size: 18px;
+      flex-grow: 1; /* Allow the description to grow and take remaining space */
+    }
+
+    /* Style for the right container (price) */
+    .price-container {
+        border: 2px solid rgba(204, 204, 204, 0.3);
+        position: absolute; /* Set the price container to absolute positioning */
+        top: 109px; /* Align to the top of the main container */
+        right: 30px; /* Add some right gap */
+        
+        padding: 10px; /* Padding around the price container */
+        width: 310px; /* Set the width of the price container */
+        font-size: 20px;
+        
+    }
+    s{
+        margin-right: 4px; /* You can adjust the value as needed */
+        font-size: 1.7rem;
+        text-decoration: line-through;
+      }
+
+      .qr-code {
+        max-width: 100%;
+        height: auto;
+        margin-top: 55px; /* Adjust the top margin as needed */
+      }
+      .card {
+        border: 1px solid #f0f0f0;
+        margin-bottom: 1.875rem;
+    }
+    .card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 1px solid rgba(0,0,0,.125);
+        border-radius: 0.25rem;
+        margin-left: 20px;
+        margin-right: 29px;
+    }
+    .widget-title {
+      margin-bottom: 15px;
+  }
+  .widget {
+    margin-bottom: 30px;
+    font-family: 'Montserrat', sans-serif;
+}
+p{
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-family: 'Montserrat', sans-serif;
+}
+ {% comment %} .MsoNormal{
+  font-family: 'Montserrat', sans-serif;
+}  {% endcomment %}
+
+
+{% comment %} body {
+  font-family: 'Montserrat', sans-serif ; /* Use a suitable font for your design */
+  line-height: 1.6; /* Adjust line height as needed */
+} {% endcomment %}
+  </style>
+  <title>Diagnostic Package</title>
+</head>
+<body>
+
+  <header class="header">
+
+    <a href="#" class="logo"> <i class="fas fa-tint"></i> Vital_Flow </a>
+    <nav class="navbar">
+        <a href="#home">home</a>
+        <a href="#about">about</a>
+        <a href="#services">services</a>
+        <a href="#team">team</a>
+        <a href="#pricing">pricing</a>
+    </nav>
+
+    <a href="#" class="btn"> Log In </a>
+    <div id="menu-btn" class="fas fa-bars"></div>
+
+</header>
+
+  <!-- Main container with image and description -->
+  <div class="main-container">
+    <!-- Left container with image and description -->
+    <div class="image-container">
+      <!-- Image on the left -->
+      <img src="/static/images/diabetes.png" alt="Your Image Description">
+      
+      <!-- Description on the right -->
+      <div class="description">
+        <h2>Diagnostic Package</h2>
+        <p>Test for Diabetes:</p>
+        <p>Blood Glucose F, Blood Glucose PP, HbA1c, Lipid Profile, Kidney Profile, Urine R/E</p>
+        <p>
+                 To Know More-Please Call
+            <br> 9841414141/9862107925/9801010101/9801234556(WhatsApp)
+        </p>
+        
+      </div>
+    </div>
+  </div>
+
+  <!-- Right container for price -->
+  <div class="price-container">
+    <h3>NRS. 1800 &nbsp;<s>NRS.3000</s></h3>
+    {% comment %} <div class="btn mt-3 mb-3"> {% endcomment %}
+      <a href="#" class="btn1 mt-3 mb-3"> Buy Now </a>
+      <img src="/static/images/qr.png" alt="QR Code" class="qr-code">
+      
+    
+    
+    
+  </div>
+
+  
+
+  <div class="card mt-5 ">
+    <div class="card-body pt-0">
+        <!-- Tab Menu -->
+        <h3 class="pt-4">Details</h3>
+        <hr>
+        <!-- /Tab Menu -->       
+        <!-- Tab Content -->
+        <div class="tab-content pt-3">
+            <!-- Overview Content -->
+            <div role="tabpanel" id="doc_overview" class="tab-pane fade show active">
+                <div class="row">
+                    <div class="col-md-9">
+                        <!-- About Details -->
+                        <div class="widget about-widget">
+                            <h4 class="widget-title">Description</h4>
+                            <div class="WordSection1">
+                              <p class="MsoNormal" style="margin-bottom: 0.0001pt; line-height: normal;">
+                                <p><b>Tests Parameter:</b></p>
+                                <span lang="EN-US" style=""><o:p></o:p></span>
+                              </p>
+                            </div>
+                            <p>Blood&nbsp;Glucose F,&nbsp;Blood&nbsp;Glucose&nbsp;PP,&nbsp;HbA1c, Lipid Profile, Kidney Profile, Urine R/E</p>
+                            <p class="MsoNormal1" style="margin-bottom: 7.5pt; line-height: normal;"><b>This package has tests to check for :</b><o:p></o:p></p>
+                            <p class="MsoNormal" style="margin-bottom: 7.5pt; line-height: normal;">Blood-sugar levels to determine diabetes risk</p>
+                            <p class="MsoNormal" style="margin-bottom: 7.5pt; line-height: normal;"><o:p></o:p>Heart risk profile and cholesterol levels which effect the heart</p>
+                            <p class="MsoNormal" style="margin-bottom: 7.5pt; line-height: normal;">Kidneys, which produce urine, and chances for kidney disease<o:p></o:p></p>
+                            <p class="MsoNormal" style="margin-bottom: 0.0001pt;">
+                            <p></p>
+                            <span lang="EN-US" style="line-height: 18.4px;"><b>Process :</b></span>
+                            <span lang="EN-US" style="line-height: 18.4px;"><o:p></o:p></span></p>
+                            <p class="MsoNormal" style="margin-bottom: 0.0001pt;"><span lang="EN-US" style="line-height: 18.4px;">These tests requires 10-12 hours of fasting (except water). PP sample 2hrs. after meal<o:p></o:p></span></p>
+                            <p class="MsoNormal" style="margin-bottom: 0.0001pt;"><span lang="EN-US" style="line-height: 18.4px;">The lab technician will collect blood sample from the patient.</span></p>
+                            <p class="MsoNormal" style="margin-bottom: 0.0001pt;"><span lang="EN-US" style="line-height: 18.4px;">This will be processed in a lab and the report provided usually within 1 hours of PP sample.<o:p></o:p></span></p>
+                            <p class="MsoNormal" style="margin-bottom: 0.0001pt;"><span lang="EN-US" style="line-height: 18.4px;">Who should take this test :</span><span lang="EN-US" style="line-height: 18.4px;"><o:p></o:p></span></p>
+                            <p></p><p class="MsoNormal" style="margin-bottom: 0.0001pt;"><span lang="EN-US" style="line-height: 18.4px;">All adults (above age 18) should take this test (or equivalent) at least once an year.</span></p>
+                        </div>
+                    
+                        <div class="widget about-widget mb-3">
+                            <h4 class="widget-title">Precaution</h4>
+                            <p>These tests requires 10-12 hours of fasting (except water).</p><p>PP sample 2hrs. after meal</p>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+
+
+
+</body>
+</html>

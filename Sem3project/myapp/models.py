@@ -25,6 +25,17 @@ class technicianlogin(models.Model):
     technician_id=models.CharField(max_length=32)
     Password=models.CharField(max_length=16)    
 
+    
+class TechAdd(models.Model):
+    first_name =models.CharField( max_length=50)
+    middle_name=models.CharField( max_length=50,null=True)
+    last_name=models.CharField( max_length=50)    
+    email =models.EmailField(null=True)
+    contact =models.IntegerField( )
+    password=models.CharField(max_length=50)
+    com_password=models.CharField(max_length=50)        
+    gender =models.CharField( max_length=50)
+    
 
 class homeservice(models.Model):
     Name = models.CharField(max_length=32)
@@ -36,6 +47,7 @@ class homeservice(models.Model):
 
     location = models.CharField(max_length=250)
     discription = models.CharField(max_length=600)
+
 
     done = models.BooleanField(default=False)
 

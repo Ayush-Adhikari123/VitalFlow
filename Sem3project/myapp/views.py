@@ -1,6 +1,10 @@
 
 
-# views.py
+
+from django.shortcuts import render,HttpResponse
+from myapp.models import Report,Report_Detail,technicianlogin,TechAdd,homeservice
+from .forms import Report_DetailForm  # Import the Report_DetailForm
+
 import json
 
 from django.http import HttpResponseRedirect, JsonResponse
@@ -137,6 +141,7 @@ def createreport(request):
                     unit = subtest['unit']
 
                     new_report_detail = Report_Detail(
+                        report=new_report,
                         test_list=test_dropdown,
                         investigation=text,
                         results=result,
@@ -283,7 +288,7 @@ def updatereport(request,contact):
         return render(request, 'updateReport.html', {'report': existing_report})
     
 
-def createtechnicianlogin(request):
+def techlogin(request):
     if request.method == 'POST':
         # Extract form data from the POST request
         technician_id = request.POST.get('technician_id')
@@ -302,6 +307,96 @@ def createtechnicianlogin(request):
 
 def book_service(request):
     return render(request,'homeService.html')
+
+# ================================================================= tech profile
+def techprofile(request):
+      if request.method == "POST":
+         fm= EditadminprofileForm(request.POST, instance= request.user)
+         if fm.is_valid():
+          messages.info(request,'Profile Updated Successfully!')
+          fm.save()
+      else:
+          fm =EditadminprofileForm(instance=request.user)
+      return render(request,'techprofile.html',{'name': request.user,'form':fm})
+    
+  
+def techadd(request):
+  if request.method == 'POST':
+        first_name = request.POST.get('first_name')
+        middle_name = request.POST.get('middle_name')
+        last_name = request.POST.get('last_name')
+        email = request.POST.get('email')
+        contact = request.POST.get('contact')
+        password = request.POST.get('password')
+        com_password = request.POST.get('com_password')
+        gender = request.POST.get('gender')
+        
+        if first_name.strip() == '' :
+            error_message = "Please enter a valid first name."
+            options = {}  # Define your 'options' here if needed
+            return render(request, 'techadd.html', {'options': options, 'error_message': error_message})
+          
+        if last_name.strip() == '' :
+            error_message = "Please enter a valid last name."
+            options = {}  # Define your 'options' here if needed
+            return render(request, 'techadd.html', {'options': options, 'error_message': error_message})
+          
+        if email.strip() == '' :
+            error_message = "Please enter a valid email."
+            options = {}  # Define your 'options' here if needed
+            return render(request, 'techadd.html', {'options': options, 'error_message': error_message})
+        if contact.strip() == '' :
+            error_message = "Please enter a valid contact."
+            options = {}  # Define your 'options' here if needed
+            return render(request, 'techadd.html', {'options': options, 'error_message': error_message})
+
+        if password.strip() == '' :
+            error_message = "Please enter a valid password."
+            options = {}  # Define your 'options' here if needed
+            return render(request, 'techadd.html', {'options': options, 'error_message': error_message})
+
+        if com_password.strip() == '' :
+            error_message = "Please enter a valid confirm password."
+            options = {}  # Define your 'options' here if needed
+            return render(request, 'techadd.html', {'options': options, 'error_message': error_message})
+
+        if password != com_password:
+            messages.success(request,"Password didn't match")
+            return render(request, 'techadd.html')
+
+        if gender.strip() == '' :
+            error_message = "Please enter a valid gender."
+            options = {}  # Define your 'options' here if needed
+            return render(request, 'techadd.html', {'options': options, 'error_message': error_message})
+
+        new_techadd = TechAdd(
+            first_name=first_name,
+            middle_name=middle_name,
+            last_name=last_name,
+            email=email,
+            contact=contact,
+            password=password,
+            com_password=com_password,
+            gender=gender
+        )
+        new_techadd.save()
+        return HttpResponse("New technician added successfully")
+  else:
+      
+    return render(request, 'techadd.html')
+  
+
+def techpannel(request):
+  
+  if request.method == 'GET':
+        techadd_data = TechAdd.objects.all()  # Fetch all data from TechAdd model
+        context = {
+            'techadd_data': techadd_data,
+        }
+        return render(request, 'techpannel.html', context)
+  else:
+        return HttpResponse('Invalid request or empty contact field')
+    
 
 
 
@@ -329,6 +424,58 @@ def book_home_service(request):
         service.save()
 
         # Redirect to a success page or any other desired page after saving
+
         return HttpResponseRedirect('gethomeservice')  # Redirect to a success page
 
     return render(request, 'homeService.html') 
+
+       
+
+    
+
+def homeservicepannel(request):
+  
+  if request.method == 'GET':
+        homeservice_data = homeservice.objects.all()  # Fetch all data from TechAdd model
+        context = {
+            'homeservice_data': homeservice_data,
+        }
+        return render(request, 'homeservicepannel.html', context)
+  else:
+        return HttpResponse('Invalid request or empty contact field')
+  
+#   ================================================srijan
+def test(request):
+    if request.method == 'POST':
+        patient_Name = request.POST.get('patient_Name', '')
+        contact = request.POST.get('contact', '')
+
+        print(f"Patient Name: {patient_Name}, Contact: {contact}")
+
+        if contact:
+            report_data = Report.objects.filter(patient_Name=patient_Name, contact=contact).first()
+            report_detail_data = Report_Detail.objects.filter(report_id=report_data.id)
+            print(report_data)
+
+            if report_data is not None:
+                print("Data found")
+            else:
+                print("No data found")
+
+            context = {
+                'report_data': report_data,
+                'report_detail_data': report_detail_data,
+            }
+            print(f"Method: {request.method}")
+            print(f"Contact: {contact}")
+
+            return render(request, 'test.html', context)
+
+        return HttpResponse('Invalid request or empty contact field')
+
+def userlogin(request):
+    return render(request,'userlogin.html')
+
+def diagnostic(request):
+    return render(request,'diagnostic.html')
+
