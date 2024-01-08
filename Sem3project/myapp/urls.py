@@ -46,3 +46,4 @@ path('book', views.book_home_service, name='book_service'),
    path("userlogin",views.userlogin,name='userlogin'),
    path('test',views.test, name='test'),
    path('diagnostic',views.diagnostic, name='diagnostic')
+]
