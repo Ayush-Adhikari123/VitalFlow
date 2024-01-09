@@ -39,7 +39,7 @@ def about(request):
     return HttpResponse("This is About Page")
 
 def contact(request):
-    return HttpResponse("This is Contact Page")
+    return render(request,'contactus.html')
 
 def adminprofile(request):
     return render(request,'adminprofile.html')
