@@ -1,15 +1,13 @@
 
 
 
-from django.shortcuts import render,HttpResponse
-from myapp.models import Report,Report_Detail,technicianlogin,TechAdd,homeservice
-from .forms import Report_DetailForm  # Import the Report_DetailForm
-
 import json
 
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import HttpResponse, get_object_or_404, render
-from myapp.models import Report, Report_Detail, homeservice, technicianlogin
+
+from myapp.models import (Report, Report_Detail, TechAdd, homeservice,
+                          technicianlogin)
 
 from .forms import Report_DetailForm  # Import the Report_DetailForm
 
@@ -434,14 +432,15 @@ def book_home_service(request):
     
 
 def homeservicepannel(request):
-  
-  if request.method == 'GET':
-        homeservice_data = homeservice.objects.all()  # Fetch all data from TechAdd model
+    if request.method == 'GET':
+        # Filter the data where 'done_column' is 0
+        homeservice_data = homeservice.objects.filter(done=0)
+        
         context = {
             'homeservice_data': homeservice_data,
         }
         return render(request, 'homeservicepannel.html', context)
-  else:
+    else:
         return HttpResponse('Invalid request or empty contact field')
   
 #   ================================================srijan
