@@ -2,7 +2,7 @@
 
 # views.py
 from django.shortcuts import render,HttpResponse
-from myapp.models import Report,Report_Detail,technicianlogin,TechAdd,homeservice
+from myapp.models import Report,Report_Detail,technicianlogin,TechAdd,homeservice,Contact
 from .forms import Report_DetailForm  # Import the Report_DetailForm
 import json
 from django.http import HttpResponseRedirect, JsonResponse
@@ -39,7 +39,22 @@ def about(request):
     return HttpResponse("This is About Page")
 
 def contact(request):
-    return render(request,'contactus.html')
+     if request.method == 'POST':
+        full_name = request.POST.get('fullname_name')
+        email = request.POST.get('email')
+        contact = request.POST.get('contact')
+        message = request.POST.get('message')
+        
+        new_contact = Contact(
+                full_name=full_name,
+                email=email,
+                contact=contact,
+                message=message
+            )
+        new_contact.save()
+            # return render(request, 'homeService.html') 
+     else:       
+        return render(request,'contactus.html')
 
 def adminprofile(request):
     return render(request,'adminprofile.html')
