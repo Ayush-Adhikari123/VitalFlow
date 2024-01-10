@@ -40,7 +40,7 @@ def about(request):
 
 def contact(request):
      if request.method == 'POST':
-        full_name = request.POST.get('fullname_name')
+        full_name = request.POST.get('full_name')
         email = request.POST.get('email')
         contact = request.POST.get('contact')
         message = request.POST.get('message')
@@ -52,6 +52,10 @@ def contact(request):
                 message=message
             )
         new_contact.save()
+        success_message = "Data saved successfully in the database!"
+
+        # Returning the success message as an HTTP response
+        return HttpResponse(success_message)
             # return render(request, 'homeService.html') 
      else:       
         return render(request,'contactus.html')

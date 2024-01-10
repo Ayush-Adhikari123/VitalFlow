@@ -42,5 +42,5 @@ urlpatterns = [
    path("userlogin",views.userlogin,name='userlogin'),
    path('test',views.test, name='test'),
    path('diagnostic',views.diagnostic, name='diagnostic'),
- 
+   path("contactpannel",views.contactpannel,name='contactpannel'),
  ]
