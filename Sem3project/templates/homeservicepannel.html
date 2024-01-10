@@ -39,6 +39,11 @@
         #map {
             height: 400px;
         }
+        .map-container {
+            height: 200px; /* Set a fixed height for the map container */
+        }
+
+        
     </style>
 </head>
 
@@ -53,8 +58,9 @@
                 <th scope="col">Phone Number</th>
                 <th scope="col">Email</th>
                 <th scope="col">Discription</th>
-                <th scope="col">Location</th>
                 <th scope="col">Map</th>
+                <th scope="col">Send To</th>
+                <th scope="col">Done?</th>
                 {% comment %} <th scope="col">Actions</th> {% endcomment %}
             </tr>
         </thead>
@@ -65,15 +71,18 @@
                 <td>{{ homeservice.Name }}</td>
                 <td>{{ homeservice.Phonenumber }}</td>
                 <td>{{ homeservice.Email }}</td>
-                <td>{{ homeservice.discription }}</td>
-                <td>{{ homeservice.location }}</td>
-                <td>
+                <td width="200">{{ homeservice.discription }}</td>
+                <td width="300">
                     <button class="btn btn-primary show-map" data-service-id="{{ homeservice.id }}">Location</button>
                     <div id="map_{{ homeservice.id }}" class="map-container" style="display: none; height: 200px;"
                         data-latitude="{{ homeservice.latitude }}" data-longitude="{{ homeservice.longitude }}"
                         data-location="{{ homeservice.location }}">
                     </div>
                 </td>
+                <td width="200">
+                    <input type="email" name="email" class="form-control" id="email">
+                </td>
+                <td><button class="btn btn-primary done" >Done</button></td>
                 {% comment %} <td>{{ detail.email }}</td> {% endcomment %}
 
 
@@ -124,6 +133,35 @@
         }
     </script>
     <script>
+        var doneButtons = document.querySelectorAll('.done');
+    doneButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+            var serviceId = this.getAttribute('data-service-id');
+            
+            // Create a FormData object to send the service ID via AJAX
+            var formData = new FormData();
+            formData.append('service_id', serviceId);
+
+            // Perform AJAX request to update the "done" status
+            fetch('/update_done_status/', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Assuming success, disable the button and change text
+                    button.disabled = true;
+                    button.innerText = 'Completed';
+                } else {
+                    // Handle error or display a message to the user
+                    console.error('Error:', response.statusText);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    });
         function myFunction() {
             document.getElementById('foo').style.cssText = '';
         }
