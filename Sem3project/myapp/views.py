@@ -3,13 +3,14 @@
 
 import json
 
+from django.core.mail import send_mail
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import HttpResponse, get_object_or_404, render
 
 from myapp.models import (Report, Report_Detail, TechAdd, homeservice,
                           technicianlogin)
 
-from .forms import Report_DetailForm  # Import the Report_DetailForm
+from .forms import Report_DetailForm
 
 
 def index(request):
@@ -450,6 +451,30 @@ def update_done_status(request, service_id):
         hmservice = homeservice.objects.get(id=service_id)
         hmservice.done = 1  # Update the 'done' status to 1
         hmservice.save()
+
+        full_name = hmservice.Name
+        email = hmservice.Email
+        contact = hmservice.Phonenumber
+        lat = hmservice.latitude
+        lng = hmservice.longitude
+        location = hmservice.location
+        discription = hmservice.discription
+        #for sending the mail
+        email_subject = 'New Home Service'
+        email_message = f"Full Name:   {full_name}\nEmail:   {email}\nContact No. :   {contact}\nLocation:   {lat} , {lng}   ({location})\nDiscription:   {discription}"
+        sender_email = 'vitalflow33@gmail.com'
+        recipient_email = 'ayushadhikari64209@gmail.com'
+
+        send_mail(
+            email_subject,
+            email_message,
+            sender_email,
+            [recipient_email],
+            fail_silently=False,
+        )
+
+
+
 
         return render(request,'homeservicepannel.html')
 
