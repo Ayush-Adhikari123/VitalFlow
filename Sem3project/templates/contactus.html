@@ -262,6 +262,36 @@
               });
           });
       });
+
+
+
+        //Trying
+      {% comment %} document.addEventListener('DOMContentLoaded', function () {
+        const contactForm = document.getElementById('contactForm');
+
+        contactForm.addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            const formData = new FormData(contactForm);
+            fetch('http://127.0.0.1:8000/contactpanel', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message === 'Email sent successfully!') {
+                    alert('Email sent successfully!');
+                    window.location.href = 'http://127.0.0.1:8000/contactpannel'; // Redirect if needed
+                } else {
+                    alert('Failed to send email.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error sending email.');
+            });
+        });
+    }); {% endcomment %}
   </script>
     {% comment %} <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script> {% endcomment %}
     <script src="js/script.js"></script>

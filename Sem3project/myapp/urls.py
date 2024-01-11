@@ -43,4 +43,5 @@ urlpatterns = [
    path('test',views.test, name='test'),
    path('diagnostic',views.diagnostic, name='diagnostic'),
    path("contactpannel",views.contactpannel,name='contactpannel'),
+   path('delete/<int:record_id>/', views.delete_record, name='delete_record'),
  ]
