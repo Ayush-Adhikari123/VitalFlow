@@ -58,7 +58,7 @@
                 <th scope="col">Phone Number</th>
                 <th scope="col">Email</th>
                 <th scope="col">Discription</th>
-                <th scope="col">Map</th>
+                <th scope="col">Location</th>
                 <th scope="col">Send To</th>
                 <th scope="col">Done?</th>
                 {% comment %} <th scope="col">Actions</th> {% endcomment %}
@@ -73,23 +73,19 @@
                 <td>{{ homeservice.Email }}</td>
                 <td width="200">{{ homeservice.discription }}</td>
                 <td width="300">
-                    <button class="btn btn-primary show-map" data-service-id="{{ homeservice.id }}">Location</button>
+                    <button class="btn btn-primary show-map" data-service-id="{{ homeservice.id }}">Show Map</button>
                     <div id="map_{{ homeservice.id }}" class="map-container" style="display: none; height: 200px;"
                         data-latitude="{{ homeservice.latitude }}" data-longitude="{{ homeservice.longitude }}"
                         data-location="{{ homeservice.location }}">
                     </div>
                 </td>
+               
+                    
                 <td width="200">
-                    <input type="email" name="email" class="form-control" id="email">
+                    <input type="email" name="email send"  id="email_send">
                 </td>
-                <td><button class="btn btn-primary done" >Done</button></td>
-                {% comment %} <td>{{ detail.email }}</td> {% endcomment %}
-
-
-                {% comment %} <div class="d-flex justify-content-end">
-                    <button type="button" class="btn btn-danger btn-Login" data-toggle="modal"
-                        data-target="#exampleModalLong1">Delete</button>
-                </div> {% endcomment %}
+                <td><button class="btn btn-primary done" id = "done" onclick="doneTask({{ homeservice.id }})"  >Done</button></td>
+         
             </tr>
             {% endfor %}
         </tbody>
@@ -133,35 +129,38 @@
         }
     </script>
     <script>
-        var doneButtons = document.querySelectorAll('.done');
-    doneButtons.forEach(function (button) {
-        button.addEventListener('click', function () {
-            var serviceId = this.getAttribute('data-service-id');
-            
-            // Create a FormData object to send the service ID via AJAX
-            var formData = new FormData();
-            formData.append('service_id', serviceId);
-
-            // Perform AJAX request to update the "done" status
-            fetch('/update_done_status/', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => {
-                if (response.ok) {
-                    // Assuming success, disable the button and change text
-                    button.disabled = true;
-                    button.innerText = 'Completed';
-                } else {
-                    // Handle error or display a message to the user
-                    console.error('Error:', response.statusText);
+        
+            function doneTask(service_id) {
+                if (confirm('Are you sure you want to send the mail?')) {
+                    fetch(`/update_done_status/${service_id}/`, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRFToken': '{{ csrf_token }}', // Include CSRF token
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            // If deletion is successful, reload the page or update UI as needed
+                            window.location.reload(); // Reload the page to reflect changes
+                        } else {
+                            console.error('Failed to delete record');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
                 }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        });
-    });
+            }
+    
+            function myFunction() {
+                document.getElementById('foo').style.cssText = '';
+            }
+    
+            function myFunction1() {
+                document.getElementById('foo').style.cssText = ' ';
+            }
+      
         function myFunction() {
             document.getElementById('foo').style.cssText = '';
         }

@@ -443,6 +443,18 @@ def homeservicepannel(request):
     else:
         return HttpResponse('Invalid request or empty contact field')
   
+
+
+def update_done_status(request, service_id):
+    if request.method == 'POST':
+        hmservice = homeservice.objects.get(id=service_id)
+        hmservice.done = 1  # Update the 'done' status to 1
+        hmservice.save()
+
+        return render(request,'homeservicepannel.html')
+
+    return JsonResponse({'message': 'Invalid request method'}, status=405)
+
 #   ================================================srijan
 def test(request):
     if request.method == 'POST':
