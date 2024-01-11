@@ -79,7 +79,7 @@
         justify-content: center;
         align-items: center;
         z-index: 9999;
-        display: none; /* Initially hide the loading screen */
+        
       }
 
 /* ======================================================================== */
@@ -88,29 +88,18 @@ body {
     font-family: Arial, sans-serif;
 }
 
-form {
-    max-width: 100%;
-    padding: 20px;
-    position: relative;
-}
 
-label {
-    display: block;
-}
+
 
 input {
     width: 100%;
     padding: 8px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     box-sizing: border-box;
     border-radius: 15px;
 }
 
-input[type="submit"] {
-    background-color: #4caf50;
-    color: white;
-    cursor: pointer;
-}
+
 
 a {
     margin-right: 10px;
@@ -179,4 +168,13 @@ a {
     margin-left:auto;
     margin-right:auto;
     text-align:center;
+    
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+
+    overflow-y: auto;
+    display: block;
+    max-height: 500px;
+    background-color: transparent;
 }

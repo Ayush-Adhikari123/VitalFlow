@@ -50,7 +50,7 @@
 <body>
 
 
-    <table class="table table-striped mt-5">
+    <table class="table table-striped mt-5" id="table">
         <thead>
             <tr>
                 <th scope="col">S.N</th>
@@ -135,14 +135,14 @@
                     fetch(`/update_done_status/${service_id}/`, {
                         method: 'POST',
                         headers: {
-                            'X-CSRFToken': '{{ csrf_token }}', // Include CSRF token
+                            'X-CSRFToken': '{{ csrf_token }}', 
                             'Content-Type': 'application/json'
                         }
                     })
                     .then(response => {
                         if (response.ok) {
-                            // If deletion is successful, reload the page or update UI as needed
-                            window.location.reload(); // Reload the page to reflect changes
+                             // Reload the page to reflect changes
+                            window.location.reload();
                         } else {
                             console.error('Failed to delete record');
                         }
@@ -153,13 +153,7 @@
                 }
             }
     
-            function myFunction() {
-                document.getElementById('foo').style.cssText = '';
-            }
-    
-            function myFunction1() {
-                document.getElementById('foo').style.cssText = ' ';
-            }
+            
       
         function myFunction() {
             document.getElementById('foo').style.cssText = '';
