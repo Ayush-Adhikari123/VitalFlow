@@ -135,7 +135,10 @@ def createreport(request):
                     unit = subtest['unit']
 
                     new_report_detail = Report_Detail(
+<<<<<<< HEAD
                         report=new_report,
+=======
+>>>>>>> 7def4dbffb9783ceda45eccbb1b5c2d772b39176
                         test_list=test_dropdown,
                         investigation=text,
                         results=result,
@@ -381,7 +384,12 @@ def techpannel(request):
   else:
         return HttpResponse('Invalid request or empty contact field')
     
+<<<<<<< HEAD
+def book_service(request):
+    return render(request,'homeService.html')
+=======
 
+>>>>>>> 7def4dbffb9783ceda45eccbb1b5c2d772b39176
 
 def book_home_service(request):
     if request.method == 'POST':
@@ -407,7 +415,11 @@ def book_home_service(request):
         service.save()
 
         # Redirect to a success page or any other desired page after saving
+<<<<<<< HEAD
+        return HttpResponseRedirect('gethomeservice')  # Redirect to a success page
+=======
         return render(request, 'homeService.html')   # Redirect to a success page
+>>>>>>> 7def4dbffb9783ceda45eccbb1b5c2d772b39176
 
     return render(request, 'homeService.html') 
 
@@ -420,6 +432,7 @@ def homeservicepannel(request):
         }
         return render(request, 'homeservicepannel.html', context)
   else:
+<<<<<<< HEAD
         return HttpResponse('Invalid request or empty contact field')
   
 #   ================================================srijan
@@ -456,3 +469,6 @@ def userlogin(request):
 
 def diagnostic(request):
     return render(request,'diagnostic.html')
+=======
+        return HttpResponse('Invalid request or empty contact field')
+>>>>>>> 7def4dbffb9783ceda45eccbb1b5c2d772b39176
