@@ -45,7 +45,7 @@ def about(request):
     return HttpResponse("This is About Page")
 
 def contact(request):
-    return HttpResponse("This is Contact Page")
+    return render(request,'contact.html')
 
 def adminprofile(request):
     return render(request,'adminprofile.html')
@@ -141,7 +141,6 @@ def createreport(request):
                     unit = subtest['unit']
 
                     new_report_detail = Report_Detail(
-                        report=new_report,
                         test_list=test_dropdown,
                         investigation=text,
                         results=result,
