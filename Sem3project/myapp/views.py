@@ -39,7 +39,7 @@ def about(request):
     return HttpResponse("This is About Page")
 
 def contact(request):
-    return HttpResponse("This is Contact Page")
+    return render(request,'contact.html')
 
 def adminprofile(request):
     return render(request,'adminprofile.html')
@@ -135,10 +135,6 @@ def createreport(request):
                     unit = subtest['unit']
 
                     new_report_detail = Report_Detail(
-<<<<<<< HEAD
-                        report=new_report,
-=======
->>>>>>> 7def4dbffb9783ceda45eccbb1b5c2d772b39176
                         test_list=test_dropdown,
                         investigation=text,
                         results=result,
@@ -384,12 +380,6 @@ def techpannel(request):
   else:
         return HttpResponse('Invalid request or empty contact field')
     
-<<<<<<< HEAD
-def book_service(request):
-    return render(request,'homeService.html')
-=======
-
->>>>>>> 7def4dbffb9783ceda45eccbb1b5c2d772b39176
 
 def book_home_service(request):
     if request.method == 'POST':
@@ -415,11 +405,7 @@ def book_home_service(request):
         service.save()
 
         # Redirect to a success page or any other desired page after saving
-<<<<<<< HEAD
-        return HttpResponseRedirect('gethomeservice')  # Redirect to a success page
-=======
         return render(request, 'homeService.html')   # Redirect to a success page
->>>>>>> 7def4dbffb9783ceda45eccbb1b5c2d772b39176
 
     return render(request, 'homeService.html') 
 
@@ -432,43 +418,4 @@ def homeservicepannel(request):
         }
         return render(request, 'homeservicepannel.html', context)
   else:
-<<<<<<< HEAD
         return HttpResponse('Invalid request or empty contact field')
-  
-#   ================================================srijan
-def test(request):
-    if request.method == 'POST':
-        patient_Name = request.POST.get('patient_Name', '')
-        contact = request.POST.get('contact', '')
-
-        print(f"Patient Name: {patient_Name}, Contact: {contact}")
-
-        if contact:
-            report_data = Report.objects.filter(patient_Name=patient_Name, contact=contact).first()
-            report_detail_data = Report_Detail.objects.filter(report_id=report_data.id)
-            print(report_data)
-
-            if report_data is not None:
-                print("Data found")
-            else:
-                print("No data found")
-
-            context = {
-                'report_data': report_data,
-                'report_detail_data': report_detail_data,
-            }
-            print(f"Method: {request.method}")
-            print(f"Contact: {contact}")
-
-            return render(request, 'test.html', context)
-
-        return HttpResponse('Invalid request or empty contact field')
-
-def userlogin(request):
-    return render(request,'userlogin.html')
-
-def diagnostic(request):
-    return render(request,'diagnostic.html')
-=======
-        return HttpResponse('Invalid request or empty contact field')
->>>>>>> 7def4dbffb9783ceda45eccbb1b5c2d772b39176

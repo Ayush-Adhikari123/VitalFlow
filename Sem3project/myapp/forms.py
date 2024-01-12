@@ -9,14 +9,6 @@ class Report_DetailForm(forms.ModelForm):
 
         # fields=['test_list']# Include all fields or specify the fields you need
 
-<<<<<<< HEAD
-class PatientForm(forms.Form):
-
-    patient_Name = forms.CharField(max_length=255)
-    contact = forms.CharField(max_length=15)
-=======
-
->>>>>>> 7def4dbffb9783ceda45eccbb1b5c2d772b39176
 # =============================================suvam ko part
 
 from django.contrib.auth.forms import UserChangeForm
