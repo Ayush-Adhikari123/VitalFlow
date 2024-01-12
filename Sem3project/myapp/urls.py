@@ -37,7 +37,11 @@ urlpatterns = [
    path('password-reset-confirm/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(template_name='newpassword.html'),name='password_reset_confirm'),
    
 
-   path('book', views.book_home_service, name='book_service'),
+
+path("updatereport/<str:contact>/",views.updatereport,name='updatereport'),
+path("gethomeservice",views.book_service,name='updatereport'),
+path('book', views.book_home_service, name='book_service'),
+
    path("homeservicepannel",views.homeservicepannel,name='homeservicepannel'),
    path("userlogin",views.userlogin,name='userlogin'),
    path('test',views.test, name='test'),
