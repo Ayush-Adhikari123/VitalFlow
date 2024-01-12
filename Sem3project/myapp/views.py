@@ -1,12 +1,18 @@
 
 
-# views.py
+
 from django.shortcuts import render,HttpResponse
 from myapp.models import Report,Report_Detail,technicianlogin,TechAdd,homeservice
 from .forms import Report_DetailForm  # Import the Report_DetailForm
+
 import json
+
 from django.http import HttpResponseRedirect, JsonResponse
-from django.shortcuts import get_object_or_404
+from django.shortcuts import HttpResponse, get_object_or_404, render
+from myapp.models import Report, Report_Detail, homeservice, technicianlogin
+
+from .forms import Report_DetailForm  # Import the Report_DetailForm
+
 
 def index(request):
     context ={
@@ -167,10 +173,15 @@ def adminlogin(request):
 
 # =====================================================================================
 
-from django.contrib.auth.forms import AuthenticationForm,PasswordChangeForm,SetPasswordForm,UserChangeForm
-from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
-from django.contrib  import  messages
+from django.contrib import messages
+from django.contrib.auth import (authenticate, login, logout,
+                                 update_session_auth_hash)
+from django.contrib.auth.forms import (AuthenticationForm, PasswordChangeForm,
+                                       SetPasswordForm, UserChangeForm)
+
 from .forms import EditadminprofileForm, EditsuperadminprofileForm
+
+
 # login function for admin
 def admin_login(request):
   if not request.user.is_authenticated:
@@ -291,6 +302,11 @@ def techlogin(request):
     else:
         return render(request,'techlogin.html')
     
+
+
+def book_service(request):
+    return render(request,'homeService.html')
+
 # ================================================================= tech profile
 def techprofile(request):
       if request.method == "POST":
@@ -381,6 +397,8 @@ def techpannel(request):
         return HttpResponse('Invalid request or empty contact field')
     
 
+
+
 def book_home_service(request):
     if request.method == 'POST':
         # Get form data from POST request
@@ -405,9 +423,14 @@ def book_home_service(request):
         service.save()
 
         # Redirect to a success page or any other desired page after saving
-        return render(request, 'homeService.html')   # Redirect to a success page
+
+        return HttpResponseRedirect('gethomeservice')  # Redirect to a success page
 
     return render(request, 'homeService.html') 
+
+       
+
+    
 
 def homeservicepannel(request):
   
@@ -419,3 +442,39 @@ def homeservicepannel(request):
         return render(request, 'homeservicepannel.html', context)
   else:
         return HttpResponse('Invalid request or empty contact field')
+  
+#   ================================================srijan
+def test(request):
+    if request.method == 'POST':
+        patient_Name = request.POST.get('patient_Name', '')
+        contact = request.POST.get('contact', '')
+
+        print(f"Patient Name: {patient_Name}, Contact: {contact}")
+
+        if contact:
+            report_data = Report.objects.filter(patient_Name=patient_Name, contact=contact).first()
+            report_detail_data = Report_Detail.objects.filter(report_id=report_data.id)
+            print(report_data)
+
+            if report_data is not None:
+                print("Data found")
+            else:
+                print("No data found")
+
+            context = {
+                'report_data': report_data,
+                'report_detail_data': report_detail_data,
+            }
+            print(f"Method: {request.method}")
+            print(f"Contact: {contact}")
+
+            return render(request, 'test.html', context)
+
+        return HttpResponse('Invalid request or empty contact field')
+
+def userlogin(request):
+    return render(request,'userlogin.html')
+
+def diagnostic(request):
+    return render(request,'diagnostic.html')
+
