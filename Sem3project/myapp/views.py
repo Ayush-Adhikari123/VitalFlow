@@ -3,9 +3,11 @@
 
 import json
 
-from django.core.mail import send_mail
+from django.core.mail import EmailMultiAlternatives, send_mail
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import HttpResponse, get_object_or_404, render
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 from myapp.models import (Report, Report_Detail, TechAdd, homeservice,
                           technicianlogin)
@@ -459,22 +461,36 @@ def update_done_status(request, service_id):
         lng = hmservice.longitude
         location = hmservice.location
         discription = hmservice.discription
+
         #for sending the mail
+
+        
+
+
         email_subject = 'New Home Service'
-        email_message = f"Full Name:   {full_name}\nEmail:   {email}\nContact No. :   {contact}\nLocation:   {lat} , {lng}   ({location})\nDiscription:   {discription}"
+        html_message = render_to_string('servicelocation.html', {
+            'full_name': full_name,
+            'email': email,
+            'contact': contact,
+            'discription': discription,
+            'lat':lat,
+            'lng':lng,
+            
+        })
+        email_message = strip_tags(html_message)
         sender_email = 'vitalflow33@gmail.com'
         recipient_email = 'ayushadhikari64209@gmail.com'
 
-        send_mail(
+        email = EmailMultiAlternatives(
             email_subject,
             email_message,
             sender_email,
-            [recipient_email],
-            fail_silently=False,
+            [recipient_email]
         )
+        
 
-
-
+        email.attach_alternative(html_message,"text/html")
+        email.send()
 
         return render(request,'homeservicepannel.html')
 
