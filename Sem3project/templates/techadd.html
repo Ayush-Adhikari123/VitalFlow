@@ -1,23 +1,44 @@
+{% extends "admincore.html" %}
+{% block navbody %}
+<div class="top-buttons">
+    <a href="/homeservicepannel"> <button class="btn btn-primary with-icon-idk"></button></a>
+</div>
+<div class="top-buttons">
+    <a href=""> <button class="btn btn-primary with-icon-feedback"></button></a>
+</div>
+<div class="top-buttons">
+    <a href=""> <button class="btn btn-primary with-icon-addtech"></button></a>
+</div>
+<div class="top-buttons">
+    <button class="btn btn-primary with-icon-profile"></button>
+</div>
+<div class="top-buttons">
+    <button class="btn btn-primary with-icon-logout" onclick="showLoadingScreen()"></button>
+</div>
 
+<!-- <div class="loading-screen" id="loadingScreen">
+    <img src="/static/images/loding.gif" alt="">
+</div> -->
+{% endblock navbody %}
+{% block body %}
+<link rel="stylesheet" href="/static/css/homeservicepannel.css">
 
-<!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration</title>
-    <link rel="stylesheet" href="/static/techadd.css">
+    {% comment %} <link rel="stylesheet" href="/static/techadd.css"> {% endcomment %}
 </head>
 <body>
 
-<div class="header">
+{% comment %} <div class="header">
     <div class="logo">
         <img src="/static/images/Logo.png" alt="Header Image">
     </div>
     <div class="company-name">
         <h1>Vital Flow Blood-Lab</h1>
     </div>
-</div>
+</div> {% endcomment %}
 
 <div class="register-container">
     <h2>User Registration</h2>
@@ -74,4 +95,4 @@
 </script> {% endcomment %}
 
 </body>
-</html>
+{% endblock body %}

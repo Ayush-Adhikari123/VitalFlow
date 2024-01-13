@@ -1,10 +1,16 @@
 
 
 
+from django.shortcuts import render,HttpResponse
+from myapp.models import Report,Report_Detail,technicianlogin,TechAdd,homeservice,Contact
+from .forms import Report_DetailForm  # Import the Report_DetailForm
+
+
 import json
 
 from django.core.mail import EmailMultiAlternatives, send_mail
 from django.http import HttpResponseRedirect, JsonResponse
+
 from django.shortcuts import HttpResponse, get_object_or_404, render
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
@@ -13,6 +19,10 @@ from myapp.models import (Report, Report_Detail, TechAdd, homeservice,
                           technicianlogin)
 
 from .forms import Report_DetailForm
+
+from django.shortcuts import get_object_or_404
+from django.core.mail import send_mail
+from django.views.decorators.csrf import csrf_exempt
 
 
 def index(request):
@@ -46,7 +56,44 @@ def about(request):
     return HttpResponse("This is About Page")
 
 def contact(request):
-    return HttpResponse("This is Contact Page")
+
+     if request.method == 'POST':
+        full_name = request.POST.get('full_name')
+        email = request.POST.get('email')
+        contact = request.POST.get('contact')
+        message = request.POST.get('message')
+        
+        new_contact = Contact(
+                full_name=full_name,
+                email=email,
+                contact=contact,
+                message=message
+            )
+        new_contact.save()
+        
+        email_subject = 'New Contact Form Submission'
+        email_message = f"Full Name: {full_name}\nEmail: {email}\nContact No.: {contact}\nMessage: {message}\nFor the Complete detail Click on the link>: http://127.0.0.1:8000/contactpannel"
+        sender_email = 'rujanbhetwal65.com'  # Replace with your email
+        recipient_email = 'vitalflow33@gmail.com'
+
+        send_mail(
+            email_subject,
+            email_message,
+            sender_email,
+            [recipient_email],
+            fail_silently=False,
+        )
+
+        success_message = "Data saved successfully in the database!"
+        
+        
+
+        # Returning the success message as an HTTP response
+        return HttpResponse(success_message)
+            # return render(request, 'homeService.html') 
+     else:       
+        return render(request,'contactus.html')
+
 
 def adminprofile(request):
     return render(request,'adminprofile.html')
@@ -142,7 +189,6 @@ def createreport(request):
                     unit = subtest['unit']
 
                     new_report_detail = Report_Detail(
-                        report=new_report,
                         test_list=test_dropdown,
                         investigation=text,
                         results=result,
@@ -547,3 +593,23 @@ def userlogin(request):
 def diagnostic(request):
     return render(request,'diagnostic.html')
 
+
+
+def contactpannel(request):
+  
+  if request.method == 'GET':
+        contact_data = Contact.objects.all()  # Fetch all data from TechAdd model
+        context = {
+            'contact_data': contact_data,
+        }
+        return render(request, 'contactpannel.html', context)
+  else:
+        return HttpResponse('Invalid request or empty contact field')
+    
+def delete_record(request, record_id):
+    if request.method == 'POST':
+        record = get_object_or_404(Contact, pk=record_id)
+        record.delete()
+        return JsonResponse({'message': 'Record deleted successfully'}, status=200)
+    else:
+        return JsonResponse({'error': 'Invalid request'}, status=400)

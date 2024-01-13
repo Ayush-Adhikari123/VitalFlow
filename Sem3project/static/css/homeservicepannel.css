@@ -79,7 +79,9 @@
         justify-content: center;
         align-items: center;
         z-index: 9999;
-        
+
+        display: none; /* Initially hide the loading screen */
+
       }
 
 /* ======================================================================== */
@@ -89,16 +91,33 @@ body {
 }
 
 
+form {
+    max-width: 100%;
+    padding: 20px;
+    position: relative;
+}
+
+label {
+    display: block;
+}
 
 
 input {
     width: 100%;
     padding: 8px;
+
     margin-bottom: 5px;
+
     box-sizing: border-box;
     border-radius: 15px;
 }
 
+
+input[type="submit"] {
+    background-color: #4caf50;
+    color: white;
+    cursor: pointer;
+}
 
 
 a {
@@ -160,6 +179,7 @@ a {
   }
 
   .update-button{
+
     max-width: 300px;
     
   }
@@ -177,3 +197,6 @@ a {
     display: block;
     max-height: 500px;
 }
+
+
+

@@ -48,10 +48,12 @@ class homeservice(models.Model):
     location = models.CharField(max_length=250)
     discription = models.CharField(max_length=600)
 
-
     done = models.BooleanField(default=False)
 
-
-
-
+    
+class Contact(models.Model):
+    full_name =models.CharField( max_length=50)   
+    email =models.EmailField(null=True)
+    contact =models.IntegerField( )      
+    message =models.CharField( max_length=500)
 
