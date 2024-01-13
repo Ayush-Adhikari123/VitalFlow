@@ -1,10 +1,9 @@
 # urls.py
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
 from django.urls import path
+
 from myapp import views
-
-from django.contrib.auth import views as auth_views 
-
 
 urlpatterns = [
    path("",views.index,name='myapp'),
@@ -43,9 +42,14 @@ path("gethomeservice",views.book_service,name='updatereport'),
 path('book', views.book_home_service, name='book_service'),
 
    path("homeservicepannel",views.homeservicepannel,name='homeservicepannel'),
+   path('update_done_status/<int:service_id>/<str:tempmail>/', views.update_done_status, name='update_done_status'),
+   path('delete_service/<int:service_id>/', views.delete_service, name='delete_service'),
+
    path("userlogin",views.userlogin,name='userlogin'),
    path('test',views.test, name='test'),
+
    path('diagnostic',views.diagnostic, name='diagnostic'),
    path("contactpannel",views.contactpannel,name='contactpannel'),
    path('delete/<int:record_id>/', views.delete_record, name='delete_record'),
  ]
+
