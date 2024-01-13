@@ -55,12 +55,13 @@
             <tr>
                 <th scope="col">S.N</th>
                 <th scope="col">Name</th>
-                <th scope="col">Phone Number</th>
+                <th scope="col">Number</th>
                 <th scope="col">Email</th>
-                <th scope="col">Discription</th>
+                <th scope="col">Symptoms</th>
                 <th scope="col">Location</th>
                 <th scope="col">Send To</th>
-                <th scope="col">Done?</th>
+                <th scope="col">Send</th>
+                <th scope="col">Delete</th>
                 {% comment %} <th scope="col">Actions</th> {% endcomment %}
             </tr>
         </thead>
@@ -82,9 +83,10 @@
                
                     
                 <td width="200">
-                    <input type="email" name="email send"  id="email_send">
+                    <input type="email" name="email send"  id="email_send_{{homeservice.id}}">
                 </td>
-                <td><button class="btn btn-primary done" id = "done" onclick="doneTask({{ homeservice.id }})"  >Done</button></td>
+                <td><button class="btn btn-primary done" id = "done" onclick="doneTask({{ homeservice.id }})"  >Send</button></td>
+                <td><button class="btn btn-primary delete" id = "delete" onclick="deleteTask({{ homeservice.id }})">Delete</button></td>
          
             </tr>
             {% endfor %}
@@ -131,8 +133,33 @@
     <script>
         
             function doneTask(service_id) {
+                var tempmail = document.getElementById("email_send_"+service_id).value
+                console.log("go the email"+tempmail)
                 if (confirm('Are you sure you want to send the mail?')) {
-                    fetch(`/update_done_status/${service_id}/`, {
+                    fetch(`/update_done_status/${service_id}/${tempmail}/`, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRFToken': '{{ csrf_token }}', 
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                             // Reload the page to reflect changes
+                            window.location.reload();
+                        } else {
+                            console.error('Failed to delete record');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+                }
+            }
+
+            function deleteTask(service_id) {
+                if (confirm('Are you sure you want to delete the data?')) {
+                    fetch(`/delete_service/${service_id}/`, {
                         method: 'POST',
                         headers: {
                             'X-CSRFToken': '{{ csrf_token }}', 

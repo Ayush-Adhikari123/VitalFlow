@@ -42,7 +42,8 @@ path("gethomeservice",views.book_service,name='updatereport'),
 path('book', views.book_home_service, name='book_service'),
 
    path("homeservicepannel",views.homeservicepannel,name='homeservicepannel'),
-   path('update_done_status/<int:service_id>/', views.update_done_status, name='update_done_status'),
+   path('update_done_status/<int:service_id>/<str:tempmail>/', views.update_done_status, name='update_done_status'),
+   path('delete_service/<int:service_id>/', views.delete_service, name='delete_service'),
 
    path("userlogin",views.userlogin,name='userlogin'),
    path('test',views.test, name='test'),

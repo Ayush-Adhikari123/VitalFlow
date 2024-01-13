@@ -448,7 +448,7 @@ def homeservicepannel(request):
   
 
 
-def update_done_status(request, service_id):
+def update_done_status(request, service_id,tempmail):
     if request.method == 'POST':
         hmservice = homeservice.objects.get(id=service_id)
         hmservice.done = 1  # Update the 'done' status to 1
@@ -473,13 +473,14 @@ def update_done_status(request, service_id):
             'email': email,
             'contact': contact,
             'discription': discription,
+            'location': location,
             'lat':lat,
             'lng':lng,
             
         })
         email_message = strip_tags(html_message)
         sender_email = 'vitalflow33@gmail.com'
-        recipient_email = 'ayushadhikari64209@gmail.com'
+        recipient_email = tempmail
 
         email = EmailMultiAlternatives(
             email_subject,
@@ -495,6 +496,21 @@ def update_done_status(request, service_id):
         return render(request,'homeservicepannel.html')
 
     return JsonResponse({'message': 'Invalid request method'}, status=405)
+
+
+def delete_service(request, service_id):
+    if request.method == 'POST':
+        hmservice = homeservice.objects.get(id=service_id)
+        hmservice.delete()
+
+        return render(request,'homeservicepannel.html')
+
+    return JsonResponse({'message': 'Invalid request method'}, status=405)
+
+
+
+       
+
 
 #   ================================================srijan
 def test(request):
