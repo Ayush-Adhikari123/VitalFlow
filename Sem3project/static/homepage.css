@@ -1,0 +1,193 @@
+/* Custom CSS for spacing */
+.navbar {
+  background-color: #00a2e8 !important; /* Changing the background color */
+}
+.navbar .dropdown-menu {
+  background-color: #00a2e8 !important;
+}
+.navbar-inquiry {
+  font-size: 1.1rem; /* Increasing the font size */
+  margin-left: 30px;
+}
+.btn-Login {
+  justify-content: center;
+  background-color: #1e62d8 !important;
+  border: none;
+  border-radius: 8px; /* Adjust the border-radius to your preference */
+  cursor: pointer;
+  padding: 8px 16px; /* Adjust the padding to reduce the size */
+  font-size: 14px; /* Adjust the font size **/
+  margin-left: 300px;
+  font-weight: bold; /* Adjust the margin */
+}
+
+.navbar-brand {
+  color: #8a3030;
+  font-weight: bold;
+  font-size: 2rem; /* Increasing the font size */
+  margin-left: 30px;
+  margin-right: 100px; /* Adjust the margin value as needed */
+}
+/* Adjusting the width of the search input */
+.form-control {
+  width: 350px; /* Change the width as per your requirement */
+}
+
+/* #carouselExampleCaptions .carousel-caption {
+        text-align: left;
+      } */
+/* .dropdown-menu {
+        background-color: #00A2E8 !important;
+      } */
+
+.class1 {
+  background-color: #ffffff;
+  box-shadow: 6px 6px 10px #555;
+  border: 3px solid transparent;
+  padding: 12px 5px 2px 5px;
+  border-radius: 25px;
+  justify-content: center;
+}
+
+.class2 {
+  background-color: #ffffff;
+  box-shadow: 6px 6px 10px #555;
+  border: 3px solid transparent;
+  padding: 10px 5px 2px 5px;
+  border-radius: 25px;
+  justify-content: center;
+}
+.class3 {
+  background-color: #ffffff;
+  box-shadow: 6px 6px 10px #555;
+  border: 3px solid transparent;
+  padding: 8px 5px 2px 5px;
+  border-radius: 25px;
+  justify-content: center;
+}
+.class4 {
+  background-color: #ffffff;
+  box-shadow: 6px 6px 10px #555;
+  border: 3px solid transparent;
+  padding: 8px 5px 2px 5px;
+  border-radius: 25px;
+  justify-content: center;
+}
+
+.class5 {
+  background-color: #ffffff;
+  box-shadow: 6px 6px 10px #555;
+  border: 3px solid transparent;
+  padding: 8px 5px 2px 5px;
+  border-radius: 25px;
+  justify-content: center;
+}
+.class2:hover,
+.class3:hover,
+.class4:hover,
+.class5:hover,
+.class1:hover {
+  transform: scale(1.3);
+  z-index: 2;
+}
+.carousel-caption {
+  position: static;
+}
+/* ----------------PRADIP KO PART======= */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  /* margin: 10px; */
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  height: 100vh;
+  position: relative;
+}
+
+.login-container {
+  background-color: #ebebeb;
+  padding: 0px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 750px;
+  width: 160%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.login-container2 {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  width: 100%;
+  position: relative;
+  margin-top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  margin-bottom: 20px;
+  background-color: #6290e8; /* Equal color on both sides */
+}
+
+.logo img {
+  width: 100px;
+  height: auto;
+}
+
+.company-name h1 {
+  color: #fff;
+  text-align: center;
+  margin: 0;
+}
+
+.form-group {
+  margin-bottom: 25px;
+}
+
+label {
+  display: block;
+  margin-bottom: 20px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.login-button,
+.back-button {
+  background-color: #8f94fd;
+  color: #fff;
+  padding: 10px 240px;
+  border: 20px;
+  border-radius: 20px;
+  cursor: pointer;
+
+  margin: 4px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-title {
+  text-align: center;
+  margin: 0;
+  font-weight: bold;
+}
