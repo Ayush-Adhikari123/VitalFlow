@@ -51,5 +51,7 @@ path('book', views.book_home_service, name='book_service'),
    path('diagnostic',views.diagnostic, name='diagnostic'),
    path("contactpannel",views.contactpannel,name='contactpannel'),
    path('delete/<int:record_id>/', views.delete_record, name='delete_record'),
+
+   path('feedbackpannel',views.fdback, name='feedback'),
  ]
 

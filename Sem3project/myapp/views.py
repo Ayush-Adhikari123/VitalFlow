@@ -1,28 +1,19 @@
 
 
 
-from django.shortcuts import render,HttpResponse
-from myapp.models import Report,Report_Detail,technicianlogin,TechAdd,homeservice,Contact
-from .forms import Report_DetailForm  # Import the Report_DetailForm
-
-
 import json
 
 from django.core.mail import EmailMultiAlternatives, send_mail
 from django.http import HttpResponseRedirect, JsonResponse
-
 from django.shortcuts import HttpResponse, get_object_or_404, render
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
+from django.views.decorators.csrf import csrf_exempt
 
-from myapp.models import (Report, Report_Detail, TechAdd, homeservice,
+from myapp.models import (Contact, Report, Report_Detail, TechAdd, homeservice,
                           technicianlogin)
 
-from .forms import Report_DetailForm
-
-from django.shortcuts import get_object_or_404
-from django.core.mail import send_mail
-from django.views.decorators.csrf import csrf_exempt
+from .forms import Report_DetailForm  # Import the Report_DetailForm
 
 
 def index(request):
@@ -613,3 +604,6 @@ def delete_record(request, record_id):
         return JsonResponse({'message': 'Record deleted successfully'}, status=200)
     else:
         return JsonResponse({'error': 'Invalid request'}, status=400)
+
+def fdback(request):
+    return render(request,'feedbackadmin.html')

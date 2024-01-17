@@ -1,0 +1,86 @@
+{% extends "admincore.html" %}
+{% block navbody %}
+<div class="top-buttons">
+    <a href="/homeservicepannel"> <button class="btn btn-primary with-icon-idk"></button></a>
+</div>
+<div class="top-buttons">
+    <a href=""> <button class="btn btn-primary with-icon-feedback"></button></a>
+</div>
+<div class="top-buttons">
+    <a href=""> <button class="btn btn-primary with-icon-addtech"></button></a>
+</div>
+<div class="top-buttons">
+    <button class="btn btn-primary with-icon-profile"></button>
+</div>
+<div class="top-buttons">
+    <button class="btn btn-primary with-icon-logout" onclick="showLoadingScreen()"></button>
+</div>
+
+<!-- <div class="loading-screen" id="loadingScreen">
+    <img src="/static/images/loding.gif" alt="">
+</div> -->
+{% endblock navbody %}
+{% block body %}
+<link rel="stylesheet" href="/static/css/homeservicepannel.css">
+
+<head>
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>VitalFlow</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/techpannel.css" />-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <style>
+        #map {
+            height: 400px;
+        }
+        .map-container {
+            height: 200px; /* Set a fixed height for the map container */
+        }
+
+        
+    </style>
+</head>
+
+<body>
+
+
+    <table class="table table-striped mt-5" id="table">
+        <thead>
+            <tr>
+                <th scope="col">S.N</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col" width=800px>Feedback</th>
+                {% comment %} <th scope="col">Delete</th> {% endcomment %}
+                
+                
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Ram</td>
+                <td>ram@gmail.com</td>
+                <td>the staff here is very friendly</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Shyam</td>
+                <td>shyam@gmail.com</td>
+                <td>You can find well trained professionals here. I strongly suggest that you visit</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+
+
+</body>
+{% endblock body %}
