@@ -208,5 +208,14 @@ a {
     vertical-align: top;
   } */
 
+  .delete{
+    background-color: red;
+    border-color: red;
+  }
+
+  .delete:hover{
+    background-color: crimson;
+  }
+
 
 

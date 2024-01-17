@@ -61,6 +61,7 @@
                 <th scope="col">Location</th>
                 <th scope="col">Send To</th>
                 <th scope="col">Done?</th>
+                <th scope="col">Delete</th>
                 {% comment %} <th scope="col">Actions</th> {% endcomment %}
             </tr>
         </thead>
@@ -86,6 +87,7 @@
 
                 </td>
                 <td><button class="btn btn-primary done" onclick="doneTask({{ homeservice.id }})">Done</button></td>
+                <td><button class="btn btn-primary delete" id = "delete" onclick="deleteTask({{ homeservice.id }})">Delete</button></td>
 
          
             </tr>
