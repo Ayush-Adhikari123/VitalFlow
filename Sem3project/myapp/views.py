@@ -1,16 +1,20 @@
 
 
 
-from django.shortcuts import render,HttpResponse
-from myapp.models import Report,Report_Detail,technicianlogin,TechAdd,homeservice,Contact
-from .forms import Report_DetailForm  # Import the Report_DetailForm
-
 import json
 
+from django.core.mail import EmailMultiAlternatives, send_mail
 from django.http import HttpResponseRedirect, JsonResponse
-from django.shortcuts import get_object_or_404
-from django.core.mail import send_mail
+from django.shortcuts import HttpResponse, get_object_or_404, render
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 from django.views.decorators.csrf import csrf_exempt
+
+from myapp.models import (Contact, Feedback, Report, Report_Detail, TechAdd,
+                          homeservice, technicianlogin)
+
+from .forms import Report_DetailForm  # Import the Report_DetailForm
+
 
 def index(request):
     context ={
@@ -37,7 +41,7 @@ def package(request):
     return HttpResponse("This is Package Page")
 
 def feedback(request):
-    return HttpResponse("This is Feedback Page")
+    return render(request,'feedback.html')
 
 def about(request):
     return HttpResponse("This is About Page")
@@ -468,16 +472,83 @@ def book_home_service(request):
     
 
 def homeservicepannel(request):
-  
-  if request.method == 'GET':
-        homeservice_data = homeservice.objects.all()  # Fetch all data from TechAdd model
+    if request.method == 'GET':
+        # Filter the data where 'done_column' is 0
+        homeservice_data = homeservice.objects.filter(done=0)
+        
         context = {
             'homeservice_data': homeservice_data,
         }
         return render(request, 'homeservicepannel.html', context)
-  else:
+    else:
         return HttpResponse('Invalid request or empty contact field')
   
+
+
+def update_done_status(request, service_id,tempmail):
+    if request.method == 'POST':
+        hmservice = homeservice.objects.get(id=service_id)
+        hmservice.done = 1  # Update the 'done' status to 1
+        hmservice.save()
+
+        full_name = hmservice.Name
+        email = hmservice.Email
+        contact = hmservice.Phonenumber
+        lat = hmservice.latitude
+        lng = hmservice.longitude
+        location = hmservice.location
+        discription = hmservice.discription
+
+        #for sending the mail
+
+        
+
+
+        email_subject = 'New Home Service'
+        html_message = render_to_string('servicelocation.html', {
+            'full_name': full_name,
+            'email': email,
+            'contact': contact,
+            'discription': discription,
+            'location': location,
+            'lat':lat,
+            'lng':lng,
+            
+        })
+        email_message = strip_tags(html_message)
+        sender_email = 'vitalflow33@gmail.com'
+        recipient_email = tempmail
+
+        email = EmailMultiAlternatives(
+            email_subject,
+            email_message,
+            sender_email,
+            [recipient_email]
+        )
+        
+
+        email.attach_alternative(html_message,"text/html")
+        email.send()
+
+        return render(request,'homeservicepannel.html')
+
+    return JsonResponse({'message': 'Invalid request method'}, status=405)
+
+
+def delete_service(request, service_id):
+    if request.method == 'POST':
+        hmservice = homeservice.objects.get(id=service_id)
+        hmservice.delete()
+
+        return render(request,'homeservicepannel.html')
+
+    return JsonResponse({'message': 'Invalid request method'}, status=405)
+
+
+
+       
+
+
 #   ================================================srijan
 def test(request):
     if request.method == 'POST':
@@ -533,3 +604,29 @@ def delete_record(request, record_id):
         return JsonResponse({'message': 'Record deleted successfully'}, status=200)
     else:
         return JsonResponse({'error': 'Invalid request'}, status=400)
+
+
+
+
+def feedbackpannel(request):
+    if request.method == 'GET':
+        
+        feedback_data = Feedback.objects.filter(show=1)
+        
+        context = {
+            'feedback_data': feedback_data,
+        }
+
+        return render(request, 'feedbackadmin.html', context)
+    else:
+        return HttpResponse('Invalid request or empty contact field')
+    
+
+def delete_feed(request, feed_id):
+    if request.method == 'POST':
+        feed = Feedback.objects.get(id=feed_id)
+        feed.delete()
+
+        return render(request,'feedbackadmin.html')
+
+    return JsonResponse({'message': 'Invalid request method'}, status=405)
