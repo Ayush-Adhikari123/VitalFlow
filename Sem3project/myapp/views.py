@@ -10,8 +10,8 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.views.decorators.csrf import csrf_exempt
 
-from myapp.models import (Contact, Report, Report_Detail, TechAdd, homeservice,
-                          technicianlogin)
+from myapp.models import (Contact, Feedback, Report, Report_Detail, TechAdd,
+                          homeservice, technicianlogin)
 
 from .forms import Report_DetailForm  # Import the Report_DetailForm
 
@@ -605,5 +605,19 @@ def delete_record(request, record_id):
     else:
         return JsonResponse({'error': 'Invalid request'}, status=400)
 
-def fdback(request):
-    return render(request,'feedbackadmin.html')
+
+
+
+def feedbackpannel(request):
+    if request.method == 'GET':
+        
+        feedback_data = Feedback.objects.filter(show=1)
+        
+        context = {
+            'feedback_data': feedback_data,
+        }
+
+        print(context)
+        return render(request, 'feedbackadmin.html', context)
+    else:
+        return HttpResponse('Invalid request or empty contact field')

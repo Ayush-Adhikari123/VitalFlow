@@ -7,7 +7,7 @@
     <a href=""> <button class="btn btn-primary with-icon-feedback"></button></a>
 </div>
 <div class="top-buttons">
-    <a href=""> <button class="btn btn-primary with-icon-addtech"></button></a>
+    <a href="techadd"> <button class="btn btn-primary with-icon-addtech"></button></a>
 </div>
 <div class="top-buttons">
     <button class="btn btn-primary with-icon-profile"></button>
@@ -63,20 +63,20 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Ram</td>
-                <td>ram@gmail.com</td>
-                <td>the staff here is very friendly</td>
+            
+
+
+
+
+            {% for feedback  in feedback_data %}
+            <tr class="no-click">
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ feedback.name }}</td>
+                <td>{{ feedback.email }}</td>
+                <td width="200">{{ feedback.message }}</td>
                 <td><button class="btn btn-primary delete" id = "delete" onclick="">Delete</button></td>
             </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Shyam</td>
-                <td>shyam@gmail.com</td>
-                <td>You can find well trained professionals here. I strongly suggest that you visit</td>
-                <td><button class="btn btn-primary delete" id = "delete" onclick="">Delete</button></td>
-            </tr>
+            {% endfor %}
         </tbody>
     </table>
 
