@@ -82,18 +82,26 @@
     <script>
 
         function deleteFeedback(feedId) {
-            
-            
-        
-            
-                fetch(`/delete_feed/${feedId}/`, {
+          if (confirm('Are you sure you want to delete this record?')) {
+                fetch(`/delete/${recordId}/`, {
                     method: 'POST',
                     headers: {
-                        'X-CSRFToken': '{{ csrf_token }}',
+                        'X-CSRFToken': '{{ csrf_token }}', // Include CSRF token
                         'Content-Type': 'application/json'
-                    
-                }
-            })
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // If deletion is successful, reload the page or update UI as needed
+                        window.location.reload(); // Reload the page to reflect changes
+                    } else {
+                        console.error('Failed to delete record');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
 
         }
             
