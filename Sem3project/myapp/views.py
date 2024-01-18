@@ -617,7 +617,16 @@ def feedbackpannel(request):
             'feedback_data': feedback_data,
         }
 
-        print(context)
         return render(request, 'feedbackadmin.html', context)
     else:
         return HttpResponse('Invalid request or empty contact field')
+    
+
+def delete_feed(request, feed_id):
+    if request.method == 'POST':
+        feed = Feedback.objects.get(id=feed_id)
+        feed.delete()
+
+        return render(request,'feedbackadmin.html')
+
+    return JsonResponse({'message': 'Invalid request method'}, status=405)

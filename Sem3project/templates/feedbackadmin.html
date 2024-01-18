@@ -74,15 +74,29 @@
                 <td>{{ feedback.name }}</td>
                 <td>{{ feedback.email }}</td>
                 <td width="200">{{ feedback.message }}</td>
-                <td><button class="btn btn-primary delete" id = "delete" onclick="">Delete</button></td>
+                <td><button class="btn btn-primary delete" id = "delete" onclick="deleteFeedback({{ feedback.id }})">Delete</button></td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+    <script>
 
+        function deleteFeedback(feedId) {
+            
+            
+        
+            
+                fetch(`/delete_feed/${feedId}/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}',
+                        'Content-Type': 'application/json'
+                    
+                }
+            })
 
-
-
-
+        }
+            
+    </script>
 </body>
 {% endblock body %}

@@ -215,7 +215,10 @@ a {
 
   .delete:hover{
     background-color: crimson;
+    border-color: crimson;
   }
+
+  
 
 
 
