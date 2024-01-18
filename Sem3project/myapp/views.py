@@ -638,6 +638,6 @@ def delete_feed(request, feed_id):
         feed = Feedback.objects.get(id=feed_id)
         feed.delete()
 
-        return render(request,'feedbackadmin.html')
+        return JsonResponse({'message': 'Record deleted successfully'}, status=200)
 
     return JsonResponse({'message': 'Invalid request method'}, status=405)
