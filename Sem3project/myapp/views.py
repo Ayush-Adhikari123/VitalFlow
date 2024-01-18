@@ -41,6 +41,17 @@ def package(request):
     return HttpResponse("This is Package Page")
 
 def feedback(request):
+    if request.method == 'POST':
+        full_name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('feedback')
+        
+        new_feedback = Feedback(
+                name=full_name,
+                email=email,                
+                message=message
+            )
+        new_feedback.save()
     return render(request,'feedback.html')
 
 def about(request):
