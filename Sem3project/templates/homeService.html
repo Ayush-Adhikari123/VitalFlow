@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -47,6 +48,7 @@
 
 
 
+
 </head>
 <style>
   body {
@@ -63,6 +65,7 @@
     margin: auto;
   }
 </style>
+
 
 <body>
 
@@ -95,8 +98,8 @@
                         <input type="text" name="name" class="form-control" id="name" required>
                       </div>
                     </div>
-                    {% comment %} <div class="invalid-feedback">Please, enter your name!</div> {% endcomment %}
-
+                       {% comment %} <div class="invalid-feedback">Please, enter your name!</div>  {% endcomment %}
+                    
 
                     <div class="col-12" style="display:flex; justify-content: space-between">
                       <label for="phone_number" class="form-label">Your Phone Number</label>
@@ -104,9 +107,8 @@
                         <input type="tel" name="phone_number" class="form-control" id="phone_number" required>
                       </div>
                     </div>
-                    {% comment %} <div class="invalid-feedback">Please enter a valid phone number!</div> {% endcomment
-                    %}
-
+                      {% comment %} <div class="invalid-feedback">Please enter a valid phone number!</div>  {% endcomment %}
+                    
 
                     <div class="col-12" style="display:flex; justify-content: space-between">
                       <label for="email" class="form-label">Email</label>
@@ -114,30 +116,28 @@
                         <input type="email" name="email" class="form-control" id="email" required>
                       </div>
                     </div>
-                    {% comment %} <div class="invalid-feedback">Please enter a valid email address!</div> {% endcomment
-                    %}
-
+                       {% comment %} <div class="invalid-feedback">Please enter a valid email address!</div>  {% endcomment %}
+                    
 
 
                     <!-- Hidden fields to store latitude and longitude -->
                     <input type="hidden" name="latitude" id="latitude" value="">
                     <input type="hidden" name="longitude" id="longitude" value="">
-
+                    
 
                     <div class="col-12">
 
                       <label for="location" class="form-label">Location</label>
 
                       <div id="map" style="height: 250px; width: 400px"></div>
-                      {% comment %} <div class="invalid-feedback">Please select your location</div> {% endcomment %}
+                      {% comment %} <div class="invalid-feedback">Please select your location</div>  {% endcomment %}
 
                     </div>
 
                     <div class="col-12">
                       <label for="direction" class="form-label">Directions to your house</label>
                       <textarea id="direction" name="direction" rows="4" cols="50" required></textarea><br><br>
-                      {% comment %} <div class="invalid-feedback">Please provide us with directions too</div> {%
-                      endcomment %}
+                      {% comment %} <div class="invalid-feedback">Please provide us with directions too</div> {% endcomment %}
                     </div>
 
                     <div class="col-12">
@@ -149,7 +149,7 @@
 
 
                     <div class="col-12">
-                      <button class="button" type="submit">Book</button>
+                      <button class="button"  type="submit">Book</button>
                     </div>
 
                   </form>
@@ -177,6 +177,7 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
       class="bi bi-arrow-up-short"></i></a>
 
+
   <!-- Vendor JS Files -->
   <script src="static/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -188,26 +189,26 @@
 
 
   <script>
-    (function () {
+    (function() {
       'use strict';
-
+  
       // Fetch all the forms we want to apply custom Bootstrap validation styles to
       var forms = document.querySelectorAll('.needs-validation');
-
+  
       // Loop over them and prevent submission
-      Array.prototype.slice.call(forms).forEach(function (form) {
-        form.addEventListener('submit', function (event) {
+      Array.prototype.slice.call(forms).forEach(function(form ) {
+        form.addEventListener('submit', function(event)  {
           if (!form.checkValidity()) {
             event.preventDefault();
             event.stopPropagation();
           }
-
+  
           form.classList.add('was-validated');
         }, false);
       });
     });
   </script>
-
+  
 
 
 
@@ -238,6 +239,7 @@
 
     // Listen for the marker drag event to update latitude and longitude
     marker.on('dragend', function (event) {
+
       var position = marker.getLatLng();
       updateMarkerPosition(position);
     });

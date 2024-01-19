@@ -1,6 +1,7 @@
 
 
 
+
 from django.shortcuts import render,HttpResponse
 from myapp.models import Report,Report_Detail,technicianlogin,TechAdd,homeservice,Contact
 from .forms import Report_DetailForm  # Import the Report_DetailForm
@@ -14,15 +15,12 @@ from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import HttpResponse, get_object_or_404, render
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
-
-from myapp.models import (Report, Report_Detail, TechAdd, homeservice,
-                          technicianlogin)
-
-from .forms import Report_DetailForm
-
-from django.shortcuts import get_object_or_404
-from django.core.mail import send_mail
 from django.views.decorators.csrf import csrf_exempt
+
+from myapp.models import (Contact, Feedback, Report, Report_Detail, TechAdd,
+                          homeservice, technicianlogin)
+
+from .forms import Report_DetailForm  # Import the Report_DetailForm
 
 
 def index(request):
@@ -50,7 +48,18 @@ def package(request):
     return HttpResponse("This is Package Page")
 
 def feedback(request):
-    return HttpResponse("This is Feedback Page")
+    if request.method == 'POST':
+        full_name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('feedback')
+        
+        new_feedback = Feedback(
+                name=full_name,
+                email=email,                
+                message=message
+            )
+        new_feedback.save()
+    return render(request,'feedback.html')
 
 def about(request):
     return HttpResponse("This is About Page")
@@ -613,3 +622,29 @@ def delete_record(request, record_id):
         return JsonResponse({'message': 'Record deleted successfully'}, status=200)
     else:
         return JsonResponse({'error': 'Invalid request'}, status=400)
+
+
+
+
+def feedbackpannel(request):
+    if request.method == 'GET':
+        
+        feedback_data = Feedback.objects.filter(show=1)
+        
+        context = {
+            'feedback_data': feedback_data,
+        }
+
+        return render(request, 'feedbackadmin.html', context)
+    else:
+        return HttpResponse('Invalid request or empty contact field')
+    
+
+def delete_feed(request, feed_id):
+    if request.method == 'POST':
+        feed = Feedback.objects.get(id=feed_id)
+        feed.delete()
+
+        return JsonResponse({'message': 'Record deleted successfully'}, status=200)
+
+    return JsonResponse({'message': 'Invalid request method'}, status=405)
