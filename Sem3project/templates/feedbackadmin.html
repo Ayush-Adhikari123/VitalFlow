@@ -83,7 +83,7 @@
 
         function deleteFeedback(feedId) {
           if (confirm('Are you sure you want to delete this record?')) {
-                fetch(`/delete/${recordId}/`, {
+                fetch(`/delete_feed/${feedId}/`, {
                     method: 'POST',
                     headers: {
                         'X-CSRFToken': '{{ csrf_token }}', // Include CSRF token
