@@ -181,6 +181,7 @@ a {
   .update-button{
 
     max-width: 300px;
+
     
   }
 
@@ -218,7 +219,20 @@ a {
     border-color: crimson;
   }
 
-  
+  .table{
+    margin-left:auto;
+    margin-right:auto;
+    text-align:center;
+    
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+
+    overflow-y: auto;
+    display: block;
+    max-height: 500px;
+}
+
 
 
 
