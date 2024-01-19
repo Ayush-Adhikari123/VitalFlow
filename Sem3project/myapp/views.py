@@ -1,17 +1,10 @@
 
 
 
-
-from django.shortcuts import render,HttpResponse
-from myapp.models import Report,Report_Detail,technicianlogin,TechAdd,homeservice,Contact
-from .forms import Report_DetailForm  # Import the Report_DetailForm
-
-
 import json
 
 from django.core.mail import EmailMultiAlternatives, send_mail
 from django.http import HttpResponseRedirect, JsonResponse
-
 from django.shortcuts import HttpResponse, get_object_or_404, render
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
