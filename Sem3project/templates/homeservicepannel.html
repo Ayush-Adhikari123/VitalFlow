@@ -128,12 +128,10 @@
         });
     });
 
-    function doneTask(serviceId) {
-        var emailField = document.getElementById('email_send_' + serviceId);
-        var email = emailField ? emailField.value : '';
+    function deleteTask(serviceId) {
     
-        if (confirm('Are you sure you want to send the mail?')) {
-            fetch(`/update_done_status/${serviceId}/${email}/`, {
+        if (confirm('Are you sure you want to delete it?')) {
+            fetch(`/delete_service/${serviceId}/`, {
                 method: 'POST',
                 headers: {
                     'X-CSRFToken': '{{ csrf_token }}',
