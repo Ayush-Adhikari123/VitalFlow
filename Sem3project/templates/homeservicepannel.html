@@ -7,12 +7,10 @@
     <a href="/feedbackpannel"> <button class="btn btn-primary with-icon-feedback"></button></a>
 </div>
 <div class="top-buttons">
-
     <a href=""> <button class="btn btn-primary with-icon-addtech"></button></a>
 </div>
 <div class="top-buttons">
     <button class="btn btn-primary with-icon-profile"></button>
-
 </div>
 <div class="top-buttons">
     <button class="btn btn-primary with-icon-logout" onclick="showLoadingScreen()"></button>
@@ -41,7 +39,6 @@
         #map {
             height: 400px;
         }
-      
         .map-container {
             height: 200px; /* Set a fixed height for the map container */
         }
@@ -53,25 +50,18 @@
 <body>
 
 
-
     <table class="table table-striped mt-5" id="table">
-
-
         <thead>
             <tr>
                 <th scope="col">S.N</th>
                 <th scope="col">Name</th>
-
-                <th scope="col">Number</th>
+                <th scope="col">Phone Number</th>
                 <th scope="col">Email</th>
-
                 <th scope="col">Discription</th>
                 <th scope="col">Location</th>
                 <th scope="col">Send To</th>
                 <th scope="col">Done?</th>
                 <th scope="col">Delete</th>
-
-
                 {% comment %} <th scope="col">Actions</th> {% endcomment %}
             </tr>
         </thead>
@@ -82,17 +72,15 @@
                 <td>{{ homeservice.Name }}</td>
                 <td>{{ homeservice.Phonenumber }}</td>
                 <td>{{ homeservice.Email }}</td>
-
                 <td width="200">{{ homeservice.discription }}</td>
                 <td width="300">
                     <button class="btn btn-primary show-map" data-service-id="{{ homeservice.id }}">Show Map</button>
-
                     <div id="map_{{ homeservice.id }}" class="map-container" style="display: none; height: 200px;"
                         data-latitude="{{ homeservice.latitude }}" data-longitude="{{ homeservice.longitude }}"
                         data-location="{{ homeservice.location }}">
                     </div>
                 </td>
-
+               
                     
                 <td width="200">
                     <input type="email" name="email_send_{{ homeservice.id }}" id="email_send_{{ homeservice.id }}">
@@ -163,75 +151,6 @@
             .catch(error => {
                 console.error('Error:', error);
             });
-
-        });
-
-        function showLoadingScreen() {
-            document.getElementById('loadingScreen').style.display = 'flex';
-            setTimeout(function () {
-                window.location.href = '/adminlogout';
-            }, 1000);
-        }
-    </script>
-    <script>
-        
-            function doneTask(service_id) {
-                var tempmail = document.getElementById("email_send_"+service_id).value
-                console.log("go the email"+tempmail)
-                if (confirm('Are you sure you want to send the mail?')) {
-                    fetch(`/update_done_status/${service_id}/${tempmail}/`, {
-                        method: 'POST',
-                        headers: {
-                            'X-CSRFToken': '{{ csrf_token }}', 
-                            'Content-Type': 'application/json'
-                        }
-                    })
-                    .then(response => {
-                        if (response.ok) {
-                             // Reload the page to reflect changes
-                            window.location.reload();
-                        } else {
-                            console.error('Failed to delete record');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                    });
-                }
-            }
-
-            function deleteTask(service_id) {
-                if (confirm('Are you sure you want to delete the data?')) {
-                    fetch(`/delete_service/${service_id}/`, {
-                        method: 'POST',
-                        headers: {
-                            'X-CSRFToken': '{{ csrf_token }}', 
-                            'Content-Type': 'application/json'
-                        }
-                    })
-                    .then(response => {
-                        if (response.ok) {
-                             // Reload the page to reflect changes
-                            window.location.reload();
-                        } else {
-                            console.error('Failed to delete record');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                    });
-                }
-            }
-    
-            
-      
-        function myFunction() {
-            document.getElementById('foo').style.cssText = '';
-        }
-
-        function myFunction1() {
-            document.getElementById('foo').style.cssText = ' ';
-
         }
     }
     
@@ -279,8 +198,4 @@
             }
     </script>
 </body>
-
-
 {% endblock body %}
-
-
