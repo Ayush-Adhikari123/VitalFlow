@@ -15,10 +15,8 @@ from .forms import Report_DetailForm  # Import the Report_DetailForm
 
 
 def index(request):
-    context ={
-        'variable':"this is sent"
-    }
-    return render(request,'homepage.html',context)
+   
+    return render(request,'homepage.html')
 
 def about(request):
     return HttpResponse('This is my about')
