@@ -14,6 +14,8 @@
 
 
     <link rel="stylesheet" href="/static/css/homepage.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
 </head>
 
 <body>
@@ -239,6 +241,35 @@
 
         </div>
 
+    </section>
+    <section>
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+              {% for slide in feedback_detail_data %}
+                <div class="swiper-slide">
+                  {% comment %} <input type="text" id="input1_slide{{ slide.id }}" placeholder="Input 1">
+                  <input type="text" id="input2_slide{{ slide.id }}" placeholder="Input 2"> {% endcomment %}
+                  <div>{{ slide.name }}</div>
+                    <div>{{ slide.message }}</div>     
+                </div>
+              {% endfor %}
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+          </div>
+          
+          <!-- Swiper JS -->
+          <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        
+          <!-- Initialize Swiper -->
+          <script>
+            var swiper = new Swiper(".mySwiper", {
+              navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+              },
+            });
+          </script>
     </section>
 
     <section class="footer">

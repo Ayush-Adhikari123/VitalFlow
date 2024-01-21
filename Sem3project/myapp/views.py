@@ -17,9 +17,18 @@ from .forms import Report_DetailForm  # Import the Report_DetailForm
 
 
 def index(request):
-    context ={
-        'variable':"this is sent"
+    feedback_detail_data = Feedback.objects.filter(show=True)
+    print(feedback_detail_data)
+
+    if feedback_detail_data:
+        print("Data found")
+    else:
+        print("No data found")
+
+    context = {
+        'feedback_detail_data': feedback_detail_data,
     }
+    print(feedback_detail_data)
     return render(request,'homepage.html',context)
 
 def about(request):
