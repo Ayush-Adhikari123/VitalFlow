@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
-
 :root {
     --primary: skyblue;
     --secondary: #2f66d4;
@@ -55,7 +54,6 @@ section {
     text-transform: uppercase;
     font-weight: bolder;
     margin-bottom: 3rem;
-
 }
 
 .btn {
@@ -73,6 +71,7 @@ section {
     background: var(--secondary);
 }
 
+
 /* header */
 
 .header {
@@ -87,7 +86,6 @@ section {
     align-items: center;
     justify-content: space-between;
     padding: 2rem 9%;
-
 }
 
 .header .logo {
@@ -127,7 +125,9 @@ section {
     color: var(--primary);
 }
 
+
 /* header end */
+
 
 /* home */
 
@@ -159,7 +159,9 @@ section {
     padding: 1rem 0;
 }
 
+
 /* home end */
+
 
 /* about us */
 
@@ -198,7 +200,9 @@ section {
     line-height: 2;
 }
 
+
 /* about end */
+
 
 /* services */
 
@@ -241,7 +245,9 @@ section {
     line-height: 2;
 }
 
+
 /* services section ends */
+
 
 /* team section */
 
@@ -298,6 +304,7 @@ section {
     line-height: 2;
     color: var(--light-color);
 }
+
 
 /* team section ends */
 
@@ -382,7 +389,9 @@ section {
     color: var(--secondary);
 }
 
+
 /* pricing plan ends */
+
 
 /* blog */
 
@@ -462,7 +471,9 @@ section {
     line-height: 2;
 }
 
+
 /* blog ends*/
+
 
 /* contact */
 
@@ -511,7 +522,44 @@ section {
     text-transform: capitalize;
 }
 
+
 /* contact ends */
+
+
+/*feedback */
+
+
+/* body {
+      background: #eee;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color: #000;
+      margin: 0;
+      padding: 0;
+    } */
+
+.swiper {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide {
+    display: grid;
+    align-content: center;
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    justify-content: center;
+    align-items: center;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 
 /* footer */
 
@@ -538,13 +586,13 @@ section {
     line-height: 2;
     color: var(--light-color);
 }
- .footer .box-container .box a {
+
+.footer .box-container .box a {
     font-size: 1.5rem;
     padding: .5rem 0;
     line-height: 2;
     color: var(--light-color);
-} 
-
+}
 
 .footer .box-container .box .share {
     margin-top: 1rem;
@@ -595,34 +643,28 @@ section {
 
 /* footer ends */
 
+
 /* media queries */
 
 @media (max-width: 991px) {
-
     html {
         font-size: 55%;
     }
-
     .header .btn {
         display: none;
     }
-
     section {
         padding: 2rem;
     }
-
 }
 
 @media (max-width: 768px) {
-
     #menu-btn {
         display: inline-block;
     }
-
     #menu-btn.fa-times {
         transform: rotate(180deg);
     }
-
     .header .navbar {
         position: absolute;
         top: 99%;
@@ -635,51 +677,40 @@ section {
         flex-flow: column;
         clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
     }
-
     .header .navbar.active {
         clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
     }
-
     .header .navbar a {
         display: block;
         padding: 1rem 0;
         font-size: 2rem;
     }
-
     .home {
         background-position: left;
     }
-
     .home .content {
         max-width: 50rem;
         padding-left: 3rem;
     }
-
     .home .content h3 {
         font-size: 4rem;
     }
-
 }
 
 @media(max-width:450px) {
-
     html {
         font-size: 50%;
     }
-
     .home .content h3 {
         font-size: 3rem;
     }
-
 }
-
 
 
 /* -----css of logins in the bottom of the page------ */
 
 
-
- /* .box1 {
+/* .box1 {
     width: 300px;
     padding: 20px;
     margin: 0 auto;
