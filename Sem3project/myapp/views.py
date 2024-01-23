@@ -101,7 +101,22 @@ def adminprofile(request):
     return render(request,'adminprofile.html')
       
 def createreport(request):
+    patient_name = request.POST.get('name')
+    age = request.POST.get('age')
+    gender = request.POST.get('gender')
+    address = request.POST.get('address')
+    lab_no = request.POST.get('lab_no')
+    contact = request.POST.get('contact')
+    date = request.POST.get('date')
+    consultant = request.POST.get('consultant')
+    test_dropdown = request.POST.get('test_list')
+    investigation=request.POST.getlist('investigation[]')
+    result = request.POST.getlist('result[]')
+    reference=request.POST.getlist('references[]')
+    unit=request.POST.getlist('unit[]')
     
+    
+        
     options = {
         "Complete Blood Count (CBC)": [
           { "text": 'Red Blood Cell Count (RBC)', "reference": '4.5 - 5.5 million', "unit": 'cells/mcL' },
@@ -150,21 +165,13 @@ def createreport(request):
           { "text": 'Male', "reference": '3.4 - 7.0', "unit": 'mg/dL' },
           { "text": 'Female', "reference": '2.4 - 6.0', "unit": 'mg/dL' }
         ]}
-
     if request.method == 'POST':
       
-        patient_name = request.POST.get('name')
-        age = request.POST.get('age')
-        gender = request.POST.get('gender')
-        address = request.POST.get('address')
-        lab_no = request.POST.get('lab_no')
-        contact = request.POST.get('contact')
-        date = request.POST.get('date')
-        consultant = request.POST.get('consultant')
+        
 
         # Perform basic validation
-        if age.strip() == '' or not age.isnumeric():
-            return render(request, 'createReport.html', {'options': options})
+        # if age.strip() == '' or not age.isnumeric():
+        #     return render(request, 'createReport.html', {'options': options})
 
         new_report = Report(
             patient_Name=patient_name,
@@ -177,35 +184,27 @@ def createreport(request):
             consultant=consultant
         )
         new_report.save()
-      
-        test_dropdown = request.POST.get('test_list')
-        if test_dropdown:
-            
-            if test_dropdown in options:
+        
+        if test_dropdown in options:
                 subtests = options[test_dropdown]
-                for subtest in subtests:
-                    text = subtest['text']
-                    # result = request.POST.get(f'{text}_result')
-                    result ="ok"
-                    reference = subtest['reference']
-                    unit = subtest['unit']
+                for i, subtest in enumerate(subtests):
+                        investigation_value = investigation[i]
+                        result_value = result[i]
+                        reference_value = reference[i]
+                        unit_value = unit[i]
+                        youdonotneedtounderstandthis = subtest['unit']
 
-                    new_report_detail = Report_Detail(
-                        test_list=test_dropdown,
-                        investigation=text,
-                        results=result,
-                        reference_value=reference,
-                        unit=unit
-                    )
-                    new_report_detail.save()
-
-                return HttpResponse("Report created successfully")
-            else:
-                return HttpResponse("Invalid test selected. ")
-        else:
-           return HttpResponse("empty. ")
-    else:
-      form = Report_DetailForm()
+                        new_report_detail = Report_Detail(
+                                report=new_report,  # Link the Report_Detail instance to the main report
+                                test_list=test_dropdown,
+                                investigation=investigation_value,
+                                results=result_value,  # Use the current result value
+                                reference_value=reference_value,
+                                unit=unit_value
+                            )
+                        new_report_detail.save()
+    print(request.POST)
+    # return JsonResponse(data={})
     return render(request, 'createReport.html')
 
 
@@ -291,6 +290,7 @@ def admin_password(request):
   
 
   # =========================================================================================
+
 def updatereport(request,contact):
     if request.method == 'POST':
         # Retrieve the existing record from the database
@@ -301,6 +301,7 @@ def updatereport(request,contact):
         existing_report.age = request.POST.get('age')
         existing_report.gender = request.POST.get('gender')
         existing_report.address = request.POST.get('address')
+        existing_report.lab_no = request.POST.get('lab_no')
         existing_report.contact = request.POST.get('contact')
         existing_report.date = request.POST.get('date')
         existing_report.consultant = request.POST.get('consultant')
@@ -319,10 +320,23 @@ def updatereport(request,contact):
 
         # Update Report_Detail records
         for report_detail in report_details:
-            investigation_name = report_detail.investigation  # Retrieve the investigation name
+            investigation_value = request.POST.getlist('investigation[]')
+            result_value = request.POST.getlist('result[]')
+            reference_value = request.POST.getlist('references[]')
+            unit_value = request.POST.getlist('unit[]')
+            
+
+            new_report_detail = Report_Detail(
+                                report=existing_report,  # Link the Report_Detail instance to the main report
+                                investigation=investigation_value,
+                                results=result_value,  # Use the current result value
+                                reference_value=reference_value,
+                                unit=unit_value
+                            )
+            new_report_detail.save()
 
             # Get the updated result from the form using the input name
-            result = request.POST.get(f'result_{existing_report.contact}_{investigation_name.replace(" ", "_")}')
+            result = request.POST.getlist('')
 
             # Update the result in the Report_Detail model
             report_detail.results = result
@@ -331,10 +345,20 @@ def updatereport(request,contact):
             report_detail.save()
 
         return HttpResponse("Report and Report_Detail updated successfully")
-    else:
-        # Retrieve the existing Report record for rendering in the form
+    
+    
+    elif request.method == 'GET':
+        report_data = Report.objects.all()  # Fetch all data from Report model
         existing_report = get_object_or_404(Report, contact=contact)
-        return render(request, 'updateReport.html', {'report': existing_report})
+        reportdetail_data = Report_Detail.objects.filter(report=existing_report)  # Fetch all data from Report model
+        
+        context = {
+            'report_data': report_data,
+            'reportdetail_data': reportdetail_data,
+            'report': existing_report,  # Include the existing_report in the context
+        }
+        return render(request, 'updateReport.html', context)
+
     
 
 def techlogin(request):
@@ -354,8 +378,8 @@ def techlogin(request):
     
 
 
-def book_service(request):
-    return render(request,'homeService.html')
+# def book_service(request):
+#     return render(request,'homeService.html')
 
 # ================================================================= tech profile
 def techprofile(request):

@@ -69,7 +69,7 @@
 
       <div class="container-form">
         <div class="content2">
-          <form class="form" id="reportForm" action="{% url 'createreport' %}" method="post">
+          <form class="form" id="reportForm"  method="post">
             {% csrf_token %}
             <div class="label" style="font-weight: bold;">PATIENT NAME:</div>
             <input type="text" class="input" name="name" placeholder="Enter patient name">
@@ -136,6 +136,9 @@
     </div>
     </form>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  
     <script>
 
       var options = {
@@ -187,6 +190,7 @@
           { "text": 'Female', "reference": '2.4 - 6.0', "unit": 'mg/dL' }
         ]
       };
+       var selectedTestData = {}; 
 
       document.addEventListener('DOMContentLoaded', function () {
         var dropdown = document.getElementById("testDropdown");
@@ -214,6 +218,9 @@
             inputResult.setAttribute("type", "text");
             inputResult.setAttribute("name", `${subtest.text}_result`);
             inputResult.setAttribute("id", `${subtest.text}_result`);
+
+            inputResult.setAttribute("class", `test_table`);
+
             inputResult.value = "RESULT";
 
             cellResult.appendChild(inputResult);
@@ -228,9 +235,84 @@
 
 
       }
-      function clearForm() {
-        document.getElementById("reportForm").reset();
+      document.getElementById("reportForm").addEventListener("submit", function(e){
+        e.preventDefault()
+        console.log("jhgfd")
+        
+        let result = []
+        let investigation = [];
+        let references = [];
+        let unit = [];
+        let selectedTestData = [];
+        let test = document.getElementsByClassName("test_table")
+        for (let i = 0; i < test.length; i++) {
+          let test_1 = test[i];
+          result.push(test_1.value);
+      } 
+
+      let selectedTest = document.getElementById("testDropdown").value;
+      let testTableBody = document.getElementById("testTableBody");
+      if (selectedTest in options) {
+        let subtests = options[selectedTest];
+      
+        for (let i = 0; i < testTableBody.rows.length; i++) {
+          let row = testTableBody.rows[i];
+      
+          // Assuming that the first cell of the row contains the investigation text
+          let cellInvestigation = row.cells[0];
+          let investigationValue = cellInvestigation.textContent;
+          investigation.push(investigationValue);
+
+          let cellReference = row.cells[2];
+          let referenceValue = cellReference.textContent;
+          references.push(referenceValue);
+
+          let cellUnit = row.cells[3];
+          let unitValue = cellUnit.textContent;
+          unit.push(unitValue);
+        }
       }
+
+      let gender = document.querySelector('input[name="gender"]:checked')
+      const csrfToken = document.getElementsByName("csrfmiddlewaretoken")[0].value;
+
+        const formData = {
+          csrfmiddlewaretoken: csrfToken,
+
+          name: document.querySelector('input[name="name"]').value,
+          age: document.querySelector('input[name="age"]').value,
+          gender: gender?gender.value:"",
+          address: document.querySelector('input[name="address"]').value,
+          lab_no: document.querySelector('input[name="lab_no"]').value,
+          contact: document.querySelector('input[name="contact"]').value,
+          date: document.querySelector('input[name="date"]').value,
+          consultant: document.querySelector('input[name="consultant"]').value,
+          test_list: document.querySelector('select[name="test_list"]').value,
+          investigation: investigation,
+          result: result,
+          references: references,
+          unit: unit,
+          testDropdown: selectedTestData,
+      };
+      console.log(formData)
+      $.ajax({
+        url: "{% url 'createreport' %}",
+        type: "POST",
+        data: formData,
+        success: function (response) {
+            // Handle success response
+            console.log(response);
+            alert("Report created successfully!");
+        },
+        error: function (error) {
+            // Handle error response
+            console.error("Error creating report:", error);
+            alert("Error creating report. Please try again.");
+        }
+    });
+     });
+
+      
     </script>
 </body>
 

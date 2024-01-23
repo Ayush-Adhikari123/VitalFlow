@@ -39,7 +39,7 @@
         </thead>
            <tbody>
             {% for detail in contact_data %}
-            <tr class="no-click">
+             <tr class="no-click">
                 <th scope="row">{{ forloop.counter }}</th>
                 <td>{{ detail.full_name }}</td>
                 <td>{{ detail.email }}</td>
@@ -52,7 +52,7 @@
                             data-target="#exampleModalLong1">Delete</button>
                     </div>
                 <td>
-            </tr>
+            </tr> 
             {% endfor %}
         </tbody> 
     </table>
