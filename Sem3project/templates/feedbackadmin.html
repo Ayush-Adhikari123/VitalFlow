@@ -75,7 +75,7 @@
                 <td>{{ feedback.name }}</td>
                 <td>{{ feedback.email }}</td>
                 <td width="200">{{ feedback.message }}</td>
-                <td><button class="" id = "" onclick="">Hide</button></td>
+                <td><button class="btn btn-primary delete" id = "" onclick="">Hide</button></td>
                 <td><button class="btn btn-primary delete" id = "delete" onclick="deleteFeedback({{ feedback.id }})">Delete</button></td>
             </tr>
             {% endfor %}
