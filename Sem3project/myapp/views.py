@@ -42,6 +42,9 @@ def feedback(request):
 def about(request):
     return HttpResponse("This is About Page")
 
+def navbar(request):
+   return render(request,'navbar.html')
+
 def feedback(request):
     if request.method == 'POST':
         full_name = request.POST.get('name')

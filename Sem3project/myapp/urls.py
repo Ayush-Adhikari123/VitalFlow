@@ -27,6 +27,7 @@ urlpatterns = [
    path("techadd",views.techadd,name='techadd'),
    path("techpannel",views.techpannel,name='techpannel'),
    path("feedback",views.feedback, name='feedback'),
+   path("navbar",views.navbar, name='navbar'),
 # -------------------------------------------------------------------------------
    path('password_reset/',auth_views.PasswordResetView.as_view(template_name='passwordreset.html'),name='password_reset'),
    path('password_reset/done/',auth_views.PasswordResetDoneView.as_view(template_name='resetdone.html'),name='password_reset_done'),
