@@ -611,7 +611,7 @@ def delete_record(request, record_id):
 def feedbackpannel(request):
     if request.method == 'GET':
         
-        feedback_data = Feedback.objects.filter(show=1)
+        feedback_data = Feedback.objects.all()
         
         context = {
             'feedback_data': feedback_data,
@@ -645,3 +645,20 @@ def feedback(request):
             )
         new_feedback.save()
     return render(request,'feedback.html')
+
+
+def hide_feedback(request, feed_id):
+    if request.method == 'POST':
+        feed = Feedback.objects.get(id=feed_id)
+        feed.show = 0  # Update the 'show' column  to 0
+        feed.save()
+        return render(request,'feedback.html')   
+    return JsonResponse({'message': 'Invalid request method'}, status=405)
+
+def show_feedback(request, feed_id):
+    if request.method == 'POST':
+        feed = Feedback.objects.get(id=feed_id)
+        feed.show = 1  # Update the 'show' column  to 0
+        feed.save()
+        return render(request,'feedback.html')   
+    return JsonResponse({'message': 'Invalid request method'}, status=405)

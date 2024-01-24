@@ -57,6 +57,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">Email</th>
                 <th scope="col" width=800px>Feedback</th>
+                <th scope="col">Show?</th>
                 <th scope="col">Hide?</th>
                 <th scope="col">Delete</th>
                 
@@ -75,13 +76,62 @@
                 <td>{{ feedback.name }}</td>
                 <td>{{ feedback.email }}</td>
                 <td width="200">{{ feedback.message }}</td>
-                <td><button class="btn btn-primary delete" id = "" onclick="">Hide</button></td>
+                <td><button class="btn btn-primary done" onclick="">Show</button></td>
+                <td><button class="btn btn-primary delete" id = "" onclick="hideFeed({{ feedback.id }})">Hide</button></td>
                 <td><button class="btn btn-primary delete" id = "delete" onclick="deleteFeedback({{ feedback.id }})">Delete</button></td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
     <script>
+
+        function hideFeed(feed_id) {
+
+            if (confirm('Are you sure you want to hide this feedback?')) {
+                fetch(`/hide_feed/${feed_id}/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}', 
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // Reload the page to reflect changes
+                        window.location.reload();
+                    } else {
+                        console.error('Failed to delete record');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+        }
+
+        function showFeed(feed_id) {
+
+            if (confirm('Are you sure you want to hide this feedback?')) {
+                fetch(`/hide_feed/${feed_id}/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}', 
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // Reload the page to reflect changes
+                        window.location.reload();
+                    } else {
+                        console.error('Failed to delete record');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+        }
 
         function deleteFeedback(feedId) {
             
