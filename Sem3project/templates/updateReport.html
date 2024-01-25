@@ -129,7 +129,7 @@
             {% for detail in reportdetail_data %}
               <tr class="no-click">
                 <td>{{ detail.investigation }}</td>
-                <td><input type="text" class="input" name="{{ detail.investigation }}_result" value="{{ detail.results }}"></td>
+                <td><input type="text" class="input" name="{{ detail.investigation }}_resultt" value="{{ detail.results }}"></td>
                 <td>{{ detail.reference_value }}</td>
                 <td>{{ detail.unit }}</td>
               </tr>
@@ -148,6 +148,12 @@
 
   
     <script>
+
+      let resultValues = [];
+    let resultInputs = document.querySelectorAll('input[name$="_resultt"]');
+    resultInputs.forEach(function(input) {
+        resultValues.push(input.value);
+      });
 
       var options = {
         "Complete Blood Count (CBC)": [
@@ -309,6 +315,7 @@
           references: references,
           unit: unit,
           testDropdown: selectedTestData,
+          result_values: resultValues,
           
       };
       console.log(formData)
