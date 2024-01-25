@@ -105,7 +105,7 @@
           <div class="d-flex  justify-content-between">
             <div class="ms-4">
               <label for="userInput" style="font-size: 12px; font-weight: bold;">Report Id:</label>
-              <input type="text" id="userInput1"
+              <input type="text" id="userInput1 value="{{ detail.report_id }}""
                 style="width: 84px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; background-color: #70b6c6; ">
             </div>
             <div class="me-4">
@@ -118,7 +118,7 @@
             <div class="col-5 ms-5">
               <label for="userInput" style="font-size: 12px; font-weight: bold;">Patient Name:</label>
               <input type="text" id="userInput1"
-                style="width: 84px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; background-color: #70b6c6;">
+                style="width: 84px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; background-color: #70b6c6;"   value="{{ report_data.patient_Name }}">
             </div>
 
             <div class="col-5">
@@ -230,52 +230,6 @@
 
         </div>
 
-
-
-
-        {% comment %} <img src="/static/images/viewreport.png" height="740" alt="Your Image"> {% endcomment %}
-        {% comment %} <div class="text-field1 custom-text-field"> {% endcomment %}
-          {% comment %} <label for="userInput">Enter Text:</label> {% endcomment %}
-          {% comment %} <input type="text" id="userInput1"
-            style="width: 84px; height: 15px; border: none; font-size: 10px; margin-left:67px; margin-buttom:20px;">
-
-
-        </div>
-        <div class="text-field2 custom-text-field2">
-          <input type="text" id="userInput2"
-            style="width: 84px; height: 15px; border: none; font-size: 10px; margin-left:172px;">
-        </div> {% endcomment %}
-
-        {% comment %} <div class="text-field3 custom-text-field3">
-          <input type="text" id="userInput3"
-            style="width: 84px; height: 15px; border: none; font-size: 10px; margin-left:172px; margin-top:-20px; "> {%
-          endcomment %}
-          {% comment %} background-color: #70b6c6; {% endcomment %}
-          {% comment %}
-        </div>
-        <div class="text-field4 custom-text-field4">
-          <input type="text" id="userInput4"
-            style="width: 84px; height: 15px; border: none; font-size: 10px; margin-left:172px;">
-        </div>
-        <div class="text-field5 custom-text-field5">
-          <input type="text" id="userInput5"
-            style="width: 84px; height: 15px; border: none; font-size: 10px; margin-left:170px;">
-        </div> {% endcomment %}
-        {% comment %} <div class="text-field6 custom-text-field6">
-          <input type="text" id="userInput6"
-            style="width: 84px; height: 15px; border: none; font-size: 10px; margin-left:170px;">
-        </div>
-        <div class="text-field7 custom-text-field7">
-          <input type="text" id="userInput7"
-            style="width: 84px; height: 15px; border: none; font-size: 10px; margin-left:170px;">
-        </div>
-        <div class="text-field8 custom-text-field8">
-          <input type="text" id="userInput8"
-            style="width: 84px; height: 15px; border: none; font-size: 10px; margin-left:170px;">
-        </div> {% endcomment %}
-
-
-
       </div>
     </div>
 
@@ -289,263 +243,52 @@
         <table class="table table-striped ">
           <thead>
             <tr>
-              <th scope="col">S.N</th>
-              <th scope="col">Date</th>
-              <th scope="col">Patient Id</th>
-              <th scope="col">Full Name</th>
-              <th scope="col">Test</th>
-              <th scope="col"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>2023-02-30</td>
-              <td>220302</td>
-              <td>Srijan Shrestha</td>
-              <td>Sugar</td>
-
-              <td>
-                <div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login"
-                    data-toggle="modal" data-target="#loginModal">
-                    View
-                  </button>
-                  <button type="button" class=" btn btn-success btn-Login ms-2 me-2" data-toggle="modal"
-                    data-target="#loginModal">
-                    Edit
-                  </button>
-                  <button type="button" class="btn btn-danger btn-Login" data-toggle="modal"
-                    data-target="#exampleModalLong1">
-                    Delete
-                  </button>
-                </div>
-              </td>
+                <th scope="col">S.N</th>
+                <th scope="col">Full Name</th>
+                <th scope="col">Age</th>
+                <th scope="col">Contact</th>
+                <th scope="col">Gender</th>
 
             </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>2023-02-22</td>
-              <td>220302</td>
-              <td>Srijan Shrestha</td>
-              <td>Uric acid</td>
+        </thead>
+        <tbody>
+            {% for detail in report_data %}
+            <tr class="no-click">
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ detail.patient_Name }}</td>
+                <td>{{ detail.age }}</td>
+                <td>{{ detail.contact }}</td>
+                <td>{{ detail.gender }}</td>
 
-              <td>
-                <div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login"
-                    data-toggle="modal" data-target="#loginModal">
-                    View
-                  </button>
-                  <button type="button" class=" btn btn-success btn-Login ms-2 me-2" data-toggle="modal"
-                    data-target="#loginModal">
-                    Edit
-                  </button>
-                  <button type="button" class="btn btn-danger btn-Login" data-toggle="modal"
-                    data-target="#exampleModalLong1">
-                    Delete
-                  </button>
-                </div>
-              </td>
+                <td>
+                  <div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login"
+                      data-toggle="modal" data-target="#loginModal">
+                      View
+                    </button>
+                    <button type="button" class=" btn btn-success btn-Login ms-2 me-2" data-toggle="modal"
+                       onclick="updateRecord({{ detail.contact }})">
+                      Edit
+                    </button>
+                    <button type="button" class="btn btn-danger btn-Login" data-toggle="modal"
+                      data-target="#exampleModalLong1">
+                      Delete
+                    </button>
+                  </div>
+                </td>
             </tr>
-
-            <tr>
-              <th scope="row">3</th>
-              <td>2023-02-22</td>
-              <td>220302</td>
-              <td>Srijan Shrestha</td>
-              <td>Uric acid</td>
-
-              <td>
-                <div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login"
-                    data-toggle="modal" data-target="#loginModal">
-                    View
-                  </button>
-                  <button type="button" class=" btn btn-success btn-Login ms-2 me-2" data-toggle="modal"
-                    data-target="#loginModal">
-                    Edit
-                  </button>
-                  <button type="button" class="btn btn-danger btn-Login" data-toggle="modal"
-                    data-target="#exampleModalLong1">
-                    Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <th scope="row">4</th>
-              <td>2023-02-22</td>
-              <td>220302</td>
-              <td>Srijan Shrestha</td>
-              <td>Uric acid</td>
-
-              <td>
-                <div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login"
-                    data-toggle="modal" data-target="#loginModal">
-                    View
-                  </button>
-                  <button type="button" class=" btn btn-success btn-Login ms-2 me-2" data-toggle="modal"
-                    data-target="#loginModal">
-                    Edit
-                  </button>
-                  <button type="button" class="btn btn-danger btn-Login" data-toggle="modal"
-                    data-target="#exampleModalLong1">
-                    Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <th scope="row">5</th>
-              <td>2023-02-22</td>
-              <td>220302</td>
-              <td>Srijan Shrestha</td>
-              <td>Uric acid</td>
-
-              <td>
-                <div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login"
-                    data-toggle="modal" data-target="#loginModal">
-                    View
-                  </button>
-                  <button type="button" class=" btn btn-success btn-Login ms-2 me-2" data-toggle="modal"
-                    data-target="#loginModal">
-                    Edit
-                  </button>
-                  <button type="button" class="btn btn-danger btn-Login" data-toggle="modal"
-                    data-target="#exampleModalLong1">
-                    Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <th scope="row">6</th>
-              <td>2023-02-22</td>
-              <td>220302</td>
-              <td>Srijan Shrestha</td>
-              <td>Uric acid</td>
-
-              <td>
-                <div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login"
-                    data-toggle="modal" data-target="#loginModal">
-                    View
-                  </button>
-                  <button type="button" class=" btn btn-success btn-Login ms-2 me-2" data-toggle="modal"
-                    data-target="#loginModal">
-                    Edit
-                  </button>
-                  <button type="button" class="btn btn-danger btn-Login" data-toggle="modal"
-                    data-target="#exampleModalLong1">
-                    Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <th scope="row">7</th>
-              <td>2023-02-22</td>
-              <td>220302</td>
-              <td>Srijan Shrestha</td>
-              <td>Uric acid</td>
-
-              <td>
-                <div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login"
-                    data-toggle="modal" data-target="#loginModal">
-                    View
-                  </button>
-                  <button type="button" class=" btn btn-success btn-Login ms-2 me-2" data-toggle="modal"
-                    data-target="#loginModal">
-                    Edit
-                  </button>
-                  <button type="button" class="btn btn-danger btn-Login" data-toggle="modal"
-                    data-target="#exampleModalLong1">
-                    Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <th scope="row">8</th>
-              <td>2023-02-22</td>
-              <td>220302</td>
-              <td>Srijan Shrestha</td>
-              <td>Uric acid</td>
-
-              <td>
-                <div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login"
-                    data-toggle="modal" data-target="#loginModal">
-                    View
-                  </button>
-                  <button type="button" class=" btn btn-success btn-Login ms-2 me-2" data-toggle="modal"
-                    data-target="#loginModal">
-                    Edit
-                  </button>
-                  <button type="button" class="btn btn-danger btn-Login" data-toggle="modal"
-                    data-target="#exampleModalLong1">
-                    Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <th scope="row">9</th>
-              <td>2023-02-22</td>
-              <td>220302</td>
-              <td>Srijan Shrestha</td>
-              <td>Uric acid</td>
-
-              <td>
-                <div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login"
-                    data-toggle="modal" data-target="#loginModal">
-                    View
-                  </button>
-                  <button type="button" class=" btn btn-success btn-Login ms-2 me-2" data-toggle="modal"
-                    data-target="#loginModal">
-                    Edit
-                  </button>
-                  <button type="button" class="btn btn-danger btn-Login" data-toggle="modal"
-                    data-target="#exampleModalLong1">
-                    Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <th scope="row">10</th>
-              <td>2023-02-22</td>
-              <td>220302</td>
-              <td>Srijan Shrestha</td>
-              <td>Uric acid</td>
-
-              <td>
-                <div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login"
-                    data-toggle="modal" data-target="#loginModal">
-                    View
-                  </button>
-                  <button type="button" class=" btn btn-success btn-Login ms-2 me-2" data-toggle="modal"
-                    data-target="#loginModal">
-                    Edit
-                  </button>
-                  <button type="button" class="btn btn-danger btn-Login" data-toggle="modal"
-                    data-target="#exampleModalLong1">
-                    Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
-
-
-
-          </tbody>
+            {% endfor %}
+        </tbody>
         </table>
       </div>
     </div>
 
     <script>
+
+      function updateRecord(contact) {
+        // Redirect to the update report page when the Edit button is clicked
+        window.location.href = `/updatereport/${contact}/`;
+    }
+    
       function myFunction() {
         document.getElementById('foo').style.cssText = ''
       }
