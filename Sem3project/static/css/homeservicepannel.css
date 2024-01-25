@@ -213,10 +213,12 @@ a {
     border-color: red;
   }
 
-  .delete:hover{
+  .delete:hover, .delete:focus {
     background-color: crimson;
     border-color: crimson;
   }
+
+  
 
   
 
