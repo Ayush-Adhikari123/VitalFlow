@@ -170,7 +170,16 @@ def createreport(request):
 
 
 def viewreport(request):
-    return render(request,'viewreport.html')
+      
+  if request.method == 'GET':
+        report_data = Report.objects.all()  # Fetch all data from TechAdd model
+        context = {
+            'report_data': report_data,
+        }
+        return render(request, 'viewreport.html', context)
+  else:
+        return HttpResponse('Invalid request or empty contact field')
+    
 
 
 def packages(request):
@@ -611,3 +620,30 @@ def delete_feed(request, feed_id):
         return JsonResponse({'message': 'Record deleted successfully'}, status=200)
 
     return JsonResponse({'message': 'Invalid request method'}, status=405)
+    if request.method == 'GET':
+        patient_Name = request.GET.get('name', '')
+        contact = request.GET.get('contact', '')
+
+        print(f"Patient Name: {patient_Name}, Contact: {contact}")
+
+        if contact:
+            report_data = Report.objects.filter(patient_Name=patient_Name, contact=contact).first()
+            print(report_data)  # Print the retrieved object for debugging
+
+            if report_data is not None:
+                print("Data found")
+                report_detail_data = Report_Detail.objects.filter(report_id=report_data.id)
+            else:
+                print("No data found")
+                report_detail_data = None
+
+            context = {
+                'report_data': report_data,
+                'report_detail_data': report_detail_data,
+            }
+            print(f"Method: {request.method}")
+            print(f"Contact: {contact}")
+
+            return render(request, 'test.html', context)
+
+        return HttpResponse('Invalid request or empty contact field')
