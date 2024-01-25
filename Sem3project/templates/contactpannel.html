@@ -47,8 +47,8 @@
 
                 <td>
                     <div class="d-flex justify-content-end">
-                        <button type="button" class="btn btn-danger btn-Login" onclick="deleteRecord({{ detail.id }})" data-toggle="modal"
-                            data-target="#exampleModalLong1">Delete</button>
+                        <button type="button" class="btn btn-danger btn-Login" onclick="deleteRecord({{ detail.id }})"
+                            data-toggle="modal" data-target="#exampleModalLong1">Delete</button>
                     </div>
                 </td>
             </tr>
@@ -66,17 +66,17 @@
                         'Content-Type': 'application/json'
                     }
                 })
-                .then(response => {
-                    if (response.ok) {
-                        // If deletion is successful, reload the page or update UI as needed
-                        window.location.reload(); // Reload the page to reflect changes
-                    } else {
-                        console.error('Failed to delete record');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
+                    .then(response => {
+                        if (response.ok) {
+                            // If deletion is successful, reload the page or update UI as needed
+                            window.location.reload(); // Reload the page to reflect changes
+                        } else {
+                            console.error('Failed to delete record');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
             }
         }
 
