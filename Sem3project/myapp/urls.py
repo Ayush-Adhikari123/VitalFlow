@@ -36,15 +36,21 @@ urlpatterns = [
    path('password-reset-confirm/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(template_name='newpassword.html'),name='password_reset_confirm'),
    
 
-
-path("updatereport/<str:contact>/",views.updatereport,name='updatereport'),
-path("gethomeservice",views.book_service,name='updatereport'),
+# path("gethomeservice",views.book_service,name='updatereport'),
 path('book', views.book_home_service, name='book_service'),
 
    path("homeservicepannel",views.homeservicepannel,name='homeservicepannel'),
-   path('update_done_status/<int:service_id>/', views.update_done_status, name='update_done_status'),
+   path('update_done_status/<int:service_id>/<str:tempmail>/', views.update_done_status, name='update_done_status'),
+   path('delete_service/<int:service_id>/', views.delete_service, name='delete_service'),
 
    path("userlogin",views.userlogin,name='userlogin'),
    path('test',views.test, name='test'),
-   path('diagnostic',views.diagnostic, name='diagnostic')
-]
+
+   path('diagnostic',views.diagnostic, name='diagnostic'),
+   path("contactpannel",views.contactpannel,name='contactpannel'),
+   path('delete/<int:record_id>/', views.delete_record, name='delete_record'),
+
+   path('feedbackpannel',views.feedbackpannel, name='feedbackpannel'),
+   path('delete_feed/<int:feed_id>/', views.delete_feed, name='delete_feedback'),
+ ]
+

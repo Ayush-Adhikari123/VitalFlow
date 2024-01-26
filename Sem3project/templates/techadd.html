@@ -1,26 +1,30 @@
+<!-- Replace your existing HTML with the following -->
 
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration</title>
-    <link rel="stylesheet" href="/static/techadd.css">
-</head>
-<body>
-
-<div class="header">
-    <div class="logo">
-        <img src="/static/images/Logo.png" alt="Header Image">
-    </div>
-    <div class="company-name">
-        <h1>Vital Flow Blood-Lab</h1>
-    </div>
+{% extends "admincore.html" %}
+{% block navbody %}
+<div class="top-buttons">
+    <a href="/homeservicepannel"><button class="btn btn-primary with-icon-idk"></button></a>
 </div>
+<div class="top-buttons">
+    <a href=""><button class="btn btn-primary with-icon-feedback"></button></a>
+</div>
+<div class="top-buttons">
+    <a href=""><button class="btn btn-primary with-icon-addtech"></button></a>
+</div>
+<div class="top-buttons">
+    <button class="btn btn-primary with-icon-profile"></button>
+</div>
+<div class="top-buttons">
+    <button class="btn btn-primary with-icon-logout" onclick="showLoadingScreen()"></button>
+</div>
+{% endblock navbody %}
+
+{% block body %}
+<link rel="stylesheet" href="/static/css/techadd.css">
+
 
 <div class="register-container">
-    <h2>User Registration</h2>
+    
     
     <form class="form" id="registerForm" action="{% url 'techadd' %}" method="post">
         {% csrf_token %}
@@ -30,7 +34,7 @@
         </div>
         <div class="form-group">
             <label for="middle-name">Middle Name:</label>
-            <input type="text" class="input" id="middle-name" name="middle_name">
+            <input type="text" class="input" placeholder="Optional" id="middle-name" name="middle_name">
         </div>
         <div class="form-group">
             <label for="last-name">Last Name:</label>
@@ -61,17 +65,16 @@
             </select>
         </div>
 
-        <button type="submit" onclick="submitForm()" class="login-button">Register</button>
         <button type="button" onclick="Home()" class="back-button">Back</button>
+        <button type="submit" onclick="submitForm()" class="login-button">Register</button>       
     </form>
 </div>
 
 <script>
-    {% comment %} function submitForm() {
+    function submitForm() {
         // You can add additional validation or AJAX submission here
         alert('Form submitted!'); 
     }
-</script> {% endcomment %}
+</script>
 
-</body>
-</html>
+{% endblock body %}

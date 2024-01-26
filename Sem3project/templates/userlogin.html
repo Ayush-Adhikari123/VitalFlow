@@ -1,77 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Report</title>
-    <link rel="stylesheet" href="/static/userlogin.css"/>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    
-</head>
-<body>
 
-<div class="header">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>View Report</title>
+  <link rel="stylesheet" href="/static/userlogin.css" />
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+
+<body>
+  <div class="header">
     <div class="logo">
-        <img src="/static/images/Logo.png" alt="Header Image">
+      <img src="/static/images/Logo.png" alt="Header Image" />
     </div>
     <div class="company-name">
-        <h1>Vital Flow Blood-Lab</h1>
+      <h1>Vital Flow Bio-Lab</h1>
     </div>
-</div>
+  </div>
 
-<div class="login-container">
+  <div class="login-container">
     <h2>View Report</h2>
-    <form method="POST" action="{% url 'test' %}" >
-        {% csrf_token %}
-        {% comment %} {{ form.as_p }} {% endcomment %}
-        <div class="form-group">
-            <label for="patient_Name">Patient Name:</label>
-            <input type="text" id="patientId" name="patient_Name">
-        </div>
-        <div class="form-group">
-            <label for="contact">Contact Number:</label>
-            <input type="text" id="contact" name="contact" required>
-        </div>
+    <form method="POST" action="{% url 'test' %}">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="patient_Name">Patient Name:</label>
+        <input type="text" id="patientId" name="patient_Name" />
+      </div>
+      <div class="form-group">
+        <label for="contact">Contact Number:</label>
+        <input type="text" id="contact" name="contact" required />
+      </div>
 
-        <button type="submit"  class="login-button">View Report</button>
-        <button type="button" onclick="goHome()" class="back-button">Back</button>
+      <button type="submit" class="login-button">View Report</button>
+      <button type="button" onclick="goHome()" class="back-button">
+        Back
+      </button>
     </form>
-</div>
-
-
+  </div>
 </body>
+
 </html>
-<!-- Add jQuery -->
-
-<!-- Add this script to handle the form submission -->
-<!-- Add this script to handle the form submission -->
-{% comment %} <script>
-    function viewReport() {
-        var patientName = $('#patientId').val();  // Corrected id to match the input field
-        var contact = $('#contact').val();
-    
-        $.ajax({
-            url: '/test',  // Update the URL to match your Django URL pattern for the 'test' view
-            type: 'POST',
-            data: {
-                'patient_Name': patientName,
-
-                'contact': contact,
-                csrfmiddlewaretoken: '{{ csrf_token }}'
-            },
-            success: function(response) {
-                // Redirect to test.html with the fetched data
-                window.location.href = '/test';
-            },
-            error: function(error) {
-                // Handle errors, e.g., show an alert
-                alert('Error fetching data. Please try again.');
-            }
-        });
-    }
-    
-    function goHome() {
-        // Implement the functionality to go back to the home page
-        // You can use window.location.href or other methods as needed
-    }
-</script> {% endcomment %}

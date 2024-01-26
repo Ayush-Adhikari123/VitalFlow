@@ -4,7 +4,7 @@
     <a href="/homeservicepannel"> <button class="btn btn-primary with-icon-idk"></button></a>
 </div>
 <div class="top-buttons">
-    <a href=""> <button class="btn btn-primary with-icon-feedback"></button></a>
+    <a href="/feedbackpannel"> <button class="btn btn-primary with-icon-feedback"></button></a>
 </div>
 <div class="top-buttons">
     <a href=""> <button class="btn btn-primary with-icon-addtech"></button></a>
@@ -61,6 +61,7 @@
                 <th scope="col">Location</th>
                 <th scope="col">Send To</th>
                 <th scope="col">Done?</th>
+                <th scope="col">Delete</th>
                 {% comment %} <th scope="col">Actions</th> {% endcomment %}
             </tr>
         </thead>
@@ -82,9 +83,12 @@
                
                     
                 <td width="200">
-                    <input type="email" name="email send"  id="email_send">
+                    <input type="email" name="email_send_{{ homeservice.id }}" id="email_send_{{ homeservice.id }}">
+
                 </td>
-                <td><button class="btn btn-primary done" id = "done" onclick="doneTask({{ homeservice.id }})"  >Done</button></td>
+                <td><button class="btn btn-primary done" onclick="doneTask({{ homeservice.id }})">Done</button></td>
+                <td><button class="btn btn-primary delete" id = "delete" onclick="deleteTask({{ homeservice.id }})">Delete</button></td>
+
          
             </tr>
             {% endfor %}
@@ -96,72 +100,102 @@
     <script>
         var showMapButtons = document.querySelectorAll('.show-map');
         showMapButtons.forEach(function (button) {
-            button.addEventListener('click', function () {
-                var serviceId = this.getAttribute('data-service-id');
-                var mapContainer = document.getElementById('map_' + serviceId);
+        button.addEventListener('click', function () {
+            var serviceId = this.getAttribute('data-service-id');
+            var mapContainer = document.getElementById('map_' + serviceId);
 
-                if (mapContainer.style.display === 'none') {
-                    mapContainer.style.display = 'block';
+            if (mapContainer.style.display === 'none') {
+                mapContainer.style.display = 'block';
 
-                    var latitude = mapContainer.getAttribute('data-latitude');
-                    var longitude = mapContainer.getAttribute('data-longitude');
-                    var location = mapContainer.getAttribute('data-location');
+                var latitude = mapContainer.getAttribute('data-latitude');
+                var longitude = mapContainer.getAttribute('data-longitude');
+                var location = mapContainer.getAttribute('data-location');
 
-                    var map = L.map('map_' + serviceId).setView([latitude, longitude], 13);
+                var map = L.map('map_' + serviceId).setView([latitude, longitude], 13);
 
-                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    }).addTo(map);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
 
-                    L.marker([latitude, longitude]).addTo(map)
-                        .bindPopup('<b>Service Location</b><br>' + location).openPopup();
-                } else {
-                    mapContainer.style.display = 'none';
-                }
-            });
-        });
+                L.marker([latitude, longitude]).addTo(map)
+                    .bindPopup('<b>Service Location</b><br>' + location).openPopup();
 
-        function showLoadingScreen() {
-            document.getElementById('loadingScreen').style.display = 'flex';
-            setTimeout(function () {
-                window.location.href = '/adminlogout';
-            }, 1000);
-        }
-    </script>
-    <script>
-        
-            function doneTask(service_id) {
-                if (confirm('Are you sure you want to send the mail?')) {
-                    fetch(`/update_done_status/${service_id}/`, {
-                        method: 'POST',
-                        headers: {
-                            'X-CSRFToken': '{{ csrf_token }}', 
-                            'Content-Type': 'application/json'
-                        }
-                    })
-                    .then(response => {
-                        if (response.ok) {
-                             // Reload the page to reflect changes
-                            window.location.reload();
-                        } else {
-                            console.error('Failed to delete record');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                    });
-                }
+                
+                
+            } else {
+                mapContainer.style.display = 'none';
             }
-    
-            
-      
-        function myFunction() {
-            document.getElementById('foo').style.cssText = '';
-        }
+        });
+    });
 
-        function myFunction1() {
-            document.getElementById('foo').style.cssText = ' ';
+    function doneTask(serviceId) {
+        var emailField = document.getElementById('email_send_' + serviceId);
+        var email = emailField ? emailField.value : '';
+    
+        if (confirm('Are you sure you want to send the mail?')) {
+            fetch(`/update_done_status/${serviceId}/${email}/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}',
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Reload the page to reflect changes
+                    window.location.reload();
+                } else {
+                    console.error('Failed to update record');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
         }
+    }
+    
+
+            function showLoadingScreen() {
+                document.getElementById('loadingScreen').style.display = 'flex';
+                setTimeout(function () {
+                    window.location.href = '/adminlogout';
+                }, 1000);
+            }
+        
+            
+                function doneTask(service_id,email) {
+
+                    if (confirm('Are you sure you want to send the mail?')) {
+                        fetch(`/update_done_status/${service_id}/${email}`, {
+                            method: 'POST',
+                            headers: {
+                                'X-CSRFToken': '{{ csrf_token }}', 
+                                'Content-Type': 'application/json'
+                            }
+                        })
+                        .then(response => {
+                            if (response.ok) {
+                                // Reload the page to reflect changes
+                                window.location.reload();
+                            } else {
+                                console.error('Failed to delete record');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+                    }
+                }
+        
+                
+        
+            function myFunction() {
+                document.getElementById('foo').style.cssText = '';
+            }
+
+            function myFunction1() {
+                document.getElementById('foo').style.cssText = ' ';
+            }
     </script>
 </body>
 {% endblock body %}
