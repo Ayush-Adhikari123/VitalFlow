@@ -2,7 +2,6 @@
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import path
-
 from myapp import views
 
 urlpatterns = [
@@ -36,7 +35,9 @@ urlpatterns = [
    path('password-reset-confirm/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(template_name='newpassword.html'),name='password_reset_confirm'),
    
 
-# path("gethomeservice",views.book_service,name='updatereport'),
+
+path("updatereport/<str:contact>/",views.updatereport,name='updatereport'),
+path("gethomeservice",views.book_service,name='updatereport'),
 path('book', views.book_home_service, name='book_service'),
 
    path("homeservicepannel",views.homeservicepannel,name='homeservicepannel'),
@@ -50,7 +51,10 @@ path('book', views.book_home_service, name='book_service'),
    path("contactpannel",views.contactpannel,name='contactpannel'),
    path('delete/<int:record_id>/', views.delete_record, name='delete_record'),
 
-   path('feedbackpannel',views.feedbackpannel, name='feedbackpannel'),
+   path('feedbackpannel',views.feedbackpannel, name='feedback'),
    path('delete_feed/<int:feed_id>/', views.delete_feed, name='delete_feedback'),
+   path('hide_feed/<int:feed_id>/', views.hide_feedback, name='hide_feedback'),
+   path('show_feed/<int:feed_id>/', views.show_feedback, name='hide_feedback'),
+   path("feedback",views.feedback, name='feedback'),
  ]
 
