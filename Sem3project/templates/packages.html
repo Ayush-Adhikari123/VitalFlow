@@ -1,0 +1,29 @@
+{% extends "base.html" %} {% block body %}
+<div class="head-container" data-aos="fade-in">
+  <h1>
+    <span
+      class="typed"
+      data-typed-items="<u><u>ALL AVAILABLE PACKAGES</u></u>"
+    ></span>
+  </h1>
+</div>
+<!-- Packages -->
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const typed = document.querySelector(".typed");
+    if (typed) {
+      let typed_strings = typed.getAttribute("data-typed-items");
+      typed_strings = typed_strings.split(",");
+
+      new Typed(".typed", {
+        strings: typed_strings,
+        loop: true,
+        typeSpeed: 100,
+        backSpeed: 10,
+        backDelay: 2000,
+      });
+    }
+  });
+</script>
+{% endblock body %}

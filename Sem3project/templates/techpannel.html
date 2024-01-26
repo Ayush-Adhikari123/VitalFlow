@@ -1,0 +1,74 @@
+{% extends "admincore.html" %}
+{% block navbody %}
+<div class="top-buttons">
+    <a href=""> <button class="btn btn-primary with-icon-idk"></button></a>
+</div>
+<div class="top-buttons">
+    <a href=""> <button class="btn btn-primary with-icon-feedback"></button></a>
+</div>
+<div class="top-buttons">
+    <a href=""> <button class="btn btn-primary with-icon-addtech"></button></a>
+</div>
+<div class="top-buttons">
+    <button class="btn btn-primary with-icon-profile"></button>
+</div>
+<div class="top-buttons">
+    <button class="btn btn-primary with-icon-logout" onclick="showLoadingScreen()"></button>
+</div>
+
+<!-- <div class="loading-screen" id="loadingScreen">
+    <img src="/static/images/loding.gif" alt="">
+</div> -->
+{% endblock navbody %}
+{% block body %}
+<link rel="stylesheet" href="/static/css/techpannel.css">
+
+<body>
+
+
+    <table class="table table-striped mt-5">
+        <thead>
+            <tr>
+                <th scope="col">S.N</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Middle Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Contact</th>
+                <th scope="col">Email</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for detail in techadd_data %}
+            <tr class="no-click">
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ detail.first_name }}</td>
+                <td>{{ detail.middle_name }}</td>
+                <td>{{ detail.last_name }}</td>
+                <td>{{ detail.contact }}</td>
+                <td>{{ detail.email }}</td>
+
+                <td>
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-danger btn-Login" data-toggle="modal"
+                            data-target="#exampleModalLong1">Delete</button>
+                    </div>
+                <td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+    <script>
+        function myFunction() {
+            document.getElementById('foo').style.cssText = '';
+        }
+
+        function myFunction1() {
+            document.getElementById('foo').style.cssText = ' ';
+        }
+    </script>
+</body>
+
+{% endblock body %}
