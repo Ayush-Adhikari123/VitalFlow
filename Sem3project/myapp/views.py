@@ -236,13 +236,13 @@ def admin_profile(request):
           fm =EditadminprofileForm(instance=request.user)
       return render(request,'adminprofile.html',{'name': request.user,'form':fm})
     else:
-        return HttpResponseRedirect('adminlogin')
+        return HttpResponseRedirect('/adminlogin')
 
 
 
 def admin_logout(request):
     logout(request)
-    return HttpResponseRedirect("/adminlogin/")
+    return HttpResponseRedirect("/adminlogin")
 
 def admin_password(request):
   if request.user.is_authenticated:  
@@ -257,7 +257,7 @@ def admin_password(request):
       fm = PasswordChangeForm(user=request.user)
     return render(request,'adminpassword.html',{'form': fm})
   else:
-     return HttpResponseRedirect('/adminlogin/')
+     return HttpResponseRedirect('/adminlogin')
   
 @login_required  
 def updatereport(request,contact):

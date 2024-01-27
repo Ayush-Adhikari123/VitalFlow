@@ -6,6 +6,7 @@ from myapp import views
 
 urlpatterns = [
    path("",views.index,name='myapp'),
+   path("home",views.index,name='myapp'),
    path("availabletest",views.availabletest, name='availabletest'),
    path("feedback",views.feedback, name='feedback'),
    path("contact",views.contact, name='contact'),

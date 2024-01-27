@@ -45,8 +45,14 @@
     function showLoadingScreen() {
       // Show the loading screen
       document.getElementById('loadingScreen').style.display = 'flex';
+
+      // Hide the loading screen after 3 seconds (3000 milliseconds)
+      setTimeout(function () {
+        document.getElementById('loadingScreen').style.display = 'none';
+      }, 3000);
     }
   </script>
+
 </body>
 
 </html>
