@@ -109,7 +109,7 @@
           <div class="d-flex  justify-content-between">
             <div class="ms-4">
               <label for="userInput" style="font-size: 12px; font-weight: bold;">Report Id:</label>
-              <input type="text" id="userInput1" value="{{ report_data.id }}"
+              <input type="text" id="userInput1 value=" {{ detail.report_id }}""
                 style="width: 84px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; background-color: #70b6c6; ">
             </div>
             <div class="me-4">
@@ -121,7 +121,7 @@
           <div class="row">
             <div class="col-5 ms-5">
               <label for="userInput" style="font-size: 12px; font-weight: bold;">Patient Name:</label>
-              <input type="text" id="userInput3" value="{{ report_data.patient_Name }}"
+              <input type="text" id="userInput1"
                 style="width: 84px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; background-color: #70b6c6;"
                 value="{{ report_data.patient_Name }}">
             </div>
@@ -259,14 +259,10 @@
               <td>{{ detail.gender }}</td>
 
               <td>
-                <div class="d-flex justify-content-end">
-
-                  <button type="button" class="btn btn-primary btn-Login view-btn" data-name="{{ detail.patient_Name }}"
-                    data-contact="{{ detail.contact }}">
+                <div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login"
+                    data-toggle="modal" data-target="#loginModal">
                     View
                   </button>
-
-
                   <button type="button" class=" btn btn-success btn-Login ms-2 me-2" data-toggle="modal"
                     onclick="updateRecord({{ detail.contact }})">
                     Edit
