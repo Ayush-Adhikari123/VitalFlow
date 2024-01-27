@@ -601,7 +601,7 @@ def delete_record(request, record_id):
 def feedbackpannel(request):
     if request.method == 'GET':
         
-        feedback_data = Feedback.objects.filter(show=1)
+        feedback_data = Feedback.objects.all()
         
         context = {
             'feedback_data': feedback_data,
@@ -620,30 +620,21 @@ def delete_feed(request, feed_id):
         return JsonResponse({'message': 'Record deleted successfully'}, status=200)
 
     return JsonResponse({'message': 'Invalid request method'}, status=405)
-    if request.method == 'GET':
-        patient_Name = request.GET.get('name', '')
-        contact = request.GET.get('contact', '')
 
-        print(f"Patient Name: {patient_Name}, Contact: {contact}")
 
-        if contact:
-            report_data = Report.objects.filter(patient_Name=patient_Name, contact=contact).first()
-            print(report_data)  # Print the retrieved object for debugging
 
-            if report_data is not None:
-                print("Data found")
-                report_detail_data = Report_Detail.objects.filter(report_id=report_data.id)
-            else:
-                print("No data found")
-                report_detail_data = None
+def hide_feedback(request, feed_id):
+    if request.method == 'POST':
+        feed = Feedback.objects.get(id=feed_id)
+        feed.show = 0  # Update the 'show' column  to 0
+        feed.save()
+        return render(request,'feedback.html')   
+    return JsonResponse({'message': 'Invalid request method'}, status=405)
 
-            context = {
-                'report_data': report_data,
-                'report_detail_data': report_detail_data,
-            }
-            print(f"Method: {request.method}")
-            print(f"Contact: {contact}")
-
-            return render(request, 'test.html', context)
-
-        return HttpResponse('Invalid request or empty contact field')
+def show_feedback(request, feed_id):
+    if request.method == 'POST':
+        feed = Feedback.objects.get(id=feed_id)
+        feed.show = 1  # Update the 'show' column  to 0
+        feed.save()
+        return render(request,'feedback.html')   
+    return JsonResponse({'message': 'Invalid request method'}, status=405)

@@ -52,5 +52,8 @@ path('book', views.book_home_service, name='book_service'),
 
    path('feedbackpannel',views.feedbackpannel, name='feedbackpannel'),
    path('delete_feed/<int:feed_id>/', views.delete_feed, name='delete_feedback'),
+   path('hide_feed/<int:feed_id>/', views.hide_feedback, name='hide_feedback'),
+   path('show_feed/<int:feed_id>/', views.show_feedback, name='hide_feedback'),
+   path("feedback",views.feedback, name='feedback'),
  ]
 
