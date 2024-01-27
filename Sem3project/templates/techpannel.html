@@ -48,7 +48,7 @@
                 <td>
                     <div class="d-flex justify-content-end">
                         <button type="button" class="btn btn-danger btn-Login" data-toggle="modal"
-                            data-target="#exampleModalLong1">Delete</button>
+                        onclick="deleteRecord({{ detail.id }})"    data-target="#exampleModalLong1">Delete</button>
                     </div>
                 <td>
             </tr>
@@ -58,6 +58,28 @@
 
 
     <script>
+        function deleteRecord(recordId) {
+            if (confirm('Are you sure you want to delete this record?')) {
+                fetch(`/deletetech/${recordId}/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}', // Include CSRF token
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // If deletion is successful, reload the page or update UI as needed
+                        window.location.reload(); // Reload the page to reflect changes
+                    } else {
+                        console.error('Failed to delete record');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+        }
         function myFunction() {
             document.getElementById('foo').style.cssText = '';
         }
