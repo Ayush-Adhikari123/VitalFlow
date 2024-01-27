@@ -7,8 +7,8 @@
   <title>Login</title>
 
 
-  <link rel="stylesheet" href="/static/adminlogin.css" />
- 
+  <link rel="stylesheet" href="/static/css/adminlogin.css" />
+
 
   <style>
     /* Style for the loading screen */
@@ -35,7 +35,7 @@
     {{ fm }}
     <div class="error">{{ fm.errors|striptags }}</div>
     {% if fm.name == 'password' %}
-      <a href="/passwordreset">Forgot Password?</a>
+    <a href="/passwordreset">Forgot Password?</a>
     {% endif %}
     {% endfor %}
     <input type="submit" value="Log In" />
