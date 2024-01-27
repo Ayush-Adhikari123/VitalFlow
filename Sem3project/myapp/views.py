@@ -260,16 +260,17 @@ def admin_password(request):
      return HttpResponseRedirect('/adminlogin/')
   
 @login_required  
-def updatereport(request,contact):
+def updatereport(request, contact):
     if request.method == 'POST':
         # Retrieve the existing record from the database
         existing_report = get_object_or_404(Report, contact=contact)
-        
+
         # Update the fields with the new values from the form
         existing_report.patient_Name = request.POST.get('name')
         existing_report.age = request.POST.get('age')
         existing_report.gender = request.POST.get('gender')
         existing_report.address = request.POST.get('address')
+        existing_report.lab_no = request.POST.get('lab_no')
         existing_report.contact = request.POST.get('contact')
         existing_report.date = request.POST.get('date')
         existing_report.consultant = request.POST.get('consultant')
@@ -281,29 +282,52 @@ def updatereport(request,contact):
 
         # Save the updated record
         existing_report.save()
-        
-        
+
         # Retrieve Report_Detail records related to the Report
         report_details = Report_Detail.objects.filter(report=existing_report)
 
-        # Update Report_Detail records
-        for report_detail in report_details:
-            investigation_name = report_detail.investigation  # Retrieve the investigation name
+        # Delete existing Report_Detail records
+        report_details.delete()
 
-            # Get the updated result from the form using the input name
-            result = request.POST.get(f'result_{existing_report.contact}_{investigation_name.replace(" ", "_")}')
+        # Create and save new Report_Detail records
+        test_dropdown = request.POST.get('test_list')
+        investigations = request.POST.getlist('investigation[]')
+        results = request.POST.getlist('result[]')
+        references = request.POST.getlist('references[]')
+        units = request.POST.getlist('unit[]')
 
-            # Update the result in the Report_Detail model
-            report_detail.results = result
+        for i in range(len(investigations)):
+            investigation_value = investigations[i]
+            result_value = results[i]
+            reference_value = references[i]
+            unit_value = units[i]
 
-            # Save the updated Report_Detail record
-            report_detail.save()
+            # Create a new Report_Detail instance with the correct test_list value
+            new_report_detail = Report_Detail(
+                report=existing_report,
+                test_list=test_dropdown,
+                investigation=investigation_value,
+                results=result_value,
+                reference_value=reference_value,
+                unit=unit_value
+            )
+            # Save the new instance
+            new_report_detail.save()
 
         return HttpResponse("Report and Report_Detail updated successfully")
-    else:
-        # Retrieve the existing Report record for rendering in the form
+
+    elif request.method == 'GET':
+        report_data = Report.objects.all()
         existing_report = get_object_or_404(Report, contact=contact)
-        return render(request, 'updateReport.html', {'report': existing_report})
+        reportdetail_data = Report_Detail.objects.filter(report=existing_report)
+
+        context = {
+            'report_data': report_data,
+            'reportdetail_data': reportdetail_data,
+            'report': existing_report,
+        }
+        return render(request, 'updateReport.html', context)
+
     
 def techlogin(request):
     if request.method == 'POST':
