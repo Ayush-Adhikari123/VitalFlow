@@ -35,6 +35,15 @@
   margin-left: 0px;
   border: none;
 }
+.btn-primary.with-icon-contact {
+  background-image: url("/static/images/contact.png");
+  background-color: rgba(0, 0, 0, 0);
+  background-size: cover;
+  margin-top: 10px;
+  padding: 50px;
+  margin-left: 0px;
+  border: none;
+}
 
 .btn-primary.with-icon-logout {
   background-image: url("/static/images/logout.png");
@@ -61,6 +70,16 @@
 }
 
 .btn-primary.with-icon-idk:hover {
+  background-color: #ffffff;
+  border-radius: 25px;
+  box-shadow: 6px 6px 10px #555;
+}
+.btn-primary.with-icon-profile:hover {
+  background-color: #ffffff;
+  border-radius: 25px;
+  box-shadow: 6px 6px 10px #555;
+}
+.btn-primary.with-icon-contact:hover {
   background-color: #ffffff;
   border-radius: 25px;
   box-shadow: 6px 6px 10px #555;

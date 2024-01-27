@@ -146,8 +146,6 @@ def createreport(request):
 
 @login_required  
 def viewreport(request):
-    
-
   if request.method == 'GET':
         report_data = Report.objects.all()  # Fetch all data from TechAdd model
         context = {
