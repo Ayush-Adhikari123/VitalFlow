@@ -189,13 +189,13 @@ def createreport(request):
 
 @login_required  
 def viewreport(request):
-  if request.method == 'GET':
+    if request.method == 'GET':
         report_data = Report.objects.all()  # Fetch all data from TechAdd model
         context = {
             'report_data': report_data,
         }
         return render(request, 'viewreport.html', context)
-  else:
+    else:
         return HttpResponse('Invalid request or empty contact field')
 
 
