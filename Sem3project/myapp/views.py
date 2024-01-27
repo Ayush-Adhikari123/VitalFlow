@@ -384,6 +384,14 @@ def techpannel(request):
   else:
         return HttpResponse('Invalid request or empty contact field')
     
+def delete_techrecord(request, record_id):
+    if request.method == 'POST':
+        record = get_object_or_404(TechAdd, pk=record_id)
+        record.delete()
+        return JsonResponse({'message': 'Record deleted successfully'}, status=200)
+    else:
+        return JsonResponse({'error': 'Invalid request'}, status=400)
+    
 def book_home_service(request):
     if request.method == 'POST':
         # Get form data from POST request
