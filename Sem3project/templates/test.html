@@ -284,11 +284,25 @@
           <input type="text" value="{{ report_data.patient_Name }}" id="userInput1" readonly class="no-border"
             style="width: 150px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; background-color: #70b6c6;">
         </div>
-
-        <div class="col-5">
-          <label for="userInput" style="font-size: 12px; font-weight: bold;">Contact :</label>
-          <input type="text" value="{{ report_data.contact }}" id="userInput1" readonly class="no-border"
-            style="width: 150px; height: 15px; border: none; font-size: 12px; margin-buttom:20px;  margin-left:15px; background-color: #70b6c6;">
+          <div class="container4">
+            <div class="view-7 d-flex mt-2 justify-content-end">
+              <div class="save1 me-3">
+                <label for="userInput" style="font-size: 15px; font-weight: bold;">SAVE AS :-</label>
+              </div>
+              <div class="save2 me-3 ">
+                <button type="button" class="download pdf" >
+                  PDF
+                </button>
+              </div>
+              <div class="save3 me-3">
+                <button type="button" class="download pdf" >
+                  IMAGE
+                </button>
+              </div>
+              
+            </div>
+  
+          </div>
         </div>
       </div>
       <div class="d-flex  justify-content-around ">
