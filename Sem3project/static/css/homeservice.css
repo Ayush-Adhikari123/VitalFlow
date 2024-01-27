@@ -1,19 +1,21 @@
-.body {
+body {
   background-image: url("/static/images/homeservice.png");
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
-
 .container {
-  max-width: 525px; /* Set maximum width */
-  width: 90%; /* Adjust width as needed */
-  background: #6290E8;
+  max-width: 525px;
+  width: 90%;
+  background-color: rgba(255, 255, 255, 0.5);
   position: absolute;
   top: 2%;
   left: 50%;
   transform: translateX(-50%);
   border-radius: 20px;
   padding: 20px;
-  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  box-sizing: border-box;
 }
 
 .container::after {
@@ -37,7 +39,6 @@ label {
   margin: 10px 0 5px;
   color: #000000;
   font-size: 19px;
-  
 }
 
 .input-field {
@@ -57,15 +58,14 @@ label {
   border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 14px;
-
 }
 
 .input-field textarea {
-  resize: none; 
-  height: 100px; 
+  resize: none;
+  height: 100px;
 }
 
-button{
+button {
   justify-content: center;
   background-color: #00ffa1 !important;
 
@@ -78,10 +78,9 @@ button{
   margin-top: 30px;
 }
 
-.invalid-feedback{
+.invalid-feedback {
   display: flex;
   align-items: center;
 
   margin-bottom: 15px;
-
 }
