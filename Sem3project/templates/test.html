@@ -46,7 +46,7 @@
       /* Set your desired box color */
       border-radius: 20px;
       /* Set your desired border radius */
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      {% comment %} box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); {% endcomment %}
       /* Optional: Add a box shadow for depth */
       padding: 20px;
       /* Set your desired padding */
@@ -75,7 +75,7 @@
       /* Set your desired width */
       border: solid;
       height: 610px;
-      BACKGROUND-COLOR: MISTYROSE;
+  
     }
 
     .rounded-box3 {
@@ -144,23 +144,7 @@
     }
 
 
-      {
-      % comment %
-    }
 
-    .table-scroll thead th {
-      position: sticky;
-      top: 0px;
-    }
-
-    .table-scroll {
-      overflow-y: scroll;
-      height: 470px;
-    }
-
-      {
-      % endcomment %
-    }
 
     .modal-dialog1 {
       /* background-image: url('/static/images/viewreport.png'); */
@@ -195,27 +179,12 @@
       width: 250px;
       height: 250px;
 
-        {
-        % comment %
-      }
-
-      margin: auto;
-
-        {
-        % endcomment %
-      }
-
-        {
-        % comment %
-      }
-
-      margin-left:151px;
-
-        {
-        % endcomment %
-      }
+  
 
 
+    }
+    .table>:not(caption)>*>* {
+      border-bottom-width:0px; !important
     }
 
     .container1 {
@@ -256,12 +225,7 @@
       margin-left: 300px;
     }
 
-    .elem {}
-
-    .table>:not(caption)>*>* {
-      background-color: rgba(0, 0, 0, 0.1);
-      !important;
-    }
+  
 
     .no-border {
       border: none;
@@ -356,10 +320,10 @@
     </div>
     <div class="container1">
       <div class="table-scroll">
-        <table class="table mt-5 mx-auto" style="width:90% ;">
+        <table class="table mt-5 mx-auto" style="width:90% ; border-bottom-width: 0px;">
           <thead>
             <tr>
-              <th scope="col">S.N</th>
+
               <th scope="col">INVESTIGATION</th>
               <th scope="col">RESULT</th>
               <th scope="col">REFERENCE VALUE</th>
@@ -369,7 +333,7 @@
           <tbody>
             {% for detail in report_detail_data %}
             <tr class="no-click">
-              <th scope="row">{{ forloop.counter }}</th>
+
               <td>{{ detail.investigation }}</td>
               <td>{{ detail.results }}</td>
               <td>{{ detail.reference_value }}</td>

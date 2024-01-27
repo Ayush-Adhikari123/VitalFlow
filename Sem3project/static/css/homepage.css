@@ -548,7 +548,7 @@ h1 {
 }
 
 .feedback-button {
-  margin-top: 20px; /* Adjust top margin as needed */
+  margin-top: 40px; /* Adjust top margin as needed */
   padding: 10px;
   background-color: var(--primary);
   color: #fff;
