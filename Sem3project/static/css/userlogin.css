@@ -1,3 +1,5 @@
+/* Global Styles */
+
 body {
   font-family: Arial, sans-serif;
   background-color: #efefef;
@@ -8,12 +10,7 @@ body {
   position: relative;
 }
 
-.login-container {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 40px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+/* Header Styles */
 
 .header {
   background-color: #6290e8;
@@ -33,7 +30,25 @@ body {
   color: #fff;
   text-align: center;
   margin: 0;
+  font-size: 2.5rem;
+  font-weight: 500;
+  line-height: 1.2;
 }
+
+/* Login Container Styles */
+
+.login-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 450px;
+  width: 100%;
+  position: relative;
+  margin-top: 15px;
+}
+
+/* Form Styles */
 
 .form-group {
   margin-bottom: 25px;
@@ -52,6 +67,8 @@ input {
   box-sizing: border-box;
 }
 
+/* Button Styles */
+
 .login-button,
 .back-button {
   background-color: #8f94fd;
@@ -61,13 +78,4 @@ input {
   border-radius: 15px;
   cursor: pointer;
   margin-right: 10px;
-}
-
-.bod {
-  display: flex;
-  justify-content: center;
-}
-
-.h2 {
-  font-size: 2rem;
 }

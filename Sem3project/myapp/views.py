@@ -1,18 +1,16 @@
-
-
-
 import json
-
 from django.core.mail import EmailMultiAlternatives, send_mail
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import HttpResponse, get_object_or_404, render
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.views.decorators.csrf import csrf_exempt
-from myapp.models import (Contact, Feedback, Report, Report_Detail, TechAdd,
-                          homeservice, technicianlogin)
-
-from .forms import Report_DetailForm  # Import the Report_DetailForm
+from myapp.models import (Contact, Feedback, Report, Report_Detail, TechAdd,homeservice, technicianlogin)
+from .forms import Report_DetailForm 
+from django.contrib import messages
+from django.contrib.auth import (authenticate, login, logout,update_session_auth_hash)
+from django.contrib.auth.forms import (AuthenticationForm, PasswordChangeForm,SetPasswordForm, UserChangeForm)
+from .forms import EditadminprofileForm, EditsuperadminprofileForm
 
 
 def index(request):
@@ -30,29 +28,10 @@ def index(request):
     print(feedback_detail_data)
     return render(request,'homepage.html',context)
 
-def about(request):
-    return HttpResponse('This is my about')
-
-def services(request):
-    return HttpResponse('This is my service')
-
-def home(request):
-    return HttpResponse("This is Home Page")
 
 def availabletest(request):
    return render(request,'AvailableTest.html')
 
-def report(request):
-    return HttpResponse("This is Report Page")
-
-def package(request):
-    return HttpResponse("This is Package Page")
-
-def feedback(request):
-    return HttpResponse("This is Feedback Page")
-
-def about(request):
-    return HttpResponse("This is About Page")
 
 def contact(request):
 
@@ -211,23 +190,8 @@ def viewreport(request):
     return render(request,'viewreport.html')
 
 
-def packages(request):
-    return render(request,'packages.html')
-
 def adminlogin(request):
     return render(request,"adminlogin.html")
-
-
-# =====================================================================================
-
-from django.contrib import messages
-from django.contrib.auth import (authenticate, login, logout,
-                                 update_session_auth_hash)
-from django.contrib.auth.forms import (AuthenticationForm, PasswordChangeForm,
-                                       SetPasswordForm, UserChangeForm)
-
-from .forms import EditadminprofileForm, EditsuperadminprofileForm
-
 
 # login function for admin
 def admin_login(request):
@@ -287,7 +251,6 @@ def admin_password(request):
      return HttpResponseRedirect('/adminlogin/')
   
 
-  # =========================================================================================
 def updatereport(request,contact):
     if request.method == 'POST':
         # Retrieve the existing record from the database
@@ -354,7 +317,6 @@ def techlogin(request):
 def book_service(request):
     return render(request,'homeService.html')
 
-# ================================================================= tech profile
 def techprofile(request):
       if request.method == "POST":
          fm= EditadminprofileForm(request.POST, instance= request.user)
@@ -557,7 +519,6 @@ def delete_service(request, service_id):
        
 
 
-#   ================================================srijan
 def test(request):
     if request.method == 'POST':
         patient_Name = request.POST.get('patient_Name', '')
@@ -589,8 +550,6 @@ def test(request):
 def userlogin(request):
     return render(request,'userlogin.html')
 
-def diagnostic(request):
-    return render(request,'diagnostic.html')
 
 
 
