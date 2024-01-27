@@ -11,6 +11,7 @@ from django.contrib import messages
 from django.contrib.auth import (authenticate, login, logout,update_session_auth_hash)
 from django.contrib.auth.forms import (AuthenticationForm, PasswordChangeForm,SetPasswordForm, UserChangeForm)
 from .forms import EditadminprofileForm, EditsuperadminprofileForm
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -75,7 +76,8 @@ def contact(request):
 
 def adminprofile(request):
     return render(request,'adminprofile.html')
-      
+
+@login_required        
 def createreport(request):
     
     options = {
@@ -185,7 +187,7 @@ def createreport(request):
     return render(request, 'createReport.html')
 
 
-
+@login_required  
 def viewreport(request):
     return render(request,'viewreport.html')
 
@@ -204,7 +206,7 @@ def admin_login(request):
           user = authenticate(username=uname,password=upass)
           if user is not None:
               login(request,user)
-              messages.success(request,'LOGED IN SUCCESSFULLY🤯🤯🤯')
+              messages.success(request,'LOGED IN SUCCESSFULLY')
               return HttpResponseRedirect('/adminprofile/')
     else:
       fm=AuthenticationForm()
@@ -250,7 +252,7 @@ def admin_password(request):
   else:
      return HttpResponseRedirect('/adminlogin/')
   
-
+@login_required  
 def updatereport(request,contact):
     if request.method == 'POST':
         # Retrieve the existing record from the database
@@ -296,7 +298,6 @@ def updatereport(request,contact):
         existing_report = get_object_or_404(Report, contact=contact)
         return render(request, 'updateReport.html', {'report': existing_report})
     
-
 def techlogin(request):
     if request.method == 'POST':
         # Extract form data from the POST request
@@ -312,8 +313,6 @@ def techlogin(request):
     else:
         return render(request,'techlogin.html')
     
-
-
 def book_service(request):
     return render(request,'homeService.html')
 
@@ -326,8 +325,8 @@ def techprofile(request):
       else:
           fm =EditadminprofileForm(instance=request.user)
       return render(request,'techprofile.html',{'name': request.user,'form':fm})
-    
-  
+
+@login_required      
 def techadd(request):
   if request.method == 'POST':
         first_name = request.POST.get('first_name')
@@ -393,7 +392,6 @@ def techadd(request):
       
     return render(request, 'techadd.html')
   
-
 def techpannel(request):
   
   if request.method == 'GET':
@@ -405,9 +403,6 @@ def techpannel(request):
   else:
         return HttpResponse('Invalid request or empty contact field')
     
-
-
-
 def book_home_service(request):
     if request.method == 'POST':
         # Get form data from POST request
@@ -437,10 +432,8 @@ def book_home_service(request):
 
     return render(request, 'homeService.html') 
 
-       
-
-    
-
+ 
+@login_required
 def homeservicepannel(request):
     if request.method == 'GET':
         # Filter the data where 'done_column' is 0
@@ -452,8 +445,6 @@ def homeservicepannel(request):
         return render(request, 'homeservicepannel.html', context)
     else:
         return HttpResponse('Invalid request or empty contact field')
-  
-
 
 def update_done_status(request, service_id,tempmail):
     if request.method == 'POST':
@@ -550,9 +541,7 @@ def test(request):
 def userlogin(request):
     return render(request,'userlogin.html')
 
-
-
-
+@login_required  
 def contactpannel(request):
   
   if request.method == 'GET':
@@ -574,7 +563,7 @@ def delete_record(request, record_id):
 
 
 
-
+@login_required  
 def feedbackpannel(request):
     if request.method == 'GET':
         
