@@ -317,13 +317,13 @@
         data: formData,
         success: function (response) {
             // Handle success response
-            console.log(response);
+            window.location.href = '/viewreport';
             alert("Report updated successfully!");
         },
         error: function (error) {
             // Handle error response
             console.error("Error updating report:", error);
-            alert("Error updating report. Please try again.");
+            alert("Please! Enter the updated record date.");
         }
     });
      });
