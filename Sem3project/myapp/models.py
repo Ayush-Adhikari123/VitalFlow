@@ -64,5 +64,5 @@ class Feedback(models.Model):
     email =models.EmailField(null=True)
     message =models.CharField( max_length=500)
 
-    show = models.BooleanField(default=True)
+    show = models.BooleanField(default=False)
 
