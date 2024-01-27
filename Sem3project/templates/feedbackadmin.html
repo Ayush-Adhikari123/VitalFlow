@@ -1,54 +1,36 @@
 {% extends "admincore.html" %} {% block navbody %}
 <div class="top-buttons">
   <a href="/homeservicepannel">
-    <button class="btn btn-primary with-icon-idk"></button
-  ></a>
+    <button class="btn btn-primary with-icon-idk"></button></a>
 </div>
 <div class="top-buttons">
-  <a href=""> <button class="btn btn-primary with-icon-feedback"></button></a>
+  <a href="/feedbackpannel"> <button class="btn btn-primary with-icon-feedback"></button></a>
 </div>
 <div class="top-buttons">
-  <a href="techadd">
-    <button class="btn btn-primary with-icon-addtech"></button
-  ></a>
+  <a href="/techadd">
+    <button class="btn btn-primary with-icon-addtech"></button></a>
 </div>
 <div class="top-buttons">
-  <button class="btn btn-primary with-icon-profile"></button>
+  <a href="/adminprofile"> <button class="btn btn-primary with-icon-profile"></button></a>
 </div>
 <div class="top-buttons">
-  <button
-    class="btn btn-primary with-icon-logout"
-    onclick="showLoadingScreen()"
-  ></button>
+  <button class="btn btn-primary with-icon-logout" onclick="showLoadingScreen()"></button>
 </div>
-
-<!-- <div class="loading-screen" id="loadingScreen">
-    <img src="/static/images/loding.gif" alt="">
-</div> -->
 {% endblock navbody %} {% block body %}
 <link rel="stylesheet" href="/static/css/feedbackadmin.css" />
 
 <head>
-  <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>VitalFlow</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="/static/techpannel.css" />-->
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-  />
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
   <style>
     #map {
       height: 400px;
     }
+
     .map-container {
-      height: 200px; /* Set a fixed height for the map container */
+      height: 200px;
+      /* Set a fixed height for the map container */
     }
   </style>
 </head>
@@ -75,11 +57,7 @@
         <td width="200">{{ feedback.message }}</td>
         <td id="actions{{ feedback.id }}"></td>
         <td>
-          <button
-            class="btn btn-primary delete"
-            id="delete"
-            onclick="deleteFeedback({{ feedback.id }})"
-          >
+          <button class="btn btn-primary delete" id="delete" onclick="deleteFeedback({{ feedback.id }})">
             Delete
           </button>
         </td>
@@ -91,100 +69,101 @@
 
     function hideFeed(feed_id) {
 
-        if (confirm('Are you sure you want to hide this feedback?')) {
-            fetch(`/hide_feed/${feed_id}/`, {
-                method: 'POST',
-                headers: {
-                    'X-CSRFToken': '{{ csrf_token }}',
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(response => {
-                if (response.ok) {
-                    // Reload the page to reflect changes
-                    window.location.reload();
-                } else {
-                    console.error('Failed to delete record');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        }
+      if (confirm('Are you sure you want to hide this feedback?')) {
+        fetch(`/hide_feed/${feed_id}/`, {
+          method: 'POST',
+          headers: {
+            'X-CSRFToken': '{{ csrf_token }}',
+            'Content-Type': 'application/json'
+          }
+        })
+          .then(response => {
+            if (response.ok) {
+              // Reload the page to reflect changes
+              window.location.reload();
+            } else {
+              console.error('Failed to delete record');
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+      }
     }
 
     function showFeed(feed_id) {
 
-        if (confirm('Are you sure you want to show this feedback?')) {
-            fetch(`/show_feed/${feed_id}/`, {
-                method: 'POST',
-                headers: {
-                    'X-CSRFToken': '{{ csrf_token }}',
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(response => {
-                if (response.ok) {
-                    // Reload the page to reflect changes
-                    window.location.reload();
-                } else {
-                    console.error('Failed to delete record');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        }
+      if (confirm('Are you sure you want to show this feedback?')) {
+        fetch(`/show_feed/${feed_id}/`, {
+          method: 'POST',
+          headers: {
+            'X-CSRFToken': '{{ csrf_token }}',
+            'Content-Type': 'application/json'
+          }
+        })
+          .then(response => {
+            if (response.ok) {
+              // Reload the page to reflect changes
+              window.location.reload();
+            } else {
+              console.error('Failed to delete record');
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+      }
     }
 
     function deleteFeedback(feedId) {
-        if (confirm('Are you sure you want to delete this feedback?')) {
-            fetch(`/delete_feed/${feed_id}/`, {
-                method: 'POST',
-                headers: {
-                    'X-CSRFToken': '{{ csrf_token }}',
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(response => {
-                if (response.ok) {
-                    // Reload the page to reflect changes
-                    window.location.reload();
-                } else {
-                    console.error('Failed to delete record');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        }
+      if (confirm('Are you sure you want to delete this feedback?')) {
+        fetch(`/delete_feed/${feed_id}/`, {
+          method: 'POST',
+          headers: {
+            'X-CSRFToken': '{{ csrf_token }}',
+            'Content-Type': 'application/json'
+          }
+        })
+          .then(response => {
+            if (response.ok) {
+              // Reload the page to reflect changes
+              window.location.reload();
+            } else {
+              console.error('Failed to delete record');
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+      }
 
     }
 
     document.addEventListener("DOMContentLoaded", function () {
-        {% for feedback in feedback_data %}
-            var showButton{{ feedback.id }} = document.createElement("button");
-            showButton{{ feedback.id }}.className = "btn btn-primary done";
-            showButton{{ feedback.id }}.innerHTML = "Show";
-            showButton{{ feedback.id }}.addEventListener("click", function () {
-                showFeed({{ feedback.id }});
+      {% for feedback in feedback_data %}
+      var showButton{{ feedback.id }
+    } = document.createElement("button");
+            showButton{ { feedback.id } }.className = "btn btn-primary done";
+            showButton{ { feedback.id } }.innerHTML = "Show";
+            showButton{ { feedback.id } }.addEventListener("click", function () {
+      showFeed({{ feedback.id }});
             });
 
-            var hideButton{{ feedback.id }} = document.createElement("button");
-            hideButton{{ feedback.id }}.className = "btn btn-primary delete";
-            hideButton{{ feedback.id }}.innerHTML = "Hide";
-            hideButton{{ feedback.id }}.addEventListener("click", function () {
-                hideFeed({{ feedback.id }});
+    var hideButton{{ feedback.id }} = document.createElement("button");
+            hideButton{ { feedback.id } }.className = "btn btn-primary delete";
+            hideButton{ { feedback.id } }.innerHTML = "Hide";
+            hideButton{ { feedback.id } }.addEventListener("click", function () {
+      hideFeed({{ feedback.id }});
             });
 
-            var actionsCell{{ feedback.id }} = document.getElementById("actions{{ feedback.id }}");
+    var actionsCell{{ feedback.id }} = document.getElementById("actions{{ feedback.id }}");
 
-            {% if feedback.show %}
-                actionsCell{{ feedback.id }}.appendChild(hideButton{{ feedback.id }});
-            {% else %}
-                actionsCell{{ feedback.id }}.appendChild(showButton{{ feedback.id }});
-            {% endif %}
-        {% endfor %}
+    {% if feedback.show %}
+                actionsCell{ { feedback.id } }.appendChild(hideButton{{ feedback.id }});
+    {% else %}
+                actionsCell{ { feedback.id } }.appendChild(showButton{{ feedback.id }});
+    {% endif %}
+    {% endfor %}
     });
   </script>
 </body>
