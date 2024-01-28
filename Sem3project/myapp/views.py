@@ -155,6 +155,20 @@ def viewreport(request):
     else:
         return HttpResponse('Invalid request or empty contact field')
 
+def delete_report(request, contact):
+    if request.method == 'POST':
+        report = Report.objects.get(contact=contact)
+        rp_id = report.id
+        report.delete()
+
+        report_detail = Report_Detail.objects.get(report_id=rp_id)
+        report_detail.delete()
+
+
+
+        return render(request,'viewreport.html')
+
+    return JsonResponse({'message': 'Invalid request method'}, status=405)
 
 def adminlogin(request):
     return render(request,"adminlogin.html")
