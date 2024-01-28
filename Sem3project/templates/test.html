@@ -296,128 +296,128 @@
           <input type="text" value="{{ report_data.patient_Name }}" id="userInput1" readonly class="no-border"
             style="width: 150px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; background-color: #70b6c6;">
         </div>
-          <div class="container4">
-            <div class="view-7 d-flex mt-2 justify-content-end">
-              <div class="save1 me-3">
-                <label for="userInput" style="font-size: 15px; font-weight: bold;">SAVE AS :-</label>
-              </div>
-              <div class="save2 me-3 ">
-                <button type="button" class="download pdf" >
-                  PDF
-                </button>
-              </div>
-              <div class="save3 me-3">
-                <button type="button" class="download pdf" >
-                  IMAGE
-                </button>
-              </div>
-              
+        <div class="container4">
+          <div class="view-7 d-flex mt-2 justify-content-end">
+            <div class="save1 me-3">
+              <label for="userInput" style="font-size: 15px; font-weight: bold;">SAVE AS :-</label>
             </div>
-  
+            <div class="save2 me-3 ">
+              <button type="button" class="download pdf">
+                PDF
+              </button>
+            </div>
+            <div class="save3 me-3">
+              <button type="button" class="download pdf">
+                IMAGE
+              </button>
+            </div>
+
           </div>
-        </div>
-      </div>
-      <div class="d-flex  justify-content-around ">
-        <div class="col-5 ms-5 ">
-          <label for="userInput px-0" style="font-size: 12px; font-weight: bold; ">Age :</label>
-          <input type="text" value="{{ report_data.age }}" id="userInput1" readonly class="no-border"
-            style="width: 150px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; margin-left:51px; background-color: #70b6c6; ">
-        </div>
 
-        <div class="col-5">
-          <label for="userInput" style="font-size: 12px; font-weight: bold;">Gender :</label>
-          <input type="text" value="{{ report_data.gender }}" id="userInput1" readonly class="no-border"
-            style="width: 150px; height: 15px; border: none; font-size: 12px; margin-buttom:20px;  margin-left:18px; background-color: #70b6c6;">
         </div>
-      </div>
-      <div class="d-flex  justify-content-around">
-        <div class="col-5 ms-5">
-          <label for="userInput" style="font-size: 12px; font-weight: bold; ">Address :</label>
-          <input type="text" value="{{ report_data.address }}" id="userInput1" readonly class="no-border"
-            style="width: 150px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; margin-left:28px; background-color: #70b6c6;">
-        </div>
-        <div class="col-5">
-          <label for="userInput" style="font-size: 12px; font-weight: bold;">Consultant:</label>
-          <input type="text" value="{{ report_data.consultant }}" id="userInput1" readonly class="no-border"
-            style="width: 150px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; background-color: #70b6c6;">
-        </div>
-
       </div>
     </div>
-    <div class="container1">
-      <div class="table-scroll">
-        <table class="table mt-5 mx-auto" style="width:90% ; border-bottom-width: 0px;">
-          <thead>
-            <tr>
+    <div class="d-flex  justify-content-around ">
+      <div class="col-5 ms-5 ">
+        <label for="userInput px-0" style="font-size: 12px; font-weight: bold; ">Age :</label>
+        <input type="text" value="{{ report_data.age }}" id="userInput1" readonly class="no-border"
+          style="width: 150px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; margin-left:51px; background-color: #70b6c6; ">
+      </div>
 
-              <th scope="col">INVESTIGATION</th>
-              <th scope="col">RESULT</th>
-              <th scope="col">REFERENCE VALUE</th>
-              <th scope="col">UNIT</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for detail in report_detail_data %}
-            <tr class="no-click">
-
-              <td>{{ detail.investigation }}</td>
-              <td>{{ detail.results }}</td>
-              <td>{{ detail.reference_value }}</td>
-              <td>{{ detail.unit }}</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+      <div class="col-5">
+        <label for="userInput" style="font-size: 12px; font-weight: bold;">Gender :</label>
+        <input type="text" value="{{ report_data.gender }}" id="userInput1" readonly class="no-border"
+          style="width: 150px; height: 15px; border: none; font-size: 12px; margin-buttom:20px;  margin-left:18px; background-color: #70b6c6;">
+      </div>
+    </div>
+    <div class="d-flex  justify-content-around">
+      <div class="col-5 ms-5">
+        <label for="userInput" style="font-size: 12px; font-weight: bold; ">Address :</label>
+        <input type="text" value="{{ report_data.address }}" id="userInput1" readonly class="no-border"
+          style="width: 150px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; margin-left:28px; background-color: #70b6c6;">
+      </div>
+      <div class="col-5">
+        <label for="userInput" style="font-size: 12px; font-weight: bold;">Consultant:</label>
+        <input type="text" value="{{ report_data.consultant }}" id="userInput1" readonly class="no-border"
+          style="width: 150px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; background-color: #70b6c6;">
       </div>
 
     </div>
+  </div>
+  <div class="container1">
+    <div class="table-scroll">
+      <table class="table mt-5 mx-auto" style="width:90% ; border-bottom-width: 0px;">
+        <thead>
+          <tr>
 
-    <div class="container2 ">
+            <th scope="col">INVESTIGATION</th>
+            <th scope="col">RESULT</th>
+            <th scope="col">REFERENCE VALUE</th>
+            <th scope="col">UNIT</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for detail in report_detail_data %}
+          <tr class="no-click">
 
-      <div class="view-5 d-flex mt-1 justify-content-around">
-        <div>
-          <div><img src="/static/images/Signature1.png" height="50" width="100" alt="Your Image"> </div>
-          <hr class="line">
-          <label for="userInput" style="font-size: 12px; font-weight: bold;">LAB TECHNICIAN</label>
-        </div>
+            <td>{{ detail.investigation }}</td>
+            <td>{{ detail.results }}</td>
+            <td>{{ detail.reference_value }}</td>
+            <td>{{ detail.unit }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
 
-        <div>
-          <div><img src="/static/images/Signature2.png" class="mx-auto d-block" height="50" width="100"
-              alt="Your Image"> </div>
-          <hr class="line">
-          <label for="userInput" style="font-size: 12px; font-weight: bold;">MEDICAL TECHNOLOGIES</label>
-        </div>
+  </div>
 
-        <div>
-          <div><img src="/static/images/Signature4.png" class="mx-auto d-block" height="50" width="100"
-              alt="Your Image"> </div>
-          <hr class="line">
-          <label for="userInput" style="font-size: 12px; font-weight: bold;">PATHOLOGIST</label>
-        </div>
+  <div class="container2 ">
 
-
+    <div class="view-5 d-flex mt-1 justify-content-around">
+      <div>
+        <div><img src="/static/images/Signature1.png" height="50" width="100" alt="Your Image"> </div>
+        <hr class="line">
+        <label for="userInput" style="font-size: 12px; font-weight: bold;">LAB TECHNICIAN</label>
       </div>
+
+      <div>
+        <div><img src="/static/images/Signature2.png" class="mx-auto d-block" height="50" width="100" alt="Your Image">
+        </div>
+        <hr class="line">
+        <label for="userInput" style="font-size: 12px; font-weight: bold;">MEDICAL TECHNOLOGIES</label>
+      </div>
+
+      <div>
+        <div><img src="/static/images/Signature4.png" class="mx-auto d-block" height="50" width="100" alt="Your Image">
+        </div>
+        <hr class="line">
+        <label for="userInput" style="font-size: 12px; font-weight: bold;">PATHOLOGIST</label>
+      </div>
+
 
     </div>
 
-    <div class="container3">
-      <div class="view-6 d-flex mt-3 justify-content-around">
-        <div>
-          <label for="userInput" style="font-size: 12px; font-weight: bold; color: #FFFFFF;">Terms & Condition</label>
-        </div>
-        <div>
-          <label for="userInput" style="font-size: 12px; font-weight: bold; color: #FFFFFF;">Privacy Policies</label>
-        </div>
-        <div>
-          <label for="userInput" style="font-size: 12px; font-weight: bold; color: #FFFFFF;">vitalflow@gmaIl.com</label>
-        </div>
-        <div>
-          <label for="userInput" style="font-size: 12px; font-weight: bold; color: #FFFFFF;">2023 All Right
-            Reserved</label>
-        </div>
-      </div>
+  </div>
 
+  <div class="container3">
+    <div class="view-6 d-flex mt-3 justify-content-around">
+      <div>
+        <label for="userInput" style="font-size: 12px; font-weight: bold; color: #FFFFFF;">Terms & Condition</label>
+      </div>
+      <div>
+        <label for="userInput" style="font-size: 12px; font-weight: bold; color: #FFFFFF;">Privacy Policies</label>
+      </div>
+      <div>
+        <label for="userInput" style="font-size: 12px; font-weight: bold; color: #FFFFFF;">vitalflow@gmaIl.com</label>
+      </div>
+      <div>
+        <label for="userInput" style="font-size: 12px; font-weight: bold; color: #FFFFFF;">2023 All Right
+          Reserved</label>
+      </div>
     </div>
+
+  </div>
   </div>
   <div class="container4">
     <div class="view-7 d-flex mt-2 justify-content-end">
