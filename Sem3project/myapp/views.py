@@ -1,17 +1,23 @@
 import json
+
+from django.contrib import messages
+from django.contrib.auth import (authenticate, login, logout,
+                                 update_session_auth_hash)
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import (AuthenticationForm, PasswordChangeForm,
+                                       SetPasswordForm, UserChangeForm)
 from django.core.mail import EmailMultiAlternatives, send_mail
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import HttpResponse, get_object_or_404, render
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.views.decorators.csrf import csrf_exempt
-from myapp.models import (Contact, Feedback, Report, Report_Detail, TechAdd,homeservice, technicianlogin)
-from .forms import Report_DetailForm 
-from django.contrib import messages
-from django.contrib.auth import (authenticate, login, logout,update_session_auth_hash)
-from django.contrib.auth.forms import (AuthenticationForm, PasswordChangeForm,SetPasswordForm, UserChangeForm)
-from .forms import EditadminprofileForm, EditsuperadminprofileForm
-from django.contrib.auth.decorators import login_required
+
+from myapp.models import (Contact, Feedback, Report, Report_Detail, TechAdd,
+                          homeservice, technicianlogin)
+
+from .forms import (EditadminprofileForm, EditsuperadminprofileForm,
+                    Report_DetailForm)
 
 
 def index(request):
@@ -137,6 +143,7 @@ def createreport(request):
     return render(request, 'createReport.html')
 
 
+
 @login_required  
 def viewreport(request):
     if request.method == 'GET':
@@ -148,6 +155,20 @@ def viewreport(request):
     else:
         return HttpResponse('Invalid request or empty contact field')
 
+def delete_report(request, contact):
+    if request.method == 'POST':
+        report = Report.objects.get(contact=contact)
+        rp_id = report.id
+        report.delete()
+
+        report_detail = Report_Detail.objects.get(report_id=rp_id)
+        report_detail.delete()
+
+
+
+        return render(request,'viewreport.html')
+
+    return JsonResponse({'message': 'Invalid request method'}, status=405)
 
 def adminlogin(request):
     return render(request,"adminlogin.html")
