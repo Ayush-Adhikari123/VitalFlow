@@ -100,7 +100,7 @@
           <div class="d-flex  justify-content-between">
             <div class="ms-4">
               <label for="userInput" style="font-size: 12px; font-weight: bold;">Report Id:</label>
-              <input type="text" id="userInput1" value="{{ report_data.id }}"
+              <input type="text" id="userInput1 value="{{ detail.report_id }}""
                 style="width: 84px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; background-color: #70b6c6; ">
             </div>
             <div class="me-4">
@@ -112,9 +112,8 @@
           <div class="row">
             <div class="col-5 ms-5">
               <label for="userInput" style="font-size: 12px; font-weight: bold;">Patient Name:</label>
-              <input type="text" id="userInput3" value="{{ report_data.patient_Name }}"
-                style="width: 84px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; background-color: #70b6c6;"
-                value="{{ report_data.patient_Name }}">
+              <input type="text" id="userInput1"
+                style="width: 84px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; background-color: #70b6c6;"   value="{{ report_data.patient_Name }}">
             </div>
 
             <div class="col-5">
@@ -243,15 +242,15 @@
               
 
             </tr>
-          </thead>
-          <tbody>
+        </thead>
+        <tbody>
             {% for detail in report_data %}
             <tr class="no-click">
-              <th scope="row">{{ forloop.counter }}</th>
-              <td>{{ detail.patient_Name }}</td>
-              <td>{{ detail.age }}</td>
-              <td>{{ detail.contact }}</td>
-              <td>{{ detail.gender }}</td>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ detail.patient_Name }}</td>
+                <td>{{ detail.age }}</td>
+                <td>{{ detail.contact }}</td>
+                <td>{{ detail.gender }}</td>
 
                   <td>
 
@@ -277,7 +276,7 @@
               </td>
             </tr>
             {% endfor %}
-          </tbody>
+        </tbody>
         </table>
 
         <form id="viewForm" method="POST" action="{% url 'test' %}">
@@ -343,8 +342,8 @@
       function updateRecord(contact) {
         // Redirect to the update report page when the Edit button is clicked
         window.location.href = `/updatereport/${contact}/`;
-      }
-
+    }
+    
       function myFunction() {
         document.getElementById('foo').style.cssText = ''
       }

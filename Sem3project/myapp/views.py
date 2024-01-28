@@ -146,13 +146,13 @@ def createreport(request):
 
 @login_required  
 def viewreport(request):
-  if request.method == 'GET':
+    if request.method == 'GET':
         report_data = Report.objects.all()  # Fetch all data from TechAdd model
         context = {
             'report_data': report_data,
         }
         return render(request, 'viewreport.html', context)
-  else:
+    else:
         return HttpResponse('Invalid request or empty contact field')
 
 
@@ -217,11 +217,11 @@ def admin_password(request):
      return HttpResponseRedirect('/adminlogin/')
   
 @login_required  
-def updatereport(request,contact):
+def updatereport(request, contact):
     if request.method == 'POST':
         # Retrieve the existing record from the database
         existing_report = get_object_or_404(Report, contact=contact)
-        
+
         # Update the fields with the new values from the form
         existing_report.patient_Name = request.POST.get('name')
         existing_report.age = request.POST.get('age')
@@ -239,52 +239,52 @@ def updatereport(request,contact):
 
         # Save the updated record
         existing_report.save()
-        
-        
+
         # Retrieve Report_Detail records related to the Report
         report_details = Report_Detail.objects.filter(report=existing_report)
 
-        # Update Report_Detail records with the new result values
-        result_values = request.POST.getlist('result_values')
+        # Delete existing Report_Detail records
+        report_details.delete()
 
-        for i, report_detail in enumerate(report_details):
-    # Check if there are enough values in result_values
-            if i < len(result_values):
-                result_value = result_values[i]
-                # Update the results field
-                report_detail.results = result_value
-                report_detail.save()
+        # Create and save new Report_Detail records
+        test_dropdown = request.POST.get('test_list')
+        investigations = request.POST.getlist('investigation[]')
+        results = request.POST.getlist('result[]')
+        references = request.POST.getlist('references[]')
+        units = request.POST.getlist('unit[]')
 
+        for i in range(len(investigations)):
+            investigation_value = investigations[i]
+            result_value = results[i]
+            reference_value = references[i]
+            unit_value = units[i]
+
+            # Create a new Report_Detail instance with the correct test_list value
+            new_report_detail = Report_Detail(
+                report=existing_report,
+                test_list=test_dropdown,
+                investigation=investigation_value,
+                results=result_value,
+                reference_value=reference_value,
+                unit=unit_value
+            )
+            # Save the new instance
+            new_report_detail.save()
 
         return HttpResponse("Report and Report_Detail updated successfully")
-    
-    
+
     elif request.method == 'GET':
-        report_data = Report.objects.all()  # Fetch all data from Report model
+        report_data = Report.objects.all()
         existing_report = get_object_or_404(Report, contact=contact)
-        reportdetail_data = Report_Detail.objects.filter(report=existing_report)  # Fetch all data from Report model
-        
+        reportdetail_data = Report_Detail.objects.filter(report=existing_report)
+
         context = {
             'report_data': report_data,
             'reportdetail_data': reportdetail_data,
-            'report': existing_report,  # Include the existing_report in the context
+            'report': existing_report,
         }
         return render(request, 'updateReport.html', context)
 
-def delete_report(request, contact):
-    if request.method == 'POST':
-        report = Report.objects.get(contact=contact)
-        rp_id = report.id
-        report.delete()
-
-        report_detail = Report_Detail.objects.get(report_id=rp_id)
-        report_detail.delete()
-
-        
-
-        return render(request,'viewreport.html')
-    
-    return JsonResponse({'message': 'Invalid request method'}, status=405)
     
 def techlogin(request):
     if request.method == 'POST':
@@ -390,6 +390,14 @@ def techpannel(request):
         return render(request, 'techpannel.html', context)
   else:
         return HttpResponse('Invalid request or empty contact field')
+    
+def delete_techrecord(request, record_id):
+    if request.method == 'POST':
+        record = get_object_or_404(TechAdd, pk=record_id)
+        record.delete()
+        return JsonResponse({'message': 'Record deleted successfully'}, status=200)
+    else:
+        return JsonResponse({'error': 'Invalid request'}, status=400)
     
 def book_home_service(request):
     if request.method == 'POST':

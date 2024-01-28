@@ -1,1 +1,83 @@
-@import url(contactpannel.css);
+
+
+body {
+    background-color: #f8f9fa;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+.rounded-box2 {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.table {
+    margin-top: 20px;
+}
+
+.table th,
+.table td {
+    text-align: center;
+}
+
+.table th {
+    background-color: #343a40;
+    color: #fff;
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table tbody tr:hover {
+    background-color: #e0e0e0;
+}
+
+.btn-Login {
+    margin-right: 5px;
+}
+
+.modal-content {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.modal-body {
+    text-align: center;
+}
+
+.header {
+    background-color: #343a40;
+    color: #fff;
+    padding: 10px 0;
+}
+
+.logo img {
+    max-height: 80px;
+}
+
+.company-name h1 {
+    font-size: 1.5em;
+    margin: 0;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+}
+.form-container {
+    position: absolute;
+    top: 161px; 
+    width: 1050px; 
+}
+
+  .form-all{
+    max-width: 100%;
+    display: flex;
+   justify-content: space-around;
+  }
