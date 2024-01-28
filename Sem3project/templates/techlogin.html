@@ -1,26 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
+{% extends "navbar.html" %}
+{% block body %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/tech.css">
 
-</head>
-
 <body>
-
-    <div class="header">
-        <div class="logo">
-            <img src="/static/Images/Logo.png" alt="Header Image" style="height: 100px;">
-        </div>
-        <div class="company-name">
-            <h1>VITAL FLOW<br>BIO-LAB</h1>
-        </div>
-    </div>
 
     <div class="bod my-5">
         <div class="container">
@@ -85,5 +71,4 @@
     </div>
 
 </body>
-
-</html>
+{% endblock body %}
