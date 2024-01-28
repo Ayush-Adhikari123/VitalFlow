@@ -67,10 +67,7 @@
         <td id="actions{{ feedback.id }}"></td>
         <td>
           <button
-            class="btn btn-primary delete"
-            id="delete"
-            onclick="deleteFeedback({{ feedback.id }})"
-          >
+            class="btn btn-primary delete"id="delete" onclick="deleteFeedback({{ feedback.id }})">
             Delete
           </button>
         </td>
@@ -154,29 +151,28 @@
 
     document.addEventListener("DOMContentLoaded", function () {
       {% for feedback in feedback_data %}
-      var showButton{{ feedback.id }
-    } = document.createElement("button");
-            showButton{ { feedback.id } }.className = "btn btn-primary done";
-            showButton{ { feedback.id } }.innerHTML = "Show";
-            showButton{ { feedback.id } }.addEventListener("click", function () {
-      showFeed({{ feedback.id }});
-            });
+        var showButton{{ feedback.id }} = document.createElement("button");
+        showButton{{ feedback.id }}.className = "btn btn-primary done";
+        showButton{{ feedback.id }}.innerHTML = "Show";
+        showButton{{ feedback.id }}.addEventListener("click", function () {
+          showFeed({{ feedback.id }});
+        });
 
-    var hideButton{{ feedback.id }} = document.createElement("button");
-            hideButton{ { feedback.id } }.className = "btn btn-primary delete";
-            hideButton{ { feedback.id } }.innerHTML = "Hide";
-            hideButton{ { feedback.id } }.addEventListener("click", function () {
-      hideFeed({{ feedback.id }});
-            });
+        var hideButton{{ feedback.id }} = document.createElement("button");
+        hideButton{{ feedback.id }}.className = "btn btn-primary delete";
+        hideButton{{ feedback.id }}.innerHTML = "Hide";
+        hideButton{{ feedback.id }}.addEventListener("click", function () {
+          hideFeed({{ feedback.id }});
+        });
 
-    var actionsCell{{ feedback.id }} = document.getElementById("actions{{ feedback.id }}");
+        var actionsCell{{ feedback.id }} = document.getElementById("actions{{ feedback.id }}");
 
-    {% if feedback.show %}
-                actionsCell{ { feedback.id } }.appendChild(hideButton{{ feedback.id }});
-    {% else %}
-                actionsCell{ { feedback.id } }.appendChild(showButton{{ feedback.id }});
-    {% endif %}
-    {% endfor %}
+        {% if feedback.show %}
+          actionsCell{{ feedback.id }}.appendChild(hideButton{{ feedback.id }});
+        {% else %}
+          actionsCell{{ feedback.id }}.appendChild(showButton{{ feedback.id }});
+        {% endif %}
+      {% endfor %}
     });
   </script>
 </body>
