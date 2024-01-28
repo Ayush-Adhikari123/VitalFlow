@@ -21,10 +21,9 @@
 </div> -->
 {% endblock navbody %}
 {% block body %}
-<link rel="stylesheet" href="/static/css/homeservicepannel.css">
+<link rel="stylesheet" href="/static/css/contactpannel.css">
 
 <body>
-
 
     <table class="table table-striped mt-5">
         <thead>
@@ -37,7 +36,7 @@
                 <th scope="col">Actions</th>
             </tr>
         </thead>
-           <tbody>
+        <tbody>
             {% for detail in contact_data %}
             <tr class="no-click">
                 <th scope="row">{{ forloop.counter }}</th>
@@ -48,15 +47,14 @@
 
                 <td>
                     <div class="d-flex justify-content-end">
-                        <button type="button" class="btn btn-danger btn-Login" onclick="deleteRecord({{ detail.id }})"data-toggle="modal"
+                        <button type="button" class="btn btn-danger btn-Login" onclick="deleteRecord({{ detail.id }})" data-toggle="modal"
                             data-target="#exampleModalLong1">Delete</button>
                     </div>
-                <td>
+                </td>
             </tr>
             {% endfor %}
-        </tbody> 
+        </tbody>
     </table>
-
 
     <script>
         function deleteRecord(recordId) {

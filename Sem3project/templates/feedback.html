@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/feedback.css">
+    <link rel="stylesheet" href="/static/css/feedback.css">
     <title>Feedback Page</title>
 </head>
 
@@ -12,7 +12,8 @@
 
     <div class="container">
         <h1>Feedback Form</h1>
-        <form action="submit_feedback.php" method="post">
+        <form class="form" id="FeedbackForm" action="{% url 'feedback' %}" method="post">
+            {% csrf_token %}
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
 

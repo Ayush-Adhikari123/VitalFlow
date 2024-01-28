@@ -1,34 +1,34 @@
 
 
 
-from django.shortcuts import render,HttpResponse
-from myapp.models import Report,Report_Detail,technicianlogin,TechAdd,homeservice,Contact,Feedback
-from .forms import Report_DetailForm  # Import the Report_DetailForm
-
-
 import json
 
 from django.core.mail import EmailMultiAlternatives, send_mail
 from django.http import HttpResponseRedirect, JsonResponse
-
 from django.shortcuts import HttpResponse, get_object_or_404, render
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
-
-from myapp.models import (Report, Report_Detail, TechAdd, homeservice,
-                          technicianlogin)
-
-from .forms import Report_DetailForm
-
-from django.shortcuts import get_object_or_404
-from django.core.mail import send_mail
 from django.views.decorators.csrf import csrf_exempt
+
+from myapp.models import (Contact, Feedback, Report, Report_Detail, TechAdd,
+                          homeservice, technicianlogin)
+
+from .forms import Report_DetailForm  # Import the Report_DetailForm
 
 
 def index(request):
-    context ={
-        'variable':"this is sent"
+    feedback_detail_data = Feedback.objects.filter(show=True)
+    print(feedback_detail_data)
+
+    if feedback_detail_data:
+        print("Data found")
+    else:
+        print("No data found")
+
+    context = {
+        'feedback_detail_data': feedback_detail_data,
     }
+    print(feedback_detail_data)
     return render(request,'homepage.html',context)
 
 def about(request):
@@ -57,8 +57,7 @@ def feedback(request):
         
         new_feedback = Feedback(
                 name=full_name,
-                email=email,
-                
+                email=email,                
                 message=message
             )
         new_feedback.save()
@@ -111,70 +110,27 @@ def adminprofile(request):
     return render(request,'adminprofile.html')
       
 def createreport(request):
+    patient_name = request.POST.get('name')
+    age = request.POST.get('age')
+    gender = request.POST.get('gender')
+    address = request.POST.get('address')
+    lab_no = request.POST.get('lab_no')
+    contact = request.POST.get('contact')
+    date = request.POST.get('date')
+    consultant = request.POST.get('consultant')
+    test_dropdown = request.POST.get('test_list')
+    investigation=request.POST.getlist('investigation[]')
+    result = request.POST.getlist('result[]')
+    reference=request.POST.getlist('references[]')
+    unit=request.POST.getlist('unit[]')
     
-    options = {
-        "Complete Blood Count (CBC)": [
-          { "text": 'Red Blood Cell Count (RBC)', "reference": '4.5 - 5.5 million', "unit": 'cells/mcL' },
-          { "text": 'Hemoglobin (Hb)', "reference": '12.0 - 15.5', "unit": 'g/dL' },
-          { "text": 'Hematocrit (Hct)', "reference": '38.3% - 48.6%', "unit": '' },
-          { "text": 'White Blood Cell Count (WBC)', "reference": '4,000 - 11,000', "unit": 'cells/mcL' },
-          { "text": 'Platelet Count', "reference": '150,000 - 450,000', "unit": 'cells/mcL' }
-        ],
-        "Blood Glucose": [
-          { "text": 'Fasting Blood Glucose', "reference": '70 - 99', "unit": 'mg/dL' }
-        ],
-        "Lipid Panel": [
-          { "text": 'Total Cholesterol', "reference": 'Less than 200', "unit": 'mg/dL' },
-          { "text": 'LDL Cholesterol', "reference": 'Less than 100', "unit": 'mg/dL' },
-          { "text": 'HDL Cholesterol', "reference": '40 - 60', "unit": 'mg/dL' },
-          { "text": 'Triglycerides', "reference": 'Less than 150', "unit": 'mg/dL' }
-        ],
-        "Liver Function Tests": [
-          { "text": 'ALT (Alanine Aminotransferase)', "reference": '7 - 56', "unit": 'U/L' },
-          { "text": 'AST (Aspartate Aminotransferase)', "reference": '5 - 40', "unit": 'U/L' },
-          { "text": 'ALP (Alkaline Phosphatase)', "reference": '44 - 147', "unit": 'U/L' },
-          { "text": 'Total Bilirubin', "reference": '0.3 - 1.2', "unit": 'mg/dL' }
-        ],
-        "Kidney Function Tests": [
-          { "text": 'BUN (Blood Urea Nitrogen)', "reference": '7 - 20', "unit": 'mg/dL' },
-          { "text": 'Serum Creatinine', "reference": '0.6 - 1.3', "unit": 'mg/dL' }
-        ],
-        "Electrolytes": [
-          { "text": 'Sodium', "reference": '135 - 145', "unit": 'mmol/L' },
-          { "text": 'Potassium', "reference": '3.5 - 5.0', "unit": 'mmol/L' },
-          { "text": 'Chloride', "reference": '98 - 108', "unit": 'mmol/L' }
-        ],
-        "Thyroid Function Tests": [
-          { "text": 'TSH (Thyroid Stimulating Hormone)', "reference": '0.4 - 4.0', "unit": 'mIU/L' },
-          { "text": 'FT4 (Free Thyroxine)', "reference": '0.8 - 1.8', "unit": 'ng/dL' }
-        ],
-        "Iron Studies": [
-          { "text": 'Serum Iron', "reference": '65 - 176', "unit": 'µg/dL' },
-          { "text": 'TIBC (Total Iron Binding Capacity)', "reference": '250 - 450', "unit": 'µg/dL' },
-          { "text": 'Ferritin', "reference": '12 - 300', "unit": 'ng/mL' }
-        ],
-        "C-Reactive Protein (CRP)": [
-          { "text": '', "reference": 'Less than 0.8', "unit": 'mg/dL' }
-        ],
-        "Uric Acid": [
-          { "text": 'Male', "reference": '3.4 - 7.0', "unit": 'mg/dL' },
-          { "text": 'Female', "reference": '2.4 - 6.0', "unit": 'mg/dL' }
-        ]}
-
     if request.method == 'POST':
       
-        patient_name = request.POST.get('name')
-        age = request.POST.get('age')
-        gender = request.POST.get('gender')
-        address = request.POST.get('address')
-        lab_no = request.POST.get('lab_no')
-        contact = request.POST.get('contact')
-        date = request.POST.get('date')
-        consultant = request.POST.get('consultant')
+        
 
         # Perform basic validation
-        if age.strip() == '' or not age.isnumeric():
-            return render(request, 'createReport.html', {'options': options})
+        # if age.strip() == '' or not age.isnumeric():
+        #     return render(request, 'createReport.html', {'options': options})
 
         new_report = Report(
             patient_Name=patient_name,
@@ -187,35 +143,28 @@ def createreport(request):
             consultant=consultant
         )
         new_report.save()
-      
-        test_dropdown = request.POST.get('test_list')
-        if test_dropdown:
-            
-            if test_dropdown in options:
-                subtests = options[test_dropdown]
-                for subtest in subtests:
-                    text = subtest['text']
-                    # result = request.POST.get(f'{text}_result')
-                    result ="ok"
-                    reference = subtest['reference']
-                    unit = subtest['unit']
+        
+        #report_details
+        num_investigations = len(investigation)
+        
+        # Run the loop for the number of elements in the investigation list
+        for i in range(num_investigations):
+            investigation_value = investigation[i]
+            result_value = result[i]
+            reference_value = reference[i]
+            unit_value = unit[i]
 
-                    new_report_detail = Report_Detail(
-                        test_list=test_dropdown,
-                        investigation=text,
-                        results=result,
-                        reference_value=reference,
-                        unit=unit
-                    )
-                    new_report_detail.save()
-
-                return HttpResponse("Report created successfully")
-            else:
-                return HttpResponse("Invalid test selected. ")
-        else:
-           return HttpResponse("empty. ")
-    else:
-      form = Report_DetailForm()
+            new_report_detail = Report_Detail(
+                                report=new_report,  # Link the Report_Detail instance to the main report
+                                test_list=test_dropdown,
+                                investigation=investigation_value,
+                                results=result_value,  # Use the current result value
+                                reference_value=reference_value,
+                                unit=unit_value
+                            )
+            new_report_detail.save()
+    print(request.POST)
+    # return JsonResponse(data={})
     return render(request, 'createReport.html')
 
 
@@ -301,6 +250,7 @@ def admin_password(request):
   
 
   # =========================================================================================
+
 def updatereport(request,contact):
     if request.method == 'POST':
         # Retrieve the existing record from the database
@@ -311,6 +261,7 @@ def updatereport(request,contact):
         existing_report.age = request.POST.get('age')
         existing_report.gender = request.POST.get('gender')
         existing_report.address = request.POST.get('address')
+        existing_report.lab_no = request.POST.get('lab_no')
         existing_report.contact = request.POST.get('contact')
         existing_report.date = request.POST.get('date')
         existing_report.consultant = request.POST.get('consultant')
@@ -327,24 +278,33 @@ def updatereport(request,contact):
         # Retrieve Report_Detail records related to the Report
         report_details = Report_Detail.objects.filter(report=existing_report)
 
-        # Update Report_Detail records
-        for report_detail in report_details:
-            investigation_name = report_detail.investigation  # Retrieve the investigation name
+        # Update Report_Detail records with the new result values
+        result_values = request.POST.getlist('result_values')
 
-            # Get the updated result from the form using the input name
-            result = request.POST.get(f'result_{existing_report.contact}_{investigation_name.replace(" ", "_")}')
+        for i, report_detail in enumerate(report_details):
+    # Check if there are enough values in result_values
+            if i < len(result_values):
+                result_value = result_values[i]
+                # Update the results field
+                report_detail.results = result_value
+                report_detail.save()
 
-            # Update the result in the Report_Detail model
-            report_detail.results = result
-
-            # Save the updated Report_Detail record
-            report_detail.save()
 
         return HttpResponse("Report and Report_Detail updated successfully")
-    else:
-        # Retrieve the existing Report record for rendering in the form
+    
+    
+    elif request.method == 'GET':
+        report_data = Report.objects.all()  # Fetch all data from Report model
         existing_report = get_object_or_404(Report, contact=contact)
-        return render(request, 'updateReport.html', {'report': existing_report})
+        reportdetail_data = Report_Detail.objects.filter(report=existing_report)  # Fetch all data from Report model
+        
+        context = {
+            'report_data': report_data,
+            'reportdetail_data': reportdetail_data,
+            'report': existing_report,  # Include the existing_report in the context
+        }
+        return render(request, 'updateReport.html', context)
+
     
 
 def techlogin(request):
@@ -364,8 +324,8 @@ def techlogin(request):
     
 
 
-def book_service(request):
-    return render(request,'homeService.html')
+# def book_service(request):
+#     return render(request,'homeService.html')
 
 # ================================================================= tech profile
 def techprofile(request):
@@ -625,9 +585,29 @@ def delete_record(request, record_id):
         return JsonResponse({'message': 'Record deleted successfully'}, status=200)
     else:
         return JsonResponse({'error': 'Invalid request'}, status=400)
+
+
+
+
+def feedbackpannel(request):
+    if request.method == 'GET':
+        
+        feedback_data = Feedback.objects.filter(show=1)
+        
+        context = {
+            'feedback_data': feedback_data,
+        }
+
+        return render(request, 'feedbackadmin.html', context)
+    else:
+        return HttpResponse('Invalid request or empty contact field')
     
 
+def delete_feed(request, feed_id):
+    if request.method == 'POST':
+        feed = Feedback.objects.get(id=feed_id)
+        feed.delete()
 
+        return JsonResponse({'message': 'Record deleted successfully'}, status=200)
 
-def feedback(request):
-    return render(request,"feedback.html")
+    return JsonResponse({'message': 'Invalid request method'}, status=405)

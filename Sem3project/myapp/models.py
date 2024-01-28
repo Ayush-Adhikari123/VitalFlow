@@ -57,8 +57,12 @@ class Contact(models.Model):
     contact =models.IntegerField( )      
     message =models.CharField( max_length=500)
 
+
+
 class Feedback(models.Model):
     name =models.CharField( max_length=50)   
     email =models.EmailField(null=True)
     message =models.CharField( max_length=500)
+
+    show = models.BooleanField(default=True)
 
