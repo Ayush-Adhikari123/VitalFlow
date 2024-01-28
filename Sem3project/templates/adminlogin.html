@@ -1,57 +1,58 @@
-{% comment %} <!DOCTYPE html>
+{% comment %}
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
 
 
-  <link rel="stylesheet" href="/static/css/adminlogin.css" />
+    <link rel="stylesheet" href="/static/css/adminlogin.css" />
 
 
-  <style>
-    /* Style for the loading screen */
-  </style>
+    <style>
+        /* Style for the loading screen */
+    </style>
 </head>
 
 
 <body>
-  <!-- Loading screen with GIF -->
-  <div class="loading-screen" id="loadingScreen">
-    <img src="/static/images/loding.gif" alt="">
-  </div>
+    <!-- Loading screen with GIF -->
+    <div class="loading-screen" id="loadingScreen">
+        <img src="/static/images/loding.gif" alt="">
+    </div>
 
-  <form action="" method="post" novalidate onsubmit="showLoadingScreen()">
-    {% csrf_token %}
-    <h2>Login</h2>
-    {% if form.non_field_errors %}
-    {% for error in form.non_field_errors %}
-    <div class="error">{{ error }}</div>
-    {% endfor %}
-    {% endif %}
-    {% for fm in form %}
-    <label for="{{ fm.id_for_label }}">{{ fm.label_tag }}</label>
-    {{ fm }}
-    <div class="error">{{ fm.errors|striptags }}</div>
-    {% if fm.name == 'password' %}
-    <a href="/passwordreset">Forgot Password?</a>
-    {% endif %}
-    {% endfor %}
-    <input type="submit" value="Log In" />
-  </form>
+    <form action="" method="post" novalidate onsubmit="showLoadingScreen()">
+        {% csrf_token %}
+        <h2>Login</h2>
+        {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+        <div class="error">{{ error }}</div>
+        {% endfor %}
+        {% endif %}
+        {% for fm in form %}
+        <label for="{{ fm.id_for_label }}">{{ fm.label_tag }}</label>
+        {{ fm }}
+        <div class="error">{{ fm.errors|striptags }}</div>
+        {% if fm.name == 'password' %}
+        <a href="/passwordreset">Forgot Password?</a>
+        {% endif %}
+        {% endfor %}
+        <input type="submit" value="Log In" />
+    </form>
 
-  <script>
-    function showLoadingScreen() {
-      // Show the loading screen
-      document.getElementById('loadingScreen').style.display = 'flex';
+    <script>
+        function showLoadingScreen() {
+            // Show the loading screen
+            document.getElementById('loadingScreen').style.display = 'flex';
 
-      // Hide the loading screen after 3 seconds (3000 milliseconds)
-      setTimeout(function () {
-        document.getElementById('loadingScreen').style.display = 'none';
-      }, 3000);
-    }
-  </script>
+            // Hide the loading screen after 3 seconds (3000 milliseconds)
+            setTimeout(function () {
+                document.getElementById('loadingScreen').style.display = 'none';
+            }, 3000);
+        }
+    </script>
 
 </body>
 
@@ -104,7 +105,7 @@
                             </div>
 
                             <div class="form-group small mt-3 d-flex justify-content-center">
-                                DID YOU FORGET YOUR PASSWORD?  <a href="/password_reset" class="text-primary">CLICK
+                                DID YOU FORGET YOUR PASSWORD? <a href="/password_reset" class="text-primary">CLICK
                                     HERE</a>
                             </div>
                             <div class="form-group">
@@ -120,18 +121,18 @@
                                 <div class="row mt-2">
                                     <div class="col-md-12">
                                         <a href="/">
-                                        <button type="button" class="btn btn-secondary back-button btn-block"
-                                            style="font-size: 20px;  padding: 3px;">
-                                            Back<img src="/static/images/out.png" alt="Back" class="img-fluid"
-                                                style="height: 20px; margin-right: 5px;">
-                                        </button>
-                                    </a>
+                                            <button type="button" class="btn btn-secondary back-button btn-block"
+                                                style="font-size: 20px;  padding: 3px;">
+                                                Back<img src="/static/images/out.png" alt="Back" class="img-fluid"
+                                                    style="height: 20px; margin-right: 5px;">
+                                            </button>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
 
 
-                            
+
                     </div>
 
 
