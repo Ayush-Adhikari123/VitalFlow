@@ -1,19 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "navbar.html" %}
+{% block body %}
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
   <link rel="stylesheet" href="/static/css/AvailableTest.css">
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
   <title>AVAILABLE TEST</title>
-</head>
 
 
 <body>
-  <header class="header">
+  <!-- <header class="header">
     <a class="logo" href=" ">
       <img src="/static/images/vitalflow.png" class="d-block w-100" style="height: 40px" alt="..." /></a>
     <nav class="navbar">
@@ -27,7 +24,7 @@
     <a href="#" class="btn"> Log In </a>
     <div id="menu-btn" class="fas fa-bars"></div>
 
-  </header>
+  </header> -->
   <br>
   <br>
   <div class="head-container" data-aos="fade-in">
@@ -249,4 +246,4 @@
   </script>
 </body>
 
-</html>
+{% endblock body %}

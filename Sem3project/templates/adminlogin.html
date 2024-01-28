@@ -1,19 +1,11 @@
-{% comment %} <!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
+{% extends "navbar.html" %}
+{% block body %}
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login</title>
 
 
   <link rel="stylesheet" href="/static/css/adminlogin.css" />
 
-
-  <style>
-    /* Style for the loading screen */
-  </style>
-</head>
 
 
 <body>
@@ -35,7 +27,7 @@
     {{ fm }}
     <div class="error">{{ fm.errors|striptags }}</div>
     {% if fm.name == 'password' %}
-    <a href="/passwordreset">Forgot Password?</a>
+      <a href="/passwordreset">Forgot Password?</a>
     {% endif %}
     {% endfor %}
     <input type="submit" value="Log In" />
@@ -48,94 +40,4 @@
     }
   </script>
 </body>
-
-</html> {% endcomment %}
-
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/css/tech.css">
-
-</head>
-
-<body>
-
-    <div class="header">
-        <div class="logo">
-            <img src="/static/Images/Logo.png" alt="Header Image" style="height: 100px;">
-        </div>
-        <div class="company-name">
-            <h1>VITAL FLOW<br>BIO-LAB</h1>
-        </div>
-    </div>
-
-    <div class="bod my-5">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <div class="login-container text-center ">
-                        <h2 style="font-size: 35px; margin-bottom: 30px;"><strong>OWNER LOGIN</strong></h2>
-
-                        <form id="loginForm" class="text-left">
-                            <div class="form-group">
-                                <label for="technician-id"
-                                    style="font-size: 30px; margin-bottom: 10px;"><strong>Username</strong></label>
-                                <input type="text" id="technician-id" name="technician_id"
-                                    class="form-control border-dark border-2" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="password"
-                                    style="font-size: 30px; margin-bottom: 10px;"><strong>PASSWORD:</strong></label>
-                                <input type="password" id="password" name="Password"
-                                    class="form-control border-dark git border-2 " required>
-                            </div>
-
-                            <div class="form-group small mt-3 d-flex justify-content-center">
-                                DID YOU FORGET YOUR PASSWORD?  <a href="/password_reset" class="text-primary">CLICK
-                                    HERE</a>
-                            </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <button type="button" class="btn btn-primary login-button btn-block"
-                                            style="font-size: 20px;  padding: 3px;">
-                                            LOGIN <img src="/static/images/in.png" alt="Login" class="img-fluid"
-                                                style="height: 20px; margin-right: 5px;">
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="row mt-2">
-                                    <div class="col-md-12">
-                                        <a href="/">
-                                        <button type="button" class="btn btn-secondary back-button btn-block"
-                                            style="font-size: 20px;  padding: 3px;">
-                                            Back<img src="/static/images/out.png" alt="Back" class="img-fluid"
-                                                style="height: 20px; margin-right: 5px;">
-                                        </button>
-                                    </a>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            
-                    </div>
-
-
-
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</body>
-
-</html>
+{% endblock body %}
