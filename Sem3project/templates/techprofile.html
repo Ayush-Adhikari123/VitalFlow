@@ -53,8 +53,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" onclick="myFunction1()"
                             data-dismiss="modal">Close</button>
-                        <a href="/"><button type="button" class="btn btn-primary"
-                                onclick="showLoadingScreen()">Logout</button></a>
+                        <button type="button" class="btn btn-primary" onclick="showLoadingScreen()">Logout</button>
                     </div>
                 </div>
             </div>
@@ -124,6 +123,8 @@
                             // Hide the loading screen after 3 seconds (3000 milliseconds)
                             setTimeout(function () {
                                 document.getElementById('loadingScreen').style.display = 'none';
+                                window.location.href = '/techlogout/';
+
                             }, 3000);
                         }
                         // ============

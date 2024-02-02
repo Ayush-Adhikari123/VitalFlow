@@ -214,6 +214,9 @@ def admin_profile(request):
 def admin_logout(request):
     logout(request)
     return HttpResponseRedirect("/adminlogin")
+def tech_logout(request):
+    logout(request)
+    return HttpResponseRedirect("/techlogin")
 
 def admin_password(request):
   if request.user.is_authenticated:  
@@ -301,19 +304,22 @@ def updatereport(request, contact):
 
     
 def techlogin(request):
-    if request.method == 'POST':
-        # Extract form data from the POST request
-        technician_id = request.POST.get('technician_id')
-        Password = request.POST.get('Password')
-
-        new_technicianlogin= technicianlogin(
-            technician_id=technician_id,
-            Password=Password
-        )
-        new_technicianlogin.save()
-        return HttpResponse("Succesfully Logined")
+  if not request.user.is_authenticated:
+    if request.method =="POST":
+        fm = AuthenticationForm(request=request,data=request.POST)
+        if fm.is_valid():
+          uname = fm.cleaned_data['username']
+          upass = fm.cleaned_data['password']
+          user = authenticate(username=uname,password=upass)
+          if user is not None:
+              login(request,user)
+              messages.success(request,'LOGED IN SUCCESSFULLY')
+              return HttpResponseRedirect('/techprofile')
     else:
-        return render(request,'techlogin.html')
+      fm=AuthenticationForm()
+    return render(request,'techlogin.html',{'form':fm})
+  else:
+      return HttpResponseRedirect('/techprofile')
     
 def book_service(request):
     return render(request,'homeService.html')
