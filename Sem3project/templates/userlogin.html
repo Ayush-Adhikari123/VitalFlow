@@ -1,14 +1,14 @@
 {% extends "navbar.html" %}
 {% block body %}
 
-    <title>View Report</title>
-    <link rel="stylesheet" href="/static/css/userlogin.css"/>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    
+<title>View Report</title>
+<link rel="stylesheet" href="/static/css/userlogin.css" />
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 
 <body>
 
-<!-- <div class="header">
+  <!-- <div class="header">
     <div class="logo">
         <img src="/static/images/Logo.png" alt="Header Image">
     </div>
@@ -17,24 +17,24 @@
     </div>
 </div> -->
 
-<div class="login-container">
+  <div class="login-container">
     <h2 style="text-align: center;">View Report</h2>
-    <form method="POST" action="{% url 'test' %}" >
-        {% csrf_token %}
-        {% comment %} {{ form.as_p }} {% endcomment %}
-        <div class="form-group">
-            <label for="patient_Name">Patient Name:</label>
-            <input type="text" id="patientId" name="patient_Name">
-        </div>
-        <div class="form-group">
-            <label for="contact">Contact Number:</label>
-            <input type="text" id="contact" name="contact" required>
-        </div>
+    <form method="POST" action="{% url 'test' %}">
+      {% csrf_token %}
+      {% comment %} {{ form.as_p }} {% endcomment %}
+      <div class="form-group">
+        <label for="patient_Name">Patient Name:</label>
+        <input type="text" id="patientId" name="patient_Name">
+      </div>
+      <div class="form-group">
+        <label for="contact">Contact Number:</label>
+        <input type="text" id="contact" name="contact" required>
+      </div>
 
-        <button type="submit"  class="login-button">View Report</button>
-        <button type="button" onclick="goHome()" class="back-button">Back</button>
+      <button type="submit" class="login-button">View Report</button>
+      <a href="/home"> <button type="button" class="back-button">Back</button></a>
     </form>
-</div>
+  </div>
 
 
 </body>

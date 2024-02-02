@@ -1,43 +1,49 @@
 {% extends "navbar.html" %}
 {% block body %}
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Login</title>
 
 
-  <link rel="stylesheet" href="/static/css/adminlogin.css" />
+<link rel="stylesheet" href="/static/css/adminlogin.css" />
 
 
 
 <body>
-  <!-- Loading screen with GIF -->
-  <div class="loading-screen" id="loadingScreen">
-    <img src="/static/images/loding.gif" alt="">
-  </div>
+    <!-- Loading screen with GIF -->
+    <div class="loading-screen" id="loadingScreen">
+        <img src="/static/images/loding.gif" alt="">
+    </div>
 
-  <form action="" method="post" novalidate onsubmit="showLoadingScreen()">
-    {% csrf_token %}
-    <h2>Login</h2>
-    {% if form.non_field_errors %}
-    {% for error in form.non_field_errors %}
-    <div class="error">{{ error }}</div>
-    {% endfor %}
-    {% endif %}
-    {% for fm in form %}
-    <label for="{{ fm.id_for_label }}">{{ fm.label_tag }}</label>
-    {{ fm }}
-    <div class="error">{{ fm.errors|striptags }}</div>
-    {% if fm.name == 'password' %}
-      <a href="/passwordreset">Forgot Password?</a>
-    {% endif %}
-    {% endfor %}
-    <input type="submit" value="Log In" />
-  </form>
+    <form action="" method="post" novalidate onsubmit="showLoadingScreen()">
+        {% csrf_token %}
+        <h2>Login</h2>
+        {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+        <div class="error">{{ error }}</div>
+        {% endfor %}
+        {% endif %}
+        {% for fm in form %}
+        <label for="{{ fm.id_for_label }}">{{ fm.label_tag }}</label>
+        {{ fm }}
+        <div class="error">{{ fm.errors|striptags }}</div>
+        {% if fm.name == 'password' %}
+        <a href="/passwordreset">Forgot Password?</a>
+        {% endif %}
+        {% endfor %}
+        <input type="submit" value="Log In" />
+    </form>
 
-  <script>
-    function showLoadingScreen() {
-      // Show the loading screen
-      document.getElementById('loadingScreen').style.display = 'flex';
-    }
-  </script>
+    <script>
+        function showLoadingScreen() {
+            // Show the loading screen
+            document.getElementById('loadingScreen').style.display = 'flex';
+
+            // Hide the loading screen after 3 seconds (3000 milliseconds)
+            setTimeout(function () {
+                document.getElementById('loadingScreen').style.display = 'none';
+            }, 3000);
+        }
+    </script>
+
 </body>
 {% endblock body %}
