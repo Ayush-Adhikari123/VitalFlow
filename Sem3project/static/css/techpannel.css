@@ -2,7 +2,6 @@
 
 body {
     background-color: #f8f9fa;
-    /* Set background color as needed */
 }
 
 .container {
@@ -27,27 +26,21 @@ body {
 
 .table th {
     background-color: #343a40;
-    /* Header background color */
     color: #fff;
-    /* Header text color */
 }
 
 .table tbody tr:nth-child(even) {
     background-color: #f2f2f2;
-    /* Alternate row background color */
 }
 
 .table tbody tr:hover {
     background-color: #e0e0e0;
-    /* Hovered row background color */
 }
 
-/* Adjust the button style */
 .btn-Login {
     margin-right: 5px;
 }
 
-/* Optional: Adjust modal styles if needed */
 .modal-content {
     background-color: #fff;
     border-radius: 10px;
@@ -58,18 +51,14 @@ body {
     text-align: center;
 }
 
-/* Optional: Adjust the header style */
 .header {
     background-color: #343a40;
-    /* Header background color */
     color: #fff;
-    /* Header text color */
     padding: 10px 0;
 }
 
 .logo img {
     max-height: 80px;
-    /* Adjust the logo size */
 }
 
 .company-name h1 {
@@ -77,7 +66,6 @@ body {
     margin: 0;
 }
 
-/* Optional: Add styles for the top content */
 .content {
     display: flex;
     justify-content: space-between;

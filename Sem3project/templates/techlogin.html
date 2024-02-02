@@ -1,12 +1,25 @@
-{% extends "navbar.html" %}
-{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/tech.css">
+    <link rel="stylesheet" href="/static/css/tech.css">
+
+</head>
 
 <body>
+
+    <div class="header">
+        <div class="logo">
+            <img src="/static/Images/Logo.png" alt="Header Image" style="height: 100px;">
+        </div>
+        <div class="company-name">
+            <h1>VITAL FLOW<br>BIO-LAB</h1>
+        </div>
+    </div>
 
     <div class="bod my-5">
         <div class="container">
@@ -32,7 +45,7 @@
                             </div>
 
                             <div class="form-group small mt-3 d-flex justify-content-center">
-                                DID YOU FORGET YOUR PASSWORD? <a href="/password_reset" class="text-primary">CLICK
+                                DID YOU FORGET YOUR PASSWORD?  <a href="/password_reset" class="text-primary">CLICK
                                     HERE</a>
                             </div>
                             <div class="form-group">
@@ -47,19 +60,19 @@
                                 </div>
                                 <div class="row mt-2">
                                     <div class="col-md-12">
+                                        <a href="/">
                                         <button type="button" class="btn btn-secondary back-button btn-block"
                                             style="font-size: 20px;  padding: 3px;">
                                             Back<img src="/static/images/out.png" alt="Back" class="img-fluid"
                                                 style="height: 20px; margin-right: 5px;">
                                         </button>
+                                    </a>
                                     </div>
                                 </div>
                             </div>
 
 
-                            <div class="form-group small mt-3 d-flex justify-content-center">
-                                By logging in, you accept the <u> terms and conditions</u>.
-                            </div>
+                            
                     </div>
 
 
@@ -71,4 +84,5 @@
     </div>
 
 </body>
-{% endblock body %}
+
+</html>

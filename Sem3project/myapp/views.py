@@ -1,8 +1,11 @@
-
-
-
 import json
 
+from django.contrib import messages
+from django.contrib.auth import (authenticate, login, logout,
+                                 update_session_auth_hash)
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import (AuthenticationForm, PasswordChangeForm,
+                                       SetPasswordForm, UserChangeForm)
 from django.core.mail import EmailMultiAlternatives, send_mail
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import HttpResponse, get_object_or_404, render
@@ -13,7 +16,8 @@ from django.views.decorators.csrf import csrf_exempt
 from myapp.models import (Contact, Feedback, Report, Report_Detail, TechAdd,
                           homeservice, technicianlogin)
 
-from .forms import Report_DetailForm  # Import the Report_DetailForm
+from .forms import (EditadminprofileForm, EditsuperadminprofileForm,
+                    Report_DetailForm)
 
 
 def index(request):
@@ -31,40 +35,10 @@ def index(request):
     print(feedback_detail_data)
     return render(request,'homepage.html',context)
 
-def about(request):
-    return HttpResponse('This is my about')
-
-def services(request):
-    return HttpResponse('This is my service')
-
-def home(request):
-    return HttpResponse("This is Home Page")
 
 def availabletest(request):
    return render(request,'AvailableTest.html')
 
-def report(request):
-    return HttpResponse("This is Report Page")
-
-def package(request):
-    return HttpResponse("This is Package Page")
-
-def feedback(request):
-    if request.method == 'POST':
-        full_name = request.POST.get('name')
-        email = request.POST.get('email')
-        message = request.POST.get('feedback')
-        
-        new_feedback = Feedback(
-                name=full_name,
-                email=email,                
-                message=message
-            )
-        new_feedback.save()
-    return render(request,'feedback.html')
-
-def about(request):
-    return HttpResponse("This is About Page")
 
 def contact(request):
 
@@ -108,7 +82,8 @@ def contact(request):
 
 def adminprofile(request):
     return render(request,'adminprofile.html')
-      
+
+@login_required        
 def createreport(request):
     patient_name = request.POST.get('name')
     age = request.POST.get('age')
@@ -169,27 +144,34 @@ def createreport(request):
 
 
 
+@login_required  
 def viewreport(request):
-    return render(request,'viewreport.html')
+    if request.method == 'GET':
+        report_data = Report.objects.all()  # Fetch all data from TechAdd model
+        context = {
+            'report_data': report_data,
+        }
+        return render(request, 'viewreport.html', context)
+    else:
+        return HttpResponse('Invalid request or empty contact field')
+
+def delete_report(request, contact):
+    if request.method == 'POST':
+        report = Report.objects.get(contact=contact)
+        rp_id = report.id
+        report.delete()
+
+        report_detail = Report_Detail.objects.get(report_id=rp_id)
+        report_detail.delete()
 
 
-def packages(request):
-    return render(request,'packages.html')
+
+        return render(request,'viewreport.html')
+
+    return JsonResponse({'message': 'Invalid request method'}, status=405)
 
 def adminlogin(request):
     return render(request,"adminlogin.html")
-
-
-# =====================================================================================
-
-from django.contrib import messages
-from django.contrib.auth import (authenticate, login, logout,
-                                 update_session_auth_hash)
-from django.contrib.auth.forms import (AuthenticationForm, PasswordChangeForm,
-                                       SetPasswordForm, UserChangeForm)
-
-from .forms import EditadminprofileForm, EditsuperadminprofileForm
-
 
 # login function for admin
 def admin_login(request):
@@ -202,7 +184,7 @@ def admin_login(request):
           user = authenticate(username=uname,password=upass)
           if user is not None:
               login(request,user)
-              messages.success(request,'LOGED IN SUCCESSFULLY🤯🤯🤯')
+              messages.success(request,'LOGED IN SUCCESSFULLY')
               return HttpResponseRedirect('/adminprofile/')
     else:
       fm=AuthenticationForm()
@@ -248,14 +230,12 @@ def admin_password(request):
   else:
      return HttpResponseRedirect('/adminlogin/')
   
-
-  # =========================================================================================
-
-def updatereport(request,contact):
+@login_required  
+def updatereport(request, contact):
     if request.method == 'POST':
         # Retrieve the existing record from the database
         existing_report = get_object_or_404(Report, contact=contact)
-        
+
         # Update the fields with the new values from the form
         existing_report.patient_Name = request.POST.get('name')
         existing_report.age = request.POST.get('age')
@@ -273,40 +253,53 @@ def updatereport(request,contact):
 
         # Save the updated record
         existing_report.save()
-        
-        
+
         # Retrieve Report_Detail records related to the Report
         report_details = Report_Detail.objects.filter(report=existing_report)
 
-        # Update Report_Detail records with the new result values
-        result_values = request.POST.getlist('result_values')
+        # Delete existing Report_Detail records
+        report_details.delete()
 
-        for i, report_detail in enumerate(report_details):
-    # Check if there are enough values in result_values
-            if i < len(result_values):
-                result_value = result_values[i]
-                # Update the results field
-                report_detail.results = result_value
-                report_detail.save()
+        # Create and save new Report_Detail records
+        test_dropdown = request.POST.get('test_list')
+        investigations = request.POST.getlist('investigation[]')
+        results = request.POST.getlist('result[]')
+        references = request.POST.getlist('references[]')
+        units = request.POST.getlist('unit[]')
 
+        for i in range(len(investigations)):
+            investigation_value = investigations[i]
+            result_value = results[i]
+            reference_value = references[i]
+            unit_value = units[i]
+
+            # Create a new Report_Detail instance with the correct test_list value
+            new_report_detail = Report_Detail(
+                report=existing_report,
+                test_list=test_dropdown,
+                investigation=investigation_value,
+                results=result_value,
+                reference_value=reference_value,
+                unit=unit_value
+            )
+            # Save the new instance
+            new_report_detail.save()
 
         return HttpResponse("Report and Report_Detail updated successfully")
-    
-    
+
     elif request.method == 'GET':
-        report_data = Report.objects.all()  # Fetch all data from Report model
+        report_data = Report.objects.all()
         existing_report = get_object_or_404(Report, contact=contact)
-        reportdetail_data = Report_Detail.objects.filter(report=existing_report)  # Fetch all data from Report model
-        
+        reportdetail_data = Report_Detail.objects.filter(report=existing_report)
+
         context = {
             'report_data': report_data,
             'reportdetail_data': reportdetail_data,
-            'report': existing_report,  # Include the existing_report in the context
+            'report': existing_report,
         }
         return render(request, 'updateReport.html', context)
 
     
-
 def techlogin(request):
     if request.method == 'POST':
         # Extract form data from the POST request
@@ -322,12 +315,9 @@ def techlogin(request):
     else:
         return render(request,'techlogin.html')
     
+def book_service(request):
+    return render(request,'homeService.html')
 
-
-# def book_service(request):
-#     return render(request,'homeService.html')
-
-# ================================================================= tech profile
 def techprofile(request):
       if request.method == "POST":
          fm= EditadminprofileForm(request.POST, instance= request.user)
@@ -337,8 +327,8 @@ def techprofile(request):
       else:
           fm =EditadminprofileForm(instance=request.user)
       return render(request,'techprofile.html',{'name': request.user,'form':fm})
-    
-  
+
+@login_required      
 def techadd(request):
   if request.method == 'POST':
         first_name = request.POST.get('first_name')
@@ -404,7 +394,6 @@ def techadd(request):
       
     return render(request, 'techadd.html')
   
-
 def techpannel(request):
   
   if request.method == 'GET':
@@ -416,9 +405,14 @@ def techpannel(request):
   else:
         return HttpResponse('Invalid request or empty contact field')
     
-
-
-
+def delete_techrecord(request, record_id):
+    if request.method == 'POST':
+        record = get_object_or_404(TechAdd, pk=record_id)
+        record.delete()
+        return JsonResponse({'message': 'Record deleted successfully'}, status=200)
+    else:
+        return JsonResponse({'error': 'Invalid request'}, status=400)
+    
 def book_home_service(request):
     if request.method == 'POST':
         # Get form data from POST request
@@ -448,10 +442,8 @@ def book_home_service(request):
 
     return render(request, 'homeService.html') 
 
-       
-
-    
-
+ 
+@login_required
 def homeservicepannel(request):
     if request.method == 'GET':
         # Filter the data where 'done_column' is 0
@@ -463,8 +455,6 @@ def homeservicepannel(request):
         return render(request, 'homeservicepannel.html', context)
     else:
         return HttpResponse('Invalid request or empty contact field')
-  
-
 
 def update_done_status(request, service_id,tempmail):
     if request.method == 'POST':
@@ -530,7 +520,6 @@ def delete_service(request, service_id):
        
 
 
-#   ================================================srijan
 def test(request):
     if request.method == 'POST':
         patient_Name = request.POST.get('patient_Name', '')
@@ -562,11 +551,7 @@ def test(request):
 def userlogin(request):
     return render(request,'userlogin.html')
 
-def diagnostic(request):
-    return render(request,'diagnostic.html')
-
-
-
+@login_required  
 def contactpannel(request):
   
   if request.method == 'GET':
@@ -588,11 +573,11 @@ def delete_record(request, record_id):
 
 
 
-
+@login_required  
 def feedbackpannel(request):
     if request.method == 'GET':
         
-        feedback_data = Feedback.objects.filter(show=1)
+        feedback_data = Feedback.objects.all()
         
         context = {
             'feedback_data': feedback_data,
@@ -603,11 +588,43 @@ def feedbackpannel(request):
         return HttpResponse('Invalid request or empty contact field')
     
 
+
+
+def feedback(request):
+    if request.method == 'POST':
+        full_name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('feedback')
+        
+        new_feedback = Feedback(
+                name=full_name,
+                email=email,
+                message=message
+            )
+        new_feedback.save()
+    return render(request,'feedback.html')
+
 def delete_feed(request, feed_id):
     if request.method == 'POST':
         feed = Feedback.objects.get(id=feed_id)
         feed.delete()
 
-        return JsonResponse({'message': 'Record deleted successfully'}, status=200)
+        return render(request,'feedbackadmin.html')
+    
+    return JsonResponse({'message': 'Invalid request method'}, status=405)
 
+def hide_feedback(request, feed_id):
+    if request.method == 'POST':
+        feed = Feedback.objects.get(id=feed_id)
+        feed.show = 0  # Update the 'show' column  to 0
+        feed.save()
+        return render(request,'feedback.html')   
+    return JsonResponse({'message': 'Invalid request method'}, status=405)
+
+def show_feedback(request, feed_id):
+    if request.method == 'POST':
+        feed = Feedback.objects.get(id=feed_id)
+        feed.show = 1  # Update the 'show' column  to 0
+        feed.save()
+        return render(request,'feedback.html')   
     return JsonResponse({'message': 'Invalid request method'}, status=405)

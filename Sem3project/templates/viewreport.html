@@ -66,7 +66,7 @@
     </div>
 
     <div class="modal fade" id="exampleModalLong1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
-      aria-hidden="true">
+      data-backdrop="static" data-keyboard="false" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -76,19 +76,14 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">
-            Are you sure you want to Delete it?
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" onclick="myFunction1()" data-dismiss="modal">No</button>
-            <button type="button" class="btn btn-primary">Yes</button>
-          </div>
+          
         </div>
       </div>
     </div>
 
-    <div class="modal fade" id="loginModal" tabindex="0" role="dialog" aria-labelledby="loginModalLabel"
-      aria-hidden="true">
+    <div class="modal fade" id="viewreports" tabindex="0" role="dialog" aria-labelledby="loginModalLabel"
+      data-keyboard="false" aria-hidden="true">
+
       <div class="modal-dialog1 mt-5" role="document">
 
         <div class="views d-flex justify-content-center">
@@ -105,12 +100,12 @@
           <div class="d-flex  justify-content-between">
             <div class="ms-4">
               <label for="userInput" style="font-size: 12px; font-weight: bold;">Report Id:</label>
-              <input type="text" id="userInput1"
+              <input type="text" id="userInput1 value="{{ detail.report_id }}""
                 style="width: 84px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; background-color: #70b6c6; ">
             </div>
             <div class="me-4">
               <label for="userInput" style="font-size: 12px; font-weight: bold;">Date:</label>
-              <input type="text" id="userInput1"
+              <input type="text" id="userInput2" value="{{ report_data.date }}"
                 style="width: 84px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; background-color: #70b6c6;">
             </div>
           </div>
@@ -118,49 +113,43 @@
             <div class="col-5 ms-5">
               <label for="userInput" style="font-size: 12px; font-weight: bold;">Patient Name:</label>
               <input type="text" id="userInput1"
-                style="width: 84px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; background-color: #70b6c6;">
+                style="width: 84px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; background-color: #70b6c6;"   value="{{ report_data.patient_Name }}">
             </div>
 
             <div class="col-5">
               <label for="userInput" style="font-size: 12px; font-weight: bold;">Contact :</label>
-              <input type="text" id="userInput1"
+              <input type="text" id="userInput4" value="{{ report_data.contact }}"
                 style="width: 84px; height: 15px; border: none; font-size: 12px; margin-buttom:20px;  margin-left:15px; background-color: #70b6c6;">
             </div>
           </div>
           <div class="row ">
             <div class="col-5 ms-5 ">
               <label for="userInput px-0" style="font-size: 12px; font-weight: bold;">Age :</label>
-              <input type="text" id="userInput1"
+              <input type="text" id="userInput5" value="{{ report_data.age }}"
                 style="width: 84px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; margin-left:51px; background-color: #70b6c6; ">
             </div>
 
             <div class="col-5">
               <label for="userInput" style="font-size: 12px; font-weight: bold;">Gender :</label>
-              <input type="text" id="userInput1"
+              <input type="text" id="userInput6" value="{{ report_data.gender }}"
                 style="width: 84px; height: 15px; border: none; font-size: 12px; margin-buttom:20px;  margin-left:18px; background-color: #70b6c6;">
             </div>
           </div>
           <div class="row">
             <div class="col-5 ms-5">
               <label for="userInput" style="font-size: 12px; font-weight: bold;">Address :</label>
-              <input type="text" id="userInput1"
+              <input type="text" id="userInput7" value="{{ report_data.address }}"
                 style="width: 84px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; margin-left:28px; background-color: #70b6c6;">
             </div>
 
             <div class="col-5">
               <label for="userInput" style="font-size: 12px; font-weight: bold;">Consultant:</label>
-              <input type="text" id="userInput1"
+              <input type="text" id="userInput8" value="{{ report_data.consultant }}"
                 style="width: 84px; height: 15px; border: none; font-size: 12px; margin-buttom:20px; background-color: #70b6c6;">
             </div>
           </div>
         </div>
-        <div class="container1">
 
-          <div class="view-4  ">
-
-          </div>
-
-        </div>
         <div class="container2">
 
           <div class="view-5 d-flex mt-1 justify-content-around">
@@ -221,60 +210,13 @@
               </button>
             </div>
             <div class="save3 me-3">
-              <button type="button" class="pdf">
-                IMAGE
-              </button>
+              <button type="button" class="pdf" onclick="location.href='viewreport'">Close</button>
+
             </div>
 
           </div>
 
         </div>
-
-
-
-
-        {% comment %} <img src="/static/images/viewreport.png" height="740" alt="Your Image"> {% endcomment %}
-        {% comment %} <div class="text-field1 custom-text-field"> {% endcomment %}
-          {% comment %} <label for="userInput">Enter Text:</label> {% endcomment %}
-          {% comment %} <input type="text" id="userInput1"
-            style="width: 84px; height: 15px; border: none; font-size: 10px; margin-left:67px; margin-buttom:20px;">
-
-
-        </div>
-        <div class="text-field2 custom-text-field2">
-          <input type="text" id="userInput2"
-            style="width: 84px; height: 15px; border: none; font-size: 10px; margin-left:172px;">
-        </div> {% endcomment %}
-
-        {% comment %} <div class="text-field3 custom-text-field3">
-          <input type="text" id="userInput3"
-            style="width: 84px; height: 15px; border: none; font-size: 10px; margin-left:172px; margin-top:-20px; "> {%
-          endcomment %}
-          {% comment %} background-color: #70b6c6; {% endcomment %}
-          {% comment %}
-        </div>
-        <div class="text-field4 custom-text-field4">
-          <input type="text" id="userInput4"
-            style="width: 84px; height: 15px; border: none; font-size: 10px; margin-left:172px;">
-        </div>
-        <div class="text-field5 custom-text-field5">
-          <input type="text" id="userInput5"
-            style="width: 84px; height: 15px; border: none; font-size: 10px; margin-left:170px;">
-        </div> {% endcomment %}
-        {% comment %} <div class="text-field6 custom-text-field6">
-          <input type="text" id="userInput6"
-            style="width: 84px; height: 15px; border: none; font-size: 10px; margin-left:170px;">
-        </div>
-        <div class="text-field7 custom-text-field7">
-          <input type="text" id="userInput7"
-            style="width: 84px; height: 15px; border: none; font-size: 10px; margin-left:170px;">
-        </div>
-        <div class="text-field8 custom-text-field8">
-          <input type="text" id="userInput8"
-            style="width: 84px; height: 15px; border: none; font-size: 10px; margin-left:170px;">
-        </div> {% endcomment %}
-
-
 
       </div>
     </div>
@@ -290,262 +232,118 @@
           <thead>
             <tr>
               <th scope="col">S.N</th>
-              <th scope="col">Date</th>
-              <th scope="col">Patient Id</th>
               <th scope="col">Full Name</th>
-              <th scope="col">Test</th>
-              <th scope="col"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>2023-02-30</td>
-              <td>220302</td>
-              <td>Srijan Shrestha</td>
-              <td>Sugar</td>
-
-              <td>
-                <div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login"
-                    data-toggle="modal" data-target="#loginModal">
-                    View
-                  </button>
-                  <button type="button" class=" btn btn-success btn-Login ms-2 me-2" data-toggle="modal"
-                    data-target="#loginModal">
-                    Edit
-                  </button>
-                  <button type="button" class="btn btn-danger btn-Login" data-toggle="modal"
-                    data-target="#exampleModalLong1">
-                    Delete
-                  </button>
-                </div>
-              </td>
+              <th scope="col">Age</th>
+              <th scope="col">Contact</th>
+              <th scope="col">Gender</th>
+              <th scope="col">View</th>
+              <th scope="col">Edit</th>
+              <th scope="col">Delete</th>
+              
 
             </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>2023-02-22</td>
-              <td>220302</td>
-              <td>Srijan Shrestha</td>
-              <td>Uric acid</td>
+        </thead>
+        <tbody>
+            {% for detail in report_data %}
+            <tr class="no-click">
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ detail.patient_Name }}</td>
+                <td>{{ detail.age }}</td>
+                <td>{{ detail.contact }}</td>
+                <td>{{ detail.gender }}</td>
 
-              <td>
-                <div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login"
-                    data-toggle="modal" data-target="#loginModal">
+                  <td>
+
+                  <button type="button" class="btn btn-primary view-btn" data-name="{{ detail.patient_Name }}"
+                    data-contact="{{ detail.contact }}">
                     View
                   </button>
-                  <button type="button" class=" btn btn-success btn-Login ms-2 me-2" data-toggle="modal"
-                    data-target="#loginModal">
+
+                </td>
+                <td>
+                  <button type="button" class=" btn btn-success" data-toggle="modal"
+                    onclick="updateRecord({{ detail.contact }})">
                     Edit
                   </button>
-                  <button type="button" class="btn btn-danger btn-Login" data-toggle="modal"
-                    data-target="#exampleModalLong1">
+                </td>
+                <td>
+                  <button type="button" class="btn btn-danger btn-Login"onclick="deleteReport({{ detail.contact }})">
                     Delete
                   </button>
+                </td>
+                
                 </div>
               </td>
             </tr>
-
-            <tr>
-              <th scope="row">3</th>
-              <td>2023-02-22</td>
-              <td>220302</td>
-              <td>Srijan Shrestha</td>
-              <td>Uric acid</td>
-
-              <td>
-                <div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login"
-                    data-toggle="modal" data-target="#loginModal">
-                    View
-                  </button>
-                  <button type="button" class=" btn btn-success btn-Login ms-2 me-2" data-toggle="modal"
-                    data-target="#loginModal">
-                    Edit
-                  </button>
-                  <button type="button" class="btn btn-danger btn-Login" data-toggle="modal"
-                    data-target="#exampleModalLong1">
-                    Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <th scope="row">4</th>
-              <td>2023-02-22</td>
-              <td>220302</td>
-              <td>Srijan Shrestha</td>
-              <td>Uric acid</td>
-
-              <td>
-                <div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login"
-                    data-toggle="modal" data-target="#loginModal">
-                    View
-                  </button>
-                  <button type="button" class=" btn btn-success btn-Login ms-2 me-2" data-toggle="modal"
-                    data-target="#loginModal">
-                    Edit
-                  </button>
-                  <button type="button" class="btn btn-danger btn-Login" data-toggle="modal"
-                    data-target="#exampleModalLong1">
-                    Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <th scope="row">5</th>
-              <td>2023-02-22</td>
-              <td>220302</td>
-              <td>Srijan Shrestha</td>
-              <td>Uric acid</td>
-
-              <td>
-                <div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login"
-                    data-toggle="modal" data-target="#loginModal">
-                    View
-                  </button>
-                  <button type="button" class=" btn btn-success btn-Login ms-2 me-2" data-toggle="modal"
-                    data-target="#loginModal">
-                    Edit
-                  </button>
-                  <button type="button" class="btn btn-danger btn-Login" data-toggle="modal"
-                    data-target="#exampleModalLong1">
-                    Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <th scope="row">6</th>
-              <td>2023-02-22</td>
-              <td>220302</td>
-              <td>Srijan Shrestha</td>
-              <td>Uric acid</td>
-
-              <td>
-                <div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login"
-                    data-toggle="modal" data-target="#loginModal">
-                    View
-                  </button>
-                  <button type="button" class=" btn btn-success btn-Login ms-2 me-2" data-toggle="modal"
-                    data-target="#loginModal">
-                    Edit
-                  </button>
-                  <button type="button" class="btn btn-danger btn-Login" data-toggle="modal"
-                    data-target="#exampleModalLong1">
-                    Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <th scope="row">7</th>
-              <td>2023-02-22</td>
-              <td>220302</td>
-              <td>Srijan Shrestha</td>
-              <td>Uric acid</td>
-
-              <td>
-                <div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login"
-                    data-toggle="modal" data-target="#loginModal">
-                    View
-                  </button>
-                  <button type="button" class=" btn btn-success btn-Login ms-2 me-2" data-toggle="modal"
-                    data-target="#loginModal">
-                    Edit
-                  </button>
-                  <button type="button" class="btn btn-danger btn-Login" data-toggle="modal"
-                    data-target="#exampleModalLong1">
-                    Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <th scope="row">8</th>
-              <td>2023-02-22</td>
-              <td>220302</td>
-              <td>Srijan Shrestha</td>
-              <td>Uric acid</td>
-
-              <td>
-                <div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login"
-                    data-toggle="modal" data-target="#loginModal">
-                    View
-                  </button>
-                  <button type="button" class=" btn btn-success btn-Login ms-2 me-2" data-toggle="modal"
-                    data-target="#loginModal">
-                    Edit
-                  </button>
-                  <button type="button" class="btn btn-danger btn-Login" data-toggle="modal"
-                    data-target="#exampleModalLong1">
-                    Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <th scope="row">9</th>
-              <td>2023-02-22</td>
-              <td>220302</td>
-              <td>Srijan Shrestha</td>
-              <td>Uric acid</td>
-
-              <td>
-                <div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login"
-                    data-toggle="modal" data-target="#loginModal">
-                    View
-                  </button>
-                  <button type="button" class=" btn btn-success btn-Login ms-2 me-2" data-toggle="modal"
-                    data-target="#loginModal">
-                    Edit
-                  </button>
-                  <button type="button" class="btn btn-danger btn-Login" data-toggle="modal"
-                    data-target="#exampleModalLong1">
-                    Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <th scope="row">10</th>
-              <td>2023-02-22</td>
-              <td>220302</td>
-              <td>Srijan Shrestha</td>
-              <td>Uric acid</td>
-
-              <td>
-                <div class="d-flex justify-content-end"><button type="button" class="btn btn-primary btn-Login"
-                    data-toggle="modal" data-target="#loginModal">
-                    View
-                  </button>
-                  <button type="button" class=" btn btn-success btn-Login ms-2 me-2" data-toggle="modal"
-                    data-target="#loginModal">
-                    Edit
-                  </button>
-                  <button type="button" class="btn btn-danger btn-Login" data-toggle="modal"
-                    data-target="#exampleModalLong1">
-                    Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
-
-
-
-          </tbody>
+            {% endfor %}
+        </tbody>
         </table>
+
+        <form id="viewForm" method="POST" action="{% url 'test' %}">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="patient_Name"></label>
+            <input type="text" id="patientName" name="patient_Name" style="display: none;" />
+          </div>
+          <div class="form-group">
+            <label for="contact"></label>
+            <input type="text" id="contact" name="contact" style="display: none;" required />
+          </div>
+        </form>
       </div>
     </div>
 
     <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const viewButtons = document.querySelectorAll('.view-btn');
+
+        viewButtons.forEach(button => {
+          button.addEventListener('click', function () {
+            const patientName = this.getAttribute('data-Name');
+            const contact = this.getAttribute('data-contact');
+
+            console.log("Patient Name:", patientName);
+            console.log("Contact:", contact);
+
+            document.getElementById('patientName').value = patientName;
+            document.getElementById('contact').value = contact;
+
+            // Submit the form automatically
+            document.getElementById('viewForm').submit();
+          });
+        });
+      });
+
+    
+      function deleteReport(contact) {
+        if (confirm('Are you sure you want to delete this report?')) {
+          fetch(`/delete_report/${contact}/`, {
+            method: 'POST',
+            headers: {
+              'X-CSRFToken': '{{ csrf_token }}',
+              'Content-Type': 'application/json'
+            }
+          })
+            .then(response => {
+              if (response.ok) {
+                // Reload the page to reflect changes
+                window.location.reload();
+              } else {
+                console.error('Failed to delete record');
+              }
+            })
+            .catch(error => {
+              console.error('Error:', error);
+            });
+        }
+  
+      }
+
+      function updateRecord(contact) {
+        // Redirect to the update report page when the Edit button is clicked
+        window.location.href = `/updatereport/${contact}/`;
+    }
+    
       function myFunction() {
         document.getElementById('foo').style.cssText = ''
       }
@@ -554,6 +352,7 @@
         document.getElementById('foo').style.cssText = ' '
       }
     </script>
+
 </body>
 
 </html>

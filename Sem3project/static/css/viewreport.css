@@ -3,7 +3,7 @@
 }
 
 .header {
-  background-color: #6290E8;
+  background-color: #6290e8;
   color: white;
   padding: 10px;
   display: flex;
@@ -28,18 +28,13 @@
 
 .rounded-box {
   background-color: #ffffff;
-  /* Set your desired box color */
   border-radius: 20px;
-  /* Set your desired border radius */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  /* Optional: Add a box shadow for depth */
   padding: 20px;
-  /* Set your desired padding */
   width: 210px;
-  /* Set your desired width */
   height: 610px;
   border: outset;
-  BACKGROUND-COLOR: aliceblue;
+  background-color: aliceblue;
   margin-right: 9px;
 }
 
@@ -49,53 +44,43 @@
 
 .rounded-box2 {
   background-color: #ffffff;
-  /* Set your desired box color */
   border-radius: 20px;
-  /* Set your desired border radius */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  /* Optional: Add a box shadow for depth */
   padding: 10px;
-  /* Set your desired padding */
   width: 1800px;
-  /* Set your desired width */
   border: solid;
   height: 610px;
-  BACKGROUND-COLOR: MISTYROSE;
+  background-color: MISTYROSE;
 }
 
 .rounded-box3 {
   background-color: #ffffff;
-  /* Set your desired box color */
   border-radius: 20px;
-  /* Set your desired border radius */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  /* Optional: Add a box shadow for depth */
   padding: 10px;
-  /* Set your desired padding */
   width: 1800px;
-  /* Set your desired width */
   border: solid;
   height: 610px;
   margin-right: 0px;
-  BACKGROUND-COLOR: MISTYROSE;
+  background-color: MISTYROSE;
 }
 
 .btn-primary.with-icon-1 {
-  background-image: url('/static/images/add-user.png');
+  background-image: url("/static/images/add-user.png");
   background-color: rgba(0, 0, 0, 0);
   background-size: cover;
   margin-top: 0px;
-  padding: 80px;
+  padding: 55px;
   margin-left: 0px;
   border: none;
 }
 
 .btn-primary.with-icon-4 {
-  background-image: url('/static/images/analysiss.png');
+  background-image: url("/static/images/analysiss.png");
   background-color: rgba(0, 0, 0, 0);
   background-size: cover;
   margin-top: 40px;
-  padding: 80px;
+  padding: 70px;
   margin-left: 0px;
   border: 0px solid transparent;
   justify-content: center;
@@ -104,11 +89,19 @@
 }
 
 .btn-primary.with-icon-3 {
-  background-image: url('/static/images/logout.png');
+  background-image: url("/static/images/logout.png");
   background-color: rgba(0, 0, 0, 0);
   background-size: cover;
   margin-top: 40px;
-  padding: 80px;
+  padding: 55px;
+  border: none;
+}
+.btn-primary.with-icon-2 {
+  background-image: url("/static/images/profile.png");
+  background-color: rgba(0, 0, 0, 0);
+  background-size: cover;
+  margin-top: 40px;
+  padding: 55px;
   border: none;
 }
 
@@ -144,12 +137,11 @@
 }
 
 .views {
-  background-color: #6290E8;
+  background-color: #6290e8;
   /* margin-top: 67px;
   height: 21px;
   width: 67px; */
 }
-
 
 /* .text-field{
   margin-top: 400px;
@@ -161,11 +153,11 @@
 }
 
 .view-2 {
-  background-color: #70B6C6;
+  background-color: #70b6c6;
 }
 
 .view-4 {
-  background-image: url('/static/images/fina2.png');
+  background-image: url("/static/images/fina2.png");
   width: 250px;
   height: 250px;
   background-size: cover;
@@ -178,7 +170,7 @@
 }
 
 .container3 {
-  background-color: #2A54C2;
+  background-color: #2a54c2;
 }
 
 .line {
@@ -189,7 +181,7 @@
 }
 
 .pdf {
-  background-color: #DB6464 !important;
+  background-color: #db6464 !important;
   border: none;
   border-radius: 8px;
   /* Adjust the border-radius to your preference */

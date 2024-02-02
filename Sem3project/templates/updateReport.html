@@ -138,7 +138,7 @@
         </table>
       </div>
 
-      <button type="reset" class="button-clear">CLEAR</button>
+      
       <button type="submit" class="button-create" id="submitForm">UPDATE</button>
 
     </div>
@@ -243,7 +243,7 @@
 
             inputResult.setAttribute("class", `test_table`);
 
-            inputResult.value = "RESULT";
+            inputResult.setAttribute("placeholder", "RESULT");
 
             cellResult.appendChild(inputResult);
 
@@ -266,34 +266,27 @@
         let references = [];
         let unit = [];
         let selectedTestData = [];
-        let test = document.getElementsByClassName("test_table")
-        for (let i = 0; i < test.length; i++) {
-          let test_1 = test[i];
-          result.push(test_1.value);
-      } 
+        let tableBody = document.getElementsByClassName("test_table")
+       
 
-      let selectedTest = document.getElementById("testDropdown").value;
-      let testTableBody = document.getElementById("testTableBody");
-      if (selectedTest in options) {
-        let subtests = options[selectedTest];
-      
-        for (let i = 0; i < testTableBody.rows.length; i++) {
-          let row = testTableBody.rows[i];
-      
-          // Assuming that the first cell of the row contains the investigation text
-          let cellInvestigation = row.cells[0];
-          let investigationValue = cellInvestigation.textContent;
-          investigation.push(investigationValue);
-
-          let cellReference = row.cells[0];
-          let referenceValue = cellReference.textContent;
-          references.push(referenceValue);
-
-          let cellUnit = row.cells[0];
-          let unitValue = cellUnit.textContent;
-          unit.push(unitValue);
-        }
-      }
+    // Loop through each row
+    let tableBodyRows = document.getElementById("testTableBody").rows;
+    for (let i = 0; i < tableBodyRows.length; i++) {
+        // Get the cells in the current row
+        let cells = tableBodyRows[i].cells;
+    
+        // Extract data from each cell
+        let currentInvestigation = cells[0].innerText;
+        let currentResult = cells[1].getElementsByTagName("input")[0].value;
+        let currentReferenceValue = cells[2].innerText;
+        let currentUnit = cells[3].innerText;
+    
+        // Push the values into the respective arrays
+        investigation.push(currentInvestigation);
+        result.push(currentResult);
+        references.push(currentReferenceValue);
+        unit.push(currentUnit);
+    }
 
       let gender = document.querySelector('input[name="gender"]:checked')
       const csrfToken = document.getElementsByName("csrfmiddlewaretoken")[0].value;
@@ -315,7 +308,6 @@
           references: references,
           unit: unit,
           testDropdown: selectedTestData,
-          result_values: resultValues,
           
       };
       console.log(formData)
@@ -325,13 +317,13 @@
         data: formData,
         success: function (response) {
             // Handle success response
-            console.log(response);
+            window.location.href = '/viewreport';
             alert("Report updated successfully!");
         },
         error: function (error) {
             // Handle error response
             console.error("Error updating report:", error);
-            alert("Error updating report. Please try again.");
+            alert("Please! Enter the updated record date.");
         }
     });
      });

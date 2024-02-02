@@ -221,7 +221,7 @@
 
             inputResult.setAttribute("class", `test_table`);
 
-            inputResult.value = "RESULT";
+            inputResult.setAttribute("placeholder", "RESULT");
 
             cellResult.appendChild(inputResult);
 
@@ -301,13 +301,13 @@
         data: formData,
         success: function (response) {
             // Handle success response
-            console.log(response);
+            window.location.reload();
             alert("Report created successfully!");
         },
         error: function (error) {
             // Handle error response
             console.error("Error creating report:", error);
-            alert("Error creating report. Please try again.");
+            alert("Don't leave the field empty");
         }
     });
      });

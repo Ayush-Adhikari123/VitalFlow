@@ -6,16 +6,16 @@
     <a href="/homeservicepannel"><button class="btn btn-primary with-icon-idk"></button></a>
 </div>
 <div class="top-buttons">
-    <a href=""><button class="btn btn-primary with-icon-feedback"></button></a>
+    <a href="/feedbackpannel"><button class="btn btn-primary with-icon-feedback"></button></a>
 </div>
 <div class="top-buttons">
-    <a href=""><button class="btn btn-primary with-icon-addtech"></button></a>
+    <a href="/techadd"><button class="btn btn-primary with-icon-addtech"></button></a>
 </div>
 <div class="top-buttons">
-    <button class="btn btn-primary with-icon-profile"></button>
+    <a href="/adminprofile"> <button class="btn btn-primary with-icon-profile"></button></a>
 </div>
 <div class="top-buttons">
-    <button class="btn btn-primary with-icon-logout" onclick="showLoadingScreen()"></button>
+    <a href="/contactpannel"><button class="btn btn-primary with-icon-contact"></button></a>
 </div>
 {% endblock navbody %}
 
@@ -24,8 +24,8 @@
 
 
 <div class="register-container">
-    
-    
+
+
     <form class="form" id="registerForm" action="{% url 'techadd' %}" method="post">
         {% csrf_token %}
         <div class="form-group">
@@ -65,15 +65,15 @@
             </select>
         </div>
 
-        <button type="button" onclick="Home()" class="back-button">Back</button>
-        <button type="submit" onclick="submitForm()" class="login-button">Register</button>       
+        <a href="/techpannel"><button type="button"  class="back-button">View Technician</button></a>
+        <button type="submit" onclick="submitForm()" class="login-button">Register</button>
     </form>
 </div>
 
 <script>
     function submitForm() {
         // You can add additional validation or AJAX submission here
-        alert('Form submitted!'); 
+        alert('Form submitted!');
     }
 </script>
 
