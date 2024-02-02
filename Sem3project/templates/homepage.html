@@ -129,20 +129,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-  <script>
-    var swiper = new Swiper(".mySwiper", {
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
-      autoplay: {
-        delay: 3000,
-        disableOnInteraction: false,
-      },
-      autoHeight: true,
-      loop: true,
-    });
-  </script>
+ 
   <section class="about" id="about">
     <h1 class="heading">about us</h1>
 
@@ -192,7 +179,20 @@
       Give Feedback
     </button>
   </div>
-
+ <script>
+    var swiper = new Swiper(".mySwiper", {
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+      },
+      autoHeight: true,
+      loop: true,
+    });
+  </script>
   <section class="footer">
     <div class="box-container">
       <div class="box">
